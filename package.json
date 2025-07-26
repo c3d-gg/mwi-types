@@ -1,0 +1,93 @@
+{
+  "name": "@c3d/mwi-types",
+  "module": "index.ts",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "TypeScript type definitions and schemas for Milky Way Idle game data",
+  "author": "C3D",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/c3d-gg/mwi-types"
+  },
+  "homepage": "https://github.com/c3d-gg/mwi-types#readme",
+  "bugs": {
+    "url": "https://github.com/c3d-gg/mwi-types/issues"
+  },
+  "keywords": [
+    "milky-way-idle",
+    "mwi",
+    "typescript",
+    "types",
+    "schemas",
+    "zod",
+    "typebox",
+    "game-data",
+    "type-generation",
+    "c3d"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./zod": {
+      "types": "./dist/schemas/zod/index.d.ts",
+      "import": "./dist/schemas/zod/index.js"
+    },
+    "./typebox": {
+      "types": "./dist/schemas/typebox/index.d.ts", 
+      "import": "./dist/schemas/typebox/index.js"
+    },
+    "./constants": {
+      "types": "./dist/constants/index.d.ts",
+      "import": "./dist/constants/index.js"
+    },
+    "./game-logic": {
+      "types": "./dist/game-logic/index.d.ts",
+      "import": "./dist/game-logic/index.js"
+    },
+    "./player-data": {
+      "types": "./dist/player-data/index.d.ts",
+      "import": "./dist/player-data/index.js"
+    },
+    "./localization": {
+      "types": "./dist/localization/index.d.ts",
+      "import": "./dist/localization/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "scripts": {
+    "generate": "bun run src/generators/index.ts",
+    "generate:watch": "bun run --watch src/generators/index.ts",
+    "typecheck": "bun tsc --noEmit",
+    "build": "bun run clean:dist && bun run build:tsc",
+    "build:tsc": "tsc -p tsconfig.build.json",
+    "clean": "rm -rf src/generated",
+    "clean:dist": "rm -rf dist",
+    "prebuild": "bun run generate",
+    "prepublishOnly": "bun run build"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": ">=5.0.0"
+  },
+  "dependencies": {
+    "@sinclair/typebox": "^0.34.38",
+    "@sinclair/typebox-adapter": "^0.9.1",
+    "@sinclair/typemap": "^0.10.1",
+    "zod": "^4.0.10"
+  }
+}

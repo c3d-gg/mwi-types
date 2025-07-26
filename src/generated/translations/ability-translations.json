@@ -1,0 +1,413 @@
+{
+  "items": [
+    {
+      "hrid": "/abilities/aqua_arrow",
+      "name_en": "Aqua Arrow",
+      "description_en": "Shoots an arrow made of water at the targeted enemy",
+      "name_zh": "流水箭",
+      "description_zh": "向目标敌人射出水箭"
+    },
+    {
+      "hrid": "/abilities/aqua_aura",
+      "name_en": "Aqua Aura",
+      "description_en": "Increases water amplify and resistance for all allies",
+      "name_zh": "流水光环",
+      "description_zh": "增加所有队友的水系增幅和抗性"
+    },
+    {
+      "hrid": "/abilities/arcane_reflection",
+      "name_en": "Arcane Reflection",
+      "description_en": "Gains elemental thorns temporarily",
+      "name_zh": "奥术反射",
+      "description_zh": "临时获得元素反伤"
+    },
+    {
+      "hrid": "/abilities/berserk",
+      "name_en": "Berserk",
+      "description_en": "Greatly increases physical damage temporarily",
+      "name_zh": "狂暴",
+      "description_zh": "临时大幅增加物理伤害"
+    },
+    {
+      "hrid": "/abilities/cleave",
+      "name_en": "Cleave",
+      "description_en": "Cleaves all enemies",
+      "name_zh": "分裂斩",
+      "description_zh": "劈砍所有敌人"
+    },
+    {
+      "hrid": "/abilities/crippling_slash",
+      "name_en": "Crippling Slash",
+      "description_en": "Slashes all enemies and reduce their damage",
+      "name_zh": "致残斩",
+      "description_zh": "斩击所有敌人，并减少其伤害"
+    },
+    {
+      "hrid": "/abilities/critical_aura",
+      "name_en": "Critical Aura",
+      "description_en": "Increases critical rate for all allies",
+      "name_zh": "暴击光环",
+      "description_zh": "增加所有队友的暴击率"
+    },
+    {
+      "hrid": "/abilities/elemental_affinity",
+      "name_en": "Elemental Affinity",
+      "description_en": "Greatly increases elemental damage temporarily",
+      "name_zh": "元素增幅",
+      "description_zh": "临时大幅增加元素伤害"
+    },
+    {
+      "hrid": "/abilities/elusiveness",
+      "name_en": "Elusiveness",
+      "description_en": "Greatly increases evasion temporarily",
+      "name_zh": "闪避",
+      "description_zh": "临时大幅增加闪避"
+    },
+    {
+      "hrid": "/abilities/entangle",
+      "name_en": "Entangle",
+      "description_en": "Entangles the targeted enemy, dealing damage with chance to stun",
+      "name_zh": "缠绕",
+      "description_zh": "缠绕目标敌人，造成伤害并有几率使其眩晕"
+    },
+    {
+      "hrid": "/abilities/fierce_aura",
+      "name_en": "Fierce Aura",
+      "description_en": "Increases physical amplify and armor for all allies",
+      "name_zh": "物理光环",
+      "description_zh": "增加所有队友的物理增幅和护甲"
+    },
+    {
+      "hrid": "/abilities/fireball",
+      "name_en": "Fireball",
+      "description_en": "Casts a fireball at the targeted enemy",
+      "name_zh": "火球",
+      "description_zh": "对目标敌人施放火球"
+    },
+    {
+      "hrid": "/abilities/firestorm",
+      "name_en": "Firestorm",
+      "description_en": "Casts a firestorm at all enemies",
+      "name_zh": "火焰风暴",
+      "description_zh": "对所有敌人施放火焰风暴"
+    },
+    {
+      "hrid": "/abilities/flame_arrow",
+      "name_en": "Flame Arrow",
+      "description_en": "Shoots a flaming arrow at the targeted enemy",
+      "name_zh": "烈焰箭",
+      "description_zh": "向目标敌人射出火焰箭"
+    },
+    {
+      "hrid": "/abilities/flame_aura",
+      "name_en": "Flame Aura",
+      "description_en": "Increases fire amplify and resistance for all allies",
+      "name_zh": "火焰光环",
+      "description_zh": "增加所有队友的火系增幅和抗性"
+    },
+    {
+      "hrid": "/abilities/flame_blast",
+      "name_en": "Flame Blast",
+      "description_en": "Casts a flame blast at all enemies",
+      "name_zh": "熔岩爆裂",
+      "description_zh": "对所有敌人施放熔岩爆裂"
+    },
+    {
+      "hrid": "/abilities/fracturing_impact",
+      "name_en": "Fracturing Impact",
+      "description_en": "Attacks all enemies, dealing damage and increases their damage taken",
+      "name_zh": "碎裂冲击",
+      "description_zh": "对所有敌人造成伤害，并增加其所受伤害"
+    },
+    {
+      "hrid": "/abilities/frenzy",
+      "name_en": "Frenzy",
+      "description_en": "Greatly increases attack speed temporarily",
+      "name_zh": "狂速",
+      "description_zh": "临时大幅增加攻击速度"
+    },
+    {
+      "hrid": "/abilities/frost_surge",
+      "name_en": "Frost Surge",
+      "description_en": "Casts frost surge at all enemies, dealing damage and reducing evasion",
+      "name_zh": "冰霜爆裂",
+      "description_zh": "对所有敌人施放冰霜爆裂,造成伤害并减少闪避"
+    },
+    {
+      "hrid": "/abilities/heal",
+      "name_en": "Heal",
+      "description_en": "Casts heal on yourself",
+      "name_zh": "自愈术",
+      "description_zh": "对自己施放治疗术"
+    },
+    {
+      "hrid": "/abilities/ice_spear",
+      "name_en": "Ice Spear",
+      "description_en": "Casts an ice spear at the targeted enemy, dealing damage and reducing attack speed",
+      "name_zh": "冰枪术",
+      "description_zh": "对目标敌人投掷冰矛，造成伤害并降低其攻击速度"
+    },
+    {
+      "hrid": "/abilities/impale",
+      "name_en": "Impale",
+      "description_en": "Impales the targeted enemy",
+      "name_zh": "透骨之刺",
+      "description_zh": "刺穿目标敌人"
+    },
+    {
+      "hrid": "/abilities/insanity",
+      "name_en": "Insanity",
+      "description_en": "Increases damage, attack speed, and cast speed temporarily at the cost of HP",
+      "name_zh": "疯狂",
+      "description_zh": "以HP为代价，临时增加伤害、攻击速度和施法速度"
+    },
+    {
+      "hrid": "/abilities/invincible",
+      "name_en": "Invincible",
+      "description_en": "Tremendously increases armor, resistances, and tenacity temporarily",
+      "name_zh": "无敌",
+      "description_zh": "临时极大增加护甲、抗性和韧性"
+    },
+    {
+      "hrid": "/abilities/life_drain",
+      "name_en": "Life Drain",
+      "description_en": "Drains the life force of the targeted enemy, dealing damage and healing the caster",
+      "name_zh": "生命吸取",
+      "description_zh": "吸取目标敌人的生命力，造成伤害并治疗自己"
+    },
+    {
+      "hrid": "/abilities/maim",
+      "name_en": "Maim",
+      "description_en": "Maims the targeted enemy and causes bleeding",
+      "name_zh": "血刃斩",
+      "description_zh": "划伤目标敌人，并使其流血"
+    },
+    {
+      "hrid": "/abilities/mana_spring",
+      "name_en": "Mana Spring",
+      "description_en": "Casts mana spring at all enemies, dealing damage and increasing ally MP regeneration",
+      "name_zh": "法力喷泉",
+      "description_zh": "对所有敌人释放法力喷泉，造成伤害并增加友方MP恢复"
+    },
+    {
+      "hrid": "/abilities/minor_heal",
+      "name_en": "Minor Heal",
+      "description_en": "Casts minor heal on yourself",
+      "name_zh": "初级自愈术",
+      "description_zh": "对自己施放初级治疗术"
+    },
+    {
+      "hrid": "/abilities/natures_veil",
+      "name_en": "Nature's Veil",
+      "description_en": "Cast's a veil over all enemies, dealing damage with a chance to blind",
+      "name_zh": "自然菌幕",
+      "description_zh": "给所有敌人蒙上一层菌幕，造成伤害并有几率使其失明"
+    },
+    {
+      "hrid": "/abilities/penetrating_shot",
+      "name_en": "Penetrating Shot",
+      "description_en": "Shoots the targeted enemy. On each successful hit, will pierce and hit the next enemy",
+      "name_zh": "贯穿射击",
+      "description_zh": "射击目标敌人，如果命中，则贯穿并射向下一个敌人"
+    },
+    {
+      "hrid": "/abilities/penetrating_strike",
+      "name_en": "Penetrating Strike",
+      "description_en": "Strikes the targeted enemy. On each successful hit, will pierce and hit the next enemy.",
+      "name_zh": "贯心之刺",
+      "description_zh": "刺向目标敌人，如果命中，则贯穿并刺向下一个敌人"
+    },
+    {
+      "hrid": "/abilities/pestilent_shot",
+      "name_en": "Pestilent Shot",
+      "description_en": "Shoots the targeted enemy, dealing damage and decreasing regeneration",
+      "name_zh": "疫病射击",
+      "description_zh": "对目标敌人射击，并减少HP/MP恢复"
+    },
+    {
+      "hrid": "/abilities/poke",
+      "name_en": "Poke",
+      "description_en": "Pokes the targeted enemy",
+      "name_zh": "破胆之刺",
+      "description_zh": "戳向目标敌人"
+    },
+    {
+      "hrid": "/abilities/precision",
+      "name_en": "Precision",
+      "description_en": "Greatly increases accuracy temporarily",
+      "name_zh": "精确",
+      "description_zh": "临时大幅增加精准"
+    },
+    {
+      "hrid": "/abilities/promote",
+      "name_en": "Promote",
+      "description_en": "Promotes a pawn",
+      "name_zh": "晋升",
+      "description_zh": "晋升一个小兵"
+    },
+    {
+      "hrid": "/abilities/provoke",
+      "name_en": "Provoke",
+      "description_en": "Tremendously increases threat rating",
+      "name_zh": "挑衅",
+      "description_zh": "极大地增加威胁等级"
+    },
+    {
+      "hrid": "/abilities/puncture",
+      "name_en": "Puncture",
+      "description_en": "Punctures the targeted enemy's armor, dealing damage and temporarily reducing its armor",
+      "name_zh": "破甲之刺",
+      "description_zh": "击破目标敌人的护甲，造成伤害并临时降低其护甲"
+    },
+    {
+      "hrid": "/abilities/quick_aid",
+      "name_en": "Quick Aid",
+      "description_en": "Casts heal on the ally with the lowest HP percentage",
+      "name_zh": "快速治疗术",
+      "description_zh": "对HP%最低的队友施放治疗术"
+    },
+    {
+      "hrid": "/abilities/quick_shot",
+      "name_en": "Quick Shot",
+      "description_en": "Takes a quick shot at the targeted enemy",
+      "name_zh": "快速射击",
+      "description_zh": "对目标敌人进行快速射击"
+    },
+    {
+      "hrid": "/abilities/rain_of_arrows",
+      "name_en": "Rain Of Arrows",
+      "description_en": "Shoots a rain of arrows on all enemies",
+      "name_zh": "箭雨",
+      "description_zh": "向所有敌人射出箭雨"
+    },
+    {
+      "hrid": "/abilities/rejuvenate",
+      "name_en": "Rejuvenate",
+      "description_en": "Heals all allies",
+      "name_zh": "群体治疗术",
+      "description_zh": "治疗所有队友"
+    },
+    {
+      "hrid": "/abilities/revive",
+      "name_en": "Revive",
+      "description_en": "Revives a dead ally",
+      "name_zh": "复活",
+      "description_zh": "复活一位死亡的队友"
+    },
+    {
+      "hrid": "/abilities/scratch",
+      "name_en": "Scratch",
+      "description_en": "Scratches the targeted enemy",
+      "name_zh": "爪影斩",
+      "description_zh": "抓伤目标敌人"
+    },
+    {
+      "hrid": "/abilities/shield_bash",
+      "name_en": "Shield Bash",
+      "description_en": "Bashes the targeted enemy with a shield, dealing extra damage based on attacker's armor",
+      "name_zh": "盾击",
+      "description_zh": "盾击目标敌人"
+    },
+    {
+      "hrid": "/abilities/silencing_shot",
+      "name_en": "Silencing Shot",
+      "description_en": "Takes a shot at the targeted enemy, temporarily silencing them",
+      "name_zh": "沉默之箭",
+      "description_zh": "对目标敌人射击，并使其沉默"
+    },
+    {
+      "hrid": "/abilities/smack",
+      "name_en": "Smack",
+      "description_en": "Smacks the targeted enemy",
+      "name_zh": "重碾",
+      "description_zh": "猛击目标敌人"
+    },
+    {
+      "hrid": "/abilities/smoke_burst",
+      "name_en": "Smoke Burst",
+      "description_en": "Casts a smoke burst at the targeted enemy, dealing damage and decreasing their accuracy",
+      "name_zh": "烟爆灭影",
+      "description_zh": "对目标敌人释放烟爆灭影，造成伤害并减少精准"
+    },
+    {
+      "hrid": "/abilities/speed_aura",
+      "name_en": "Speed Aura",
+      "description_en": "Increases attack speed and cast speed for all allies",
+      "name_zh": "速度光环",
+      "description_zh": "增加所有队友的攻击速度和施法速度"
+    },
+    {
+      "hrid": "/abilities/spike_shell",
+      "name_en": "Spike Shell",
+      "description_en": "Gains physical thorns temporarily",
+      "name_zh": "尖刺防护",
+      "description_zh": "临时获得物理反伤"
+    },
+    {
+      "hrid": "/abilities/steady_shot",
+      "name_en": "Steady Shot",
+      "description_en": "Takes a shot at the targeted enemy with greatly enhanced accuracy",
+      "name_zh": "稳定射击",
+      "description_zh": "以极高的精准对目标敌人进行射击"
+    },
+    {
+      "hrid": "/abilities/stunning_blow",
+      "name_en": "Stunning Blow",
+      "description_en": "Smashes the targeted enemy and has a chance to stun",
+      "name_zh": "重锤",
+      "description_zh": "重锤目标敌人，并有几率使其眩晕"
+    },
+    {
+      "hrid": "/abilities/sweep",
+      "name_en": "Sweep",
+      "description_en": "Performs a sweeping attack on all enemies",
+      "name_zh": "重扫",
+      "description_zh": "对所有敌人进行横扫攻击"
+    },
+    {
+      "hrid": "/abilities/sylvan_aura",
+      "name_en": "Sylvan Aura",
+      "description_en": "Increases nature amplify and resistance for all allies",
+      "name_zh": "自然光环",
+      "description_zh": "增加所有队友的自然系增幅和抗性"
+    },
+    {
+      "hrid": "/abilities/taunt",
+      "name_en": "Taunt",
+      "description_en": "Greatly increases threat rating",
+      "name_zh": "嘲讽",
+      "description_zh": "大幅增加威胁等级"
+    },
+    {
+      "hrid": "/abilities/toughness",
+      "name_en": "Toughness",
+      "description_en": "Greatly increases armor and resistances temporarily",
+      "name_zh": "坚韧",
+      "description_zh": "临时大幅增加护甲和抗性"
+    },
+    {
+      "hrid": "/abilities/toxic_pollen",
+      "name_en": "Toxic Pollen",
+      "description_en": "Casts toxic pollen at all enemies, dealing damage and decreasing armor and resistances",
+      "name_zh": "剧毒粉尘",
+      "description_zh": "对所有敌人施放剧毒粉尘，造成伤害并减少护甲和魔抗"
+    },
+    {
+      "hrid": "/abilities/vampirism",
+      "name_en": "Vampirism",
+      "description_en": "Gains lifesteal temporarily",
+      "name_zh": "吸血",
+      "description_zh": "临时获得生命偷取"
+    },
+    {
+      "hrid": "/abilities/water_strike",
+      "name_en": "Water Strike",
+      "description_en": "Casts a water strike at the targeted enemy",
+      "name_zh": "流水冲击",
+      "description_zh": "对目标敌人使用流水冲击"
+    }
+  ],
+  "totalCount": 58,
+  "translatedCount": 58,
+  "generatedAt": "2025-07-26T17:24:11.352Z"
+}

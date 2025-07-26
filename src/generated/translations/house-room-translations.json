@@ -1,0 +1,92 @@
+{
+  "items": [
+    {
+      "hrid": "/house_rooms/archery_range",
+      "name_en": "Archery Range",
+      "name_zh": "射箭场"
+    },
+    {
+      "hrid": "/house_rooms/armory",
+      "name_en": "Armory",
+      "name_zh": "军械库"
+    },
+    {
+      "hrid": "/house_rooms/brewery",
+      "name_en": "Brewery",
+      "name_zh": "冲泡坊"
+    },
+    {
+      "hrid": "/house_rooms/dairy_barn",
+      "name_en": "Dairy Barn",
+      "name_zh": "奶牛棚"
+    },
+    {
+      "hrid": "/house_rooms/dining_room",
+      "name_en": "Dining Room",
+      "name_zh": "餐厅"
+    },
+    {
+      "hrid": "/house_rooms/dojo",
+      "name_en": "Dojo",
+      "name_zh": "道场"
+    },
+    {
+      "hrid": "/house_rooms/forge",
+      "name_en": "Forge",
+      "name_zh": "锻造台"
+    },
+    {
+      "hrid": "/house_rooms/garden",
+      "name_en": "Garden",
+      "name_zh": "花园"
+    },
+    {
+      "hrid": "/house_rooms/gym",
+      "name_en": "Gym",
+      "name_zh": "健身房"
+    },
+    {
+      "hrid": "/house_rooms/kitchen",
+      "name_en": "Kitchen",
+      "name_zh": "厨房"
+    },
+    {
+      "hrid": "/house_rooms/laboratory",
+      "name_en": "Laboratory",
+      "name_zh": "实验室"
+    },
+    {
+      "hrid": "/house_rooms/library",
+      "name_en": "Library",
+      "name_zh": "图书馆"
+    },
+    {
+      "hrid": "/house_rooms/log_shed",
+      "name_en": "Log Shed",
+      "name_zh": "木棚"
+    },
+    {
+      "hrid": "/house_rooms/mystical_study",
+      "name_en": "Mystical Study",
+      "name_zh": "神秘研究室"
+    },
+    {
+      "hrid": "/house_rooms/observatory",
+      "name_en": "Observatory",
+      "name_zh": "天文台"
+    },
+    {
+      "hrid": "/house_rooms/sewing_parlor",
+      "name_en": "Sewing Parlor",
+      "name_zh": "缝纫室"
+    },
+    {
+      "hrid": "/house_rooms/workshop",
+      "name_en": "Workshop",
+      "name_zh": "工作间"
+    }
+  ],
+  "totalCount": 17,
+  "translatedCount": 17,
+  "generatedAt": "2025-07-26T17:24:11.352Z"
+}

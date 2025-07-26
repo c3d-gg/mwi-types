@@ -1,0 +1,162 @@
+name: Release Please
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    name: Release Please
+    runs-on: ubuntu-latest
+    
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+      version: ${{ steps.release.outputs.version }}
+    
+    steps:
+      - name: Run Release Please
+        uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release-type: node
+          package-name: '@c3d/mwi-types'
+          
+          # Conventional commits configuration
+          changelog-types: |
+            [
+              {"type": "feat", "section": "✨ Features", "hidden": false},
+              {"type": "fix", "section": "🐛 Bug Fixes", "hidden": false},
+              {"type": "perf", "section": "⚡ Performance", "hidden": false},
+              {"type": "revert", "section": "↩️ Reverts", "hidden": false},
+              {"type": "docs", "section": "📚 Documentation", "hidden": false},
+              {"type": "style", "section": "💅 Styling", "hidden": false},
+              {"type": "chore", "section": "🔧 Miscellaneous", "hidden": false},
+              {"type": "refactor", "section": "♻️ Code Refactoring", "hidden": false},
+              {"type": "test", "section": "✅ Tests", "hidden": false},
+              {"type": "build", "section": "📦 Build System", "hidden": false},
+              {"type": "ci", "section": "👷 CI/CD", "hidden": false},
+              {"type": "types", "section": "🏷️ Type Updates", "hidden": false}
+            ]
+          
+          # Version bump rules
+          bump-minor-pre-major: true
+          bump-patch-for-minor-pre-major: true
+          
+          # PR configuration
+          pull-request-title-pattern: 'chore: release ${version}'
+          pull-request-header: |
+            ## 🚀 Release ${version}
+            
+            This PR was automatically created by Release Please to prepare the next release.
+            
+          include-component-in-tag: false
+          
+          # Changelog configuration
+          changelog-sections: |
+            [
+              {"type": "feat", "section": "✨ Features"},
+              {"type": "fix", "section": "🐛 Bug Fixes"},
+              {"type": "perf", "section": "⚡ Performance"},
+              {"type": "types", "section": "🏷️ Type Updates"},
+              {"type": "BREAKING CHANGE", "section": "💥 Breaking Changes"}
+            ]
+          
+          # Extra files to update version in
+          extra-files: |
+            [
+              {
+                "type": "json",
+                "path": "package.json",
+                "jsonpath": "$.version"
+              }
+            ]
+
+  # Auto-merge release PRs after checks pass
+  auto-merge:
+    name: Auto-merge Release PR
+    runs-on: ubuntu-latest
+    needs: release-please
+    if: ${{ needs.release-please.outputs.pr }}
+    
+    steps:
+      - name: Enable auto-merge
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ fromJson(needs.release-please.outputs.pr).number }}
+          merge-method: squash
+
+  # Trigger NPM publish when release is created
+  publish-npm:
+    name: Publish to NPM
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created }}
+    uses: ./.github/workflows/publish.yml
+    with:
+      version: ${{ needs.release-please.outputs.version }}
+      tag: latest
+    secrets: inherit
+
+  # Post-release notifications
+  notify-release:
+    name: Notify Release
+    runs-on: ubuntu-latest
+    needs: [release-please, publish-npm]
+    if: ${{ needs.release-please.outputs.release_created }}
+    
+    steps:
+      - name: Post release comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const version = '${{ needs.release-please.outputs.version }}';
+            const tag = '${{ needs.release-please.outputs.tag_name }}';
+            
+            // Find PRs merged since last release
+            const { data: releases } = await github.rest.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 2
+            });
+            
+            if (releases.length >= 2) {
+              const lastRelease = releases[1];
+              const { data: commits } = await github.rest.repos.compareCommits({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                base: lastRelease.tag_name,
+                head: tag
+              });
+              
+              // Create a nice summary
+              const summary = `
+              ## 🎉 @c3d/mwi-types v${version} has been released!
+              
+              ### 📦 Installation
+              \`\`\`bash
+              npm install @c3d/mwi-types@${version}
+              \`\`\`
+              
+              ### 📝 Release Notes
+              View the full release notes: https://github.com/${context.repo.owner}/${context.repo.repo}/releases/tag/${tag}
+              
+              ### 🏷️ NPM Package
+              https://www.npmjs.com/package/@c3d/mwi-types/v/${version}
+              
+              ### 📊 Stats
+              - Commits in this release: ${commits.commits.length}
+              - Files changed: ${commits.files.length}
+              
+              Thanks to all contributors! 🙏
+              `;
+              
+              // Post to discussions or create an issue
+              console.log(summary);
+            }

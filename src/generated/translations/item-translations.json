@@ -1,0 +1,4081 @@
+{
+  "items": [
+    {
+      "hrid": "/items/abyssal_essence",
+      "name_en": "Abyssal Essence",
+      "name_zh": "地狱精华",
+      "description_en": "Used for enhancing special equipment from Infernal Abyss",
+      "description_zh": "用于强化地狱深渊特殊装备的材料"
+    },
+    {
+      "hrid": "/items/acrobatic_hood",
+      "name_en": "Acrobatic Hood",
+      "name_zh": "杂技师兜帽"
+    },
+    {
+      "hrid": "/items/acrobats_ribbon",
+      "name_en": "Acrobat's Ribbon",
+      "name_zh": "杂技师彩带",
+      "description_en": "Material used in tailoring Acrobatic Hood",
+      "description_zh": "用于缝纫杂技师兜帽的材料"
+    },
+    {
+      "hrid": "/items/advanced_task_badge",
+      "name_en": "Advanced Task Badge",
+      "name_zh": "高级任务徽章"
+    },
+    {
+      "hrid": "/items/alchemists_bottoms",
+      "name_en": "Alchemist's Bottoms",
+      "name_zh": "炼金师下装"
+    },
+    {
+      "hrid": "/items/alchemists_top",
+      "name_en": "Alchemist's Top",
+      "name_zh": "炼金师上衣"
+    },
+    {
+      "hrid": "/items/alchemy_essence",
+      "name_en": "Alchemy Essence",
+      "name_zh": "炼金精华",
+      "description_en": "Used for brewing alchemy tea and crafting alchemy catalyst",
+      "description_zh": "用于冲泡炼金茶和制作炼金催化剂"
+    },
+    {
+      "hrid": "/items/alchemy_tea",
+      "name_en": "Alchemy Tea",
+      "name_zh": "炼金茶"
+    },
+    {
+      "hrid": "/items/amber",
+      "name_en": "Amber",
+      "name_zh": "琥珀",
+      "description_en": "A shiny gem often found from Treasure Chests",
+      "description_zh": "一种闪亮的宝石，通常在宝箱中找到"
+    },
+    {
+      "hrid": "/items/amethyst",
+      "name_en": "Amethyst",
+      "name_zh": "紫水晶",
+      "description_en": "A shiny gem often found from Treasure Chests",
+      "description_zh": "一种闪亮的宝石，通常在宝箱中找到"
+    },
+    {
+      "hrid": "/items/anchorbound_plate_body",
+      "name_en": "Anchorbound Plate Body",
+      "name_zh": "锚定胸甲"
+    },
+    {
+      "hrid": "/items/anchorbound_plate_legs",
+      "name_en": "Anchorbound Plate Legs",
+      "name_zh": "锚定腿甲"
+    },
+    {
+      "hrid": "/items/apple",
+      "name_en": "Apple",
+      "name_zh": "苹果"
+    },
+    {
+      "hrid": "/items/apple_gummy",
+      "name_en": "Apple Gummy",
+      "name_zh": "苹果软糖"
+    },
+    {
+      "hrid": "/items/apple_yogurt",
+      "name_en": "Apple Yogurt",
+      "name_zh": "苹果酸奶"
+    },
+    {
+      "hrid": "/items/aqua_arrow",
+      "name_en": "Aqua Arrow",
+      "name_zh": "流水箭"
+    },
+    {
+      "hrid": "/items/aqua_aura",
+      "name_en": "Aqua Aura",
+      "name_zh": "流水光环"
+    },
+    {
+      "hrid": "/items/aqua_essence",
+      "name_en": "Aqua Essence",
+      "name_zh": "海洋精华",
+      "description_en": "Used for enhancing special equipment from Aqua Planet",
+      "description_zh": "用于强化海洋星球特殊装备的材料"
+    },
+    {
+      "hrid": "/items/arabica_coffee_bean",
+      "name_en": "Arabica Coffee Bean",
+      "name_zh": "低级咖啡豆"
+    },
+    {
+      "hrid": "/items/arcane_bow",
+      "name_en": "Arcane Bow",
+      "name_zh": "神秘弓"
+    },
+    {
+      "hrid": "/items/arcane_crossbow",
+      "name_en": "Arcane Crossbow",
+      "name_zh": "神秘弩"
+    },
+    {
+      "hrid": "/items/arcane_fire_staff",
+      "name_en": "Arcane Fire Staff",
+      "name_zh": "神秘火法杖"
+    },
+    {
+      "hrid": "/items/arcane_log",
+      "name_en": "Arcane Log",
+      "name_zh": "神秘原木"
+    },
+    {
+      "hrid": "/items/arcane_lumber",
+      "name_en": "Arcane Lumber",
+      "name_zh": "神秘木板"
+    },
+    {
+      "hrid": "/items/arcane_nature_staff",
+      "name_en": "Arcane Nature Staff",
+      "name_zh": "神秘自然法杖"
+    },
+    {
+      "hrid": "/items/arcane_reflection",
+      "name_en": "Arcane Reflection",
+      "name_zh": "奥术反射"
+    },
+    {
+      "hrid": "/items/arcane_shield",
+      "name_en": "Arcane Shield",
+      "name_zh": "神秘盾"
+    },
+    {
+      "hrid": "/items/arcane_water_staff",
+      "name_en": "Arcane Water Staff",
+      "name_zh": "神秘水法杖"
+    },
+    {
+      "hrid": "/items/artisan_tea",
+      "name_en": "Artisan Tea",
+      "name_zh": "工匠茶"
+    },
+    {
+      "hrid": "/items/attack_coffee",
+      "name_en": "Attack Coffee",
+      "name_zh": "攻击咖啡"
+    },
+    {
+      "hrid": "/items/azure_alembic",
+      "name_en": "Azure Alembic",
+      "name_zh": "蔚蓝蒸馏器"
+    },
+    {
+      "hrid": "/items/azure_boots",
+      "name_en": "Azure Boots",
+      "name_zh": "蔚蓝靴"
+    },
+    {
+      "hrid": "/items/azure_brush",
+      "name_en": "Azure Brush",
+      "name_zh": "蔚蓝刷子"
+    },
+    {
+      "hrid": "/items/azure_buckler",
+      "name_en": "Azure Buckler",
+      "name_zh": "蔚蓝圆盾"
+    },
+    {
+      "hrid": "/items/azure_bulwark",
+      "name_en": "Azure Bulwark",
+      "name_zh": "蔚蓝重盾"
+    },
+    {
+      "hrid": "/items/azure_cheese",
+      "name_en": "Azure Cheese",
+      "name_zh": "蔚蓝奶酪"
+    },
+    {
+      "hrid": "/items/azure_chisel",
+      "name_en": "Azure Chisel",
+      "name_zh": "蔚蓝凿子"
+    },
+    {
+      "hrid": "/items/azure_enhancer",
+      "name_en": "Azure Enhancer",
+      "name_zh": "蔚蓝强化器"
+    },
+    {
+      "hrid": "/items/azure_gauntlets",
+      "name_en": "Azure Gauntlets",
+      "name_zh": "蔚蓝护手"
+    },
+    {
+      "hrid": "/items/azure_hammer",
+      "name_en": "Azure Hammer",
+      "name_zh": "蔚蓝锤子"
+    },
+    {
+      "hrid": "/items/azure_hatchet",
+      "name_en": "Azure Hatchet",
+      "name_zh": "蔚蓝斧头"
+    },
+    {
+      "hrid": "/items/azure_helmet",
+      "name_en": "Azure Helmet",
+      "name_zh": "蔚蓝头盔"
+    },
+    {
+      "hrid": "/items/azure_mace",
+      "name_en": "Azure Mace",
+      "name_zh": "蔚蓝钉头锤"
+    },
+    {
+      "hrid": "/items/azure_milk",
+      "name_en": "Azure Milk",
+      "name_zh": "蔚蓝牛奶",
+      "description_en": "mooooo",
+      "description_zh": "哞哞哞"
+    },
+    {
+      "hrid": "/items/azure_needle",
+      "name_en": "Azure Needle",
+      "name_zh": "蔚蓝针"
+    },
+    {
+      "hrid": "/items/azure_plate_body",
+      "name_en": "Azure Plate Body",
+      "name_zh": "蔚蓝胸甲"
+    },
+    {
+      "hrid": "/items/azure_plate_legs",
+      "name_en": "Azure Plate Legs",
+      "name_zh": "蔚蓝腿甲"
+    },
+    {
+      "hrid": "/items/azure_pot",
+      "name_en": "Azure Pot",
+      "name_zh": "蔚蓝壶"
+    },
+    {
+      "hrid": "/items/azure_shears",
+      "name_en": "Azure Shears",
+      "name_zh": "蔚蓝剪刀"
+    },
+    {
+      "hrid": "/items/azure_spatula",
+      "name_en": "Azure Spatula",
+      "name_zh": "蔚蓝锅铲"
+    },
+    {
+      "hrid": "/items/azure_spear",
+      "name_en": "Azure Spear",
+      "name_zh": "蔚蓝长枪"
+    },
+    {
+      "hrid": "/items/azure_sword",
+      "name_en": "Azure Sword",
+      "name_zh": "蔚蓝剑"
+    },
+    {
+      "hrid": "/items/bag_of_10_cowbells",
+      "name_en": "Bag Of 10 Cowbells",
+      "name_zh": "牛铃袋 (10个)",
+      "description_en": "Tradable bag of 10 Cowbells. Once opened, the Cowbells can no longer be sold on the market.",
+      "description_zh": "可交易的一袋牛铃，每袋包含10个牛铃。只能整袋交易，一旦打开将无法出售"
+    },
+    {
+      "hrid": "/items/bamboo_boots",
+      "name_en": "Bamboo Boots",
+      "name_zh": "竹靴"
+    },
+    {
+      "hrid": "/items/bamboo_branch",
+      "name_en": "Bamboo Branch",
+      "name_zh": "竹子"
+    },
+    {
+      "hrid": "/items/bamboo_fabric",
+      "name_en": "Bamboo Fabric",
+      "name_zh": "竹子布料"
+    },
+    {
+      "hrid": "/items/bamboo_gloves",
+      "name_en": "Bamboo Gloves",
+      "name_zh": "竹手套"
+    },
+    {
+      "hrid": "/items/bamboo_hat",
+      "name_en": "Bamboo Hat",
+      "name_zh": "竹帽"
+    },
+    {
+      "hrid": "/items/bamboo_robe_bottoms",
+      "name_en": "Bamboo Robe Bottoms",
+      "name_zh": "竹袍裙"
+    },
+    {
+      "hrid": "/items/bamboo_robe_top",
+      "name_en": "Bamboo Robe Top",
+      "name_zh": "竹袍服"
+    },
+    {
+      "hrid": "/items/basic_task_badge",
+      "name_en": "Basic Task Badge",
+      "name_zh": "基础任务徽章"
+    },
+    {
+      "hrid": "/items/bear_essence",
+      "name_en": "Bear Essence",
+      "name_zh": "熊熊精华",
+      "description_en": "Used for enhancing special equipment from Bear With It",
+      "description_zh": "用于强化熊熊星球特殊装备的材料"
+    },
+    {
+      "hrid": "/items/beast_boots",
+      "name_en": "Beast Boots",
+      "name_zh": "野兽靴"
+    },
+    {
+      "hrid": "/items/beast_bracers",
+      "name_en": "Beast Bracers",
+      "name_zh": "野兽护腕"
+    },
+    {
+      "hrid": "/items/beast_chaps",
+      "name_en": "Beast Chaps",
+      "name_zh": "野兽皮裤"
+    },
+    {
+      "hrid": "/items/beast_hide",
+      "name_en": "Beast Hide",
+      "name_zh": "野兽皮"
+    },
+    {
+      "hrid": "/items/beast_hood",
+      "name_en": "Beast Hood",
+      "name_zh": "野兽兜帽"
+    },
+    {
+      "hrid": "/items/beast_leather",
+      "name_en": "Beast Leather",
+      "name_zh": "野兽皮革"
+    },
+    {
+      "hrid": "/items/beast_tunic",
+      "name_en": "Beast Tunic",
+      "name_zh": "野兽皮衣"
+    },
+    {
+      "hrid": "/items/berserk",
+      "name_en": "Berserk",
+      "name_zh": "狂暴"
+    },
+    {
+      "hrid": "/items/birch_bow",
+      "name_en": "Birch Bow",
+      "name_zh": "桦木弓"
+    },
+    {
+      "hrid": "/items/birch_crossbow",
+      "name_en": "Birch Crossbow",
+      "name_zh": "桦木弩"
+    },
+    {
+      "hrid": "/items/birch_fire_staff",
+      "name_en": "Birch Fire Staff",
+      "name_zh": "桦木火法杖"
+    },
+    {
+      "hrid": "/items/birch_log",
+      "name_en": "Birch Log",
+      "name_zh": "白桦原木"
+    },
+    {
+      "hrid": "/items/birch_lumber",
+      "name_en": "Birch Lumber",
+      "name_zh": "白桦木板"
+    },
+    {
+      "hrid": "/items/birch_nature_staff",
+      "name_en": "Birch Nature Staff",
+      "name_zh": "桦木自然法杖"
+    },
+    {
+      "hrid": "/items/birch_shield",
+      "name_en": "Birch Shield",
+      "name_zh": "桦木盾"
+    },
+    {
+      "hrid": "/items/birch_water_staff",
+      "name_en": "Birch Water Staff",
+      "name_zh": "桦木水法杖"
+    },
+    {
+      "hrid": "/items/bishops_codex",
+      "name_en": "Bishop's Codex",
+      "name_zh": "主教法典"
+    },
+    {
+      "hrid": "/items/bishops_scroll",
+      "name_en": "Bishop's Scroll",
+      "name_zh": "主教卷轴",
+      "description_en": "Material used in crafting Bishop's Codex",
+      "description_zh": "用于制作主教之书的材料"
+    },
+    {
+      "hrid": "/items/black_bear_fluff",
+      "name_en": "Black Bear Fluff",
+      "name_zh": "黑熊绒",
+      "description_en": "Material used in smithing Black Bear Shoes",
+      "description_zh": "用于锻造黑熊鞋的材料"
+    },
+    {
+      "hrid": "/items/black_bear_shoes",
+      "name_en": "Black Bear Shoes",
+      "name_zh": "黑熊鞋"
+    },
+    {
+      "hrid": "/items/black_tea_leaf",
+      "name_en": "Black Tea Leaf",
+      "name_zh": "黑茶叶"
+    },
+    {
+      "hrid": "/items/blackberry",
+      "name_en": "Blackberry",
+      "name_zh": "黑莓"
+    },
+    {
+      "hrid": "/items/blackberry_cake",
+      "name_en": "Blackberry Cake",
+      "name_zh": "黑莓蛋糕"
+    },
+    {
+      "hrid": "/items/blackberry_donut",
+      "name_en": "Blackberry Donut",
+      "name_zh": "黑莓甜甜圈"
+    },
+    {
+      "hrid": "/items/blazing_trident",
+      "name_en": "Blazing Trident",
+      "name_zh": "炽焰三叉戟"
+    },
+    {
+      "hrid": "/items/blessed_tea",
+      "name_en": "Blessed Tea",
+      "name_zh": "福气茶"
+    },
+    {
+      "hrid": "/items/blooming_trident",
+      "name_en": "Blooming Trident",
+      "name_zh": "绽放三叉戟"
+    },
+    {
+      "hrid": "/items/blue_key_fragment",
+      "name_en": "Blue Key Fragment",
+      "name_zh": "蓝色钥匙碎片",
+      "description_en": "Can be used to craft dungeon keys",
+      "description_zh": "看起来是某种钥匙的碎片，用来制作地下城钥匙"
+    },
+    {
+      "hrid": "/items/blueberry",
+      "name_en": "Blueberry",
+      "name_zh": "蓝莓"
+    },
+    {
+      "hrid": "/items/blueberry_cake",
+      "name_en": "Blueberry Cake",
+      "name_zh": "蓝莓蛋糕"
+    },
+    {
+      "hrid": "/items/blueberry_donut",
+      "name_en": "Blueberry Donut",
+      "name_zh": "蓝莓甜甜圈"
+    },
+    {
+      "hrid": "/items/branch_of_insight",
+      "name_en": "Branch Of Insight",
+      "name_zh": "洞察之枝",
+      "description_en": "Material used in producing special skilling tools and outfits",
+      "description_zh": "用于制作特殊专业工具和服装的材料"
+    },
+    {
+      "hrid": "/items/brewers_bottoms",
+      "name_en": "Brewer's Bottoms",
+      "name_zh": "饮品师下装"
+    },
+    {
+      "hrid": "/items/brewers_top",
+      "name_en": "Brewer's Top",
+      "name_zh": "饮品师上衣"
+    },
+    {
+      "hrid": "/items/brewing_essence",
+      "name_en": "Brewing Essence",
+      "name_zh": "冲泡精华",
+      "description_en": "Used for brewing brewing tea and crafting alchemy catalyst",
+      "description_zh": "用于冲泡冲泡茶和制作炼金催化剂"
+    },
+    {
+      "hrid": "/items/brewing_tea",
+      "name_en": "Brewing Tea",
+      "name_zh": "冲泡茶"
+    },
+    {
+      "hrid": "/items/brown_key_fragment",
+      "name_en": "Brown Key Fragment",
+      "name_zh": "棕色钥匙碎片",
+      "description_en": "Can be used to craft dungeon keys",
+      "description_zh": "看起来是某种钥匙的碎片，用来制作地下城钥匙"
+    },
+    {
+      "hrid": "/items/burble_alembic",
+      "name_en": "Burble Alembic",
+      "name_zh": "深紫蒸馏器"
+    },
+    {
+      "hrid": "/items/burble_boots",
+      "name_en": "Burble Boots",
+      "name_zh": "深紫靴"
+    },
+    {
+      "hrid": "/items/burble_brush",
+      "name_en": "Burble Brush",
+      "name_zh": "深紫刷子"
+    },
+    {
+      "hrid": "/items/burble_buckler",
+      "name_en": "Burble Buckler",
+      "name_zh": "深紫圆盾"
+    },
+    {
+      "hrid": "/items/burble_bulwark",
+      "name_en": "Burble Bulwark",
+      "name_zh": "深紫重盾"
+    },
+    {
+      "hrid": "/items/burble_cheese",
+      "name_en": "Burble Cheese",
+      "name_zh": "深紫奶酪"
+    },
+    {
+      "hrid": "/items/burble_chisel",
+      "name_en": "Burble Chisel",
+      "name_zh": "深紫凿子"
+    },
+    {
+      "hrid": "/items/burble_enhancer",
+      "name_en": "Burble Enhancer",
+      "name_zh": "深紫强化器"
+    },
+    {
+      "hrid": "/items/burble_gauntlets",
+      "name_en": "Burble Gauntlets",
+      "name_zh": "深紫护手"
+    },
+    {
+      "hrid": "/items/burble_hammer",
+      "name_en": "Burble Hammer",
+      "name_zh": "深紫锤子"
+    },
+    {
+      "hrid": "/items/burble_hatchet",
+      "name_en": "Burble Hatchet",
+      "name_zh": "深紫斧头"
+    },
+    {
+      "hrid": "/items/burble_helmet",
+      "name_en": "Burble Helmet",
+      "name_zh": "深紫头盔"
+    },
+    {
+      "hrid": "/items/burble_mace",
+      "name_en": "Burble Mace",
+      "name_zh": "深紫钉头锤"
+    },
+    {
+      "hrid": "/items/burble_milk",
+      "name_en": "Burble Milk",
+      "name_zh": "深紫牛奶",
+      "description_en": "moooooo",
+      "description_zh": "哞哞哞哞"
+    },
+    {
+      "hrid": "/items/burble_needle",
+      "name_en": "Burble Needle",
+      "name_zh": "深紫针"
+    },
+    {
+      "hrid": "/items/burble_plate_body",
+      "name_en": "Burble Plate Body",
+      "name_zh": "深紫胸甲"
+    },
+    {
+      "hrid": "/items/burble_plate_legs",
+      "name_en": "Burble Plate Legs",
+      "name_zh": "深紫腿甲"
+    },
+    {
+      "hrid": "/items/burble_pot",
+      "name_en": "Burble Pot",
+      "name_zh": "深紫壶"
+    },
+    {
+      "hrid": "/items/burble_shears",
+      "name_en": "Burble Shears",
+      "name_zh": "深紫剪刀"
+    },
+    {
+      "hrid": "/items/burble_spatula",
+      "name_en": "Burble Spatula",
+      "name_zh": "深紫锅铲"
+    },
+    {
+      "hrid": "/items/burble_spear",
+      "name_en": "Burble Spear",
+      "name_zh": "深紫长枪"
+    },
+    {
+      "hrid": "/items/burble_sword",
+      "name_en": "Burble Sword",
+      "name_zh": "深紫剑"
+    },
+    {
+      "hrid": "/items/burble_tea_leaf",
+      "name_en": "Burble Tea Leaf",
+      "name_zh": "紫茶叶"
+    },
+    {
+      "hrid": "/items/burning_key_fragment",
+      "name_en": "Burning Key Fragment",
+      "name_zh": "燃烧钥匙碎片",
+      "description_en": "Can be used to craft dungeon keys",
+      "description_zh": "看起来是某种钥匙的碎片，用来制作地下城钥匙"
+    },
+    {
+      "hrid": "/items/butter_of_proficiency",
+      "name_en": "Butter Of Proficiency",
+      "name_zh": "精通之油",
+      "description_en": "Material used in producing special skilling tools and outfits",
+      "description_zh": "用于制作特殊专业工具和服装的材料"
+    },
+    {
+      "hrid": "/items/catalyst_of_coinification",
+      "name_en": "Catalyst Of Coinification",
+      "name_zh": "点金催化剂",
+      "description_en": "Used in alchemy to increase the coinifying success rate by 15% (multiplicative). One catalyst is consumed on success.",
+      "description_zh": "在炼金时使用，可提高15%的点金成功率 (乘法)。成功时消耗一个催化剂。"
+    },
+    {
+      "hrid": "/items/catalyst_of_decomposition",
+      "name_en": "Catalyst Of Decomposition",
+      "name_zh": "分解催化剂",
+      "description_en": "Used in alchemy to increase the decomposition success rate by 15% (multiplicative). One catalyst is consumed on success.",
+      "description_zh": "在炼金时使用，可将分解成功率提高 15% (乘法)。成功时消耗一个催化剂。"
+    },
+    {
+      "hrid": "/items/catalyst_of_transmutation",
+      "name_en": "Catalyst Of Transmutation",
+      "name_zh": "转化催化剂",
+      "description_en": "Used in alchemy to increase the transmutation success rate by 15% (multiplicative). One catalyst is consumed on success.",
+      "description_zh": "在炼金时使用，可将转化成功率提高 15% (乘法)。成功时消耗一个催化剂。"
+    },
+    {
+      "hrid": "/items/catalytic_tea",
+      "name_en": "Catalytic Tea",
+      "name_zh": "催化茶"
+    },
+    {
+      "hrid": "/items/cedar_bow",
+      "name_en": "Cedar Bow",
+      "name_zh": "雪松弓"
+    },
+    {
+      "hrid": "/items/cedar_crossbow",
+      "name_en": "Cedar Crossbow",
+      "name_zh": "雪松弩"
+    },
+    {
+      "hrid": "/items/cedar_fire_staff",
+      "name_en": "Cedar Fire Staff",
+      "name_zh": "雪松火法杖"
+    },
+    {
+      "hrid": "/items/cedar_log",
+      "name_en": "Cedar Log",
+      "name_zh": "雪松原木"
+    },
+    {
+      "hrid": "/items/cedar_lumber",
+      "name_en": "Cedar Lumber",
+      "name_zh": "雪松木板"
+    },
+    {
+      "hrid": "/items/cedar_nature_staff",
+      "name_en": "Cedar Nature Staff",
+      "name_zh": "雪松自然法杖"
+    },
+    {
+      "hrid": "/items/cedar_shield",
+      "name_en": "Cedar Shield",
+      "name_zh": "雪松盾"
+    },
+    {
+      "hrid": "/items/cedar_water_staff",
+      "name_en": "Cedar Water Staff",
+      "name_zh": "雪松水法杖"
+    },
+    {
+      "hrid": "/items/celestial_alembic",
+      "name_en": "Celestial Alembic",
+      "name_zh": "星空蒸馏器"
+    },
+    {
+      "hrid": "/items/celestial_brush",
+      "name_en": "Celestial Brush",
+      "name_zh": "星空刷子"
+    },
+    {
+      "hrid": "/items/celestial_chisel",
+      "name_en": "Celestial Chisel",
+      "name_zh": "星空凿子"
+    },
+    {
+      "hrid": "/items/celestial_enhancer",
+      "name_en": "Celestial Enhancer",
+      "name_zh": "星空强化器"
+    },
+    {
+      "hrid": "/items/celestial_hammer",
+      "name_en": "Celestial Hammer",
+      "name_zh": "星空锤子"
+    },
+    {
+      "hrid": "/items/celestial_hatchet",
+      "name_en": "Celestial Hatchet",
+      "name_zh": "星空斧头"
+    },
+    {
+      "hrid": "/items/celestial_needle",
+      "name_en": "Celestial Needle",
+      "name_zh": "星空针"
+    },
+    {
+      "hrid": "/items/celestial_pot",
+      "name_en": "Celestial Pot",
+      "name_zh": "星空壶"
+    },
+    {
+      "hrid": "/items/celestial_shears",
+      "name_en": "Celestial Shears",
+      "name_zh": "星空剪刀"
+    },
+    {
+      "hrid": "/items/celestial_spatula",
+      "name_en": "Celestial Spatula",
+      "name_zh": "星空锅铲"
+    },
+    {
+      "hrid": "/items/centaur_boots",
+      "name_en": "Centaur Boots",
+      "name_zh": "半人马靴"
+    },
+    {
+      "hrid": "/items/centaur_hoof",
+      "name_en": "Centaur Hoof",
+      "name_zh": "半人马蹄",
+      "description_en": "Material used in tailoring Centaur Boots",
+      "description_zh": "用于缝纫半人马靴的材料"
+    },
+    {
+      "hrid": "/items/channeling_coffee",
+      "name_en": "Channeling Coffee",
+      "name_zh": "吟唱咖啡"
+    },
+    {
+      "hrid": "/items/chaotic_chain",
+      "name_en": "Chaotic Chain",
+      "name_zh": "混沌锁链",
+      "description_en": "Material used in smithing Chaotic Flail",
+      "description_zh": "用于锻造混沌连枷的材料"
+    },
+    {
+      "hrid": "/items/chaotic_flail",
+      "name_en": "Chaotic Flail",
+      "name_zh": "混沌连枷"
+    },
+    {
+      "hrid": "/items/cheese",
+      "name_en": "Cheese",
+      "name_zh": "奶酪"
+    },
+    {
+      "hrid": "/items/cheese_alembic",
+      "name_en": "Cheese Alembic",
+      "name_zh": "奶酪蒸馏器"
+    },
+    {
+      "hrid": "/items/cheese_boots",
+      "name_en": "Cheese Boots",
+      "name_zh": "奶酪靴"
+    },
+    {
+      "hrid": "/items/cheese_brush",
+      "name_en": "Cheese Brush",
+      "name_zh": "奶酪刷子"
+    },
+    {
+      "hrid": "/items/cheese_buckler",
+      "name_en": "Cheese Buckler",
+      "name_zh": "奶酪圆盾"
+    },
+    {
+      "hrid": "/items/cheese_bulwark",
+      "name_en": "Cheese Bulwark",
+      "name_zh": "奶酪重盾"
+    },
+    {
+      "hrid": "/items/cheese_chisel",
+      "name_en": "Cheese Chisel",
+      "name_zh": "奶酪凿子"
+    },
+    {
+      "hrid": "/items/cheese_enhancer",
+      "name_en": "Cheese Enhancer",
+      "name_zh": "奶酪强化器"
+    },
+    {
+      "hrid": "/items/cheese_gauntlets",
+      "name_en": "Cheese Gauntlets",
+      "name_zh": "奶酪护手"
+    },
+    {
+      "hrid": "/items/cheese_hammer",
+      "name_en": "Cheese Hammer",
+      "name_zh": "奶酪锤子"
+    },
+    {
+      "hrid": "/items/cheese_hatchet",
+      "name_en": "Cheese Hatchet",
+      "name_zh": "奶酪斧头"
+    },
+    {
+      "hrid": "/items/cheese_helmet",
+      "name_en": "Cheese Helmet",
+      "name_zh": "奶酪头盔"
+    },
+    {
+      "hrid": "/items/cheese_mace",
+      "name_en": "Cheese Mace",
+      "name_zh": "奶酪钉头锤"
+    },
+    {
+      "hrid": "/items/cheese_needle",
+      "name_en": "Cheese Needle",
+      "name_zh": "奶酪针"
+    },
+    {
+      "hrid": "/items/cheese_plate_body",
+      "name_en": "Cheese Plate Body",
+      "name_zh": "奶酪胸甲"
+    },
+    {
+      "hrid": "/items/cheese_plate_legs",
+      "name_en": "Cheese Plate Legs",
+      "name_zh": "奶酪腿甲"
+    },
+    {
+      "hrid": "/items/cheese_pot",
+      "name_en": "Cheese Pot",
+      "name_zh": "奶酪壶"
+    },
+    {
+      "hrid": "/items/cheese_shears",
+      "name_en": "Cheese Shears",
+      "name_zh": "奶酪剪刀"
+    },
+    {
+      "hrid": "/items/cheese_spatula",
+      "name_en": "Cheese Spatula",
+      "name_zh": "奶酪锅铲"
+    },
+    {
+      "hrid": "/items/cheese_spear",
+      "name_en": "Cheese Spear",
+      "name_zh": "奶酪长枪"
+    },
+    {
+      "hrid": "/items/cheese_sword",
+      "name_en": "Cheese Sword",
+      "name_zh": "奶酪剑"
+    },
+    {
+      "hrid": "/items/cheesemakers_bottoms",
+      "name_en": "Cheesemaker's Bottoms",
+      "name_zh": "奶酪师下装"
+    },
+    {
+      "hrid": "/items/cheesemakers_top",
+      "name_en": "Cheesemaker's Top",
+      "name_zh": "奶酪师上衣"
+    },
+    {
+      "hrid": "/items/cheesesmithing_essence",
+      "name_en": "Cheesesmithing Essence",
+      "name_zh": "奶酪锻造精华",
+      "description_en": "Used for brewing cheesesmithing tea and crafting alchemy catalyst",
+      "description_zh": "用于冲泡奶酪锻造茶和制作炼金催化剂"
+    },
+    {
+      "hrid": "/items/cheesesmithing_tea",
+      "name_en": "Cheesesmithing Tea",
+      "name_zh": "奶酪锻造茶"
+    },
+    {
+      "hrid": "/items/chefs_bottoms",
+      "name_en": "Chef's Bottoms",
+      "name_zh": "厨师下装"
+    },
+    {
+      "hrid": "/items/chefs_top",
+      "name_en": "Chef's Top",
+      "name_zh": "厨师上衣"
+    },
+    {
+      "hrid": "/items/chimerical_chest",
+      "name_en": "Chimerical Chest",
+      "name_zh": "奇幻宝箱",
+      "description_en": "Received from completion of the Chimerical Den dungeon. Can be opened with Chimerical Chest Key",
+      "description_zh": "攻克【奇幻洞穴】后的奖励，可以用【奇幻宝箱钥匙】打开"
+    },
+    {
+      "hrid": "/items/chimerical_chest_key",
+      "name_en": "Chimerical Chest Key",
+      "name_zh": "奇幻宝箱钥匙",
+      "description_en": "Opens 1 Chimerical Chest",
+      "description_zh": "开启一个奇幻宝箱"
+    },
+    {
+      "hrid": "/items/chimerical_entry_key",
+      "name_en": "Chimerical Entry Key",
+      "name_zh": "奇幻钥匙",
+      "description_en": "Allows 1 entry into the Chimerical Den dungeon",
+      "description_zh": "允许进入地下城【奇幻洞穴】1次"
+    },
+    {
+      "hrid": "/items/chimerical_essence",
+      "name_en": "Chimerical Essence",
+      "name_zh": "奇幻精华",
+      "description_en": "Used for enhancing special equipment from the Chimerical Den",
+      "description_zh": "用于强化奇幻洞穴特殊装备的材料"
+    },
+    {
+      "hrid": "/items/chimerical_quiver",
+      "name_en": "Chimerical Quiver",
+      "name_zh": "奇幻箭袋"
+    },
+    {
+      "hrid": "/items/chimerical_token",
+      "name_en": "Chimerical Token",
+      "name_zh": "奇幻代币",
+      "description_en": "Dungeon currency from the Chimerical Den. Spend these in the Shop",
+      "description_zh": "来自【奇幻洞穴】的地下城代币。可以在地下城商店里消费"
+    },
+    {
+      "hrid": "/items/chrono_gloves",
+      "name_en": "Chrono Gloves",
+      "name_zh": "时空手套"
+    },
+    {
+      "hrid": "/items/chrono_sphere",
+      "name_en": "Chrono Sphere",
+      "name_zh": "时空球",
+      "description_en": "Material used in tailoring Enchanted Gloves or Chrono Gloves",
+      "description_zh": "用于缝纫附魔手套或时空手套的材料"
+    },
+    {
+      "hrid": "/items/cleave",
+      "name_en": "Cleave",
+      "name_zh": "分裂斩"
+    },
+    {
+      "hrid": "/items/cocoon",
+      "name_en": "Cocoon",
+      "name_zh": "蚕茧"
+    },
+    {
+      "hrid": "/items/coin",
+      "name_en": "Coin",
+      "name_zh": "金币",
+      "description_en": "Basic currency",
+      "description_zh": "基础货币"
+    },
+    {
+      "hrid": "/items/collectors_boots",
+      "name_en": "Collector's Boots",
+      "name_zh": "收藏家靴"
+    },
+    {
+      "hrid": "/items/colossus_core",
+      "name_en": "Colossus Core",
+      "name_zh": "巨像核心",
+      "description_en": "Material used in smithing Colossus Plate Body or Legs",
+      "description_zh": "用于锻造巨像胸甲或腿甲的材料"
+    },
+    {
+      "hrid": "/items/colossus_plate_body",
+      "name_en": "Colossus Plate Body",
+      "name_zh": "巨像胸甲"
+    },
+    {
+      "hrid": "/items/colossus_plate_legs",
+      "name_en": "Colossus Plate Legs",
+      "name_zh": "巨像腿甲"
+    },
+    {
+      "hrid": "/items/cooking_essence",
+      "name_en": "Cooking Essence",
+      "name_zh": "烹饪精华",
+      "description_en": "Used for brewing cooking tea and crafting alchemy catalyst",
+      "description_zh": "用于冲泡烹饪茶和制作炼金催化剂"
+    },
+    {
+      "hrid": "/items/cooking_tea",
+      "name_en": "Cooking Tea",
+      "name_zh": "烹饪茶"
+    },
+    {
+      "hrid": "/items/corsair_crest",
+      "name_en": "Corsair Crest",
+      "name_zh": "掠夺者徽章",
+      "description_en": "Material used in smithing Corsair Helmet",
+      "description_zh": "用于锻造掠夺者头盔的材料"
+    },
+    {
+      "hrid": "/items/corsair_helmet",
+      "name_en": "Corsair Helmet",
+      "name_zh": "掠夺者头盔"
+    },
+    {
+      "hrid": "/items/cotton",
+      "name_en": "Cotton",
+      "name_zh": "棉花"
+    },
+    {
+      "hrid": "/items/cotton_boots",
+      "name_en": "Cotton Boots",
+      "name_zh": "棉靴"
+    },
+    {
+      "hrid": "/items/cotton_fabric",
+      "name_en": "Cotton Fabric",
+      "name_zh": "棉花布料"
+    },
+    {
+      "hrid": "/items/cotton_gloves",
+      "name_en": "Cotton Gloves",
+      "name_zh": "棉手套"
+    },
+    {
+      "hrid": "/items/cotton_hat",
+      "name_en": "Cotton Hat",
+      "name_zh": "棉帽"
+    },
+    {
+      "hrid": "/items/cotton_robe_bottoms",
+      "name_en": "Cotton Robe Bottoms",
+      "name_zh": "棉袍裙"
+    },
+    {
+      "hrid": "/items/cotton_robe_top",
+      "name_en": "Cotton Robe Top",
+      "name_zh": "棉布袍服"
+    },
+    {
+      "hrid": "/items/cowbell",
+      "name_en": "Cowbell",
+      "name_zh": "牛铃",
+      "description_en": "Premium currency. Buy or spend these in the Cowbell Store",
+      "description_zh": "高级货币。可在牛铃商店购买或使用这些货币"
+    },
+    {
+      "hrid": "/items/crab_pincer",
+      "name_en": "Crab Pincer",
+      "name_zh": "蟹钳",
+      "description_en": "Material used in smithing Pincer Gloves",
+      "description_zh": "用于锻造蟹钳手套的材料"
+    },
+    {
+      "hrid": "/items/crafters_bottoms",
+      "name_en": "Crafter's Bottoms",
+      "name_zh": "工匠下装"
+    },
+    {
+      "hrid": "/items/crafters_top",
+      "name_en": "Crafter's Top",
+      "name_zh": "工匠上衣"
+    },
+    {
+      "hrid": "/items/crafting_essence",
+      "name_en": "Crafting Essence",
+      "name_zh": "制作精华",
+      "description_en": "Used for brewing crafting tea and crafting alchemy catalyst",
+      "description_zh": "用于冲泡制作茶和制作炼金催化剂"
+    },
+    {
+      "hrid": "/items/crafting_tea",
+      "name_en": "Crafting Tea",
+      "name_zh": "制作茶"
+    },
+    {
+      "hrid": "/items/crimson_alembic",
+      "name_en": "Crimson Alembic",
+      "name_zh": "绛红蒸馏器"
+    },
+    {
+      "hrid": "/items/crimson_boots",
+      "name_en": "Crimson Boots",
+      "name_zh": "绛红靴"
+    },
+    {
+      "hrid": "/items/crimson_brush",
+      "name_en": "Crimson Brush",
+      "name_zh": "绛红刷子"
+    },
+    {
+      "hrid": "/items/crimson_buckler",
+      "name_en": "Crimson Buckler",
+      "name_zh": "绛红圆盾"
+    },
+    {
+      "hrid": "/items/crimson_bulwark",
+      "name_en": "Crimson Bulwark",
+      "name_zh": "绛红重盾"
+    },
+    {
+      "hrid": "/items/crimson_cheese",
+      "name_en": "Crimson Cheese",
+      "name_zh": "绛红奶酪"
+    },
+    {
+      "hrid": "/items/crimson_chisel",
+      "name_en": "Crimson Chisel",
+      "name_zh": "绛红凿子"
+    },
+    {
+      "hrid": "/items/crimson_enhancer",
+      "name_en": "Crimson Enhancer",
+      "name_zh": "绛红强化器"
+    },
+    {
+      "hrid": "/items/crimson_gauntlets",
+      "name_en": "Crimson Gauntlets",
+      "name_zh": "绛红护手"
+    },
+    {
+      "hrid": "/items/crimson_hammer",
+      "name_en": "Crimson Hammer",
+      "name_zh": "绛红锤子"
+    },
+    {
+      "hrid": "/items/crimson_hatchet",
+      "name_en": "Crimson Hatchet",
+      "name_zh": "绛红斧头"
+    },
+    {
+      "hrid": "/items/crimson_helmet",
+      "name_en": "Crimson Helmet",
+      "name_zh": "绛红头盔"
+    },
+    {
+      "hrid": "/items/crimson_mace",
+      "name_en": "Crimson Mace",
+      "name_zh": "绛红钉头锤"
+    },
+    {
+      "hrid": "/items/crimson_milk",
+      "name_en": "Crimson Milk",
+      "name_zh": "绛红牛奶",
+      "description_en": "mooooooo",
+      "description_zh": "哞哞哞哞哞"
+    },
+    {
+      "hrid": "/items/crimson_needle",
+      "name_en": "Crimson Needle",
+      "name_zh": "绛红针"
+    },
+    {
+      "hrid": "/items/crimson_plate_body",
+      "name_en": "Crimson Plate Body",
+      "name_zh": "绛红胸甲"
+    },
+    {
+      "hrid": "/items/crimson_plate_legs",
+      "name_en": "Crimson Plate Legs",
+      "name_zh": "绛红腿甲"
+    },
+    {
+      "hrid": "/items/crimson_pot",
+      "name_en": "Crimson Pot",
+      "name_zh": "绛红壶"
+    },
+    {
+      "hrid": "/items/crimson_shears",
+      "name_en": "Crimson Shears",
+      "name_zh": "绛红剪刀"
+    },
+    {
+      "hrid": "/items/crimson_spatula",
+      "name_en": "Crimson Spatula",
+      "name_zh": "绛红锅铲"
+    },
+    {
+      "hrid": "/items/crimson_spear",
+      "name_en": "Crimson Spear",
+      "name_zh": "绛红长枪"
+    },
+    {
+      "hrid": "/items/crimson_sword",
+      "name_en": "Crimson Sword",
+      "name_zh": "绛红剑"
+    },
+    {
+      "hrid": "/items/crippling_slash",
+      "name_en": "Crippling Slash",
+      "name_zh": "致残斩"
+    },
+    {
+      "hrid": "/items/critical_aura",
+      "name_en": "Critical Aura",
+      "name_zh": "暴击光环"
+    },
+    {
+      "hrid": "/items/critical_coffee",
+      "name_en": "Critical Coffee",
+      "name_zh": "暴击咖啡"
+    },
+    {
+      "hrid": "/items/crushed_amber",
+      "name_en": "Crushed Amber",
+      "name_zh": "琥珀碎片",
+      "description_en": "Used to be a piece of amber",
+      "description_zh": "曾经是一块琥珀"
+    },
+    {
+      "hrid": "/items/crushed_amethyst",
+      "name_en": "Crushed Amethyst",
+      "name_zh": "紫水晶碎片",
+      "description_en": "Used to be a piece of amethyst",
+      "description_zh": "曾经是一颗紫水晶"
+    },
+    {
+      "hrid": "/items/crushed_garnet",
+      "name_en": "Crushed Garnet",
+      "name_zh": "石榴石碎片",
+      "description_en": "Used to be a piece of garnet.",
+      "description_zh": "曾经是一颗石榴石"
+    },
+    {
+      "hrid": "/items/crushed_jade",
+      "name_en": "Crushed Jade",
+      "name_zh": "翡翠碎片",
+      "description_en": "Used to be a piece of jade",
+      "description_zh": "曾经是一块翡翠"
+    },
+    {
+      "hrid": "/items/crushed_moonstone",
+      "name_en": "Crushed Moonstone",
+      "name_zh": "月亮石碎片",
+      "description_en": "Used to be a piece of moonstone",
+      "description_zh": "曾经是一枚月亮石"
+    },
+    {
+      "hrid": "/items/crushed_pearl",
+      "name_en": "Crushed Pearl",
+      "name_zh": "珍珠碎片",
+      "description_en": "Used to be a piece of pearl",
+      "description_zh": "曾经是一粒珍珠"
+    },
+    {
+      "hrid": "/items/crushed_philosophers_stone",
+      "name_en": "Crushed Philosopher's Stone",
+      "name_zh": "贤者之石碎片",
+      "description_en": "Used to be a piece of a philosopher's stone",
+      "description_zh": "曾经是一块贤者之石"
+    },
+    {
+      "hrid": "/items/crushed_sunstone",
+      "name_en": "Crushed Sunstone",
+      "name_zh": "太阳石碎片",
+      "description_en": "Used to be a piece of sunstone",
+      "description_zh": "曾经是一枚太阳石"
+    },
+    {
+      "hrid": "/items/cupcake",
+      "name_en": "Cupcake",
+      "name_zh": "纸杯蛋糕"
+    },
+    {
+      "hrid": "/items/cursed_ball",
+      "name_en": "Cursed Ball",
+      "name_zh": "诅咒之球",
+      "description_en": "Material used in crafting Cursed Bow",
+      "description_zh": "用于制作咒怨之弓的材料"
+    },
+    {
+      "hrid": "/items/cursed_bow",
+      "name_en": "Cursed Bow",
+      "name_zh": "咒怨之弓"
+    },
+    {
+      "hrid": "/items/dairyhands_bottoms",
+      "name_en": "Dairyhand's Bottoms",
+      "name_zh": "挤奶工下装"
+    },
+    {
+      "hrid": "/items/dairyhands_top",
+      "name_en": "Dairyhand's Top",
+      "name_zh": "挤奶工上衣"
+    },
+    {
+      "hrid": "/items/damaged_anchor",
+      "name_en": "Damaged Anchor",
+      "name_zh": "破损船锚",
+      "description_en": "Material used in smithing Anchorbound Plate Body or Legs",
+      "description_zh": "用于锻造锚定胸甲或腿甲的材料"
+    },
+    {
+      "hrid": "/items/dark_key_fragment",
+      "name_en": "Dark Key Fragment",
+      "name_zh": "黑暗钥匙碎片",
+      "description_en": "Can be used to craft dungeon keys",
+      "description_zh": "看起来是某种钥匙的碎片，用来制作地下城钥匙"
+    },
+    {
+      "hrid": "/items/defense_coffee",
+      "name_en": "Defense Coffee",
+      "name_zh": "防御咖啡"
+    },
+    {
+      "hrid": "/items/demonic_core",
+      "name_en": "Demonic Core",
+      "name_zh": "恶魔核心",
+      "description_en": "Material used in smithing Demonic Plate Body or Legs",
+      "description_zh": "用于锻造恶魔胸甲或腿甲的材料"
+    },
+    {
+      "hrid": "/items/demonic_plate_body",
+      "name_en": "Demonic Plate Body",
+      "name_zh": "恶魔胸甲"
+    },
+    {
+      "hrid": "/items/demonic_plate_legs",
+      "name_en": "Demonic Plate Legs",
+      "name_zh": "恶魔腿甲"
+    },
+    {
+      "hrid": "/items/dodocamel_gauntlets",
+      "name_en": "Dodocamel Gauntlets",
+      "name_zh": "渡渡驼护手"
+    },
+    {
+      "hrid": "/items/dodocamel_plume",
+      "name_en": "Dodocamel Plume",
+      "name_zh": "渡渡驼之翎",
+      "description_en": "Material used in smithing Dodocamel Gauntlets",
+      "description_zh": "用于锻造渡渡驼护手的材料"
+    },
+    {
+      "hrid": "/items/donut",
+      "name_en": "Donut",
+      "name_zh": "甜甜圈"
+    },
+    {
+      "hrid": "/items/dragon_fruit",
+      "name_en": "Dragon Fruit",
+      "name_zh": "火龙果"
+    },
+    {
+      "hrid": "/items/dragon_fruit_gummy",
+      "name_en": "Dragon Fruit Gummy",
+      "name_zh": "火龙果软糖"
+    },
+    {
+      "hrid": "/items/dragon_fruit_yogurt",
+      "name_en": "Dragon Fruit Yogurt",
+      "name_zh": "火龙果酸奶"
+    },
+    {
+      "hrid": "/items/earrings_of_armor",
+      "name_en": "Earrings Of Armor",
+      "name_zh": "护甲耳环"
+    },
+    {
+      "hrid": "/items/earrings_of_critical_strike",
+      "name_en": "Earrings Of Critical Strike",
+      "name_zh": "暴击耳环"
+    },
+    {
+      "hrid": "/items/earrings_of_essence_find",
+      "name_en": "Earrings Of Essence Find",
+      "name_zh": "精华发现耳环"
+    },
+    {
+      "hrid": "/items/earrings_of_gathering",
+      "name_en": "Earrings Of Gathering",
+      "name_zh": "采集耳环"
+    },
+    {
+      "hrid": "/items/earrings_of_rare_find",
+      "name_en": "Earrings Of Rare Find",
+      "name_zh": "稀有发现耳环"
+    },
+    {
+      "hrid": "/items/earrings_of_regeneration",
+      "name_en": "Earrings Of Regeneration",
+      "name_zh": "恢复耳环"
+    },
+    {
+      "hrid": "/items/earrings_of_resistance",
+      "name_en": "Earrings Of Resistance",
+      "name_zh": "抗性耳环"
+    },
+    {
+      "hrid": "/items/efficiency_tea",
+      "name_en": "Efficiency Tea",
+      "name_zh": "效率茶"
+    },
+    {
+      "hrid": "/items/egg",
+      "name_en": "Egg",
+      "name_zh": "鸡蛋"
+    },
+    {
+      "hrid": "/items/elemental_affinity",
+      "name_en": "Elemental Affinity",
+      "name_zh": "元素增幅"
+    },
+    {
+      "hrid": "/items/elusiveness",
+      "name_en": "Elusiveness",
+      "name_zh": "闪避"
+    },
+    {
+      "hrid": "/items/emp_tea_leaf",
+      "name_en": "Emp Tea Leaf",
+      "name_zh": "虚空茶叶"
+    },
+    {
+      "hrid": "/items/enchanted_chest",
+      "name_en": "Enchanted Chest",
+      "name_zh": "秘法宝箱",
+      "description_en": "Received from completion of the Enchanted Fortress dungeon. Can be opened with Enchanted Chest Key",
+      "description_zh": "攻克【秘法要塞】后的奖励，可以用【秘法宝箱钥匙】打开"
+    },
+    {
+      "hrid": "/items/enchanted_chest_key",
+      "name_en": "Enchanted Chest Key",
+      "name_zh": "秘法宝箱钥匙",
+      "description_en": "Opens 1 Enchanted Chest",
+      "description_zh": "开启一个秘法宝箱"
+    },
+    {
+      "hrid": "/items/enchanted_cloak",
+      "name_en": "Enchanted Cloak",
+      "name_zh": "秘法披风"
+    },
+    {
+      "hrid": "/items/enchanted_entry_key",
+      "name_en": "Enchanted Entry Key",
+      "name_zh": "秘法钥匙",
+      "description_en": "Allows 1 entry into the Enchanted Fortress dungeon",
+      "description_zh": "允许进入地下城【秘法要塞】1次"
+    },
+    {
+      "hrid": "/items/enchanted_essence",
+      "name_en": "Enchanted Essence",
+      "name_zh": "秘法精华",
+      "description_en": "Used for enhancing special equipment from the Enchanted Fortress",
+      "description_zh": "用于强化秘法要塞特殊装备的材料"
+    },
+    {
+      "hrid": "/items/enchanted_gloves",
+      "name_en": "Enchanted Gloves",
+      "name_zh": "附魔手套"
+    },
+    {
+      "hrid": "/items/enchanted_token",
+      "name_en": "Enchanted Token",
+      "name_zh": "秘法代币",
+      "description_en": "Dungeon currency from the Enchanted Fortress. Spend these in the Shop",
+      "description_zh": "来自【秘法要塞】的地下城代币。可以在地下城商店里消费"
+    },
+    {
+      "hrid": "/items/enhancers_bottoms",
+      "name_en": "Enhancer's Bottoms",
+      "name_zh": "强化师下装"
+    },
+    {
+      "hrid": "/items/enhancers_top",
+      "name_en": "Enhancer's Top",
+      "name_zh": "强化师上衣"
+    },
+    {
+      "hrid": "/items/enhancing_essence",
+      "name_en": "Enhancing Essence",
+      "name_zh": "强化精华",
+      "description_en": "Used for brewing enhancing tea and crafting alchemy catalyst",
+      "description_zh": "用于冲泡强化茶和制作炼金催化剂"
+    },
+    {
+      "hrid": "/items/enhancing_tea",
+      "name_en": "Enhancing Tea",
+      "name_zh": "强化茶"
+    },
+    {
+      "hrid": "/items/entangle",
+      "name_en": "Entangle",
+      "name_zh": "缠绕"
+    },
+    {
+      "hrid": "/items/excelsa_coffee_bean",
+      "name_en": "Excelsa Coffee Bean",
+      "name_zh": "特级咖啡豆"
+    },
+    {
+      "hrid": "/items/expert_task_badge",
+      "name_en": "Expert Task Badge",
+      "name_zh": "专家任务徽章"
+    },
+    {
+      "hrid": "/items/eye_of_the_watcher",
+      "name_en": "Eye Of The Watcher",
+      "name_zh": "观察者之眼",
+      "description_en": "Material used in crafting Eye Watch or Watchful Relic",
+      "description_zh": "用于制作掌上监工或警戒遗物的材料"
+    },
+    {
+      "hrid": "/items/eye_watch",
+      "name_en": "Eye Watch",
+      "name_zh": "掌上监工"
+    },
+    {
+      "hrid": "/items/eyessence",
+      "name_en": "Eyessence",
+      "name_zh": "眼精华",
+      "description_en": "Used for enhancing special equipment from Planet Of The Eyes",
+      "description_zh": "用于强化眼球星球特殊装备的材料"
+    },
+    {
+      "hrid": "/items/fierce_aura",
+      "name_en": "Fierce Aura",
+      "name_zh": "物理光环"
+    },
+    {
+      "hrid": "/items/fieriosa_coffee_bean",
+      "name_en": "Fieriosa Coffee Bean",
+      "name_zh": "火山咖啡豆"
+    },
+    {
+      "hrid": "/items/fighter_necklace",
+      "name_en": "Fighter Necklace",
+      "name_zh": "战士项链"
+    },
+    {
+      "hrid": "/items/fireball",
+      "name_en": "Fireball",
+      "name_zh": "火球"
+    },
+    {
+      "hrid": "/items/firestorm",
+      "name_en": "Firestorm",
+      "name_zh": "火焰风暴"
+    },
+    {
+      "hrid": "/items/flame_arrow",
+      "name_en": "Flame Arrow",
+      "name_zh": "烈焰箭"
+    },
+    {
+      "hrid": "/items/flame_aura",
+      "name_en": "Flame Aura",
+      "name_zh": "火焰光环"
+    },
+    {
+      "hrid": "/items/flame_blast",
+      "name_en": "Flame Blast",
+      "name_zh": "熔岩爆裂"
+    },
+    {
+      "hrid": "/items/flaming_cloth",
+      "name_en": "Flaming Cloth",
+      "name_zh": "烈焰织物",
+      "description_en": "Material used in tailoring Flaming Robe Top or Bottoms",
+      "description_zh": "用于缝纫烈焰袍服或袍裙的材料"
+    },
+    {
+      "hrid": "/items/flaming_robe_bottoms",
+      "name_en": "Flaming Robe Bottoms",
+      "name_zh": "烈焰袍裙"
+    },
+    {
+      "hrid": "/items/flaming_robe_top",
+      "name_en": "Flaming Robe Top",
+      "name_zh": "烈焰袍服"
+    },
+    {
+      "hrid": "/items/flax",
+      "name_en": "Flax",
+      "name_zh": "亚麻"
+    },
+    {
+      "hrid": "/items/fluffy_red_hat",
+      "name_en": "Fluffy Red Hat",
+      "name_zh": "蓬松红帽子"
+    },
+    {
+      "hrid": "/items/foragers_bottoms",
+      "name_en": "Forager's Bottoms",
+      "name_zh": "采摘者下装"
+    },
+    {
+      "hrid": "/items/foragers_top",
+      "name_en": "Forager's Top",
+      "name_zh": "采摘者上衣"
+    },
+    {
+      "hrid": "/items/foraging_essence",
+      "name_en": "Foraging Essence",
+      "name_zh": "采摘精华",
+      "description_en": "Used for brewing foraging tea and crafting alchemy catalyst",
+      "description_zh": "用于冲泡采摘茶和制作炼金催化剂"
+    },
+    {
+      "hrid": "/items/foraging_tea",
+      "name_en": "Foraging Tea",
+      "name_zh": "采摘茶"
+    },
+    {
+      "hrid": "/items/fracturing_impact",
+      "name_en": "Fracturing Impact",
+      "name_zh": "碎裂冲击"
+    },
+    {
+      "hrid": "/items/frenzy",
+      "name_en": "Frenzy",
+      "name_zh": "狂速"
+    },
+    {
+      "hrid": "/items/frost_sphere",
+      "name_en": "Frost Sphere",
+      "name_zh": "冰霜球",
+      "description_en": "Material used in crafting Frost Staff",
+      "description_zh": "用于制作冰霜法杖的材料"
+    },
+    {
+      "hrid": "/items/frost_staff",
+      "name_en": "Frost Staff",
+      "name_zh": "冰霜法杖"
+    },
+    {
+      "hrid": "/items/frost_surge",
+      "name_en": "Frost Surge",
+      "name_zh": "冰霜爆裂"
+    },
+    {
+      "hrid": "/items/furious_spear",
+      "name_en": "Furious Spear",
+      "name_zh": "狂怒长枪"
+    },
+    {
+      "hrid": "/items/garnet",
+      "name_en": "Garnet",
+      "name_zh": "石榴石",
+      "description_en": "A shiny gem often found from Treasure Chests",
+      "description_zh": "一种闪亮的宝石，通常在宝箱中找到"
+    },
+    {
+      "hrid": "/items/gathering_tea",
+      "name_en": "Gathering Tea",
+      "name_zh": "采集茶"
+    },
+    {
+      "hrid": "/items/gator_vest",
+      "name_en": "Gator Vest",
+      "name_zh": "鳄鱼马甲"
+    },
+    {
+      "hrid": "/items/giant_pouch",
+      "name_en": "Giant Pouch",
+      "name_zh": "巨大袋子"
+    },
+    {
+      "hrid": "/items/ginkgo_bow",
+      "name_en": "Ginkgo Bow",
+      "name_zh": "银杏弓"
+    },
+    {
+      "hrid": "/items/ginkgo_crossbow",
+      "name_en": "Ginkgo Crossbow",
+      "name_zh": "银杏弩"
+    },
+    {
+      "hrid": "/items/ginkgo_fire_staff",
+      "name_en": "Ginkgo Fire Staff",
+      "name_zh": "银杏火法杖"
+    },
+    {
+      "hrid": "/items/ginkgo_log",
+      "name_en": "Ginkgo Log",
+      "name_zh": "银杏原木"
+    },
+    {
+      "hrid": "/items/ginkgo_lumber",
+      "name_en": "Ginkgo Lumber",
+      "name_zh": "银杏木板"
+    },
+    {
+      "hrid": "/items/ginkgo_nature_staff",
+      "name_en": "Ginkgo Nature Staff",
+      "name_zh": "银杏自然法杖"
+    },
+    {
+      "hrid": "/items/ginkgo_shield",
+      "name_en": "Ginkgo Shield",
+      "name_zh": "银杏盾"
+    },
+    {
+      "hrid": "/items/ginkgo_water_staff",
+      "name_en": "Ginkgo Water Staff",
+      "name_zh": "银杏水法杖"
+    },
+    {
+      "hrid": "/items/gluttonous_energy",
+      "name_en": "Gluttonous Energy",
+      "name_zh": "贪食能量",
+      "description_en": "Used for tailoring Gluttonous Pouch",
+      "description_zh": "用于缝纫贪食之袋"
+    },
+    {
+      "hrid": "/items/gluttonous_pouch",
+      "name_en": "Gluttonous Pouch",
+      "name_zh": "贪食之袋"
+    },
+    {
+      "hrid": "/items/gobo_boomstick",
+      "name_en": "Gobo Boomstick",
+      "name_zh": "哥布林火棍"
+    },
+    {
+      "hrid": "/items/gobo_boots",
+      "name_en": "Gobo Boots",
+      "name_zh": "哥布林靴"
+    },
+    {
+      "hrid": "/items/gobo_bracers",
+      "name_en": "Gobo Bracers",
+      "name_zh": "哥布林护腕"
+    },
+    {
+      "hrid": "/items/gobo_chaps",
+      "name_en": "Gobo Chaps",
+      "name_zh": "哥布林皮裤"
+    },
+    {
+      "hrid": "/items/gobo_defender",
+      "name_en": "Gobo Defender",
+      "name_zh": "哥布林防御者"
+    },
+    {
+      "hrid": "/items/gobo_essence",
+      "name_en": "Gobo Essence",
+      "name_zh": "哥布林精华",
+      "description_en": "Used for enhancing special equipment from Gobo Planet",
+      "description_zh": "用于强化哥布林星球特殊装备的材料"
+    },
+    {
+      "hrid": "/items/gobo_hide",
+      "name_en": "Gobo Hide",
+      "name_zh": "哥布林皮"
+    },
+    {
+      "hrid": "/items/gobo_hood",
+      "name_en": "Gobo Hood",
+      "name_zh": "哥布林兜帽"
+    },
+    {
+      "hrid": "/items/gobo_leather",
+      "name_en": "Gobo Leather",
+      "name_zh": "哥布林皮革"
+    },
+    {
+      "hrid": "/items/gobo_rag",
+      "name_en": "Gobo Rag",
+      "name_zh": "哥布林抹布",
+      "description_en": "Material used in tailoring Collector's Boots",
+      "description_zh": "用于缝纫收藏家靴的材料"
+    },
+    {
+      "hrid": "/items/gobo_shooter",
+      "name_en": "Gobo Shooter",
+      "name_zh": "哥布林弹弓"
+    },
+    {
+      "hrid": "/items/gobo_slasher",
+      "name_en": "Gobo Slasher",
+      "name_zh": "哥布林关刀"
+    },
+    {
+      "hrid": "/items/gobo_smasher",
+      "name_en": "Gobo Smasher",
+      "name_zh": "哥布林狼牙棒"
+    },
+    {
+      "hrid": "/items/gobo_stabber",
+      "name_en": "Gobo Stabber",
+      "name_zh": "哥布林长剑"
+    },
+    {
+      "hrid": "/items/gobo_tunic",
+      "name_en": "Gobo Tunic",
+      "name_zh": "哥布林皮衣"
+    },
+    {
+      "hrid": "/items/goggles",
+      "name_en": "Goggles",
+      "name_zh": "护目镜",
+      "description_en": "Material used in smithing Vision Helmet",
+      "description_zh": "用于锻造视觉头盔的材料"
+    },
+    {
+      "hrid": "/items/golem_essence",
+      "name_en": "Golem Essence",
+      "name_zh": "魔像精华",
+      "description_en": "Used for enhancing special equipment from Golem Cave",
+      "description_zh": "用于强化魔像洞穴特殊装备的材料"
+    },
+    {
+      "hrid": "/items/gourmet_tea",
+      "name_en": "Gourmet Tea",
+      "name_zh": "美食茶"
+    },
+    {
+      "hrid": "/items/granite_bludgeon",
+      "name_en": "Granite Bludgeon",
+      "name_zh": "花岗岩大棒"
+    },
+    {
+      "hrid": "/items/green_key_fragment",
+      "name_en": "Green Key Fragment",
+      "name_zh": "绿色钥匙碎片",
+      "description_en": "Can be used to craft dungeon keys",
+      "description_zh": "看起来是某种钥匙的碎片，用来制作地下城钥匙"
+    },
+    {
+      "hrid": "/items/green_tea_leaf",
+      "name_en": "Green Tea Leaf",
+      "name_zh": "绿茶叶"
+    },
+    {
+      "hrid": "/items/griffin_bulwark",
+      "name_en": "Griffin Bulwark",
+      "name_zh": "狮鹫重盾"
+    },
+    {
+      "hrid": "/items/griffin_chaps",
+      "name_en": "Griffin Chaps",
+      "name_zh": "狮鹫皮裤"
+    },
+    {
+      "hrid": "/items/griffin_leather",
+      "name_en": "Griffin Leather",
+      "name_zh": "狮鹫之皮",
+      "description_en": "Material used in cheesesmithing Griffin Bulwark and tailoring Griffin Tunic or Chaps",
+      "description_zh": "用于锻造狮鹫重盾跟缝纫狮鹫皮衣或皮裤的材料"
+    },
+    {
+      "hrid": "/items/griffin_talon",
+      "name_en": "Griffin Talon",
+      "name_zh": "狮鹫之爪",
+      "description_en": "Material used in smithing Griffin Bulwark",
+      "description_zh": "用于锻造狮鹫重盾的材料"
+    },
+    {
+      "hrid": "/items/griffin_tunic",
+      "name_en": "Griffin Tunic",
+      "name_zh": "狮鹫皮衣"
+    },
+    {
+      "hrid": "/items/grizzly_bear_fluff",
+      "name_en": "Grizzly Bear Fluff",
+      "name_zh": "棕熊绒",
+      "description_en": "Material used in smithing Grizzly Bear Shoes",
+      "description_zh": "用于锻造棕熊鞋的材料"
+    },
+    {
+      "hrid": "/items/grizzly_bear_shoes",
+      "name_en": "Grizzly Bear Shoes",
+      "name_zh": "棕熊鞋"
+    },
+    {
+      "hrid": "/items/gummy",
+      "name_en": "Gummy",
+      "name_zh": "软糖"
+    },
+    {
+      "hrid": "/items/guzzling_energy",
+      "name_en": "Guzzling Energy",
+      "name_zh": "暴饮能量",
+      "description_en": "Used for tailoring Guzzling Pouch",
+      "description_zh": "用于缝纫暴饮之囊"
+    },
+    {
+      "hrid": "/items/guzzling_pouch",
+      "name_en": "Guzzling Pouch",
+      "name_zh": "暴饮之囊"
+    },
+    {
+      "hrid": "/items/heal",
+      "name_en": "Heal",
+      "name_zh": "自愈术"
+    },
+    {
+      "hrid": "/items/holy_alembic",
+      "name_en": "Holy Alembic",
+      "name_zh": "神圣蒸馏器"
+    },
+    {
+      "hrid": "/items/holy_boots",
+      "name_en": "Holy Boots",
+      "name_zh": "神圣靴"
+    },
+    {
+      "hrid": "/items/holy_brush",
+      "name_en": "Holy Brush",
+      "name_zh": "神圣刷子"
+    },
+    {
+      "hrid": "/items/holy_buckler",
+      "name_en": "Holy Buckler",
+      "name_zh": "神圣圆盾"
+    },
+    {
+      "hrid": "/items/holy_bulwark",
+      "name_en": "Holy Bulwark",
+      "name_zh": "神圣重盾"
+    },
+    {
+      "hrid": "/items/holy_cheese",
+      "name_en": "Holy Cheese",
+      "name_zh": "神圣奶酪"
+    },
+    {
+      "hrid": "/items/holy_chisel",
+      "name_en": "Holy Chisel",
+      "name_zh": "神圣凿子"
+    },
+    {
+      "hrid": "/items/holy_enhancer",
+      "name_en": "Holy Enhancer",
+      "name_zh": "神圣强化器"
+    },
+    {
+      "hrid": "/items/holy_gauntlets",
+      "name_en": "Holy Gauntlets",
+      "name_zh": "神圣护手"
+    },
+    {
+      "hrid": "/items/holy_hammer",
+      "name_en": "Holy Hammer",
+      "name_zh": "神圣锤子"
+    },
+    {
+      "hrid": "/items/holy_hatchet",
+      "name_en": "Holy Hatchet",
+      "name_zh": "神圣斧头"
+    },
+    {
+      "hrid": "/items/holy_helmet",
+      "name_en": "Holy Helmet",
+      "name_zh": "神圣头盔"
+    },
+    {
+      "hrid": "/items/holy_mace",
+      "name_en": "Holy Mace",
+      "name_zh": "神圣钉头锤"
+    },
+    {
+      "hrid": "/items/holy_milk",
+      "name_en": "Holy Milk",
+      "name_zh": "神圣牛奶",
+      "description_en": "mooooooooo",
+      "description_zh": "哞哞哞哞哞哞哞"
+    },
+    {
+      "hrid": "/items/holy_needle",
+      "name_en": "Holy Needle",
+      "name_zh": "神圣针"
+    },
+    {
+      "hrid": "/items/holy_plate_body",
+      "name_en": "Holy Plate Body",
+      "name_zh": "神圣胸甲"
+    },
+    {
+      "hrid": "/items/holy_plate_legs",
+      "name_en": "Holy Plate Legs",
+      "name_zh": "神圣腿甲"
+    },
+    {
+      "hrid": "/items/holy_pot",
+      "name_en": "Holy Pot",
+      "name_zh": "神圣壶"
+    },
+    {
+      "hrid": "/items/holy_shears",
+      "name_en": "Holy Shears",
+      "name_zh": "神圣剪刀"
+    },
+    {
+      "hrid": "/items/holy_spatula",
+      "name_en": "Holy Spatula",
+      "name_zh": "神圣锅铲"
+    },
+    {
+      "hrid": "/items/holy_spear",
+      "name_en": "Holy Spear",
+      "name_zh": "神圣长枪"
+    },
+    {
+      "hrid": "/items/holy_sword",
+      "name_en": "Holy Sword",
+      "name_zh": "神圣剑"
+    },
+    {
+      "hrid": "/items/ice_spear",
+      "name_en": "Ice Spear",
+      "name_zh": "冰枪术"
+    },
+    {
+      "hrid": "/items/icy_cloth",
+      "name_en": "Icy Cloth",
+      "name_zh": "冰霜织物",
+      "description_en": "Material used in tailoring Icy Robe Top or Bottoms",
+      "description_zh": "用于缝纫冰霜袍服或袍裙的材料"
+    },
+    {
+      "hrid": "/items/icy_robe_bottoms",
+      "name_en": "Icy Robe Bottoms",
+      "name_zh": "冰霜袍裙"
+    },
+    {
+      "hrid": "/items/icy_robe_top",
+      "name_en": "Icy Robe Top",
+      "name_zh": "冰霜袍服"
+    },
+    {
+      "hrid": "/items/impale",
+      "name_en": "Impale",
+      "name_zh": "透骨之刺"
+    },
+    {
+      "hrid": "/items/infernal_battlestaff",
+      "name_en": "Infernal Battlestaff",
+      "name_zh": "炼狱法杖"
+    },
+    {
+      "hrid": "/items/infernal_ember",
+      "name_en": "Infernal Ember",
+      "name_zh": "地狱余烬",
+      "description_en": "Material used in crafting Infernal Battlestaff",
+      "description_zh": "用于制作炼狱法杖的材料"
+    },
+    {
+      "hrid": "/items/insanity",
+      "name_en": "Insanity",
+      "name_zh": "疯狂"
+    },
+    {
+      "hrid": "/items/intelligence_coffee",
+      "name_en": "Intelligence Coffee",
+      "name_zh": "智力咖啡"
+    },
+    {
+      "hrid": "/items/invincible",
+      "name_en": "Invincible",
+      "name_zh": "无敌"
+    },
+    {
+      "hrid": "/items/jackalope_antler",
+      "name_en": "Jackalope Antler",
+      "name_zh": "鹿角兔之角",
+      "description_en": "Material used in crafting Jackalope Staff",
+      "description_zh": "用于制作鹿角兔之杖的材料"
+    },
+    {
+      "hrid": "/items/jackalope_staff",
+      "name_en": "Jackalope Staff",
+      "name_zh": "鹿角兔之杖"
+    },
+    {
+      "hrid": "/items/jade",
+      "name_en": "Jade",
+      "name_zh": "翡翠",
+      "description_en": "A shiny gem often found from Treasure Chests",
+      "description_zh": "一种闪亮的宝石，通常在宝箱中找到"
+    },
+    {
+      "hrid": "/items/jungle_essence",
+      "name_en": "Jungle Essence",
+      "name_zh": "丛林精华",
+      "description_en": "Used for enhancing special equipment from Jungle Planet",
+      "description_zh": "用于强化丛林星球特殊装备的材料"
+    },
+    {
+      "hrid": "/items/knights_aegis",
+      "name_en": "Knight's Aegis",
+      "name_zh": "骑士盾"
+    },
+    {
+      "hrid": "/items/knights_ingot",
+      "name_en": "Knight's Ingot",
+      "name_zh": "骑士之锭",
+      "description_en": "Material used in smithing Knight's Aegis",
+      "description_zh": "用于锻造骑士之盾的材料"
+    },
+    {
+      "hrid": "/items/kraken_chaps",
+      "name_en": "Kraken Chaps",
+      "name_zh": "克拉肯皮裤"
+    },
+    {
+      "hrid": "/items/kraken_fang",
+      "name_en": "Kraken Fang",
+      "name_zh": "克拉肯之牙",
+      "description_en": "Material used in crafting Rippling, Blooming, or Blazing Trident",
+      "description_zh": "用于制作涟漪、绽放或炽焰三叉戟的材料"
+    },
+    {
+      "hrid": "/items/kraken_leather",
+      "name_en": "Kraken Leather",
+      "name_zh": "克拉肯皮革",
+      "description_en": "Material used in tailoring Kraken Tunic or Chaps",
+      "description_zh": "用于缝纫克拉肯皮衣或皮裤的材料"
+    },
+    {
+      "hrid": "/items/kraken_tunic",
+      "name_en": "Kraken Tunic",
+      "name_zh": "克拉肯皮衣"
+    },
+    {
+      "hrid": "/items/large_artisans_crate",
+      "name_en": "Large Artisan's Crate",
+      "name_zh": "大工匠匣",
+      "description_en": "Can be found during production skills. Looks like it contains items inside!",
+      "description_zh": "在生产时可以找到，看起来里面装着物品！"
+    },
+    {
+      "hrid": "/items/large_meteorite_cache",
+      "name_en": "Large Meteorite Cache",
+      "name_zh": "大陨石舱",
+      "description_en": "Can be found while gathering. Looks like it contains items inside!",
+      "description_zh": "在采集时可以找到，看起来里面装着物品！"
+    },
+    {
+      "hrid": "/items/large_pouch",
+      "name_en": "Large Pouch",
+      "name_zh": "大袋子"
+    },
+    {
+      "hrid": "/items/large_treasure_chest",
+      "name_en": "Large Treasure Chest",
+      "name_zh": "大宝箱",
+      "description_en": "Can be found from monsters. Looks like it contains items inside!",
+      "description_zh": "可以从怪物身上找到，看起来里面装着物品！"
+    },
+    {
+      "hrid": "/items/liberica_coffee_bean",
+      "name_en": "Liberica Coffee Bean",
+      "name_zh": "高级咖啡豆"
+    },
+    {
+      "hrid": "/items/life_drain",
+      "name_en": "Life Drain",
+      "name_zh": "生命吸取"
+    },
+    {
+      "hrid": "/items/linen_boots",
+      "name_en": "Linen Boots",
+      "name_zh": "亚麻靴"
+    },
+    {
+      "hrid": "/items/linen_fabric",
+      "name_en": "Linen Fabric",
+      "name_zh": "亚麻布料"
+    },
+    {
+      "hrid": "/items/linen_gloves",
+      "name_en": "Linen Gloves",
+      "name_zh": "亚麻手套"
+    },
+    {
+      "hrid": "/items/linen_hat",
+      "name_en": "Linen Hat",
+      "name_zh": "亚麻帽"
+    },
+    {
+      "hrid": "/items/linen_robe_bottoms",
+      "name_en": "Linen Robe Bottoms",
+      "name_zh": "亚麻袍裙"
+    },
+    {
+      "hrid": "/items/linen_robe_top",
+      "name_en": "Linen Robe Top",
+      "name_zh": "亚麻袍服"
+    },
+    {
+      "hrid": "/items/living_granite",
+      "name_en": "Living Granite",
+      "name_zh": "花岗岩",
+      "description_en": "Material used in smithing Granite Bludgeon or Spiked Bulwark",
+      "description_zh": "用于锻造花岗岩大棒或尖刺重盾的材料"
+    },
+    {
+      "hrid": "/items/log",
+      "name_en": "Log",
+      "name_zh": "原木"
+    },
+    {
+      "hrid": "/items/lucky_coffee",
+      "name_en": "Lucky Coffee",
+      "name_zh": "幸运咖啡"
+    },
+    {
+      "hrid": "/items/lumber",
+      "name_en": "Lumber",
+      "name_zh": "木板"
+    },
+    {
+      "hrid": "/items/lumberjacks_bottoms",
+      "name_en": "Lumberjack's Bottoms",
+      "name_zh": "伐木工下装"
+    },
+    {
+      "hrid": "/items/lumberjacks_top",
+      "name_en": "Lumberjack's Top",
+      "name_zh": "伐木工上衣"
+    },
+    {
+      "hrid": "/items/luna_robe_bottoms",
+      "name_en": "Luna Robe Bottoms",
+      "name_zh": "月神袍裙"
+    },
+    {
+      "hrid": "/items/luna_robe_top",
+      "name_en": "Luna Robe Top",
+      "name_zh": "月神袍服"
+    },
+    {
+      "hrid": "/items/luna_wing",
+      "name_en": "Luna Wing",
+      "name_zh": "月神翼",
+      "description_en": "Material used in tailoring Luna Robe Top or Bottoms",
+      "description_zh": "用于缝纫月神袍服或袍裙的材料"
+    },
+    {
+      "hrid": "/items/maelstrom_plate_body",
+      "name_en": "Maelstrom Plate Body",
+      "name_zh": "怒涛胸甲"
+    },
+    {
+      "hrid": "/items/maelstrom_plate_legs",
+      "name_en": "Maelstrom Plate Legs",
+      "name_zh": "怒涛腿甲"
+    },
+    {
+      "hrid": "/items/maelstrom_plating",
+      "name_en": "Maelstrom Plating",
+      "name_zh": "怒涛甲片",
+      "description_en": "Material used in smithing Maelstrom Plate Body or Legs",
+      "description_zh": "用于锻造怒涛胸甲或腿甲的材料"
+    },
+    {
+      "hrid": "/items/magic_coffee",
+      "name_en": "Magic Coffee",
+      "name_zh": "魔法咖啡"
+    },
+    {
+      "hrid": "/items/magicians_cloth",
+      "name_en": "Magician's Cloth",
+      "name_zh": "魔术师织物",
+      "description_en": "Material used in tailoring Magician's Hat",
+      "description_zh": "用于缝纫魔术师之帽的材料"
+    },
+    {
+      "hrid": "/items/magicians_hat",
+      "name_en": "Magician's Hat",
+      "name_zh": "魔术师帽"
+    },
+    {
+      "hrid": "/items/magnet",
+      "name_en": "Magnet",
+      "name_zh": "磁铁",
+      "description_en": "Material used in smithing Magnetic Gloves",
+      "description_zh": "用于锻造磁力手套的材料"
+    },
+    {
+      "hrid": "/items/magnetic_gloves",
+      "name_en": "Magnetic Gloves",
+      "name_zh": "磁力手套"
+    },
+    {
+      "hrid": "/items/magnifying_glass",
+      "name_en": "Magnifying Glass",
+      "name_zh": "放大镜",
+      "description_en": "Material used in smithing Vision Shield or tailoring Sighted Bracers",
+      "description_zh": "用于锻造视觉盾或缝纫瞄准护腕的材料"
+    },
+    {
+      "hrid": "/items/maim",
+      "name_en": "Maim",
+      "name_zh": "血刃斩"
+    },
+    {
+      "hrid": "/items/mana_spring",
+      "name_en": "Mana Spring",
+      "name_zh": "法力喷泉"
+    },
+    {
+      "hrid": "/items/manticore_shield",
+      "name_en": "Manticore Shield",
+      "name_zh": "蝎狮盾"
+    },
+    {
+      "hrid": "/items/manticore_sting",
+      "name_en": "Manticore Sting",
+      "name_zh": "蝎狮之刺",
+      "description_en": "Material used in crafting Manticore Shield",
+      "description_zh": "用于制作蝎狮盾的材料"
+    },
+    {
+      "hrid": "/items/marine_chaps",
+      "name_en": "Marine Chaps",
+      "name_zh": "航海皮裤"
+    },
+    {
+      "hrid": "/items/marine_scale",
+      "name_en": "Marine Scale",
+      "name_zh": "海洋鳞片",
+      "description_en": "Material used in tailoring Marine Tunic or Chaps",
+      "description_zh": "用于缝纫海洋皮衣或皮裤的材料"
+    },
+    {
+      "hrid": "/items/marine_tunic",
+      "name_en": "Marine Tunic",
+      "name_zh": "海洋皮衣"
+    },
+    {
+      "hrid": "/items/marksman_bracers",
+      "name_en": "Marksman Bracers",
+      "name_zh": "神射护腕"
+    },
+    {
+      "hrid": "/items/marksman_brooch",
+      "name_en": "Marksman Brooch",
+      "name_zh": "神射胸针",
+      "description_en": "Material used in tailoring Marksman Bracers",
+      "description_zh": "用于缝纫神射护腕的材料"
+    },
+    {
+      "hrid": "/items/marsberry",
+      "name_en": "Marsberry",
+      "name_zh": "火星莓"
+    },
+    {
+      "hrid": "/items/marsberry_cake",
+      "name_en": "Marsberry Cake",
+      "name_zh": "火星莓蛋糕"
+    },
+    {
+      "hrid": "/items/marsberry_donut",
+      "name_en": "Marsberry Donut",
+      "name_zh": "火星莓甜甜圈"
+    },
+    {
+      "hrid": "/items/medium_artisans_crate",
+      "name_en": "Medium Artisan's Crate",
+      "name_zh": "中工匠匣",
+      "description_en": "Can be found during production skills. Looks like it contains items inside!",
+      "description_zh": "在生产时可以找到，看起来里面装着物品！"
+    },
+    {
+      "hrid": "/items/medium_meteorite_cache",
+      "name_en": "Medium Meteorite Cache",
+      "name_zh": "中陨石舱",
+      "description_en": "Can be found while gathering. Looks like it contains items inside!",
+      "description_zh": "在采集时可以找到，看起来里面装着物品！"
+    },
+    {
+      "hrid": "/items/medium_pouch",
+      "name_en": "Medium Pouch",
+      "name_zh": "中袋子"
+    },
+    {
+      "hrid": "/items/medium_treasure_chest",
+      "name_en": "Medium Treasure Chest",
+      "name_zh": "中宝箱",
+      "description_en": "Can be found from monsters. Looks like it contains items inside!",
+      "description_zh": "可以从怪物身上找到，看起来里面装着物品！"
+    },
+    {
+      "hrid": "/items/milk",
+      "name_en": "Milk",
+      "name_zh": "牛奶",
+      "description_en": "mooo",
+      "description_zh": "哞"
+    },
+    {
+      "hrid": "/items/milking_essence",
+      "name_en": "Milking Essence",
+      "name_zh": "挤奶精华",
+      "description_en": "Used for brewing milking tea and crafting alchemy catalyst",
+      "description_zh": "用于冲泡奶茶和制作炼金催化剂"
+    },
+    {
+      "hrid": "/items/milking_tea",
+      "name_en": "Milking Tea",
+      "name_zh": "挤奶茶"
+    },
+    {
+      "hrid": "/items/minor_heal",
+      "name_en": "Minor Heal",
+      "name_zh": "初级自愈术"
+    },
+    {
+      "hrid": "/items/mirror_of_protection",
+      "name_en": "Mirror Of Protection",
+      "name_zh": "保护之镜",
+      "description_en": "A rare artifact that functions as a copy of any equipment for enhancing protection",
+      "description_zh": "一种稀有神器，可在强化时作为任何保护装备的副本"
+    },
+    {
+      "hrid": "/items/mooberry",
+      "name_en": "Mooberry",
+      "name_zh": "哞莓"
+    },
+    {
+      "hrid": "/items/mooberry_cake",
+      "name_en": "Mooberry Cake",
+      "name_zh": "哞莓蛋糕"
+    },
+    {
+      "hrid": "/items/mooberry_donut",
+      "name_en": "Mooberry Donut",
+      "name_zh": "哞莓甜甜圈"
+    },
+    {
+      "hrid": "/items/moolong_tea_leaf",
+      "name_en": "Moolong Tea Leaf",
+      "name_zh": "哞龙茶叶"
+    },
+    {
+      "hrid": "/items/moonstone",
+      "name_en": "Moonstone",
+      "name_zh": "月亮石",
+      "description_en": "A shiny gem often found from Treasure Chests",
+      "description_zh": "一种闪亮的宝石，通常在宝箱中找到"
+    },
+    {
+      "hrid": "/items/natures_veil",
+      "name_en": "Nature's Veil",
+      "name_zh": "自然菌幕"
+    },
+    {
+      "hrid": "/items/necklace_of_efficiency",
+      "name_en": "Necklace Of Efficiency",
+      "name_zh": "效率项链"
+    },
+    {
+      "hrid": "/items/necklace_of_speed",
+      "name_en": "Necklace Of Speed",
+      "name_zh": "速度项链"
+    },
+    {
+      "hrid": "/items/necklace_of_wisdom",
+      "name_en": "Necklace Of Wisdom",
+      "name_zh": "经验项链"
+    },
+    {
+      "hrid": "/items/orange",
+      "name_en": "Orange",
+      "name_zh": "橙子"
+    },
+    {
+      "hrid": "/items/orange_gummy",
+      "name_en": "Orange Gummy",
+      "name_zh": "橙子软糖"
+    },
+    {
+      "hrid": "/items/orange_key_fragment",
+      "name_en": "Orange Key Fragment",
+      "name_zh": "橙色钥匙碎片",
+      "description_en": "Can be used to craft dungeon keys",
+      "description_zh": "看起来是某种钥匙的碎片，用来制作地下城钥匙"
+    },
+    {
+      "hrid": "/items/orange_yogurt",
+      "name_en": "Orange Yogurt",
+      "name_zh": "橙子酸奶"
+    },
+    {
+      "hrid": "/items/panda_fluff",
+      "name_en": "Panda Fluff",
+      "name_zh": "熊猫绒",
+      "description_en": "Material used in smithing Panda Gloves",
+      "description_zh": "用于锻造熊猫手套的材料"
+    },
+    {
+      "hrid": "/items/panda_gloves",
+      "name_en": "Panda Gloves",
+      "name_zh": "熊猫手套"
+    },
+    {
+      "hrid": "/items/peach",
+      "name_en": "Peach",
+      "name_zh": "桃子"
+    },
+    {
+      "hrid": "/items/peach_gummy",
+      "name_en": "Peach Gummy",
+      "name_zh": "桃子软糖"
+    },
+    {
+      "hrid": "/items/peach_yogurt",
+      "name_en": "Peach Yogurt",
+      "name_zh": "桃子酸奶"
+    },
+    {
+      "hrid": "/items/pearl",
+      "name_en": "Pearl",
+      "name_zh": "珍珠",
+      "description_en": "A shiny gem often found from Treasure Chests",
+      "description_zh": "一种闪亮的宝石，通常在宝箱中找到"
+    },
+    {
+      "hrid": "/items/penetrating_shot",
+      "name_en": "Penetrating Shot",
+      "name_zh": "贯穿射击"
+    },
+    {
+      "hrid": "/items/penetrating_strike",
+      "name_en": "Penetrating Strike",
+      "name_zh": "贯心之刺"
+    },
+    {
+      "hrid": "/items/pestilent_shot",
+      "name_en": "Pestilent Shot",
+      "name_zh": "疫病射击"
+    },
+    {
+      "hrid": "/items/philosophers_earrings",
+      "name_en": "Philosopher's Earrings",
+      "name_zh": "贤者耳环"
+    },
+    {
+      "hrid": "/items/philosophers_necklace",
+      "name_en": "Philosopher's Necklace",
+      "name_zh": "贤者项链"
+    },
+    {
+      "hrid": "/items/philosophers_ring",
+      "name_en": "Philosopher's Ring",
+      "name_zh": "贤者戒指"
+    },
+    {
+      "hrid": "/items/philosophers_stone",
+      "name_en": "Philosopher's Stone",
+      "name_zh": "贤者之石",
+      "description_en": "A legendary stone of immense power.",
+      "description_zh": "传说中拥有无穷力量的石头"
+    },
+    {
+      "hrid": "/items/pincer_gloves",
+      "name_en": "Pincer Gloves",
+      "name_zh": "蟹钳手套"
+    },
+    {
+      "hrid": "/items/pirate_chest",
+      "name_en": "Pirate Chest",
+      "name_zh": "海盗宝箱",
+      "description_en": "Received from completion of the Pirate Cove dungeon. Can be opened with Pirate Chest Key",
+      "description_zh": "攻克【海盗基地】后的奖励，可以用【海盗宝箱钥匙】打开"
+    },
+    {
+      "hrid": "/items/pirate_chest_key",
+      "name_en": "Pirate Chest Key",
+      "name_zh": "海盗宝箱钥匙",
+      "description_en": "Opens 1 Pirate Chest",
+      "description_zh": "开启一个海盗宝箱"
+    },
+    {
+      "hrid": "/items/pirate_entry_key",
+      "name_en": "Pirate Entry Key",
+      "name_zh": "海盗钥匙",
+      "description_en": "Allows 1 entry into the Pirate Cove dungeon",
+      "description_zh": "允许进入地下城【海盗基地】1次"
+    },
+    {
+      "hrid": "/items/pirate_essence",
+      "name_en": "Pirate Essence",
+      "name_zh": "海盗精华",
+      "description_en": "Used for enhancing special equipment from the Pirate Cove",
+      "description_zh": "用于强化海盗基地特殊装备的材料"
+    },
+    {
+      "hrid": "/items/pirate_token",
+      "name_en": "Pirate Token",
+      "name_zh": "海盗代币",
+      "description_en": "Dungeon currency from the Pirate Cove. Spend these in the Shop",
+      "description_zh": "来自【海盗基地】的地下城代币。可以在地下城商店里消费"
+    },
+    {
+      "hrid": "/items/plum",
+      "name_en": "Plum",
+      "name_zh": "李子"
+    },
+    {
+      "hrid": "/items/plum_gummy",
+      "name_en": "Plum Gummy",
+      "name_zh": "李子软糖"
+    },
+    {
+      "hrid": "/items/plum_yogurt",
+      "name_en": "Plum Yogurt",
+      "name_zh": "李子酸奶"
+    },
+    {
+      "hrid": "/items/poke",
+      "name_en": "Poke",
+      "name_zh": "破胆之刺"
+    },
+    {
+      "hrid": "/items/polar_bear_fluff",
+      "name_en": "Polar Bear Fluff",
+      "name_zh": "北极熊绒",
+      "description_en": "Material used in smithing Polar Bear Shoes",
+      "description_zh": "用于锻造北极熊鞋的材料"
+    },
+    {
+      "hrid": "/items/polar_bear_shoes",
+      "name_en": "Polar Bear Shoes",
+      "name_zh": "北极熊鞋"
+    },
+    {
+      "hrid": "/items/power_coffee",
+      "name_en": "Power Coffee",
+      "name_zh": "力量咖啡"
+    },
+    {
+      "hrid": "/items/precision",
+      "name_en": "Precision",
+      "name_zh": "精确"
+    },
+    {
+      "hrid": "/items/prime_catalyst",
+      "name_en": "Prime Catalyst",
+      "name_zh": "至高催化剂",
+      "description_en": "Used in alchemy to increase the success rate of any action by 25% (multiplicative). One catalyst is consumed on success.",
+      "description_zh": "在炼金时使用，可将任何行动的成功率提高 25% (乘法)。成功时消耗一个催化剂。"
+    },
+    {
+      "hrid": "/items/processing_tea",
+      "name_en": "Processing Tea",
+      "name_zh": "加工茶"
+    },
+    {
+      "hrid": "/items/provoke",
+      "name_en": "Provoke",
+      "name_zh": "挑衅"
+    },
+    {
+      "hrid": "/items/puncture",
+      "name_en": "Puncture",
+      "name_zh": "破甲之刺"
+    },
+    {
+      "hrid": "/items/purple_key_fragment",
+      "name_en": "Purple Key Fragment",
+      "name_zh": "紫色钥匙碎片",
+      "description_en": "Can be used to craft dungeon keys",
+      "description_zh": "看起来是某种钥匙的碎片，用来制作地下城钥匙"
+    },
+    {
+      "hrid": "/items/purpleheart_bow",
+      "name_en": "Purpleheart Bow",
+      "name_zh": "紫心弓"
+    },
+    {
+      "hrid": "/items/purpleheart_crossbow",
+      "name_en": "Purpleheart Crossbow",
+      "name_zh": "紫心弩"
+    },
+    {
+      "hrid": "/items/purpleheart_fire_staff",
+      "name_en": "Purpleheart Fire Staff",
+      "name_zh": "紫心火法杖"
+    },
+    {
+      "hrid": "/items/purpleheart_log",
+      "name_en": "Purpleheart Log",
+      "name_zh": "紫心原木"
+    },
+    {
+      "hrid": "/items/purpleheart_lumber",
+      "name_en": "Purpleheart Lumber",
+      "name_zh": "紫心木板"
+    },
+    {
+      "hrid": "/items/purpleheart_nature_staff",
+      "name_en": "Purpleheart Nature Staff",
+      "name_zh": "紫心自然法杖"
+    },
+    {
+      "hrid": "/items/purpleheart_shield",
+      "name_en": "Purpleheart Shield",
+      "name_zh": "紫心盾"
+    },
+    {
+      "hrid": "/items/purpleheart_water_staff",
+      "name_en": "Purpleheart Water Staff",
+      "name_zh": "紫心水法杖"
+    },
+    {
+      "hrid": "/items/purples_gift",
+      "name_en": "Purple's Gift",
+      "name_zh": "小紫牛的礼物",
+      "description_en": "Gifted by Purple after earning task points. Looks like it contains items inside!",
+      "description_zh": "获得任务积分后小紫牛赠送的礼物，看起来里面装着物品！"
+    },
+    {
+      "hrid": "/items/quick_aid",
+      "name_en": "Quick Aid",
+      "name_zh": "快速治疗术"
+    },
+    {
+      "hrid": "/items/quick_shot",
+      "name_en": "Quick Shot",
+      "name_zh": "快速射击"
+    },
+    {
+      "hrid": "/items/radiant_boots",
+      "name_en": "Radiant Boots",
+      "name_zh": "光辉靴"
+    },
+    {
+      "hrid": "/items/radiant_fabric",
+      "name_en": "Radiant Fabric",
+      "name_zh": "光辉布料"
+    },
+    {
+      "hrid": "/items/radiant_fiber",
+      "name_en": "Radiant Fiber",
+      "name_zh": "光辉纤维"
+    },
+    {
+      "hrid": "/items/radiant_gloves",
+      "name_en": "Radiant Gloves",
+      "name_zh": "光辉手套"
+    },
+    {
+      "hrid": "/items/radiant_hat",
+      "name_en": "Radiant Hat",
+      "name_zh": "光辉帽"
+    },
+    {
+      "hrid": "/items/radiant_robe_bottoms",
+      "name_en": "Radiant Robe Bottoms",
+      "name_zh": "光辉袍裙"
+    },
+    {
+      "hrid": "/items/radiant_robe_top",
+      "name_en": "Radiant Robe Top",
+      "name_zh": "光辉袍服"
+    },
+    {
+      "hrid": "/items/rain_of_arrows",
+      "name_en": "Rain Of Arrows",
+      "name_zh": "箭雨"
+    },
+    {
+      "hrid": "/items/rainbow_alembic",
+      "name_en": "Rainbow Alembic",
+      "name_zh": "彩虹蒸馏器"
+    },
+    {
+      "hrid": "/items/rainbow_boots",
+      "name_en": "Rainbow Boots",
+      "name_zh": "彩虹靴"
+    },
+    {
+      "hrid": "/items/rainbow_brush",
+      "name_en": "Rainbow Brush",
+      "name_zh": "彩虹刷子"
+    },
+    {
+      "hrid": "/items/rainbow_buckler",
+      "name_en": "Rainbow Buckler",
+      "name_zh": "彩虹圆盾"
+    },
+    {
+      "hrid": "/items/rainbow_bulwark",
+      "name_en": "Rainbow Bulwark",
+      "name_zh": "彩虹重盾"
+    },
+    {
+      "hrid": "/items/rainbow_cheese",
+      "name_en": "Rainbow Cheese",
+      "name_zh": "彩虹奶酪"
+    },
+    {
+      "hrid": "/items/rainbow_chisel",
+      "name_en": "Rainbow Chisel",
+      "name_zh": "彩虹凿子"
+    },
+    {
+      "hrid": "/items/rainbow_enhancer",
+      "name_en": "Rainbow Enhancer",
+      "name_zh": "彩虹强化器"
+    },
+    {
+      "hrid": "/items/rainbow_gauntlets",
+      "name_en": "Rainbow Gauntlets",
+      "name_zh": "彩虹护手"
+    },
+    {
+      "hrid": "/items/rainbow_hammer",
+      "name_en": "Rainbow Hammer",
+      "name_zh": "彩虹锤子"
+    },
+    {
+      "hrid": "/items/rainbow_hatchet",
+      "name_en": "Rainbow Hatchet",
+      "name_zh": "彩虹斧头"
+    },
+    {
+      "hrid": "/items/rainbow_helmet",
+      "name_en": "Rainbow Helmet",
+      "name_zh": "彩虹头盔"
+    },
+    {
+      "hrid": "/items/rainbow_mace",
+      "name_en": "Rainbow Mace",
+      "name_zh": "彩虹钉头锤"
+    },
+    {
+      "hrid": "/items/rainbow_milk",
+      "name_en": "Rainbow Milk",
+      "name_zh": "彩虹牛奶",
+      "description_en": "moooooooo",
+      "description_zh": "哞哞哞哞哞哞"
+    },
+    {
+      "hrid": "/items/rainbow_needle",
+      "name_en": "Rainbow Needle",
+      "name_zh": "彩虹针"
+    },
+    {
+      "hrid": "/items/rainbow_plate_body",
+      "name_en": "Rainbow Plate Body",
+      "name_zh": "彩虹胸甲"
+    },
+    {
+      "hrid": "/items/rainbow_plate_legs",
+      "name_en": "Rainbow Plate Legs",
+      "name_zh": "彩虹腿甲"
+    },
+    {
+      "hrid": "/items/rainbow_pot",
+      "name_en": "Rainbow Pot",
+      "name_zh": "彩虹壶"
+    },
+    {
+      "hrid": "/items/rainbow_shears",
+      "name_en": "Rainbow Shears",
+      "name_zh": "彩虹剪刀"
+    },
+    {
+      "hrid": "/items/rainbow_spatula",
+      "name_en": "Rainbow Spatula",
+      "name_zh": "彩虹锅铲"
+    },
+    {
+      "hrid": "/items/rainbow_spear",
+      "name_en": "Rainbow Spear",
+      "name_zh": "彩虹长枪"
+    },
+    {
+      "hrid": "/items/rainbow_sword",
+      "name_en": "Rainbow Sword",
+      "name_zh": "彩虹剑"
+    },
+    {
+      "hrid": "/items/ranged_coffee",
+      "name_en": "Ranged Coffee",
+      "name_zh": "远程咖啡"
+    },
+    {
+      "hrid": "/items/ranger_necklace",
+      "name_en": "Ranger Necklace",
+      "name_zh": "射手项链"
+    },
+    {
+      "hrid": "/items/red_culinary_hat",
+      "name_en": "Red Culinary Hat",
+      "name_zh": "红色厨师帽"
+    },
+    {
+      "hrid": "/items/red_panda_fluff",
+      "name_en": "Red Panda Fluff",
+      "name_zh": "小熊猫绒",
+      "description_en": "Material used in tailoring Red Culinary Hat or Fluffy Red Hat",
+      "description_zh": "用于缝纫红色厨师帽或蓬松红帽的材料"
+    },
+    {
+      "hrid": "/items/red_tea_leaf",
+      "name_en": "Red Tea Leaf",
+      "name_zh": "红茶叶"
+    },
+    {
+      "hrid": "/items/redwood_bow",
+      "name_en": "Redwood Bow",
+      "name_zh": "红杉弓"
+    },
+    {
+      "hrid": "/items/redwood_crossbow",
+      "name_en": "Redwood Crossbow",
+      "name_zh": "红杉弩"
+    },
+    {
+      "hrid": "/items/redwood_fire_staff",
+      "name_en": "Redwood Fire Staff",
+      "name_zh": "红杉火法杖"
+    },
+    {
+      "hrid": "/items/redwood_log",
+      "name_en": "Redwood Log",
+      "name_zh": "红杉原木"
+    },
+    {
+      "hrid": "/items/redwood_lumber",
+      "name_en": "Redwood Lumber",
+      "name_zh": "红杉木板"
+    },
+    {
+      "hrid": "/items/redwood_nature_staff",
+      "name_en": "Redwood Nature Staff",
+      "name_zh": "红杉自然法杖"
+    },
+    {
+      "hrid": "/items/redwood_shield",
+      "name_en": "Redwood Shield",
+      "name_zh": "红杉盾"
+    },
+    {
+      "hrid": "/items/redwood_water_staff",
+      "name_en": "Redwood Water Staff",
+      "name_zh": "红杉水法杖"
+    },
+    {
+      "hrid": "/items/regal_jewel",
+      "name_en": "Regal Jewel",
+      "name_zh": "君王宝石",
+      "description_en": "Material used in smithing Regal Sword and Furious Spear",
+      "description_zh": "用于锻造君王之剑和狂怒长枪的材料"
+    },
+    {
+      "hrid": "/items/regal_sword",
+      "name_en": "Regal Sword",
+      "name_zh": "君王之剑"
+    },
+    {
+      "hrid": "/items/rejuvenate",
+      "name_en": "Rejuvenate",
+      "name_zh": "群体治疗术"
+    },
+    {
+      "hrid": "/items/reptile_boots",
+      "name_en": "Reptile Boots",
+      "name_zh": "爬行动物靴"
+    },
+    {
+      "hrid": "/items/reptile_bracers",
+      "name_en": "Reptile Bracers",
+      "name_zh": "爬行动物护腕"
+    },
+    {
+      "hrid": "/items/reptile_chaps",
+      "name_en": "Reptile Chaps",
+      "name_zh": "爬行动物皮裤"
+    },
+    {
+      "hrid": "/items/reptile_hide",
+      "name_en": "Reptile Hide",
+      "name_zh": "爬行动物皮"
+    },
+    {
+      "hrid": "/items/reptile_hood",
+      "name_en": "Reptile Hood",
+      "name_zh": "爬行动物兜帽"
+    },
+    {
+      "hrid": "/items/reptile_leather",
+      "name_en": "Reptile Leather",
+      "name_zh": "爬行动物皮革"
+    },
+    {
+      "hrid": "/items/reptile_tunic",
+      "name_en": "Reptile Tunic",
+      "name_zh": "爬行动物皮衣"
+    },
+    {
+      "hrid": "/items/revenant_anima",
+      "name_en": "Revenant Anima",
+      "name_zh": "亡者之魂",
+      "description_en": "Material used in tailoring Revenant Tunic or Chaps",
+      "description_zh": "用于缝纫亡灵皮衣或皮裤的材料"
+    },
+    {
+      "hrid": "/items/revenant_chaps",
+      "name_en": "Revenant Chaps",
+      "name_zh": "亡灵皮裤"
+    },
+    {
+      "hrid": "/items/revenant_tunic",
+      "name_en": "Revenant Tunic",
+      "name_zh": "亡灵皮衣"
+    },
+    {
+      "hrid": "/items/revive",
+      "name_en": "Revive",
+      "name_zh": "复活"
+    },
+    {
+      "hrid": "/items/ring_of_armor",
+      "name_en": "Ring Of Armor",
+      "name_zh": "护甲戒指"
+    },
+    {
+      "hrid": "/items/ring_of_critical_strike",
+      "name_en": "Ring Of Critical Strike",
+      "name_zh": "暴击戒指"
+    },
+    {
+      "hrid": "/items/ring_of_essence_find",
+      "name_en": "Ring Of Essence Find",
+      "name_zh": "精华发现戒指"
+    },
+    {
+      "hrid": "/items/ring_of_gathering",
+      "name_en": "Ring Of Gathering",
+      "name_zh": "采集戒指"
+    },
+    {
+      "hrid": "/items/ring_of_rare_find",
+      "name_en": "Ring Of Rare Find",
+      "name_zh": "稀有发现戒指"
+    },
+    {
+      "hrid": "/items/ring_of_regeneration",
+      "name_en": "Ring Of Regeneration",
+      "name_zh": "恢复戒指"
+    },
+    {
+      "hrid": "/items/ring_of_resistance",
+      "name_en": "Ring Of Resistance",
+      "name_zh": "抗性戒指"
+    },
+    {
+      "hrid": "/items/rippling_trident",
+      "name_en": "Rippling Trident",
+      "name_zh": "涟漪三叉戟"
+    },
+    {
+      "hrid": "/items/robusta_coffee_bean",
+      "name_en": "Robusta Coffee Bean",
+      "name_zh": "中级咖啡豆"
+    },
+    {
+      "hrid": "/items/rough_boots",
+      "name_en": "Rough Boots",
+      "name_zh": "粗糙靴"
+    },
+    {
+      "hrid": "/items/rough_bracers",
+      "name_en": "Rough Bracers",
+      "name_zh": "粗糙护腕"
+    },
+    {
+      "hrid": "/items/rough_chaps",
+      "name_en": "Rough Chaps",
+      "name_zh": "粗糙皮裤"
+    },
+    {
+      "hrid": "/items/rough_hide",
+      "name_en": "Rough Hide",
+      "name_zh": "粗糙兽皮"
+    },
+    {
+      "hrid": "/items/rough_hood",
+      "name_en": "Rough Hood",
+      "name_zh": "粗糙兜帽"
+    },
+    {
+      "hrid": "/items/rough_leather",
+      "name_en": "Rough Leather",
+      "name_zh": "粗糙皮革"
+    },
+    {
+      "hrid": "/items/rough_tunic",
+      "name_en": "Rough Tunic",
+      "name_zh": "粗糙皮衣"
+    },
+    {
+      "hrid": "/items/royal_cloth",
+      "name_en": "Royal Cloth",
+      "name_zh": "皇家织物",
+      "description_en": "Material used in tailoring Royal Robe Top or Bottoms",
+      "description_zh": "用于缝纫皇家袍服和皇家袍裙的材料"
+    },
+    {
+      "hrid": "/items/royal_fire_robe_bottoms",
+      "name_en": "Royal Fire Robe Bottoms",
+      "name_zh": "皇家火系袍裙"
+    },
+    {
+      "hrid": "/items/royal_fire_robe_top",
+      "name_en": "Royal Fire Robe Top",
+      "name_zh": "皇家火系袍服"
+    },
+    {
+      "hrid": "/items/royal_nature_robe_bottoms",
+      "name_en": "Royal Nature Robe Bottoms",
+      "name_zh": "皇家自然系袍裙"
+    },
+    {
+      "hrid": "/items/royal_nature_robe_top",
+      "name_en": "Royal Nature Robe Top",
+      "name_zh": "皇家自然系袍服"
+    },
+    {
+      "hrid": "/items/royal_water_robe_bottoms",
+      "name_en": "Royal Water Robe Bottoms",
+      "name_zh": "皇家水系袍裙"
+    },
+    {
+      "hrid": "/items/royal_water_robe_top",
+      "name_en": "Royal Water Robe Top",
+      "name_zh": "皇家水系袍服"
+    },
+    {
+      "hrid": "/items/scratch",
+      "name_en": "Scratch",
+      "name_zh": "爪影斩"
+    },
+    {
+      "hrid": "/items/shard_of_protection",
+      "name_en": "Shard Of Protection",
+      "name_zh": "保护碎片",
+      "description_en": "Found from Artisan's Crates. They are used for crafting Mirror of Protection",
+      "description_zh": "从工匠匣中获得，用于合成保护之镜"
+    },
+    {
+      "hrid": "/items/shield_bash",
+      "name_en": "Shield Bash",
+      "name_zh": "盾击"
+    },
+    {
+      "hrid": "/items/shoebill_feather",
+      "name_en": "Shoebill Feather",
+      "name_zh": "鲸头鹳羽毛",
+      "description_en": "Material used in tailoring Shoebill Shoes",
+      "description_zh": "用于缝纫鲸头鹳鞋的材料"
+    },
+    {
+      "hrid": "/items/shoebill_shoes",
+      "name_en": "Shoebill Shoes",
+      "name_zh": "鲸头鹳鞋"
+    },
+    {
+      "hrid": "/items/sighted_bracers",
+      "name_en": "Sighted Bracers",
+      "name_zh": "瞄准护腕"
+    },
+    {
+      "hrid": "/items/silencing_shot",
+      "name_en": "Silencing Shot",
+      "name_zh": "沉默之箭"
+    },
+    {
+      "hrid": "/items/silk_boots",
+      "name_en": "Silk Boots",
+      "name_zh": "丝靴"
+    },
+    {
+      "hrid": "/items/silk_fabric",
+      "name_en": "Silk Fabric",
+      "name_zh": "丝绸"
+    },
+    {
+      "hrid": "/items/silk_gloves",
+      "name_en": "Silk Gloves",
+      "name_zh": "丝手套"
+    },
+    {
+      "hrid": "/items/silk_hat",
+      "name_en": "Silk Hat",
+      "name_zh": "丝帽"
+    },
+    {
+      "hrid": "/items/silk_robe_bottoms",
+      "name_en": "Silk Robe Bottoms",
+      "name_zh": "丝绸袍裙"
+    },
+    {
+      "hrid": "/items/silk_robe_top",
+      "name_en": "Silk Robe Top",
+      "name_zh": "丝绸袍服"
+    },
+    {
+      "hrid": "/items/sinister_cape",
+      "name_en": "Sinister Cape",
+      "name_zh": "阴森斗篷"
+    },
+    {
+      "hrid": "/items/sinister_chest",
+      "name_en": "Sinister Chest",
+      "name_zh": "阴森宝箱",
+      "description_en": "Received from completion of the Sinister Circus dungeon. Can be opened with Sinister Chest Key",
+      "description_zh": "攻克【阴森马戏团】后的奖励，可以用【阴森宝箱钥匙】打开"
+    },
+    {
+      "hrid": "/items/sinister_chest_key",
+      "name_en": "Sinister Chest Key",
+      "name_zh": "阴森宝箱钥匙",
+      "description_en": "Opens 1 Sinister Chest",
+      "description_zh": "开启一个阴森宝箱"
+    },
+    {
+      "hrid": "/items/sinister_entry_key",
+      "name_en": "Sinister Entry Key",
+      "name_zh": "阴森钥匙",
+      "description_en": "Allows 1 entry into the Sinister Circus dungeon",
+      "description_zh": "允许进入地下城【阴森马戏团】1次"
+    },
+    {
+      "hrid": "/items/sinister_essence",
+      "name_en": "Sinister Essence",
+      "name_zh": "阴森精华",
+      "description_en": "Used for enhancing special equipment from the Sinister Circus",
+      "description_zh": "用于强化阴森马戏团特殊装备的材料"
+    },
+    {
+      "hrid": "/items/sinister_token",
+      "name_en": "Sinister Token",
+      "name_zh": "阴森代币",
+      "description_en": "Dungeon currency from the Sinister Circus. Spend these in the Shop",
+      "description_zh": "来自【阴森马戏团】的地下城代币。可以在地下城商店里消费"
+    },
+    {
+      "hrid": "/items/smack",
+      "name_en": "Smack",
+      "name_zh": "重碾"
+    },
+    {
+      "hrid": "/items/small_artisans_crate",
+      "name_en": "Small Artisan's Crate",
+      "name_zh": "小工匠匣",
+      "description_en": "Can be found during production skills. Looks like it contains items inside!",
+      "description_zh": "在生产时可以找到，看起来里面装着物品！"
+    },
+    {
+      "hrid": "/items/small_meteorite_cache",
+      "name_en": "Small Meteorite Cache",
+      "name_zh": "小陨石舱",
+      "description_en": "Can be found while gathering. Looks like it contains items inside!",
+      "description_zh": "在采集时可以找到，看起来里面装着物品！"
+    },
+    {
+      "hrid": "/items/small_pouch",
+      "name_en": "Small Pouch",
+      "name_zh": "小袋子"
+    },
+    {
+      "hrid": "/items/small_treasure_chest",
+      "name_en": "Small Treasure Chest",
+      "name_zh": "小宝箱",
+      "description_en": "Can be found from monsters. Looks like it contains items inside!",
+      "description_zh": "可以从怪物身上找到，看起来里面装着物品！"
+    },
+    {
+      "hrid": "/items/smoke_burst",
+      "name_en": "Smoke Burst",
+      "name_zh": "烟爆灭影"
+    },
+    {
+      "hrid": "/items/snail_shell",
+      "name_en": "Snail Shell",
+      "name_zh": "蜗牛壳",
+      "description_en": "Material used in smithing Snail Shell Helmet",
+      "description_zh": "用于锻造蜗牛壳头盔的材料"
+    },
+    {
+      "hrid": "/items/snail_shell_helmet",
+      "name_en": "Snail Shell Helmet",
+      "name_zh": "蜗牛壳头盔"
+    },
+    {
+      "hrid": "/items/snake_fang",
+      "name_en": "Snake Fang",
+      "name_zh": "蛇牙",
+      "description_en": "Material used in smithing Snake Fang Dirk",
+      "description_zh": "用于锻造蛇牙短剑的材料"
+    },
+    {
+      "hrid": "/items/snake_fang_dirk",
+      "name_en": "Snake Fang Dirk",
+      "name_zh": "蛇牙短剑"
+    },
+    {
+      "hrid": "/items/sorcerer_boots",
+      "name_en": "Sorcerer Boots",
+      "name_zh": "巫师靴"
+    },
+    {
+      "hrid": "/items/sorcerer_essence",
+      "name_en": "Sorcerer Essence",
+      "name_zh": "法师精华",
+      "description_en": "Used for enhancing special equipment from Sorcerer's Tower",
+      "description_zh": "用于强化巫师之塔特殊装备的材料"
+    },
+    {
+      "hrid": "/items/sorcerers_sole",
+      "name_en": "Sorcerer's Sole",
+      "name_zh": "魔法师鞋底",
+      "description_en": "Material used in tailoring Sorcerer Boots",
+      "description_zh": "用于缝纫魔法师靴的材料"
+    },
+    {
+      "hrid": "/items/soul_fragment",
+      "name_en": "Soul Fragment",
+      "name_zh": "灵魂碎片",
+      "description_en": "Material used in crafting Soul Hunter Crossbow",
+      "description_zh": "用于制作灵魂猎手弩的材料"
+    },
+    {
+      "hrid": "/items/soul_hunter_crossbow",
+      "name_en": "Soul Hunter Crossbow",
+      "name_zh": "灵魂猎手弩"
+    },
+    {
+      "hrid": "/items/spaceberry",
+      "name_en": "Spaceberry",
+      "name_zh": "太空莓"
+    },
+    {
+      "hrid": "/items/spaceberry_cake",
+      "name_en": "Spaceberry Cake",
+      "name_zh": "太空莓蛋糕"
+    },
+    {
+      "hrid": "/items/spaceberry_donut",
+      "name_en": "Spaceberry Donut",
+      "name_zh": "太空莓甜甜圈"
+    },
+    {
+      "hrid": "/items/spacia_coffee_bean",
+      "name_en": "Spacia Coffee Bean",
+      "name_zh": "太空咖啡豆"
+    },
+    {
+      "hrid": "/items/speed_aura",
+      "name_en": "Speed Aura",
+      "name_zh": "速度光环"
+    },
+    {
+      "hrid": "/items/spike_shell",
+      "name_en": "Spike Shell",
+      "name_zh": "尖刺防护"
+    },
+    {
+      "hrid": "/items/spiked_bulwark",
+      "name_en": "Spiked Bulwark",
+      "name_zh": "尖刺重盾"
+    },
+    {
+      "hrid": "/items/stalactite_shard",
+      "name_en": "Stalactite Shard",
+      "name_zh": "钟乳石碎片",
+      "description_en": "Material used in smithing Stalactite Spear or Spiked Bulwark",
+      "description_zh": "用于锻造石钟长枪或尖刺重盾的材料"
+    },
+    {
+      "hrid": "/items/stalactite_spear",
+      "name_en": "Stalactite Spear",
+      "name_zh": "石钟长枪"
+    },
+    {
+      "hrid": "/items/stamina_coffee",
+      "name_en": "Stamina Coffee",
+      "name_zh": "耐力咖啡"
+    },
+    {
+      "hrid": "/items/star_fragment",
+      "name_en": "Star Fragment",
+      "name_zh": "星光碎片",
+      "description_en": "Fragments with a celestial origin found in Meteorite Caches. They can be used to craft jewelry.",
+      "description_zh": "在陨石舱里发现的碎片，可以用来制作珠宝。"
+    },
+    {
+      "hrid": "/items/star_fruit",
+      "name_en": "Star Fruit",
+      "name_zh": "杨桃"
+    },
+    {
+      "hrid": "/items/star_fruit_gummy",
+      "name_en": "Star Fruit Gummy",
+      "name_zh": "杨桃软糖"
+    },
+    {
+      "hrid": "/items/star_fruit_yogurt",
+      "name_en": "Star Fruit Yogurt",
+      "name_zh": "杨桃酸奶"
+    },
+    {
+      "hrid": "/items/steady_shot",
+      "name_en": "Steady Shot",
+      "name_zh": "稳定射击"
+    },
+    {
+      "hrid": "/items/stone_key_fragment",
+      "name_en": "Stone Key Fragment",
+      "name_zh": "石头钥匙碎片",
+      "description_en": "Can be used to craft dungeon keys",
+      "description_zh": "看起来是某种钥匙的碎片，用来制作地下城钥匙"
+    },
+    {
+      "hrid": "/items/strawberry",
+      "name_en": "Strawberry",
+      "name_zh": "草莓"
+    },
+    {
+      "hrid": "/items/strawberry_cake",
+      "name_en": "Strawberry Cake",
+      "name_zh": "草莓蛋糕"
+    },
+    {
+      "hrid": "/items/strawberry_donut",
+      "name_en": "Strawberry Donut",
+      "name_zh": "草莓甜甜圈"
+    },
+    {
+      "hrid": "/items/stunning_blow",
+      "name_en": "Stunning Blow",
+      "name_zh": "重锤"
+    },
+    {
+      "hrid": "/items/sugar",
+      "name_en": "Sugar",
+      "name_zh": "糖"
+    },
+    {
+      "hrid": "/items/sundering_crossbow",
+      "name_en": "Sundering Crossbow",
+      "name_zh": "裂空之弩"
+    },
+    {
+      "hrid": "/items/sundering_jewel",
+      "name_en": "Sundering Jewel",
+      "name_zh": "裂空宝石",
+      "description_en": "Material used in crafting Sundering Crossbow and smithing Furious Spear",
+      "description_zh": "用于制作裂空之弩和锻造狂怒长枪的材料"
+    },
+    {
+      "hrid": "/items/sunstone",
+      "name_en": "Sunstone",
+      "name_zh": "太阳石",
+      "description_en": "A shiny gem in the shape of the sun.",
+      "description_zh": "一种闪亮的太阳形状的宝石"
+    },
+    {
+      "hrid": "/items/super_alchemy_tea",
+      "name_en": "Super Alchemy Tea",
+      "name_zh": "超级炼金茶"
+    },
+    {
+      "hrid": "/items/super_attack_coffee",
+      "name_en": "Super Attack Coffee",
+      "name_zh": "超级攻击咖啡"
+    },
+    {
+      "hrid": "/items/super_brewing_tea",
+      "name_en": "Super Brewing Tea",
+      "name_zh": "超级冲泡茶"
+    },
+    {
+      "hrid": "/items/super_cheesesmithing_tea",
+      "name_en": "Super Cheesesmithing Tea",
+      "name_zh": "超级奶酪锻造茶"
+    },
+    {
+      "hrid": "/items/super_cooking_tea",
+      "name_en": "Super Cooking Tea",
+      "name_zh": "超级烹饪茶"
+    },
+    {
+      "hrid": "/items/super_crafting_tea",
+      "name_en": "Super Crafting Tea",
+      "name_zh": "超级制作茶"
+    },
+    {
+      "hrid": "/items/super_defense_coffee",
+      "name_en": "Super Defense Coffee",
+      "name_zh": "超级防御咖啡"
+    },
+    {
+      "hrid": "/items/super_enhancing_tea",
+      "name_en": "Super Enhancing Tea",
+      "name_zh": "超级强化茶"
+    },
+    {
+      "hrid": "/items/super_foraging_tea",
+      "name_en": "Super Foraging Tea",
+      "name_zh": "超级采摘茶"
+    },
+    {
+      "hrid": "/items/super_intelligence_coffee",
+      "name_en": "Super Intelligence Coffee",
+      "name_zh": "超级智力咖啡"
+    },
+    {
+      "hrid": "/items/super_magic_coffee",
+      "name_en": "Super Magic Coffee",
+      "name_zh": "超级魔法咖啡"
+    },
+    {
+      "hrid": "/items/super_milking_tea",
+      "name_en": "Super Milking Tea",
+      "name_zh": "超级挤奶茶"
+    },
+    {
+      "hrid": "/items/super_power_coffee",
+      "name_en": "Super Power Coffee",
+      "name_zh": "超级力量咖啡"
+    },
+    {
+      "hrid": "/items/super_ranged_coffee",
+      "name_en": "Super Ranged Coffee",
+      "name_zh": "超级远程咖啡"
+    },
+    {
+      "hrid": "/items/super_stamina_coffee",
+      "name_en": "Super Stamina Coffee",
+      "name_zh": "超级耐力咖啡"
+    },
+    {
+      "hrid": "/items/super_tailoring_tea",
+      "name_en": "Super Tailoring Tea",
+      "name_zh": "超级缝纫茶"
+    },
+    {
+      "hrid": "/items/super_woodcutting_tea",
+      "name_en": "Super Woodcutting Tea",
+      "name_zh": "超级伐木茶"
+    },
+    {
+      "hrid": "/items/swamp_essence",
+      "name_en": "Swamp Essence",
+      "name_zh": "沼泽精华",
+      "description_en": "Used for enhancing special equipment from Swamp Planet",
+      "description_zh": "用于强化沼泽星球特殊装备的材料"
+    },
+    {
+      "hrid": "/items/sweep",
+      "name_en": "Sweep",
+      "name_zh": "重扫"
+    },
+    {
+      "hrid": "/items/swiftness_coffee",
+      "name_en": "Swiftness Coffee",
+      "name_zh": "迅捷咖啡"
+    },
+    {
+      "hrid": "/items/sylvan_aura",
+      "name_en": "Sylvan Aura",
+      "name_zh": "自然光环"
+    },
+    {
+      "hrid": "/items/tailoring_essence",
+      "name_en": "Tailoring Essence",
+      "name_zh": "缝纫精华",
+      "description_en": "Used for brewing tailoring tea and crafting alchemy catalyst",
+      "description_zh": "用于冲泡缝纫茶和制作炼金催化剂"
+    },
+    {
+      "hrid": "/items/tailoring_tea",
+      "name_en": "Tailoring Tea",
+      "name_zh": "缝纫茶"
+    },
+    {
+      "hrid": "/items/tailors_bottoms",
+      "name_en": "Tailor's Bottoms",
+      "name_zh": "裁缝下装"
+    },
+    {
+      "hrid": "/items/tailors_top",
+      "name_en": "Tailor's Top",
+      "name_zh": "裁缝上衣"
+    },
+    {
+      "hrid": "/items/task_crystal",
+      "name_en": "Task Crystal",
+      "name_zh": "任务水晶",
+      "description_en": "Crystals obtained from Purple. They can be used to craft special trinkets.",
+      "description_zh": "小紫牛给的水晶，可以用来制作特殊的饰品。"
+    },
+    {
+      "hrid": "/items/task_token",
+      "name_en": "Task Token",
+      "name_zh": "任务代币",
+      "description_en": "Task currency. Spend these in the Task Shop",
+      "description_zh": "任务代币。可在任务商店中使用这些代币"
+    },
+    {
+      "hrid": "/items/taunt",
+      "name_en": "Taunt",
+      "name_zh": "嘲讽"
+    },
+    {
+      "hrid": "/items/thread_of_expertise",
+      "name_en": "Thread Of Expertise",
+      "name_zh": "专精之线",
+      "description_en": "Material used in producing special skilling outfits",
+      "description_zh": "用于制作特殊专业服装的材料"
+    },
+    {
+      "hrid": "/items/tome_of_healing",
+      "name_en": "Tome Of Healing",
+      "name_zh": "治疗之书"
+    },
+    {
+      "hrid": "/items/tome_of_the_elements",
+      "name_en": "Tome Of The Elements",
+      "name_zh": "元素之书"
+    },
+    {
+      "hrid": "/items/toughness",
+      "name_en": "Toughness",
+      "name_zh": "坚韧"
+    },
+    {
+      "hrid": "/items/toxic_pollen",
+      "name_en": "Toxic Pollen",
+      "name_zh": "剧毒粉尘"
+    },
+    {
+      "hrid": "/items/treant_bark",
+      "name_en": "Treant Bark",
+      "name_zh": "树皮",
+      "description_en": "Material used in crafting Treant Shield",
+      "description_zh": "用于制作树人盾的材料"
+    },
+    {
+      "hrid": "/items/treant_shield",
+      "name_en": "Treant Shield",
+      "name_zh": "树人盾"
+    },
+    {
+      "hrid": "/items/turtle_shell",
+      "name_en": "Turtle Shell",
+      "name_zh": "乌龟壳",
+      "description_en": "Material used in smithing Turtle Shell Plate Body or Legs",
+      "description_zh": "用于锻造龟壳胸甲或腿甲的材料"
+    },
+    {
+      "hrid": "/items/turtle_shell_body",
+      "name_en": "Turtle Shell Body",
+      "name_zh": "龟壳胸甲"
+    },
+    {
+      "hrid": "/items/turtle_shell_legs",
+      "name_en": "Turtle Shell Legs",
+      "name_zh": "龟壳腿甲"
+    },
+    {
+      "hrid": "/items/twilight_essence",
+      "name_en": "Twilight Essence",
+      "name_zh": "暮光精华",
+      "description_en": "Used for enhancing special equipment from Twilight Zone",
+      "description_zh": "用于强化暮光之城特殊装备的材料"
+    },
+    {
+      "hrid": "/items/ultra_alchemy_tea",
+      "name_en": "Ultra Alchemy Tea",
+      "name_zh": "究极炼金茶"
+    },
+    {
+      "hrid": "/items/ultra_attack_coffee",
+      "name_en": "Ultra Attack Coffee",
+      "name_zh": "究极攻击咖啡"
+    },
+    {
+      "hrid": "/items/ultra_brewing_tea",
+      "name_en": "Ultra Brewing Tea",
+      "name_zh": "究极冲泡茶"
+    },
+    {
+      "hrid": "/items/ultra_cheesesmithing_tea",
+      "name_en": "Ultra Cheesesmithing Tea",
+      "name_zh": "究极奶酪锻造茶"
+    },
+    {
+      "hrid": "/items/ultra_cooking_tea",
+      "name_en": "Ultra Cooking Tea",
+      "name_zh": "究极烹饪茶"
+    },
+    {
+      "hrid": "/items/ultra_crafting_tea",
+      "name_en": "Ultra Crafting Tea",
+      "name_zh": "究极制作茶"
+    },
+    {
+      "hrid": "/items/ultra_defense_coffee",
+      "name_en": "Ultra Defense Coffee",
+      "name_zh": "究极防御咖啡"
+    },
+    {
+      "hrid": "/items/ultra_enhancing_tea",
+      "name_en": "Ultra Enhancing Tea",
+      "name_zh": "究极强化茶"
+    },
+    {
+      "hrid": "/items/ultra_foraging_tea",
+      "name_en": "Ultra Foraging Tea",
+      "name_zh": "究极采摘茶"
+    },
+    {
+      "hrid": "/items/ultra_intelligence_coffee",
+      "name_en": "Ultra Intelligence Coffee",
+      "name_zh": "究极智力咖啡"
+    },
+    {
+      "hrid": "/items/ultra_magic_coffee",
+      "name_en": "Ultra Magic Coffee",
+      "name_zh": "究极魔法咖啡"
+    },
+    {
+      "hrid": "/items/ultra_milking_tea",
+      "name_en": "Ultra Milking Tea",
+      "name_zh": "究极挤奶茶"
+    },
+    {
+      "hrid": "/items/ultra_power_coffee",
+      "name_en": "Ultra Power Coffee",
+      "name_zh": "究极力量咖啡"
+    },
+    {
+      "hrid": "/items/ultra_ranged_coffee",
+      "name_en": "Ultra Ranged Coffee",
+      "name_zh": "究极远程咖啡"
+    },
+    {
+      "hrid": "/items/ultra_stamina_coffee",
+      "name_en": "Ultra Stamina Coffee",
+      "name_zh": "究极耐力咖啡"
+    },
+    {
+      "hrid": "/items/ultra_tailoring_tea",
+      "name_en": "Ultra Tailoring Tea",
+      "name_zh": "究极缝纫茶"
+    },
+    {
+      "hrid": "/items/ultra_woodcutting_tea",
+      "name_en": "Ultra Woodcutting Tea",
+      "name_zh": "究极伐木茶"
+    },
+    {
+      "hrid": "/items/umbral_boots",
+      "name_en": "Umbral Boots",
+      "name_zh": "暗影靴"
+    },
+    {
+      "hrid": "/items/umbral_bracers",
+      "name_en": "Umbral Bracers",
+      "name_zh": "暗影护腕"
+    },
+    {
+      "hrid": "/items/umbral_chaps",
+      "name_en": "Umbral Chaps",
+      "name_zh": "暗影皮裤"
+    },
+    {
+      "hrid": "/items/umbral_hide",
+      "name_en": "Umbral Hide",
+      "name_zh": "暗影皮"
+    },
+    {
+      "hrid": "/items/umbral_hood",
+      "name_en": "Umbral Hood",
+      "name_zh": "暗影兜帽"
+    },
+    {
+      "hrid": "/items/umbral_leather",
+      "name_en": "Umbral Leather",
+      "name_zh": "暗影皮革"
+    },
+    {
+      "hrid": "/items/umbral_tunic",
+      "name_en": "Umbral Tunic",
+      "name_zh": "暗影皮衣"
+    },
+    {
+      "hrid": "/items/vampire_fang",
+      "name_en": "Vampire Fang",
+      "name_zh": "吸血鬼之牙",
+      "description_en": "Material used in smithing Vampire Fang Dirk or crafting Vampiric Bow",
+      "description_zh": "用于锻造吸血鬼短剑或制作吸血弓的材料"
+    },
+    {
+      "hrid": "/items/vampire_fang_dirk",
+      "name_en": "Vampire Fang Dirk",
+      "name_zh": "吸血鬼短剑"
+    },
+    {
+      "hrid": "/items/vampiric_bow",
+      "name_en": "Vampiric Bow",
+      "name_zh": "吸血弓"
+    },
+    {
+      "hrid": "/items/vampirism",
+      "name_en": "Vampirism",
+      "name_zh": "吸血"
+    },
+    {
+      "hrid": "/items/verdant_alembic",
+      "name_en": "Verdant Alembic",
+      "name_zh": "翠绿蒸馏器"
+    },
+    {
+      "hrid": "/items/verdant_boots",
+      "name_en": "Verdant Boots",
+      "name_zh": "翠绿靴"
+    },
+    {
+      "hrid": "/items/verdant_brush",
+      "name_en": "Verdant Brush",
+      "name_zh": "翠绿刷子"
+    },
+    {
+      "hrid": "/items/verdant_buckler",
+      "name_en": "Verdant Buckler",
+      "name_zh": "翠绿圆盾"
+    },
+    {
+      "hrid": "/items/verdant_bulwark",
+      "name_en": "Verdant Bulwark",
+      "name_zh": "翠绿重盾"
+    },
+    {
+      "hrid": "/items/verdant_cheese",
+      "name_en": "Verdant Cheese",
+      "name_zh": "翠绿奶酪"
+    },
+    {
+      "hrid": "/items/verdant_chisel",
+      "name_en": "Verdant Chisel",
+      "name_zh": "翠绿凿子"
+    },
+    {
+      "hrid": "/items/verdant_enhancer",
+      "name_en": "Verdant Enhancer",
+      "name_zh": "翠绿强化器"
+    },
+    {
+      "hrid": "/items/verdant_gauntlets",
+      "name_en": "Verdant Gauntlets",
+      "name_zh": "翠绿护手"
+    },
+    {
+      "hrid": "/items/verdant_hammer",
+      "name_en": "Verdant Hammer",
+      "name_zh": "翠绿锤子"
+    },
+    {
+      "hrid": "/items/verdant_hatchet",
+      "name_en": "Verdant Hatchet",
+      "name_zh": "翠绿斧头"
+    },
+    {
+      "hrid": "/items/verdant_helmet",
+      "name_en": "Verdant Helmet",
+      "name_zh": "翠绿头盔"
+    },
+    {
+      "hrid": "/items/verdant_mace",
+      "name_en": "Verdant Mace",
+      "name_zh": "翠绿钉头锤"
+    },
+    {
+      "hrid": "/items/verdant_milk",
+      "name_en": "Verdant Milk",
+      "name_zh": "翠绿牛奶",
+      "description_en": "moooo",
+      "description_zh": "哞哞"
+    },
+    {
+      "hrid": "/items/verdant_needle",
+      "name_en": "Verdant Needle",
+      "name_zh": "翠绿针"
+    },
+    {
+      "hrid": "/items/verdant_plate_body",
+      "name_en": "Verdant Plate Body",
+      "name_zh": "翠绿胸甲"
+    },
+    {
+      "hrid": "/items/verdant_plate_legs",
+      "name_en": "Verdant Plate Legs",
+      "name_zh": "翠绿腿甲"
+    },
+    {
+      "hrid": "/items/verdant_pot",
+      "name_en": "Verdant Pot",
+      "name_zh": "翠绿壶"
+    },
+    {
+      "hrid": "/items/verdant_shears",
+      "name_en": "Verdant Shears",
+      "name_zh": "翠绿剪刀"
+    },
+    {
+      "hrid": "/items/verdant_spatula",
+      "name_en": "Verdant Spatula",
+      "name_zh": "翠绿锅铲"
+    },
+    {
+      "hrid": "/items/verdant_spear",
+      "name_en": "Verdant Spear",
+      "name_zh": "翠绿长枪"
+    },
+    {
+      "hrid": "/items/verdant_sword",
+      "name_en": "Verdant Sword",
+      "name_zh": "翠绿剑"
+    },
+    {
+      "hrid": "/items/vision_helmet",
+      "name_en": "Vision Helmet",
+      "name_zh": "视觉头盔"
+    },
+    {
+      "hrid": "/items/vision_shield",
+      "name_en": "Vision Shield",
+      "name_zh": "视觉盾"
+    },
+    {
+      "hrid": "/items/watchful_relic",
+      "name_en": "Watchful Relic",
+      "name_zh": "警戒遗物"
+    },
+    {
+      "hrid": "/items/water_strike",
+      "name_en": "Water Strike",
+      "name_zh": "流水冲击"
+    },
+    {
+      "hrid": "/items/werewolf_claw",
+      "name_en": "Werewolf Claw",
+      "name_zh": "狼人之爪",
+      "description_en": "Material used in smithing Werewolf Slasher or crafting Vampiric Bow",
+      "description_zh": "用于锻造狼人关刀或制作吸血弓的材料"
+    },
+    {
+      "hrid": "/items/werewolf_slasher",
+      "name_en": "Werewolf Slasher",
+      "name_zh": "狼人关刀"
+    },
+    {
+      "hrid": "/items/wheat",
+      "name_en": "Wheat",
+      "name_zh": "小麦"
+    },
+    {
+      "hrid": "/items/white_key_fragment",
+      "name_en": "White Key Fragment",
+      "name_zh": "白色钥匙碎片",
+      "description_en": "Can be used to craft dungeon keys",
+      "description_zh": "看起来是某种钥匙的碎片，用来制作地下城钥匙"
+    },
+    {
+      "hrid": "/items/wisdom_coffee",
+      "name_en": "Wisdom Coffee",
+      "name_zh": "经验咖啡"
+    },
+    {
+      "hrid": "/items/wisdom_tea",
+      "name_en": "Wisdom Tea",
+      "name_zh": "经验茶"
+    },
+    {
+      "hrid": "/items/wizard_necklace",
+      "name_en": "Wizard Necklace",
+      "name_zh": "巫师项链"
+    },
+    {
+      "hrid": "/items/woodcutting_essence",
+      "name_en": "Woodcutting Essence",
+      "name_zh": "伐木精华",
+      "description_en": "Used for brewing woodcutting tea and crafting alchemy catalyst",
+      "description_zh": "用于冲泡伐木茶和制作炼金催化剂"
+    },
+    {
+      "hrid": "/items/woodcutting_tea",
+      "name_en": "Woodcutting Tea",
+      "name_zh": "伐木茶"
+    },
+    {
+      "hrid": "/items/wooden_bow",
+      "name_en": "Wooden Bow",
+      "name_zh": "木弓"
+    },
+    {
+      "hrid": "/items/wooden_crossbow",
+      "name_en": "Wooden Crossbow",
+      "name_zh": "木弩"
+    },
+    {
+      "hrid": "/items/wooden_fire_staff",
+      "name_en": "Wooden Fire Staff",
+      "name_zh": "木制火法杖"
+    },
+    {
+      "hrid": "/items/wooden_nature_staff",
+      "name_en": "Wooden Nature Staff",
+      "name_zh": "木制自然法杖"
+    },
+    {
+      "hrid": "/items/wooden_shield",
+      "name_en": "Wooden Shield",
+      "name_zh": "木盾"
+    },
+    {
+      "hrid": "/items/wooden_water_staff",
+      "name_en": "Wooden Water Staff",
+      "name_zh": "木制水法杖"
+    },
+    {
+      "hrid": "/items/yogurt",
+      "name_en": "Yogurt",
+      "name_zh": "酸奶"
+    }
+  ],
+  "totalCount": 754,
+  "translatedCount": 754,
+  "generatedAt": "2025-07-26T17:24:11.354Z"
+}

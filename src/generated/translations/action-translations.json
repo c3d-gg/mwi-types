@@ -1,0 +1,3157 @@
+{
+  "items": [
+    {
+      "hrid": "/actions/alchemy/coinify",
+      "name_en": "Coinify",
+      "name_zh": "点金"
+    },
+    {
+      "hrid": "/actions/alchemy/decompose",
+      "name_en": "Decompose",
+      "name_zh": "分解"
+    },
+    {
+      "hrid": "/actions/alchemy/transmute",
+      "name_en": "Transmute",
+      "name_zh": "转化"
+    },
+    {
+      "hrid": "/actions/brewing/alchemy_tea",
+      "name_en": "Alchemy Tea",
+      "name_zh": "炼金茶"
+    },
+    {
+      "hrid": "/actions/brewing/artisan_tea",
+      "name_en": "Artisan Tea",
+      "name_zh": "工匠茶"
+    },
+    {
+      "hrid": "/actions/brewing/attack_coffee",
+      "name_en": "Attack Coffee",
+      "name_zh": "攻击咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/blessed_tea",
+      "name_en": "Blessed Tea",
+      "name_zh": "福气茶"
+    },
+    {
+      "hrid": "/actions/brewing/brewing_tea",
+      "name_en": "Brewing Tea",
+      "name_zh": "冲泡茶"
+    },
+    {
+      "hrid": "/actions/brewing/catalytic_tea",
+      "name_en": "Catalytic Tea",
+      "name_zh": "催化茶"
+    },
+    {
+      "hrid": "/actions/brewing/channeling_coffee",
+      "name_en": "Channeling Coffee",
+      "name_zh": "吟唱咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/cheesesmithing_tea",
+      "name_en": "Cheesesmithing Tea",
+      "name_zh": "奶酪锻造茶"
+    },
+    {
+      "hrid": "/actions/brewing/cooking_tea",
+      "name_en": "Cooking Tea",
+      "name_zh": "烹饪茶"
+    },
+    {
+      "hrid": "/actions/brewing/crafting_tea",
+      "name_en": "Crafting Tea",
+      "name_zh": "制作茶"
+    },
+    {
+      "hrid": "/actions/brewing/critical_coffee",
+      "name_en": "Critical Coffee",
+      "name_zh": "暴击咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/defense_coffee",
+      "name_en": "Defense Coffee",
+      "name_zh": "防御咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/efficiency_tea",
+      "name_en": "Efficiency Tea",
+      "name_zh": "效率茶"
+    },
+    {
+      "hrid": "/actions/brewing/enhancing_tea",
+      "name_en": "Enhancing Tea",
+      "name_zh": "强化茶"
+    },
+    {
+      "hrid": "/actions/brewing/foraging_tea",
+      "name_en": "Foraging Tea",
+      "name_zh": "采摘茶"
+    },
+    {
+      "hrid": "/actions/brewing/gathering_tea",
+      "name_en": "Gathering Tea",
+      "name_zh": "采集茶"
+    },
+    {
+      "hrid": "/actions/brewing/gourmet_tea",
+      "name_en": "Gourmet Tea",
+      "name_zh": "美食茶"
+    },
+    {
+      "hrid": "/actions/brewing/intelligence_coffee",
+      "name_en": "Intelligence Coffee",
+      "name_zh": "智力咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/lucky_coffee",
+      "name_en": "Lucky Coffee",
+      "name_zh": "幸运咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/magic_coffee",
+      "name_en": "Magic Coffee",
+      "name_zh": "魔法咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/milking_tea",
+      "name_en": "Milking Tea",
+      "name_zh": "挤奶茶"
+    },
+    {
+      "hrid": "/actions/brewing/power_coffee",
+      "name_en": "Power Coffee",
+      "name_zh": "力量咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/processing_tea",
+      "name_en": "Processing Tea",
+      "name_zh": "加工茶"
+    },
+    {
+      "hrid": "/actions/brewing/ranged_coffee",
+      "name_en": "Ranged Coffee",
+      "name_zh": "远程咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/stamina_coffee",
+      "name_en": "Stamina Coffee",
+      "name_zh": "耐力咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/super_alchemy_tea",
+      "name_en": "Super Alchemy Tea",
+      "name_zh": "超级炼金茶"
+    },
+    {
+      "hrid": "/actions/brewing/super_attack_coffee",
+      "name_en": "Super Attack Coffee",
+      "name_zh": "超级攻击咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/super_brewing_tea",
+      "name_en": "Super Brewing Tea",
+      "name_zh": "超级冲泡茶"
+    },
+    {
+      "hrid": "/actions/brewing/super_cheesesmithing_tea",
+      "name_en": "Super Cheesesmithing Tea",
+      "name_zh": "超级奶酪锻造茶"
+    },
+    {
+      "hrid": "/actions/brewing/super_cooking_tea",
+      "name_en": "Super Cooking Tea",
+      "name_zh": "超级烹饪茶"
+    },
+    {
+      "hrid": "/actions/brewing/super_crafting_tea",
+      "name_en": "Super Crafting Tea",
+      "name_zh": "超级制作茶"
+    },
+    {
+      "hrid": "/actions/brewing/super_defense_coffee",
+      "name_en": "Super Defense Coffee",
+      "name_zh": "超级防御咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/super_enhancing_tea",
+      "name_en": "Super Enhancing Tea",
+      "name_zh": "超级强化茶"
+    },
+    {
+      "hrid": "/actions/brewing/super_foraging_tea",
+      "name_en": "Super Foraging Tea",
+      "name_zh": "超级采摘茶"
+    },
+    {
+      "hrid": "/actions/brewing/super_intelligence_coffee",
+      "name_en": "Super Intelligence Coffee",
+      "name_zh": "超级智力咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/super_magic_coffee",
+      "name_en": "Super Magic Coffee",
+      "name_zh": "超级魔法咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/super_milking_tea",
+      "name_en": "Super Milking Tea",
+      "name_zh": "超级挤奶茶"
+    },
+    {
+      "hrid": "/actions/brewing/super_power_coffee",
+      "name_en": "Super Power Coffee",
+      "name_zh": "超级力量咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/super_ranged_coffee",
+      "name_en": "Super Ranged Coffee",
+      "name_zh": "超级远程咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/super_stamina_coffee",
+      "name_en": "Super Stamina Coffee",
+      "name_zh": "超级耐力咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/super_tailoring_tea",
+      "name_en": "Super Tailoring Tea",
+      "name_zh": "超级缝纫茶"
+    },
+    {
+      "hrid": "/actions/brewing/super_woodcutting_tea",
+      "name_en": "Super Woodcutting Tea",
+      "name_zh": "超级伐木茶"
+    },
+    {
+      "hrid": "/actions/brewing/swiftness_coffee",
+      "name_en": "Swiftness Coffee",
+      "name_zh": "迅捷咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/tailoring_tea",
+      "name_en": "Tailoring Tea",
+      "name_zh": "缝纫茶"
+    },
+    {
+      "hrid": "/actions/brewing/ultra_alchemy_tea",
+      "name_en": "Ultra Alchemy Tea",
+      "name_zh": "究极炼金茶"
+    },
+    {
+      "hrid": "/actions/brewing/ultra_attack_coffee",
+      "name_en": "Ultra Attack Coffee",
+      "name_zh": "究极攻击咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/ultra_brewing_tea",
+      "name_en": "Ultra Brewing Tea",
+      "name_zh": "究极冲泡茶"
+    },
+    {
+      "hrid": "/actions/brewing/ultra_cheesesmithing_tea",
+      "name_en": "Ultra Cheesesmithing Tea",
+      "name_zh": "究极奶酪锻造茶"
+    },
+    {
+      "hrid": "/actions/brewing/ultra_cooking_tea",
+      "name_en": "Ultra Cooking Tea",
+      "name_zh": "究极烹饪茶"
+    },
+    {
+      "hrid": "/actions/brewing/ultra_crafting_tea",
+      "name_en": "Ultra Crafting Tea",
+      "name_zh": "究极制作茶"
+    },
+    {
+      "hrid": "/actions/brewing/ultra_defense_coffee",
+      "name_en": "Ultra Defense Coffee",
+      "name_zh": "究极防御咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/ultra_enhancing_tea",
+      "name_en": "Ultra Enhancing Tea",
+      "name_zh": "究极强化茶"
+    },
+    {
+      "hrid": "/actions/brewing/ultra_foraging_tea",
+      "name_en": "Ultra Foraging Tea",
+      "name_zh": "究极采摘茶"
+    },
+    {
+      "hrid": "/actions/brewing/ultra_intelligence_coffee",
+      "name_en": "Ultra Intelligence Coffee",
+      "name_zh": "究极智力咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/ultra_magic_coffee",
+      "name_en": "Ultra Magic Coffee",
+      "name_zh": "究极魔法咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/ultra_milking_tea",
+      "name_en": "Ultra Milking Tea",
+      "name_zh": "究极挤奶茶"
+    },
+    {
+      "hrid": "/actions/brewing/ultra_power_coffee",
+      "name_en": "Ultra Power Coffee",
+      "name_zh": "究极力量咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/ultra_ranged_coffee",
+      "name_en": "Ultra Ranged Coffee",
+      "name_zh": "究极远程咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/ultra_stamina_coffee",
+      "name_en": "Ultra Stamina Coffee",
+      "name_zh": "究极耐力咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/ultra_tailoring_tea",
+      "name_en": "Ultra Tailoring Tea",
+      "name_zh": "究极缝纫茶"
+    },
+    {
+      "hrid": "/actions/brewing/ultra_woodcutting_tea",
+      "name_en": "Ultra Woodcutting Tea",
+      "name_zh": "究极伐木茶"
+    },
+    {
+      "hrid": "/actions/brewing/wisdom_coffee",
+      "name_en": "Wisdom Coffee",
+      "name_zh": "经验咖啡"
+    },
+    {
+      "hrid": "/actions/brewing/wisdom_tea",
+      "name_en": "Wisdom Tea",
+      "name_zh": "经验茶"
+    },
+    {
+      "hrid": "/actions/brewing/woodcutting_tea",
+      "name_en": "Woodcutting Tea",
+      "name_zh": "伐木茶"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/anchorbound_plate_body",
+      "name_en": "Anchorbound Plate Body",
+      "name_zh": "锚定胸甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/anchorbound_plate_legs",
+      "name_en": "Anchorbound Plate Legs",
+      "name_zh": "锚定腿甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_alembic",
+      "name_en": "Azure Alembic",
+      "name_zh": "蔚蓝蒸馏器"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_boots",
+      "name_en": "Azure Boots",
+      "name_zh": "蔚蓝靴"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_brush",
+      "name_en": "Azure Brush",
+      "name_zh": "蔚蓝刷子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_buckler",
+      "name_en": "Azure Buckler",
+      "name_zh": "蔚蓝圆盾"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_bulwark",
+      "name_en": "Azure Bulwark",
+      "name_zh": "蔚蓝重盾"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_cheese",
+      "name_en": "Azure Cheese",
+      "name_zh": "蔚蓝奶酪"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_chisel",
+      "name_en": "Azure Chisel",
+      "name_zh": "蔚蓝凿子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_enhancer",
+      "name_en": "Azure Enhancer",
+      "name_zh": "蔚蓝强化器"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_gauntlets",
+      "name_en": "Azure Gauntlets",
+      "name_zh": "蔚蓝护手"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_hammer",
+      "name_en": "Azure Hammer",
+      "name_zh": "蔚蓝锤子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_hatchet",
+      "name_en": "Azure Hatchet",
+      "name_zh": "蔚蓝斧头"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_helmet",
+      "name_en": "Azure Helmet",
+      "name_zh": "蔚蓝头盔"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_mace",
+      "name_en": "Azure Mace",
+      "name_zh": "蔚蓝钉头锤"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_needle",
+      "name_en": "Azure Needle",
+      "name_zh": "蔚蓝针"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_plate_body",
+      "name_en": "Azure Plate Body",
+      "name_zh": "蔚蓝胸甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_plate_legs",
+      "name_en": "Azure Plate Legs",
+      "name_zh": "蔚蓝腿甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_pot",
+      "name_en": "Azure Pot",
+      "name_zh": "蔚蓝壶"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_shears",
+      "name_en": "Azure Shears",
+      "name_zh": "蔚蓝剪刀"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_spatula",
+      "name_en": "Azure Spatula",
+      "name_zh": "蔚蓝锅铲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_spear",
+      "name_en": "Azure Spear",
+      "name_zh": "蔚蓝长枪"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/azure_sword",
+      "name_en": "Azure Sword",
+      "name_zh": "蔚蓝剑"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/black_bear_shoes",
+      "name_en": "Black Bear Shoes",
+      "name_zh": "黑熊鞋"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_alembic",
+      "name_en": "Burble Alembic",
+      "name_zh": "深紫蒸馏器"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_boots",
+      "name_en": "Burble Boots",
+      "name_zh": "深紫靴"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_brush",
+      "name_en": "Burble Brush",
+      "name_zh": "深紫刷子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_buckler",
+      "name_en": "Burble Buckler",
+      "name_zh": "深紫圆盾"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_bulwark",
+      "name_en": "Burble Bulwark",
+      "name_zh": "深紫重盾"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_cheese",
+      "name_en": "Burble Cheese",
+      "name_zh": "深紫奶酪"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_chisel",
+      "name_en": "Burble Chisel",
+      "name_zh": "深紫凿子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_enhancer",
+      "name_en": "Burble Enhancer",
+      "name_zh": "深紫强化器"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_gauntlets",
+      "name_en": "Burble Gauntlets",
+      "name_zh": "深紫护手"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_hammer",
+      "name_en": "Burble Hammer",
+      "name_zh": "深紫锤子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_hatchet",
+      "name_en": "Burble Hatchet",
+      "name_zh": "深紫斧头"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_helmet",
+      "name_en": "Burble Helmet",
+      "name_zh": "深紫头盔"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_mace",
+      "name_en": "Burble Mace",
+      "name_zh": "深紫钉头锤"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_needle",
+      "name_en": "Burble Needle",
+      "name_zh": "深紫针"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_plate_body",
+      "name_en": "Burble Plate Body",
+      "name_zh": "深紫胸甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_plate_legs",
+      "name_en": "Burble Plate Legs",
+      "name_zh": "深紫腿甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_pot",
+      "name_en": "Burble Pot",
+      "name_zh": "深紫壶"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_shears",
+      "name_en": "Burble Shears",
+      "name_zh": "深紫剪刀"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_spatula",
+      "name_en": "Burble Spatula",
+      "name_zh": "深紫锅铲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_spear",
+      "name_en": "Burble Spear",
+      "name_zh": "深紫长枪"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/burble_sword",
+      "name_en": "Burble Sword",
+      "name_zh": "深紫剑"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/celestial_alembic",
+      "name_en": "Celestial Alembic",
+      "name_zh": "星空蒸馏器"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/celestial_brush",
+      "name_en": "Celestial Brush",
+      "name_zh": "星空刷子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/celestial_chisel",
+      "name_en": "Celestial Chisel",
+      "name_zh": "星空凿子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/celestial_enhancer",
+      "name_en": "Celestial Enhancer",
+      "name_zh": "星空强化器"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/celestial_hammer",
+      "name_en": "Celestial Hammer",
+      "name_zh": "星空锤子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/celestial_hatchet",
+      "name_en": "Celestial Hatchet",
+      "name_zh": "星空斧头"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/celestial_needle",
+      "name_en": "Celestial Needle",
+      "name_zh": "星空针"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/celestial_pot",
+      "name_en": "Celestial Pot",
+      "name_zh": "星空壶"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/celestial_shears",
+      "name_en": "Celestial Shears",
+      "name_zh": "星空剪刀"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/celestial_spatula",
+      "name_en": "Celestial Spatula",
+      "name_zh": "星空锅铲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/chaotic_flail",
+      "name_en": "Chaotic Flail",
+      "name_zh": "混沌连枷"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese",
+      "name_en": "Cheese",
+      "name_zh": "奶酪"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_alembic",
+      "name_en": "Cheese Alembic",
+      "name_zh": "奶酪蒸馏器"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_boots",
+      "name_en": "Cheese Boots",
+      "name_zh": "奶酪靴"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_brush",
+      "name_en": "Cheese Brush",
+      "name_zh": "奶酪刷子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_buckler",
+      "name_en": "Cheese Buckler",
+      "name_zh": "奶酪圆盾"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_bulwark",
+      "name_en": "Cheese Bulwark",
+      "name_zh": "奶酪重盾"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_chisel",
+      "name_en": "Cheese Chisel",
+      "name_zh": "奶酪凿子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_enhancer",
+      "name_en": "Cheese Enhancer",
+      "name_zh": "奶酪强化器"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_gauntlets",
+      "name_en": "Cheese Gauntlets",
+      "name_zh": "奶酪护手"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_hammer",
+      "name_en": "Cheese Hammer",
+      "name_zh": "奶酪锤子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_hatchet",
+      "name_en": "Cheese Hatchet",
+      "name_zh": "奶酪斧头"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_helmet",
+      "name_en": "Cheese Helmet",
+      "name_zh": "奶酪头盔"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_mace",
+      "name_en": "Cheese Mace",
+      "name_zh": "奶酪钉头锤"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_needle",
+      "name_en": "Cheese Needle",
+      "name_zh": "奶酪针"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_plate_body",
+      "name_en": "Cheese Plate Body",
+      "name_zh": "奶酪胸甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_plate_legs",
+      "name_en": "Cheese Plate Legs",
+      "name_zh": "奶酪腿甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_pot",
+      "name_en": "Cheese Pot",
+      "name_zh": "奶酪壶"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_shears",
+      "name_en": "Cheese Shears",
+      "name_zh": "奶酪剪刀"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_spatula",
+      "name_en": "Cheese Spatula",
+      "name_zh": "奶酪锅铲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_spear",
+      "name_en": "Cheese Spear",
+      "name_zh": "奶酪长枪"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/cheese_sword",
+      "name_en": "Cheese Sword",
+      "name_zh": "奶酪剑"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/colossus_plate_body",
+      "name_en": "Colossus Plate Body",
+      "name_zh": "巨像胸甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/colossus_plate_legs",
+      "name_en": "Colossus Plate Legs",
+      "name_zh": "巨像腿甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/corsair_helmet",
+      "name_en": "Corsair Helmet",
+      "name_zh": "掠夺者头盔"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_alembic",
+      "name_en": "Crimson Alembic",
+      "name_zh": "绛红蒸馏器"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_boots",
+      "name_en": "Crimson Boots",
+      "name_zh": "绛红靴"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_brush",
+      "name_en": "Crimson Brush",
+      "name_zh": "绛红刷子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_buckler",
+      "name_en": "Crimson Buckler",
+      "name_zh": "绛红圆盾"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_bulwark",
+      "name_en": "Crimson Bulwark",
+      "name_zh": "绛红重盾"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_cheese",
+      "name_en": "Crimson Cheese",
+      "name_zh": "绛红奶酪"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_chisel",
+      "name_en": "Crimson Chisel",
+      "name_zh": "绛红凿子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_enhancer",
+      "name_en": "Crimson Enhancer",
+      "name_zh": "绛红强化器"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_gauntlets",
+      "name_en": "Crimson Gauntlets",
+      "name_zh": "绛红护手"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_hammer",
+      "name_en": "Crimson Hammer",
+      "name_zh": "绛红锤子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_hatchet",
+      "name_en": "Crimson Hatchet",
+      "name_zh": "绛红斧头"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_helmet",
+      "name_en": "Crimson Helmet",
+      "name_zh": "绛红头盔"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_mace",
+      "name_en": "Crimson Mace",
+      "name_zh": "绛红钉头锤"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_needle",
+      "name_en": "Crimson Needle",
+      "name_zh": "绛红针"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_plate_body",
+      "name_en": "Crimson Plate Body",
+      "name_zh": "绛红胸甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_plate_legs",
+      "name_en": "Crimson Plate Legs",
+      "name_zh": "绛红腿甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_pot",
+      "name_en": "Crimson Pot",
+      "name_zh": "绛红壶"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_shears",
+      "name_en": "Crimson Shears",
+      "name_zh": "绛红剪刀"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_spatula",
+      "name_en": "Crimson Spatula",
+      "name_zh": "绛红锅铲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_spear",
+      "name_en": "Crimson Spear",
+      "name_zh": "绛红长枪"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/crimson_sword",
+      "name_en": "Crimson Sword",
+      "name_zh": "绛红剑"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/demonic_plate_body",
+      "name_en": "Demonic Plate Body",
+      "name_zh": "恶魔胸甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/demonic_plate_legs",
+      "name_en": "Demonic Plate Legs",
+      "name_zh": "恶魔腿甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/dodocamel_gauntlets",
+      "name_en": "Dodocamel Gauntlets",
+      "name_zh": "渡渡驼护手"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/furious_spear",
+      "name_en": "Furious Spear",
+      "name_zh": "狂怒长枪"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/granite_bludgeon",
+      "name_en": "Granite Bludgeon",
+      "name_zh": "花岗岩大棒"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/griffin_bulwark",
+      "name_en": "Griffin Bulwark",
+      "name_zh": "狮鹫重盾"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/grizzly_bear_shoes",
+      "name_en": "Grizzly Bear Shoes",
+      "name_zh": "棕熊鞋"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_alembic",
+      "name_en": "Holy Alembic",
+      "name_zh": "神圣蒸馏器"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_boots",
+      "name_en": "Holy Boots",
+      "name_zh": "神圣靴"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_brush",
+      "name_en": "Holy Brush",
+      "name_zh": "神圣刷子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_buckler",
+      "name_en": "Holy Buckler",
+      "name_zh": "神圣圆盾"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_bulwark",
+      "name_en": "Holy Bulwark",
+      "name_zh": "神圣重盾"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_cheese",
+      "name_en": "Holy Cheese",
+      "name_zh": "神圣奶酪"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_chisel",
+      "name_en": "Holy Chisel",
+      "name_zh": "神圣凿子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_enhancer",
+      "name_en": "Holy Enhancer",
+      "name_zh": "神圣强化器"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_gauntlets",
+      "name_en": "Holy Gauntlets",
+      "name_zh": "神圣护手"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_hammer",
+      "name_en": "Holy Hammer",
+      "name_zh": "神圣锤子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_hatchet",
+      "name_en": "Holy Hatchet",
+      "name_zh": "神圣斧头"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_helmet",
+      "name_en": "Holy Helmet",
+      "name_zh": "神圣头盔"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_mace",
+      "name_en": "Holy Mace",
+      "name_zh": "神圣钉头锤"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_needle",
+      "name_en": "Holy Needle",
+      "name_zh": "神圣针"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_plate_body",
+      "name_en": "Holy Plate Body",
+      "name_zh": "神圣胸甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_plate_legs",
+      "name_en": "Holy Plate Legs",
+      "name_zh": "神圣腿甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_pot",
+      "name_en": "Holy Pot",
+      "name_zh": "神圣壶"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_shears",
+      "name_en": "Holy Shears",
+      "name_zh": "神圣剪刀"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_spatula",
+      "name_en": "Holy Spatula",
+      "name_zh": "神圣锅铲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_spear",
+      "name_en": "Holy Spear",
+      "name_zh": "神圣长枪"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/holy_sword",
+      "name_en": "Holy Sword",
+      "name_zh": "神圣剑"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/knights_aegis",
+      "name_en": "Knights Aegis",
+      "name_zh": "骑士盾"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/maelstrom_plate_body",
+      "name_en": "Maelstrom Plate Body",
+      "name_zh": "怒涛胸甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/maelstrom_plate_legs",
+      "name_en": "Maelstrom Plate Legs",
+      "name_zh": "怒涛腿甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/magnetic_gloves",
+      "name_en": "Magnetic Gloves",
+      "name_zh": "磁力手套"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/panda_gloves",
+      "name_en": "Panda Gloves",
+      "name_zh": "熊猫手套"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/pincer_gloves",
+      "name_en": "Pincer Gloves",
+      "name_zh": "蟹钳手套"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/polar_bear_shoes",
+      "name_en": "Polar Bear Shoes",
+      "name_zh": "北极熊鞋"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_alembic",
+      "name_en": "Rainbow Alembic",
+      "name_zh": "彩虹蒸馏器"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_boots",
+      "name_en": "Rainbow Boots",
+      "name_zh": "彩虹靴"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_brush",
+      "name_en": "Rainbow Brush",
+      "name_zh": "彩虹刷子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_buckler",
+      "name_en": "Rainbow Buckler",
+      "name_zh": "彩虹圆盾"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_bulwark",
+      "name_en": "Rainbow Bulwark",
+      "name_zh": "彩虹重盾"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_cheese",
+      "name_en": "Rainbow Cheese",
+      "name_zh": "彩虹奶酪"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_chisel",
+      "name_en": "Rainbow Chisel",
+      "name_zh": "彩虹凿子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_enhancer",
+      "name_en": "Rainbow Enhancer",
+      "name_zh": "彩虹强化器"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_gauntlets",
+      "name_en": "Rainbow Gauntlets",
+      "name_zh": "彩虹护手"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_hammer",
+      "name_en": "Rainbow Hammer",
+      "name_zh": "彩虹锤子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_hatchet",
+      "name_en": "Rainbow Hatchet",
+      "name_zh": "彩虹斧头"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_helmet",
+      "name_en": "Rainbow Helmet",
+      "name_zh": "彩虹头盔"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_mace",
+      "name_en": "Rainbow Mace",
+      "name_zh": "彩虹钉头锤"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_needle",
+      "name_en": "Rainbow Needle",
+      "name_zh": "彩虹针"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_plate_body",
+      "name_en": "Rainbow Plate Body",
+      "name_zh": "彩虹胸甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_plate_legs",
+      "name_en": "Rainbow Plate Legs",
+      "name_zh": "彩虹腿甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_pot",
+      "name_en": "Rainbow Pot",
+      "name_zh": "彩虹壶"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_shears",
+      "name_en": "Rainbow Shears",
+      "name_zh": "彩虹剪刀"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_spatula",
+      "name_en": "Rainbow Spatula",
+      "name_zh": "彩虹锅铲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_spear",
+      "name_en": "Rainbow Spear",
+      "name_zh": "彩虹长枪"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/rainbow_sword",
+      "name_en": "Rainbow Sword",
+      "name_zh": "彩虹剑"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/regal_sword",
+      "name_en": "Regal Sword",
+      "name_zh": "君王之剑"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/snail_shell_helmet",
+      "name_en": "Snail Shell Helmet",
+      "name_zh": "蜗牛壳头盔"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/snake_fang_dirk",
+      "name_en": "Snake Fang Dirk",
+      "name_zh": "蛇牙短剑"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/spiked_bulwark",
+      "name_en": "Spiked Bulwark",
+      "name_zh": "尖刺重盾"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/stalactite_spear",
+      "name_en": "Stalactite Spear",
+      "name_zh": "石钟长枪"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/turtle_shell_body",
+      "name_en": "Turtle Shell Body",
+      "name_zh": "龟壳胸甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/turtle_shell_legs",
+      "name_en": "Turtle Shell Legs",
+      "name_zh": "龟壳腿甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/vampire_fang_dirk",
+      "name_en": "Vampire Fang Dirk",
+      "name_zh": "吸血鬼短剑"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_alembic",
+      "name_en": "Verdant Alembic",
+      "name_zh": "翠绿蒸馏器"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_boots",
+      "name_en": "Verdant Boots",
+      "name_zh": "翠绿靴"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_brush",
+      "name_en": "Verdant Brush",
+      "name_zh": "翠绿刷子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_buckler",
+      "name_en": "Verdant Buckler",
+      "name_zh": "翠绿圆盾"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_bulwark",
+      "name_en": "Verdant Bulwark",
+      "name_zh": "翠绿重盾"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_cheese",
+      "name_en": "Verdant Cheese",
+      "name_zh": "翠绿奶酪"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_chisel",
+      "name_en": "Verdant Chisel",
+      "name_zh": "翠绿凿子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_enhancer",
+      "name_en": "Verdant Enhancer",
+      "name_zh": "翠绿强化器"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_gauntlets",
+      "name_en": "Verdant Gauntlets",
+      "name_zh": "翠绿护手"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_hammer",
+      "name_en": "Verdant Hammer",
+      "name_zh": "翠绿锤子"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_hatchet",
+      "name_en": "Verdant Hatchet",
+      "name_zh": "翠绿斧头"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_helmet",
+      "name_en": "Verdant Helmet",
+      "name_zh": "翠绿头盔"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_mace",
+      "name_en": "Verdant Mace",
+      "name_zh": "翠绿钉头锤"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_needle",
+      "name_en": "Verdant Needle",
+      "name_zh": "翠绿针"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_plate_body",
+      "name_en": "Verdant Plate Body",
+      "name_zh": "翠绿胸甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_plate_legs",
+      "name_en": "Verdant Plate Legs",
+      "name_zh": "翠绿腿甲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_pot",
+      "name_en": "Verdant Pot",
+      "name_zh": "翠绿壶"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_shears",
+      "name_en": "Verdant Shears",
+      "name_zh": "翠绿剪刀"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_spatula",
+      "name_en": "Verdant Spatula",
+      "name_zh": "翠绿锅铲"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_spear",
+      "name_en": "Verdant Spear",
+      "name_zh": "翠绿长枪"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/verdant_sword",
+      "name_en": "Verdant Sword",
+      "name_zh": "翠绿剑"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/vision_helmet",
+      "name_en": "Vision Helmet",
+      "name_zh": "视觉头盔"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/vision_shield",
+      "name_en": "Vision Shield",
+      "name_zh": "视觉盾"
+    },
+    {
+      "hrid": "/actions/cheesesmithing/werewolf_slasher",
+      "name_en": "Werewolf Slasher",
+      "name_zh": "狼人关刀"
+    },
+    {
+      "hrid": "/actions/combat/abyssal_imp",
+      "name_en": "Abyssal Imp",
+      "name_zh": "深渊小鬼"
+    },
+    {
+      "hrid": "/actions/combat/alligator",
+      "name_en": "Sherlock",
+      "name_zh": "夏洛克"
+    },
+    {
+      "hrid": "/actions/combat/aqua_planet",
+      "name_en": "Aqua Planet",
+      "name_zh": "海洋星球"
+    },
+    {
+      "hrid": "/actions/combat/aqua_planet_elite",
+      "name_en": "Aqua Planet (Elite)",
+      "name_zh": "海洋星球 (精英)"
+    },
+    {
+      "hrid": "/actions/combat/aquahorse",
+      "name_en": "Aquahorse",
+      "name_zh": "水马"
+    },
+    {
+      "hrid": "/actions/combat/bear_with_it",
+      "name_en": "Bear With It",
+      "name_zh": "熊熊星球"
+    },
+    {
+      "hrid": "/actions/combat/bear_with_it_elite",
+      "name_en": "Bear With It (Elite)",
+      "name_zh": "熊熊星球 (精英)"
+    },
+    {
+      "hrid": "/actions/combat/black_bear",
+      "name_en": "Black Bear",
+      "name_zh": "黑熊"
+    },
+    {
+      "hrid": "/actions/combat/centaur_archer",
+      "name_en": "Centaur Archer",
+      "name_zh": "半人马弓箭手"
+    },
+    {
+      "hrid": "/actions/combat/chimerical_den",
+      "name_en": "Chimerical Den",
+      "name_zh": "奇幻洞穴"
+    },
+    {
+      "hrid": "/actions/combat/crab",
+      "name_en": "I Pinch",
+      "name_zh": "螃蟹"
+    },
+    {
+      "hrid": "/actions/combat/elementalist",
+      "name_en": "Elementalist",
+      "name_zh": "元素法师"
+    },
+    {
+      "hrid": "/actions/combat/enchanted_fortress",
+      "name_en": "Enchanted Fortress",
+      "name_zh": "秘法要塞"
+    },
+    {
+      "hrid": "/actions/combat/eye",
+      "name_en": "Eye",
+      "name_zh": "独眼"
+    },
+    {
+      "hrid": "/actions/combat/eyes",
+      "name_en": "Eyes",
+      "name_zh": "叠眼"
+    },
+    {
+      "hrid": "/actions/combat/flame_sorcerer",
+      "name_en": "Flame Sorcerer",
+      "name_zh": "火焰巫师"
+    },
+    {
+      "hrid": "/actions/combat/fly",
+      "name_en": "Fly",
+      "name_zh": "苍蝇"
+    },
+    {
+      "hrid": "/actions/combat/frog",
+      "name_en": "Frogger",
+      "name_zh": "青蛙"
+    },
+    {
+      "hrid": "/actions/combat/gobo_boomy",
+      "name_en": "Boomy",
+      "name_zh": "轰轰"
+    },
+    {
+      "hrid": "/actions/combat/gobo_planet",
+      "name_en": "Gobo Planet",
+      "name_zh": "哥布林星球"
+    },
+    {
+      "hrid": "/actions/combat/gobo_planet_elite",
+      "name_en": "Gobo Planet (Elite)",
+      "name_zh": "哥布林星球 (精英)"
+    },
+    {
+      "hrid": "/actions/combat/gobo_shooty",
+      "name_en": "Shooty",
+      "name_zh": "咻咻"
+    },
+    {
+      "hrid": "/actions/combat/gobo_slashy",
+      "name_en": "Slashy",
+      "name_zh": "砍砍"
+    },
+    {
+      "hrid": "/actions/combat/gobo_smashy",
+      "name_en": "Smashy",
+      "name_zh": "锤锤"
+    },
+    {
+      "hrid": "/actions/combat/gobo_stabby",
+      "name_en": "Stabby",
+      "name_zh": "刺刺"
+    },
+    {
+      "hrid": "/actions/combat/golem_cave",
+      "name_en": "Golem Cave",
+      "name_zh": "魔像洞穴"
+    },
+    {
+      "hrid": "/actions/combat/golem_cave_elite",
+      "name_en": "Golem Cave (Elite)",
+      "name_zh": "魔像洞穴 (精英)"
+    },
+    {
+      "hrid": "/actions/combat/granite_golem",
+      "name_en": "Granite Golem",
+      "name_zh": "花岗岩魔像"
+    },
+    {
+      "hrid": "/actions/combat/grizzly_bear",
+      "name_en": "Grizzly Bear",
+      "name_zh": "棕熊"
+    },
+    {
+      "hrid": "/actions/combat/gummy_bear",
+      "name_en": "Gummy Bear",
+      "name_zh": "软糖熊"
+    },
+    {
+      "hrid": "/actions/combat/ice_sorcerer",
+      "name_en": "Ice Sorcerer",
+      "name_zh": "冰霜巫师"
+    },
+    {
+      "hrid": "/actions/combat/infernal_abyss",
+      "name_en": "Infernal Abyss",
+      "name_zh": "地狱深渊"
+    },
+    {
+      "hrid": "/actions/combat/infernal_abyss_elite",
+      "name_en": "Infernal Abyss (Elite)",
+      "name_zh": "地狱深渊 (精英)"
+    },
+    {
+      "hrid": "/actions/combat/infernal_warlock",
+      "name_en": "Infernal Warlock",
+      "name_zh": "地狱术士"
+    },
+    {
+      "hrid": "/actions/combat/jungle_planet",
+      "name_en": "Jungle Planet",
+      "name_zh": "丛林星球"
+    },
+    {
+      "hrid": "/actions/combat/jungle_planet_elite",
+      "name_en": "Jungle Planet (Elite)",
+      "name_zh": "丛林星球 (精英)"
+    },
+    {
+      "hrid": "/actions/combat/jungle_sprite",
+      "name_en": "Jungle Sprite",
+      "name_zh": "丛林精灵"
+    },
+    {
+      "hrid": "/actions/combat/magnetic_golem",
+      "name_en": "Magnetic Golem",
+      "name_zh": "磁力魔像"
+    },
+    {
+      "hrid": "/actions/combat/myconid",
+      "name_en": "Myconid",
+      "name_zh": "蘑菇人"
+    },
+    {
+      "hrid": "/actions/combat/nom_nom",
+      "name_en": "Nom Nom",
+      "name_zh": "咬咬鱼"
+    },
+    {
+      "hrid": "/actions/combat/novice_sorcerer",
+      "name_en": "Novice Sorcerer",
+      "name_zh": "新手巫师"
+    },
+    {
+      "hrid": "/actions/combat/panda",
+      "name_en": "Panda",
+      "name_zh": "熊猫"
+    },
+    {
+      "hrid": "/actions/combat/pirate_cove",
+      "name_en": "Pirate Cove",
+      "name_zh": "海盗基地"
+    },
+    {
+      "hrid": "/actions/combat/planet_of_the_eyes",
+      "name_en": "Planet Of The Eyes",
+      "name_zh": "眼球星球"
+    },
+    {
+      "hrid": "/actions/combat/planet_of_the_eyes_elite",
+      "name_en": "Planet Of The Eyes (Elite)",
+      "name_zh": "眼球星球 (精英)"
+    },
+    {
+      "hrid": "/actions/combat/polar_bear",
+      "name_en": "Polar Bear",
+      "name_zh": "北极熊"
+    },
+    {
+      "hrid": "/actions/combat/porcupine",
+      "name_en": "Porcupine",
+      "name_zh": "豪猪"
+    },
+    {
+      "hrid": "/actions/combat/rat",
+      "name_en": "Jerry",
+      "name_zh": "杰瑞"
+    },
+    {
+      "hrid": "/actions/combat/sea_snail",
+      "name_en": "Gary",
+      "name_zh": "蜗牛"
+    },
+    {
+      "hrid": "/actions/combat/sinister_circus",
+      "name_en": "Sinister Circus",
+      "name_zh": "阴森马戏团"
+    },
+    {
+      "hrid": "/actions/combat/skunk",
+      "name_en": "Skunk",
+      "name_zh": "臭鼬"
+    },
+    {
+      "hrid": "/actions/combat/slimy",
+      "name_en": "Slimy",
+      "name_zh": "史莱姆"
+    },
+    {
+      "hrid": "/actions/combat/smelly_planet",
+      "name_en": "Smelly Planet",
+      "name_zh": "臭臭星球"
+    },
+    {
+      "hrid": "/actions/combat/smelly_planet_elite",
+      "name_en": "Smelly Planet (Elite)",
+      "name_zh": "臭臭星球 (精英)"
+    },
+    {
+      "hrid": "/actions/combat/snake",
+      "name_en": "Thnake",
+      "name_zh": "蛇"
+    },
+    {
+      "hrid": "/actions/combat/sorcerers_tower",
+      "name_en": "Sorcerer's Tower",
+      "name_zh": "巫师之塔"
+    },
+    {
+      "hrid": "/actions/combat/sorcerers_tower_elite",
+      "name_en": "Sorcerer's Tower (Elite)",
+      "name_zh": "巫师之塔 (精英)"
+    },
+    {
+      "hrid": "/actions/combat/soul_hunter",
+      "name_en": "Soul Hunter",
+      "name_zh": "灵魂猎手"
+    },
+    {
+      "hrid": "/actions/combat/stalactite_golem",
+      "name_en": "Stalactite Golem",
+      "name_zh": "钟乳石魔像"
+    },
+    {
+      "hrid": "/actions/combat/swamp_planet",
+      "name_en": "Swamp Planet",
+      "name_zh": "沼泽星球"
+    },
+    {
+      "hrid": "/actions/combat/swamp_planet_elite",
+      "name_en": "Swamp Planet (Elite)",
+      "name_zh": "沼泽星球 (精英)"
+    },
+    {
+      "hrid": "/actions/combat/swampy",
+      "name_en": "Swampy",
+      "name_zh": "沼泽虫"
+    },
+    {
+      "hrid": "/actions/combat/treant",
+      "name_en": "Treant",
+      "name_zh": "树人"
+    },
+    {
+      "hrid": "/actions/combat/turtle",
+      "name_en": "Turuto",
+      "name_zh": "忍者龟"
+    },
+    {
+      "hrid": "/actions/combat/twilight_zone",
+      "name_en": "Twilight Zone",
+      "name_zh": "暮光之地"
+    },
+    {
+      "hrid": "/actions/combat/twilight_zone_elite",
+      "name_en": "Twilight Zone (Elite)",
+      "name_zh": "暮光之地 (精英)"
+    },
+    {
+      "hrid": "/actions/combat/vampire",
+      "name_en": "Vampire",
+      "name_zh": "吸血鬼"
+    },
+    {
+      "hrid": "/actions/combat/veyes",
+      "name_en": "Veyes",
+      "name_zh": "复眼"
+    },
+    {
+      "hrid": "/actions/combat/werewolf",
+      "name_en": "Werewolf",
+      "name_zh": "狼人"
+    },
+    {
+      "hrid": "/actions/combat/zombie",
+      "name_en": "Zombie",
+      "name_zh": "僵尸"
+    },
+    {
+      "hrid": "/actions/cooking/apple_gummy",
+      "name_en": "Apple Gummy",
+      "name_zh": "苹果软糖"
+    },
+    {
+      "hrid": "/actions/cooking/apple_yogurt",
+      "name_en": "Apple Yogurt",
+      "name_zh": "苹果酸奶"
+    },
+    {
+      "hrid": "/actions/cooking/blackberry_cake",
+      "name_en": "Blackberry Cake",
+      "name_zh": "黑莓蛋糕"
+    },
+    {
+      "hrid": "/actions/cooking/blackberry_donut",
+      "name_en": "Blackberry Donut",
+      "name_zh": "黑莓甜甜圈"
+    },
+    {
+      "hrid": "/actions/cooking/blueberry_cake",
+      "name_en": "Blueberry Cake",
+      "name_zh": "蓝莓蛋糕"
+    },
+    {
+      "hrid": "/actions/cooking/blueberry_donut",
+      "name_en": "Blueberry Donut",
+      "name_zh": "蓝莓甜甜圈"
+    },
+    {
+      "hrid": "/actions/cooking/cupcake",
+      "name_en": "Cupcake",
+      "name_zh": "纸杯蛋糕"
+    },
+    {
+      "hrid": "/actions/cooking/donut",
+      "name_en": "Donut",
+      "name_zh": "甜甜圈"
+    },
+    {
+      "hrid": "/actions/cooking/dragon_fruit_gummy",
+      "name_en": "Dragon Fruit Gummy",
+      "name_zh": "火龙果软糖"
+    },
+    {
+      "hrid": "/actions/cooking/dragon_fruit_yogurt",
+      "name_en": "Dragon Fruit Yogurt",
+      "name_zh": "火龙果酸奶"
+    },
+    {
+      "hrid": "/actions/cooking/gummy",
+      "name_en": "Gummy",
+      "name_zh": "软糖"
+    },
+    {
+      "hrid": "/actions/cooking/marsberry_cake",
+      "name_en": "Marsberry Cake",
+      "name_zh": "火星莓蛋糕"
+    },
+    {
+      "hrid": "/actions/cooking/marsberry_donut",
+      "name_en": "Marsberry Donut",
+      "name_zh": "火星莓甜甜圈"
+    },
+    {
+      "hrid": "/actions/cooking/mooberry_cake",
+      "name_en": "Mooberry Cake",
+      "name_zh": "哞莓蛋糕"
+    },
+    {
+      "hrid": "/actions/cooking/mooberry_donut",
+      "name_en": "Mooberry Donut",
+      "name_zh": "哞莓甜甜圈"
+    },
+    {
+      "hrid": "/actions/cooking/orange_gummy",
+      "name_en": "Orange Gummy",
+      "name_zh": "橙子软糖"
+    },
+    {
+      "hrid": "/actions/cooking/orange_yogurt",
+      "name_en": "Orange Yogurt",
+      "name_zh": "橙子酸奶"
+    },
+    {
+      "hrid": "/actions/cooking/peach_gummy",
+      "name_en": "Peach Gummy",
+      "name_zh": "桃子软糖"
+    },
+    {
+      "hrid": "/actions/cooking/peach_yogurt",
+      "name_en": "Peach Yogurt",
+      "name_zh": "桃子酸奶"
+    },
+    {
+      "hrid": "/actions/cooking/plum_gummy",
+      "name_en": "Plum Gummy",
+      "name_zh": "李子软糖"
+    },
+    {
+      "hrid": "/actions/cooking/plum_yogurt",
+      "name_en": "Plum Yogurt",
+      "name_zh": "李子酸奶"
+    },
+    {
+      "hrid": "/actions/cooking/spaceberry_cake",
+      "name_en": "Spaceberry Cake",
+      "name_zh": "太空莓蛋糕"
+    },
+    {
+      "hrid": "/actions/cooking/spaceberry_donut",
+      "name_en": "Spaceberry Donut",
+      "name_zh": "太空莓甜甜圈"
+    },
+    {
+      "hrid": "/actions/cooking/star_fruit_gummy",
+      "name_en": "Star Fruit Gummy",
+      "name_zh": "杨桃软糖"
+    },
+    {
+      "hrid": "/actions/cooking/star_fruit_yogurt",
+      "name_en": "Star Fruit Yogurt",
+      "name_zh": "杨桃酸奶"
+    },
+    {
+      "hrid": "/actions/cooking/strawberry_cake",
+      "name_en": "Strawberry Cake",
+      "name_zh": "草莓蛋糕"
+    },
+    {
+      "hrid": "/actions/cooking/strawberry_donut",
+      "name_en": "Strawberry Donut",
+      "name_zh": "草莓甜甜圈"
+    },
+    {
+      "hrid": "/actions/cooking/yogurt",
+      "name_en": "Yogurt",
+      "name_zh": "酸奶"
+    },
+    {
+      "hrid": "/actions/crafting/advanced_task_badge",
+      "name_en": "Advanced Task Badge",
+      "name_zh": "高级任务徽章"
+    },
+    {
+      "hrid": "/actions/crafting/arcane_bow",
+      "name_en": "Arcane Bow",
+      "name_zh": "神秘弓"
+    },
+    {
+      "hrid": "/actions/crafting/arcane_crossbow",
+      "name_en": "Arcane Crossbow",
+      "name_zh": "神秘弩"
+    },
+    {
+      "hrid": "/actions/crafting/arcane_fire_staff",
+      "name_en": "Arcane Fire Staff",
+      "name_zh": "神秘火法杖"
+    },
+    {
+      "hrid": "/actions/crafting/arcane_lumber",
+      "name_en": "Arcane Lumber",
+      "name_zh": "神秘木板"
+    },
+    {
+      "hrid": "/actions/crafting/arcane_nature_staff",
+      "name_en": "Arcane Nature Staff",
+      "name_zh": "神秘自然法杖"
+    },
+    {
+      "hrid": "/actions/crafting/arcane_shield",
+      "name_en": "Arcane Shield",
+      "name_zh": "神秘盾"
+    },
+    {
+      "hrid": "/actions/crafting/arcane_water_staff",
+      "name_en": "Arcane Water Staff",
+      "name_zh": "神秘水法杖"
+    },
+    {
+      "hrid": "/actions/crafting/basic_task_badge",
+      "name_en": "Basic Task Badge",
+      "name_zh": "基础任务徽章"
+    },
+    {
+      "hrid": "/actions/crafting/birch_bow",
+      "name_en": "Birch Bow",
+      "name_zh": "桦木弓"
+    },
+    {
+      "hrid": "/actions/crafting/birch_crossbow",
+      "name_en": "Birch Crossbow",
+      "name_zh": "桦木弩"
+    },
+    {
+      "hrid": "/actions/crafting/birch_fire_staff",
+      "name_en": "Birch Fire Staff",
+      "name_zh": "桦木火法杖"
+    },
+    {
+      "hrid": "/actions/crafting/birch_lumber",
+      "name_en": "Birch Lumber",
+      "name_zh": "白桦木板"
+    },
+    {
+      "hrid": "/actions/crafting/birch_nature_staff",
+      "name_en": "Birch Nature Staff",
+      "name_zh": "桦木自然法杖"
+    },
+    {
+      "hrid": "/actions/crafting/birch_shield",
+      "name_en": "Birch Shield",
+      "name_zh": "桦木盾"
+    },
+    {
+      "hrid": "/actions/crafting/birch_water_staff",
+      "name_en": "Birch Water Staff",
+      "name_zh": "桦木水法杖"
+    },
+    {
+      "hrid": "/actions/crafting/bishops_codex",
+      "name_en": "Bishop's Codex",
+      "name_zh": "主教法典"
+    },
+    {
+      "hrid": "/actions/crafting/blazing_trident",
+      "name_en": "Blazing Trident",
+      "name_zh": "炽焰三叉戟"
+    },
+    {
+      "hrid": "/actions/crafting/blooming_trident",
+      "name_en": "Blooming Trident",
+      "name_zh": "绽放三叉戟"
+    },
+    {
+      "hrid": "/actions/crafting/catalyst_of_coinification",
+      "name_en": "Catalyst Of Coinification",
+      "name_zh": "点金催化剂"
+    },
+    {
+      "hrid": "/actions/crafting/catalyst_of_decomposition",
+      "name_en": "Catalyst Of Decomposition",
+      "name_zh": "分解催化剂"
+    },
+    {
+      "hrid": "/actions/crafting/catalyst_of_transmutation",
+      "name_en": "Catalyst Of Transmutation",
+      "name_zh": "转化催化剂"
+    },
+    {
+      "hrid": "/actions/crafting/cedar_bow",
+      "name_en": "Cedar Bow",
+      "name_zh": "雪松弓"
+    },
+    {
+      "hrid": "/actions/crafting/cedar_crossbow",
+      "name_en": "Cedar Crossbow",
+      "name_zh": "雪松弩"
+    },
+    {
+      "hrid": "/actions/crafting/cedar_fire_staff",
+      "name_en": "Cedar Fire Staff",
+      "name_zh": "雪松火法杖"
+    },
+    {
+      "hrid": "/actions/crafting/cedar_lumber",
+      "name_en": "Cedar Lumber",
+      "name_zh": "雪松木板"
+    },
+    {
+      "hrid": "/actions/crafting/cedar_nature_staff",
+      "name_en": "Cedar Nature Staff",
+      "name_zh": "雪松自然法杖"
+    },
+    {
+      "hrid": "/actions/crafting/cedar_shield",
+      "name_en": "Cedar Shield",
+      "name_zh": "雪松盾"
+    },
+    {
+      "hrid": "/actions/crafting/cedar_water_staff",
+      "name_en": "Cedar Water Staff",
+      "name_zh": "雪松水法杖"
+    },
+    {
+      "hrid": "/actions/crafting/chimerical_chest_key",
+      "name_en": "Chimerical Chest Key",
+      "name_zh": "奇幻宝箱钥匙"
+    },
+    {
+      "hrid": "/actions/crafting/chimerical_entry_key",
+      "name_en": "Chimerical Entry Key",
+      "name_zh": "奇幻钥匙"
+    },
+    {
+      "hrid": "/actions/crafting/crushed_amber",
+      "name_en": "Crushed Amber",
+      "name_zh": "琥珀碎片"
+    },
+    {
+      "hrid": "/actions/crafting/crushed_amethyst",
+      "name_en": "Crushed Amethyst",
+      "name_zh": "紫水晶碎片"
+    },
+    {
+      "hrid": "/actions/crafting/crushed_garnet",
+      "name_en": "Crushed Garnet",
+      "name_zh": "石榴石碎片"
+    },
+    {
+      "hrid": "/actions/crafting/crushed_jade",
+      "name_en": "Crushed Jade",
+      "name_zh": "翡翠碎片"
+    },
+    {
+      "hrid": "/actions/crafting/crushed_moonstone",
+      "name_en": "Crushed Moonstone",
+      "name_zh": "月亮石碎片"
+    },
+    {
+      "hrid": "/actions/crafting/crushed_pearl",
+      "name_en": "Crushed Pearl",
+      "name_zh": "珍珠碎片"
+    },
+    {
+      "hrid": "/actions/crafting/crushed_philosophers_stone",
+      "name_en": "Crushed Philosopher's Stone",
+      "name_zh": "贤者之石碎片"
+    },
+    {
+      "hrid": "/actions/crafting/crushed_sunstone",
+      "name_en": "Crushed Sunstone",
+      "name_zh": "太阳石碎片"
+    },
+    {
+      "hrid": "/actions/crafting/cursed_bow",
+      "name_en": "Cursed Bow",
+      "name_zh": "咒怨之弓"
+    },
+    {
+      "hrid": "/actions/crafting/earrings_of_armor",
+      "name_en": "Earrings Of Armor",
+      "name_zh": "护甲耳环"
+    },
+    {
+      "hrid": "/actions/crafting/earrings_of_critical_strike",
+      "name_en": "Earrings Of Critical Strike",
+      "name_zh": "暴击耳环"
+    },
+    {
+      "hrid": "/actions/crafting/earrings_of_essence_find",
+      "name_en": "Earrings Of Essence Find",
+      "name_zh": "精华发现耳环"
+    },
+    {
+      "hrid": "/actions/crafting/earrings_of_gathering",
+      "name_en": "Earrings Of Gathering",
+      "name_zh": "采集耳环"
+    },
+    {
+      "hrid": "/actions/crafting/earrings_of_rare_find",
+      "name_en": "Earrings Of Rare Find",
+      "name_zh": "稀有发现耳环"
+    },
+    {
+      "hrid": "/actions/crafting/earrings_of_regeneration",
+      "name_en": "Earrings Of Regeneration",
+      "name_zh": "恢复耳环"
+    },
+    {
+      "hrid": "/actions/crafting/earrings_of_resistance",
+      "name_en": "Earrings Of Resistance",
+      "name_zh": "抗性耳环"
+    },
+    {
+      "hrid": "/actions/crafting/enchanted_chest_key",
+      "name_en": "Enchanted Chest Key",
+      "name_zh": "秘法宝箱钥匙"
+    },
+    {
+      "hrid": "/actions/crafting/enchanted_entry_key",
+      "name_en": "Enchanted Entry Key",
+      "name_zh": "秘法钥匙"
+    },
+    {
+      "hrid": "/actions/crafting/expert_task_badge",
+      "name_en": "Expert Task Badge",
+      "name_zh": "专家任务徽章"
+    },
+    {
+      "hrid": "/actions/crafting/eye_watch",
+      "name_en": "Eye Watch",
+      "name_zh": "掌上监工"
+    },
+    {
+      "hrid": "/actions/crafting/fighter_necklace",
+      "name_en": "Fighter Necklace",
+      "name_zh": "战士项链"
+    },
+    {
+      "hrid": "/actions/crafting/frost_staff",
+      "name_en": "Frost Staff",
+      "name_zh": "冰霜法杖"
+    },
+    {
+      "hrid": "/actions/crafting/ginkgo_bow",
+      "name_en": "Ginkgo Bow",
+      "name_zh": "银杏弓"
+    },
+    {
+      "hrid": "/actions/crafting/ginkgo_crossbow",
+      "name_en": "Ginkgo Crossbow",
+      "name_zh": "银杏弩"
+    },
+    {
+      "hrid": "/actions/crafting/ginkgo_fire_staff",
+      "name_en": "Ginkgo Fire Staff",
+      "name_zh": "银杏火法杖"
+    },
+    {
+      "hrid": "/actions/crafting/ginkgo_lumber",
+      "name_en": "Ginkgo Lumber",
+      "name_zh": "银杏木板"
+    },
+    {
+      "hrid": "/actions/crafting/ginkgo_nature_staff",
+      "name_en": "Ginkgo Nature Staff",
+      "name_zh": "银杏自然法杖"
+    },
+    {
+      "hrid": "/actions/crafting/ginkgo_shield",
+      "name_en": "Ginkgo Shield",
+      "name_zh": "银杏盾"
+    },
+    {
+      "hrid": "/actions/crafting/ginkgo_water_staff",
+      "name_en": "Ginkgo Water Staff",
+      "name_zh": "银杏水法杖"
+    },
+    {
+      "hrid": "/actions/crafting/infernal_battlestaff",
+      "name_en": "Infernal Battlestaff",
+      "name_zh": "炼狱法杖"
+    },
+    {
+      "hrid": "/actions/crafting/jackalope_staff",
+      "name_en": "Jackalope Staff",
+      "name_zh": "鹿角兔之杖"
+    },
+    {
+      "hrid": "/actions/crafting/lumber",
+      "name_en": "Lumber",
+      "name_zh": "木板"
+    },
+    {
+      "hrid": "/actions/crafting/manticore_shield",
+      "name_en": "Manticore Shield",
+      "name_zh": "蝎狮盾"
+    },
+    {
+      "hrid": "/actions/crafting/mirror_of_protection",
+      "name_en": "Mirror Of Protection",
+      "name_zh": "保护之镜"
+    },
+    {
+      "hrid": "/actions/crafting/necklace_of_efficiency",
+      "name_en": "Necklace Of Efficiency",
+      "name_zh": "效率项链"
+    },
+    {
+      "hrid": "/actions/crafting/necklace_of_speed",
+      "name_en": "Necklace Of Speed",
+      "name_zh": "速度项链"
+    },
+    {
+      "hrid": "/actions/crafting/necklace_of_wisdom",
+      "name_en": "Necklace Of Wisdom",
+      "name_zh": "经验项链"
+    },
+    {
+      "hrid": "/actions/crafting/philosophers_earrings",
+      "name_en": "Philosopher's Earrings",
+      "name_zh": "贤者耳环"
+    },
+    {
+      "hrid": "/actions/crafting/philosophers_necklace",
+      "name_en": "Philosopher's Necklace",
+      "name_zh": "贤者项链"
+    },
+    {
+      "hrid": "/actions/crafting/philosophers_ring",
+      "name_en": "Philosopher's Ring",
+      "name_zh": "贤者戒指"
+    },
+    {
+      "hrid": "/actions/crafting/pirate_chest_key",
+      "name_en": "Pirate Chest Key",
+      "name_zh": "海盗宝箱钥匙"
+    },
+    {
+      "hrid": "/actions/crafting/pirate_entry_key",
+      "name_en": "Pirate Entry Key",
+      "name_zh": "海盗钥匙"
+    },
+    {
+      "hrid": "/actions/crafting/purpleheart_bow",
+      "name_en": "Purpleheart Bow",
+      "name_zh": "紫心弓"
+    },
+    {
+      "hrid": "/actions/crafting/purpleheart_crossbow",
+      "name_en": "Purpleheart Crossbow",
+      "name_zh": "紫心弩"
+    },
+    {
+      "hrid": "/actions/crafting/purpleheart_fire_staff",
+      "name_en": "Purpleheart Fire Staff",
+      "name_zh": "紫心火法杖"
+    },
+    {
+      "hrid": "/actions/crafting/purpleheart_lumber",
+      "name_en": "Purpleheart Lumber",
+      "name_zh": "紫心木板"
+    },
+    {
+      "hrid": "/actions/crafting/purpleheart_nature_staff",
+      "name_en": "Purpleheart Nature Staff",
+      "name_zh": "紫心自然法杖"
+    },
+    {
+      "hrid": "/actions/crafting/purpleheart_shield",
+      "name_en": "Purpleheart Shield",
+      "name_zh": "紫心盾"
+    },
+    {
+      "hrid": "/actions/crafting/purpleheart_water_staff",
+      "name_en": "Purpleheart Water Staff",
+      "name_zh": "紫心水法杖"
+    },
+    {
+      "hrid": "/actions/crafting/ranger_necklace",
+      "name_en": "Ranger Necklace",
+      "name_zh": "射手项链"
+    },
+    {
+      "hrid": "/actions/crafting/redwood_bow",
+      "name_en": "Redwood Bow",
+      "name_zh": "红杉弓"
+    },
+    {
+      "hrid": "/actions/crafting/redwood_crossbow",
+      "name_en": "Redwood Crossbow",
+      "name_zh": "红杉弩"
+    },
+    {
+      "hrid": "/actions/crafting/redwood_fire_staff",
+      "name_en": "Redwood Fire Staff",
+      "name_zh": "红杉火法杖"
+    },
+    {
+      "hrid": "/actions/crafting/redwood_lumber",
+      "name_en": "Redwood Lumber",
+      "name_zh": "红杉木板"
+    },
+    {
+      "hrid": "/actions/crafting/redwood_nature_staff",
+      "name_en": "Redwood Nature Staff",
+      "name_zh": "红杉自然法杖"
+    },
+    {
+      "hrid": "/actions/crafting/redwood_shield",
+      "name_en": "Redwood Shield",
+      "name_zh": "红杉盾"
+    },
+    {
+      "hrid": "/actions/crafting/redwood_water_staff",
+      "name_en": "Redwood Water Staff",
+      "name_zh": "红杉水法杖"
+    },
+    {
+      "hrid": "/actions/crafting/ring_of_armor",
+      "name_en": "Ring Of Armor",
+      "name_zh": "护甲戒指"
+    },
+    {
+      "hrid": "/actions/crafting/ring_of_critical_strike",
+      "name_en": "Ring Of Critical Strike",
+      "name_zh": "暴击戒指"
+    },
+    {
+      "hrid": "/actions/crafting/ring_of_essence_find",
+      "name_en": "Ring Of Essence Find",
+      "name_zh": "精华发现戒指"
+    },
+    {
+      "hrid": "/actions/crafting/ring_of_gathering",
+      "name_en": "Ring Of Gathering",
+      "name_zh": "采集戒指"
+    },
+    {
+      "hrid": "/actions/crafting/ring_of_rare_find",
+      "name_en": "Ring Of Rare Find",
+      "name_zh": "稀有发现戒指"
+    },
+    {
+      "hrid": "/actions/crafting/ring_of_regeneration",
+      "name_en": "Ring Of Regeneration",
+      "name_zh": "恢复戒指"
+    },
+    {
+      "hrid": "/actions/crafting/ring_of_resistance",
+      "name_en": "Ring Of Resistance",
+      "name_zh": "抗性戒指"
+    },
+    {
+      "hrid": "/actions/crafting/rippling_trident",
+      "name_en": "Rippling Trident",
+      "name_zh": "涟漪三叉戟"
+    },
+    {
+      "hrid": "/actions/crafting/sinister_chest_key",
+      "name_en": "Sinister Chest Key",
+      "name_zh": "阴森宝箱钥匙"
+    },
+    {
+      "hrid": "/actions/crafting/sinister_entry_key",
+      "name_en": "Sinister Entry Key",
+      "name_zh": "阴森钥匙"
+    },
+    {
+      "hrid": "/actions/crafting/soul_hunter_crossbow",
+      "name_en": "Soul Hunter Crossbow",
+      "name_zh": "灵魂猎手弩"
+    },
+    {
+      "hrid": "/actions/crafting/sundering_crossbow",
+      "name_en": "Sundering Crossbow",
+      "name_zh": "裂空之弩"
+    },
+    {
+      "hrid": "/actions/crafting/treant_shield",
+      "name_en": "Treant Shield",
+      "name_zh": "树人盾"
+    },
+    {
+      "hrid": "/actions/crafting/vampiric_bow",
+      "name_en": "Vampiric Bow",
+      "name_zh": "吸血弓"
+    },
+    {
+      "hrid": "/actions/crafting/watchful_relic",
+      "name_en": "Watchful Relic",
+      "name_zh": "警戒遗物"
+    },
+    {
+      "hrid": "/actions/crafting/wizard_necklace",
+      "name_en": "Wizard Necklace",
+      "name_zh": "巫师项链"
+    },
+    {
+      "hrid": "/actions/crafting/wooden_bow",
+      "name_en": "Wooden Bow",
+      "name_zh": "木弓"
+    },
+    {
+      "hrid": "/actions/crafting/wooden_crossbow",
+      "name_en": "Wooden Crossbow",
+      "name_zh": "木弩"
+    },
+    {
+      "hrid": "/actions/crafting/wooden_fire_staff",
+      "name_en": "Wooden Fire Staff",
+      "name_zh": "木制火法杖"
+    },
+    {
+      "hrid": "/actions/crafting/wooden_nature_staff",
+      "name_en": "Wooden Nature Staff",
+      "name_zh": "木制自然法杖"
+    },
+    {
+      "hrid": "/actions/crafting/wooden_shield",
+      "name_en": "Wooden Shield",
+      "name_zh": "木盾"
+    },
+    {
+      "hrid": "/actions/crafting/wooden_water_staff",
+      "name_en": "Wooden Water Staff",
+      "name_zh": "木制水法杖"
+    },
+    {
+      "hrid": "/actions/enhancing/enhance",
+      "name_en": "Enhance",
+      "name_zh": "强化"
+    },
+    {
+      "hrid": "/actions/foraging/apple",
+      "name_en": "Apple",
+      "name_zh": "苹果"
+    },
+    {
+      "hrid": "/actions/foraging/arabica_coffee_bean",
+      "name_en": "Arabica Coffee Bean",
+      "name_zh": "低级咖啡豆"
+    },
+    {
+      "hrid": "/actions/foraging/asteroid_belt",
+      "name_en": "Asteroid Belt",
+      "name_zh": "小行星带"
+    },
+    {
+      "hrid": "/actions/foraging/bamboo_branch",
+      "name_en": "Bamboo Branch",
+      "name_zh": "竹子"
+    },
+    {
+      "hrid": "/actions/foraging/blackberry",
+      "name_en": "Blackberry",
+      "name_zh": "黑莓"
+    },
+    {
+      "hrid": "/actions/foraging/blueberry",
+      "name_en": "Blueberry",
+      "name_zh": "蓝莓"
+    },
+    {
+      "hrid": "/actions/foraging/burble_beach",
+      "name_en": "Burble Beach",
+      "name_zh": "深紫沙滩"
+    },
+    {
+      "hrid": "/actions/foraging/cocoon",
+      "name_en": "Cocoon",
+      "name_zh": "蚕茧"
+    },
+    {
+      "hrid": "/actions/foraging/cotton",
+      "name_en": "Cotton",
+      "name_zh": "棉花"
+    },
+    {
+      "hrid": "/actions/foraging/dragon_fruit",
+      "name_en": "Dragon Fruit",
+      "name_zh": "火龙果"
+    },
+    {
+      "hrid": "/actions/foraging/egg",
+      "name_en": "Egg",
+      "name_zh": "鸡蛋"
+    },
+    {
+      "hrid": "/actions/foraging/excelsa_coffee_bean",
+      "name_en": "Excelsa Coffee Bean",
+      "name_zh": "特级咖啡豆"
+    },
+    {
+      "hrid": "/actions/foraging/farmland",
+      "name_en": "Farmland",
+      "name_zh": "翠野农场"
+    },
+    {
+      "hrid": "/actions/foraging/fieriosa_coffee_bean",
+      "name_en": "Fieriosa Coffee Bean",
+      "name_zh": "火山咖啡豆"
+    },
+    {
+      "hrid": "/actions/foraging/flax",
+      "name_en": "Flax",
+      "name_zh": "亚麻"
+    },
+    {
+      "hrid": "/actions/foraging/liberica_coffee_bean",
+      "name_en": "Liberica Coffee Bean",
+      "name_zh": "高级咖啡豆"
+    },
+    {
+      "hrid": "/actions/foraging/marsberry",
+      "name_en": "Marsberry",
+      "name_zh": "火星莓"
+    },
+    {
+      "hrid": "/actions/foraging/misty_forest",
+      "name_en": "Misty Forest",
+      "name_zh": "迷雾森林"
+    },
+    {
+      "hrid": "/actions/foraging/mooberry",
+      "name_en": "Mooberry",
+      "name_zh": "哞莓"
+    },
+    {
+      "hrid": "/actions/foraging/olympus_mons",
+      "name_en": "Olympus Mons",
+      "name_zh": "奥林匹斯山"
+    },
+    {
+      "hrid": "/actions/foraging/orange",
+      "name_en": "Orange",
+      "name_zh": "橙子"
+    },
+    {
+      "hrid": "/actions/foraging/peach",
+      "name_en": "Peach",
+      "name_zh": "桃子"
+    },
+    {
+      "hrid": "/actions/foraging/plum",
+      "name_en": "Plum",
+      "name_zh": "李子"
+    },
+    {
+      "hrid": "/actions/foraging/radiant_fiber",
+      "name_en": "Radiant Fiber",
+      "name_zh": "光辉纤维"
+    },
+    {
+      "hrid": "/actions/foraging/robusta_coffee_bean",
+      "name_en": "Robusta Coffee Bean",
+      "name_zh": "中级咖啡豆"
+    },
+    {
+      "hrid": "/actions/foraging/shimmering_lake",
+      "name_en": "Shimmering Lake",
+      "name_zh": "波光湖泊"
+    },
+    {
+      "hrid": "/actions/foraging/silly_cow_valley",
+      "name_en": "Silly Cow Valley",
+      "name_zh": "傻牛山谷"
+    },
+    {
+      "hrid": "/actions/foraging/spaceberry",
+      "name_en": "Spaceberry",
+      "name_zh": "太空莓"
+    },
+    {
+      "hrid": "/actions/foraging/spacia_coffee_bean",
+      "name_en": "Spacia Coffee Bean",
+      "name_zh": "太空咖啡豆"
+    },
+    {
+      "hrid": "/actions/foraging/star_fruit",
+      "name_en": "Star Fruit",
+      "name_zh": "杨桃"
+    },
+    {
+      "hrid": "/actions/foraging/strawberry",
+      "name_en": "Strawberry",
+      "name_zh": "草莓"
+    },
+    {
+      "hrid": "/actions/foraging/sugar",
+      "name_en": "Sugar",
+      "name_zh": "糖"
+    },
+    {
+      "hrid": "/actions/foraging/wheat",
+      "name_en": "Wheat",
+      "name_zh": "小麦"
+    },
+    {
+      "hrid": "/actions/milking/azure_cow",
+      "name_en": "Azure Cow",
+      "name_zh": "蔚蓝奶牛"
+    },
+    {
+      "hrid": "/actions/milking/burble_cow",
+      "name_en": "Burble Cow",
+      "name_zh": "深紫奶牛"
+    },
+    {
+      "hrid": "/actions/milking/cow",
+      "name_en": "Cow",
+      "name_zh": "奶牛"
+    },
+    {
+      "hrid": "/actions/milking/crimson_cow",
+      "name_en": "Crimson Cow",
+      "name_zh": "绛红奶牛"
+    },
+    {
+      "hrid": "/actions/milking/holy_cow",
+      "name_en": "Holy Cow",
+      "name_zh": "神圣奶牛"
+    },
+    {
+      "hrid": "/actions/milking/unicow",
+      "name_en": "Unicow",
+      "name_zh": "彩虹奶牛"
+    },
+    {
+      "hrid": "/actions/milking/verdant_cow",
+      "name_en": "Verdant Cow",
+      "name_zh": "翠绿奶牛"
+    },
+    {
+      "hrid": "/actions/tailoring/acrobatic_hood",
+      "name_en": "Acrobatic Hood",
+      "name_zh": "杂技师兜帽"
+    },
+    {
+      "hrid": "/actions/tailoring/alchemists_bottoms",
+      "name_en": "Alchemist's Bottoms",
+      "name_zh": "炼金师下装"
+    },
+    {
+      "hrid": "/actions/tailoring/alchemists_top",
+      "name_en": "Alchemist's Top",
+      "name_zh": "炼金师上衣"
+    },
+    {
+      "hrid": "/actions/tailoring/bamboo_boots",
+      "name_en": "Bamboo Boots",
+      "name_zh": "竹靴"
+    },
+    {
+      "hrid": "/actions/tailoring/bamboo_fabric",
+      "name_en": "Bamboo Fabric",
+      "name_zh": "竹子布料"
+    },
+    {
+      "hrid": "/actions/tailoring/bamboo_gloves",
+      "name_en": "Bamboo Gloves",
+      "name_zh": "竹手套"
+    },
+    {
+      "hrid": "/actions/tailoring/bamboo_hat",
+      "name_en": "Bamboo Hat",
+      "name_zh": "竹帽"
+    },
+    {
+      "hrid": "/actions/tailoring/bamboo_robe_bottoms",
+      "name_en": "Bamboo Robe Bottoms",
+      "name_zh": "竹布袍裙"
+    },
+    {
+      "hrid": "/actions/tailoring/bamboo_robe_top",
+      "name_en": "Bamboo Robe Top",
+      "name_zh": "竹袍服"
+    },
+    {
+      "hrid": "/actions/tailoring/beast_boots",
+      "name_en": "Beast Boots",
+      "name_zh": "野兽靴"
+    },
+    {
+      "hrid": "/actions/tailoring/beast_bracers",
+      "name_en": "Beast Bracers",
+      "name_zh": "野兽护腕"
+    },
+    {
+      "hrid": "/actions/tailoring/beast_chaps",
+      "name_en": "Beast Chaps",
+      "name_zh": "野兽皮裤"
+    },
+    {
+      "hrid": "/actions/tailoring/beast_hood",
+      "name_en": "Beast Hood",
+      "name_zh": "野兽兜帽"
+    },
+    {
+      "hrid": "/actions/tailoring/beast_leather",
+      "name_en": "Beast Leather",
+      "name_zh": "野兽皮革"
+    },
+    {
+      "hrid": "/actions/tailoring/beast_tunic",
+      "name_en": "Beast Tunic",
+      "name_zh": "野兽皮衣"
+    },
+    {
+      "hrid": "/actions/tailoring/brewers_bottoms",
+      "name_en": "Brewer's Bottoms",
+      "name_zh": "饮品师下装"
+    },
+    {
+      "hrid": "/actions/tailoring/brewers_top",
+      "name_en": "Brewer's Top",
+      "name_zh": "饮品师上衣"
+    },
+    {
+      "hrid": "/actions/tailoring/centaur_boots",
+      "name_en": "Centaur Boots",
+      "name_zh": "半人马靴"
+    },
+    {
+      "hrid": "/actions/tailoring/cheesemakers_bottoms",
+      "name_en": "Cheesemaker's Bottoms",
+      "name_zh": "奶酪师下装"
+    },
+    {
+      "hrid": "/actions/tailoring/cheesemakers_top",
+      "name_en": "Cheesemaker's Top",
+      "name_zh": "奶酪师上衣"
+    },
+    {
+      "hrid": "/actions/tailoring/chefs_bottoms",
+      "name_en": "Chef's Bottoms",
+      "name_zh": "厨师下装"
+    },
+    {
+      "hrid": "/actions/tailoring/chefs_top",
+      "name_en": "Chef's Top",
+      "name_zh": "厨师上衣"
+    },
+    {
+      "hrid": "/actions/tailoring/chrono_gloves",
+      "name_en": "Chrono Gloves",
+      "name_zh": "时空手套"
+    },
+    {
+      "hrid": "/actions/tailoring/collectors_boots",
+      "name_en": "Collectors Boots",
+      "name_zh": "收藏家之靴"
+    },
+    {
+      "hrid": "/actions/tailoring/cotton_boots",
+      "name_en": "Cotton Boots",
+      "name_zh": "棉靴"
+    },
+    {
+      "hrid": "/actions/tailoring/cotton_fabric",
+      "name_en": "Cotton Fabric",
+      "name_zh": "棉花布料"
+    },
+    {
+      "hrid": "/actions/tailoring/cotton_gloves",
+      "name_en": "Cotton Gloves",
+      "name_zh": "棉手套"
+    },
+    {
+      "hrid": "/actions/tailoring/cotton_hat",
+      "name_en": "Cotton Hat",
+      "name_zh": "棉帽"
+    },
+    {
+      "hrid": "/actions/tailoring/cotton_robe_bottoms",
+      "name_en": "Cotton Robe Bottoms",
+      "name_zh": "棉布袍裙"
+    },
+    {
+      "hrid": "/actions/tailoring/cotton_robe_top",
+      "name_en": "Cotton Robe Top",
+      "name_zh": "棉布袍服"
+    },
+    {
+      "hrid": "/actions/tailoring/crafters_bottoms",
+      "name_en": "Crafter's Bottoms",
+      "name_zh": "工匠下装"
+    },
+    {
+      "hrid": "/actions/tailoring/crafters_top",
+      "name_en": "Crafter's Top",
+      "name_zh": "工匠上衣"
+    },
+    {
+      "hrid": "/actions/tailoring/dairyhands_bottoms",
+      "name_en": "Dairyhand's Bottoms",
+      "name_zh": "挤奶工下装"
+    },
+    {
+      "hrid": "/actions/tailoring/dairyhands_top",
+      "name_en": "Dairyhand's Top",
+      "name_zh": "挤奶工上衣"
+    },
+    {
+      "hrid": "/actions/tailoring/enchanted_gloves",
+      "name_en": "Enchanted Gloves",
+      "name_zh": "附魔手套"
+    },
+    {
+      "hrid": "/actions/tailoring/enhancers_bottoms",
+      "name_en": "Enhancer's Bottoms",
+      "name_zh": "强化师下装"
+    },
+    {
+      "hrid": "/actions/tailoring/enhancers_top",
+      "name_en": "Enhancer's Top",
+      "name_zh": "强化师上衣"
+    },
+    {
+      "hrid": "/actions/tailoring/flaming_robe_bottoms",
+      "name_en": "Flaming Robe Bottoms",
+      "name_zh": "烈焰袍裙"
+    },
+    {
+      "hrid": "/actions/tailoring/flaming_robe_top",
+      "name_en": "Flaming Robe Top",
+      "name_zh": "烈焰袍服"
+    },
+    {
+      "hrid": "/actions/tailoring/fluffy_red_hat",
+      "name_en": "Fluffy Red Hat",
+      "name_zh": "蓬松红帽子"
+    },
+    {
+      "hrid": "/actions/tailoring/foragers_bottoms",
+      "name_en": "Forager's Bottoms",
+      "name_zh": "采摘者下装"
+    },
+    {
+      "hrid": "/actions/tailoring/foragers_top",
+      "name_en": "Forager's Top",
+      "name_zh": "采摘者上衣"
+    },
+    {
+      "hrid": "/actions/tailoring/giant_pouch",
+      "name_en": "Giant Pouch",
+      "name_zh": "巨大袋子"
+    },
+    {
+      "hrid": "/actions/tailoring/gluttonous_pouch",
+      "name_en": "Gluttonous Pouch",
+      "name_zh": "贪食之袋"
+    },
+    {
+      "hrid": "/actions/tailoring/gobo_boots",
+      "name_en": "Gobo Boots",
+      "name_zh": "哥布林靴"
+    },
+    {
+      "hrid": "/actions/tailoring/gobo_bracers",
+      "name_en": "Gobo Bracers",
+      "name_zh": "哥布林护腕"
+    },
+    {
+      "hrid": "/actions/tailoring/gobo_chaps",
+      "name_en": "Gobo Chaps",
+      "name_zh": "哥布林皮裤"
+    },
+    {
+      "hrid": "/actions/tailoring/gobo_hood",
+      "name_en": "Gobo Hood",
+      "name_zh": "哥布林兜帽"
+    },
+    {
+      "hrid": "/actions/tailoring/gobo_leather",
+      "name_en": "Gobo Leather",
+      "name_zh": "哥布林皮革"
+    },
+    {
+      "hrid": "/actions/tailoring/gobo_tunic",
+      "name_en": "Gobo Tunic",
+      "name_zh": "哥布林皮衣"
+    },
+    {
+      "hrid": "/actions/tailoring/griffin_chaps",
+      "name_en": "Griffin Chaps",
+      "name_zh": "狮鹫皮裤"
+    },
+    {
+      "hrid": "/actions/tailoring/griffin_tunic",
+      "name_en": "Griffin Tunic",
+      "name_zh": "狮鹫皮衣"
+    },
+    {
+      "hrid": "/actions/tailoring/guzzling_pouch",
+      "name_en": "Guzzling Pouch",
+      "name_zh": "暴饮之囊"
+    },
+    {
+      "hrid": "/actions/tailoring/icy_robe_bottoms",
+      "name_en": "Icy Robe Bottoms",
+      "name_zh": "冰霜袍裙"
+    },
+    {
+      "hrid": "/actions/tailoring/icy_robe_top",
+      "name_en": "Icy Robe Top",
+      "name_zh": "冰霜袍服"
+    },
+    {
+      "hrid": "/actions/tailoring/kraken_chaps",
+      "name_en": "Kraken Chaps",
+      "name_zh": "克拉肯皮裤"
+    },
+    {
+      "hrid": "/actions/tailoring/kraken_tunic",
+      "name_en": "Kraken Tunic",
+      "name_zh": "克拉肯皮衣"
+    },
+    {
+      "hrid": "/actions/tailoring/large_pouch",
+      "name_en": "Large Pouch",
+      "name_zh": "大袋子"
+    },
+    {
+      "hrid": "/actions/tailoring/linen_boots",
+      "name_en": "Linen Boots",
+      "name_zh": "亚麻靴"
+    },
+    {
+      "hrid": "/actions/tailoring/linen_fabric",
+      "name_en": "Linen Fabric",
+      "name_zh": "亚麻布料"
+    },
+    {
+      "hrid": "/actions/tailoring/linen_gloves",
+      "name_en": "Linen Gloves",
+      "name_zh": "亚麻手套"
+    },
+    {
+      "hrid": "/actions/tailoring/linen_hat",
+      "name_en": "Linen Hat",
+      "name_zh": "亚麻帽"
+    },
+    {
+      "hrid": "/actions/tailoring/linen_robe_bottoms",
+      "name_en": "Linen Robe Bottoms",
+      "name_zh": "亚麻袍裙"
+    },
+    {
+      "hrid": "/actions/tailoring/linen_robe_top",
+      "name_en": "Linen Robe Top",
+      "name_zh": "亚麻袍服"
+    },
+    {
+      "hrid": "/actions/tailoring/lumberjacks_bottoms",
+      "name_en": "Lumberjack's Bottoms",
+      "name_zh": "伐木工下装"
+    },
+    {
+      "hrid": "/actions/tailoring/lumberjacks_top",
+      "name_en": "Lumberjack's Top",
+      "name_zh": "伐木工上衣"
+    },
+    {
+      "hrid": "/actions/tailoring/luna_robe_bottoms",
+      "name_en": "Luna Robe Bottoms",
+      "name_zh": "月神袍裙"
+    },
+    {
+      "hrid": "/actions/tailoring/luna_robe_top",
+      "name_en": "Luna Robe Top",
+      "name_zh": "月神袍服"
+    },
+    {
+      "hrid": "/actions/tailoring/magicians_hat",
+      "name_en": "Magician's Hat",
+      "name_zh": "魔术师之帽"
+    },
+    {
+      "hrid": "/actions/tailoring/marine_chaps",
+      "name_en": "Marine Chaps",
+      "name_zh": "航海皮裤"
+    },
+    {
+      "hrid": "/actions/tailoring/marine_tunic",
+      "name_en": "Marine Tunic",
+      "name_zh": "海洋皮衣"
+    },
+    {
+      "hrid": "/actions/tailoring/marksman_bracers",
+      "name_en": "Marksman Bracers",
+      "name_zh": "神射护腕"
+    },
+    {
+      "hrid": "/actions/tailoring/medium_pouch",
+      "name_en": "Medium Pouch",
+      "name_zh": "中袋子"
+    },
+    {
+      "hrid": "/actions/tailoring/radiant_boots",
+      "name_en": "Radiant Boots",
+      "name_zh": "光辉靴"
+    },
+    {
+      "hrid": "/actions/tailoring/radiant_fabric",
+      "name_en": "Radiant Fabric",
+      "name_zh": "光辉布料"
+    },
+    {
+      "hrid": "/actions/tailoring/radiant_gloves",
+      "name_en": "Radiant Gloves",
+      "name_zh": "光辉手套"
+    },
+    {
+      "hrid": "/actions/tailoring/radiant_hat",
+      "name_en": "Radiant Hat",
+      "name_zh": "光辉帽"
+    },
+    {
+      "hrid": "/actions/tailoring/radiant_robe_bottoms",
+      "name_en": "Radiant Robe Bottoms",
+      "name_zh": "光辉袍裙"
+    },
+    {
+      "hrid": "/actions/tailoring/radiant_robe_top",
+      "name_en": "Radiant Robe Top",
+      "name_zh": "光辉袍服"
+    },
+    {
+      "hrid": "/actions/tailoring/red_culinary_hat",
+      "name_en": "Red Culinary Hat",
+      "name_zh": "红色厨师帽"
+    },
+    {
+      "hrid": "/actions/tailoring/reptile_boots",
+      "name_en": "Reptile Boots",
+      "name_zh": "爬行动物靴"
+    },
+    {
+      "hrid": "/actions/tailoring/reptile_bracers",
+      "name_en": "Reptile Bracers",
+      "name_zh": "爬行动物护腕"
+    },
+    {
+      "hrid": "/actions/tailoring/reptile_chaps",
+      "name_en": "Reptile Chaps",
+      "name_zh": "爬行动物皮裤"
+    },
+    {
+      "hrid": "/actions/tailoring/reptile_hood",
+      "name_en": "Reptile Hood",
+      "name_zh": "爬行动物兜帽"
+    },
+    {
+      "hrid": "/actions/tailoring/reptile_leather",
+      "name_en": "Reptile Leather",
+      "name_zh": "爬行动物皮革"
+    },
+    {
+      "hrid": "/actions/tailoring/reptile_tunic",
+      "name_en": "Reptile Tunic",
+      "name_zh": "爬行动物皮衣"
+    },
+    {
+      "hrid": "/actions/tailoring/revenant_chaps",
+      "name_en": "Revenant Chaps",
+      "name_zh": "亡灵皮裤"
+    },
+    {
+      "hrid": "/actions/tailoring/revenant_tunic",
+      "name_en": "Revenant Tunic",
+      "name_zh": "亡灵皮衣"
+    },
+    {
+      "hrid": "/actions/tailoring/rough_boots",
+      "name_en": "Rough Boots",
+      "name_zh": "粗糙靴"
+    },
+    {
+      "hrid": "/actions/tailoring/rough_bracers",
+      "name_en": "Rough Bracers",
+      "name_zh": "粗糙护腕"
+    },
+    {
+      "hrid": "/actions/tailoring/rough_chaps",
+      "name_en": "Rough Chaps",
+      "name_zh": "粗糙皮裤"
+    },
+    {
+      "hrid": "/actions/tailoring/rough_hood",
+      "name_en": "Rough Hood",
+      "name_zh": "粗糙兜帽"
+    },
+    {
+      "hrid": "/actions/tailoring/rough_leather",
+      "name_en": "Rough Leather",
+      "name_zh": "粗糙皮革"
+    },
+    {
+      "hrid": "/actions/tailoring/rough_tunic",
+      "name_en": "Rough Tunic",
+      "name_zh": "粗糙皮衣"
+    },
+    {
+      "hrid": "/actions/tailoring/royal_fire_robe_bottoms",
+      "name_en": "Royal Fire Robe Bottoms",
+      "name_zh": "皇家火系袍裙"
+    },
+    {
+      "hrid": "/actions/tailoring/royal_fire_robe_top",
+      "name_en": "Royal Fire Robe Top",
+      "name_zh": "皇家火系袍服"
+    },
+    {
+      "hrid": "/actions/tailoring/royal_nature_robe_bottoms",
+      "name_en": "Royal Nature Robe Bottoms",
+      "name_zh": "皇家自然系袍裙"
+    },
+    {
+      "hrid": "/actions/tailoring/royal_nature_robe_top",
+      "name_en": "Royal Nature Robe Top",
+      "name_zh": "皇家自然系袍服"
+    },
+    {
+      "hrid": "/actions/tailoring/royal_water_robe_bottoms",
+      "name_en": "Royal Water Robe Bottoms",
+      "name_zh": "皇家水系袍裙"
+    },
+    {
+      "hrid": "/actions/tailoring/royal_water_robe_top",
+      "name_en": "Royal Water Robe Top",
+      "name_zh": "皇家水系袍服"
+    },
+    {
+      "hrid": "/actions/tailoring/shoebill_shoes",
+      "name_en": "Shoebill Shoes",
+      "name_zh": "鲸头鹳鞋"
+    },
+    {
+      "hrid": "/actions/tailoring/sighted_bracers",
+      "name_en": "Sighted Bracers",
+      "name_zh": "瞄准护腕"
+    },
+    {
+      "hrid": "/actions/tailoring/silk_boots",
+      "name_en": "Silk Boots",
+      "name_zh": "丝靴"
+    },
+    {
+      "hrid": "/actions/tailoring/silk_fabric",
+      "name_en": "Silk Fabric",
+      "name_zh": "丝绸"
+    },
+    {
+      "hrid": "/actions/tailoring/silk_gloves",
+      "name_en": "Silk Gloves",
+      "name_zh": "丝手套"
+    },
+    {
+      "hrid": "/actions/tailoring/silk_hat",
+      "name_en": "Silk Hat",
+      "name_zh": "丝帽"
+    },
+    {
+      "hrid": "/actions/tailoring/silk_robe_bottoms",
+      "name_en": "Silk Robe Bottoms",
+      "name_zh": "丝绸袍裙"
+    },
+    {
+      "hrid": "/actions/tailoring/silk_robe_top",
+      "name_en": "Silk Robe Top",
+      "name_zh": "丝绸袍服"
+    },
+    {
+      "hrid": "/actions/tailoring/small_pouch",
+      "name_en": "Small Pouch",
+      "name_zh": "小袋子"
+    },
+    {
+      "hrid": "/actions/tailoring/sorcerer_boots",
+      "name_en": "Sorcerer Boots",
+      "name_zh": "巫师靴"
+    },
+    {
+      "hrid": "/actions/tailoring/tailors_bottoms",
+      "name_en": "Tailor's Bottoms",
+      "name_zh": "裁缝下装"
+    },
+    {
+      "hrid": "/actions/tailoring/tailors_top",
+      "name_en": "Tailor's Top",
+      "name_zh": "裁缝上衣"
+    },
+    {
+      "hrid": "/actions/tailoring/umbral_boots",
+      "name_en": "Umbral Boots",
+      "name_zh": "暗影靴"
+    },
+    {
+      "hrid": "/actions/tailoring/umbral_bracers",
+      "name_en": "Umbral Bracers",
+      "name_zh": "暗影护腕"
+    },
+    {
+      "hrid": "/actions/tailoring/umbral_chaps",
+      "name_en": "Umbral Chaps",
+      "name_zh": "暗影皮裤"
+    },
+    {
+      "hrid": "/actions/tailoring/umbral_hood",
+      "name_en": "Umbral Hood",
+      "name_zh": "暗影兜帽"
+    },
+    {
+      "hrid": "/actions/tailoring/umbral_leather",
+      "name_en": "Umbral Leather",
+      "name_zh": "暗影皮革"
+    },
+    {
+      "hrid": "/actions/tailoring/umbral_tunic",
+      "name_en": "Umbral Tunic",
+      "name_zh": "暗影皮衣"
+    },
+    {
+      "hrid": "/actions/woodcutting/arcane_tree",
+      "name_en": "Arcane Tree",
+      "name_zh": "奥秘树"
+    },
+    {
+      "hrid": "/actions/woodcutting/birch_tree",
+      "name_en": "Birch Tree",
+      "name_zh": "桦树"
+    },
+    {
+      "hrid": "/actions/woodcutting/cedar_tree",
+      "name_en": "Cedar Tree",
+      "name_zh": "雪松树"
+    },
+    {
+      "hrid": "/actions/woodcutting/ginkgo_tree",
+      "name_en": "Ginkgo Tree",
+      "name_zh": "银杏树"
+    },
+    {
+      "hrid": "/actions/woodcutting/purpleheart_tree",
+      "name_en": "Purpleheart Tree",
+      "name_zh": "紫心树"
+    },
+    {
+      "hrid": "/actions/woodcutting/redwood_tree",
+      "name_en": "Redwood Tree",
+      "name_zh": "红杉树"
+    },
+    {
+      "hrid": "/actions/woodcutting/tree",
+      "name_en": "Tree",
+      "name_zh": "树"
+    }
+  ],
+  "totalCount": 630,
+  "translatedCount": 630,
+  "generatedAt": "2025-07-26T17:24:11.352Z"
+}

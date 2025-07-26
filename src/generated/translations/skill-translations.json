@@ -1,0 +1,97 @@
+{
+  "items": [
+    {
+      "hrid": "/skills/alchemy",
+      "name_en": "Alchemy",
+      "name_zh": "炼金"
+    },
+    {
+      "hrid": "/skills/attack",
+      "name_en": "Attack",
+      "name_zh": "攻击"
+    },
+    {
+      "hrid": "/skills/brewing",
+      "name_en": "Brewing",
+      "name_zh": "冲泡"
+    },
+    {
+      "hrid": "/skills/cheesesmithing",
+      "name_en": "Cheesesmithing",
+      "name_zh": "奶酪锻造"
+    },
+    {
+      "hrid": "/skills/cooking",
+      "name_en": "Cooking",
+      "name_zh": "烹饪"
+    },
+    {
+      "hrid": "/skills/crafting",
+      "name_en": "Crafting",
+      "name_zh": "制作"
+    },
+    {
+      "hrid": "/skills/defense",
+      "name_en": "Defense",
+      "name_zh": "防御"
+    },
+    {
+      "hrid": "/skills/enhancing",
+      "name_en": "Enhancing",
+      "name_zh": "强化"
+    },
+    {
+      "hrid": "/skills/foraging",
+      "name_en": "Foraging",
+      "name_zh": "采摘"
+    },
+    {
+      "hrid": "/skills/intelligence",
+      "name_en": "Intelligence",
+      "name_zh": "智力"
+    },
+    {
+      "hrid": "/skills/magic",
+      "name_en": "Magic",
+      "name_zh": "魔法"
+    },
+    {
+      "hrid": "/skills/milking",
+      "name_en": "Milking",
+      "name_zh": "挤奶"
+    },
+    {
+      "hrid": "/skills/power",
+      "name_en": "Power",
+      "name_zh": "力量"
+    },
+    {
+      "hrid": "/skills/ranged",
+      "name_en": "Ranged",
+      "name_zh": "远程"
+    },
+    {
+      "hrid": "/skills/stamina",
+      "name_en": "Stamina",
+      "name_zh": "耐力"
+    },
+    {
+      "hrid": "/skills/tailoring",
+      "name_en": "Tailoring",
+      "name_zh": "缝纫"
+    },
+    {
+      "hrid": "/skills/total_level",
+      "name_en": "Total Level",
+      "name_zh": "总等级"
+    },
+    {
+      "hrid": "/skills/woodcutting",
+      "name_en": "Woodcutting",
+      "name_zh": "伐木"
+    }
+  ],
+  "totalCount": 18,
+  "translatedCount": 18,
+  "generatedAt": "2025-07-26T17:24:11.352Z"
+}
