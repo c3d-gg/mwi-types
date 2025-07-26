@@ -164,10 +164,10 @@ jobs:
             npm version ${{ github.event.inputs.version }} --no-git-tag-version
           fi
 
-      - name: Configure NPM
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          npm whoami
+      - name: Verify NPM authentication
+        run: npm whoami
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish to NPM
         run: |
