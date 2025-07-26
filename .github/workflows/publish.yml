@@ -38,7 +38,7 @@ on:
         type: string
 
 permissions:
-  contents: read
+  contents: write # For creating releases
   id-token: write # For NPM provenance
 
 jobs:
