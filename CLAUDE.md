@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-`@c3d/mwi-types` is a TypeScript type generation library for the Milky Way Idle game. It reads game data from JSON files and generates comprehensive TypeScript types, Zod schemas, Typebox schemas, HRID constants, and typed translations.
+`@c3d.gg/mwi-types` is a TypeScript type generation library for the Milky Way Idle game. It reads game data from JSON files and generates comprehensive TypeScript types, Zod schemas, Typebox schemas, HRID constants, and typed translations.
 
 ## Commands
 
@@ -63,6 +63,7 @@ src/
 ### Schema Generation Strategy
 
 **Important**: We generate only Zod schemas directly. Typebox schemas are derived from Zod schemas using the `@sinclair/typemap` package during the build process. This ensures:
+
 - Single source of truth (Zod schemas)
 - No duplicate schema definitions
 - Consistent validation behavior
@@ -79,6 +80,7 @@ src/
 ### Entity Types Generated
 
 All 30+ entity types from game_data.json including:
+
 - Skills, Items, Actions, Recipes, Equipment
 - Combat system (abilities, monsters, damage types, combat styles)
 - House rooms, Shops, Tasks
@@ -96,11 +98,12 @@ All 30+ entity types from game_data.json including:
 
 ## Publishing
 
-This package is published to NPM as `@c3d/mwi-types` with automated releases via GitHub Actions. Breaking changes are documented in CHANGELOG.md following semantic versioning.
+This package is published to NPM as `@c3d.gg/mwi-types` with automated releases via GitHub Actions. Breaking changes are documented in CHANGELOG.md following semantic versioning.
 
 ## Implementation Status
 
 The package is feature-complete with all entity types generated from game data:
+
 - Foundation infrastructure for type generation
 - All 30+ entity type generators implemented
 - Type-safe translation system for multiple locales

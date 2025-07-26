@@ -1,6 +1,6 @@
 /**
- * @c3d/mwi-types - TypeScript types for Milky Way Idle
- * 
+ * @c3d.gg/mwi-types - TypeScript types for Milky Way Idle
+ *
  * This package provides comprehensive TypeScript types, Zod schemas,
  * and constants for all game entities in Milky Way Idle.
  */
@@ -12,35 +12,31 @@ export * from './game-logic/index.js'
 // No need to re-export them here as they would cause conflicts
 
 // Schema exports as namespaces to avoid conflicts
-export * as zod from './schemas/zod/index.js'
 export * as typebox from './schemas/typebox/index.js'
+export * as zod from './schemas/zod/index.js'
 
 // Localization exports
-export { 
-  en, 
-  zh,
-  type SupportedLocale
-} from './localization/index.js'
+export { en, zh, type SupportedLocale } from './localization/index.js'
 
 // Player data exports
 export * from './player-data/index.js'
 
 // Re-export commonly used types at top level for convenience
 export type {
+  Ability,
+  Action,
+  HouseRoom,
+  Item,
+  Recipe,
   Skill,
   SkillHridType as SkillHrid,
-  Item,
-  Action,
-  Recipe,
-  Ability,
-  HouseRoom
 } from './game-logic/index.js'
 
 export type {
-  PlayerData,
   Character,
+  CharacterAction,
   CharacterItem,
-  CharacterSkill,
   CharacterQuest,
-  CharacterAction
+  CharacterSkill,
+  PlayerData,
 } from './player-data/index.js'
