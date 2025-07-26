@@ -5,7 +5,7 @@ on:
   push:
     tags:
       - 'v*.*.*'
-  
+
   # Manual trigger with version input
   workflow_dispatch:
     inputs:
@@ -23,7 +23,7 @@ on:
           - beta
           - next
           - canary
-  
+
   # Called by other workflows
   workflow_call:
     inputs:
@@ -46,7 +46,7 @@ jobs:
   quality-checks:
     name: Quality Checks
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -80,7 +80,7 @@ jobs:
         run: |
           SIZE=$(du -sh dist | cut -f1)
           echo "Package size: $SIZE"
-          
+
           # Fail if package is too large (e.g., > 50MB)
           SIZE_BYTES=$(du -sb dist | cut -f1)
           if [ $SIZE_BYTES -gt 52428800 ]; then
@@ -112,25 +112,25 @@ jobs:
           const { getSkill } = require('./dist/game-logic');
           const { PlayerDataSchema } = require('./dist/player-data');
           const { getTranslatedSkillName } = require('./dist/localization');
-          
+
           console.log('✅ CommonJS imports successful');
           console.log('Skills count:', Object.keys(SKILLS).length);
           EOF
-          
+
           # Test the imports
           node test-exports.cjs
-          
+
           # Test TypeScript imports
           cat > test-imports.ts << 'EOF'
           import { SKILLS } from './dist';
           import { SkillSchema } from './dist/schemas/zod';
           import { SkillHrid } from './dist/game-logic/skills';
           import type { PlayerData } from './dist/player-data';
-          
+
           const skill: typeof SKILLS[keyof typeof SKILLS] = SKILLS['/skills/attack'];
           console.log('✅ TypeScript imports successful');
           EOF
-          
+
           # Just compile, don't run
           npx tsc --noEmit test-imports.ts --module commonjs --esModuleInterop --skipLibCheck || echo "TypeScript check completed"
 
@@ -139,7 +139,7 @@ jobs:
     needs: quality-checks
     runs-on: ubuntu-latest
     environment: npm-publish # GitHub environment for protection
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -198,20 +198,20 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           body: |
-            ## 📦 @c3d/mwi-types ${{ github.ref_name }}
+            ## 📦 @c3d.gg/mwi-types ${{ github.ref_name }}
 
             ### Installation
             ```bash
-            npm install @c3d/mwi-types@${{ github.ref_name }}
+            npm install @c3d.gg/mwi-types@${{ github.ref_name }}
             # or
-            bun add @c3d/mwi-types@${{ github.ref_name }}
+            bun add @c3d.gg/mwi-types@${{ github.ref_name }}
             ```
 
             ### What's Changed
             See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details.
 
             ### NPM Package
-            View on NPM: https://www.npmjs.com/package/@c3d/mwi-types/v/${{ github.ref_name }}
+            View on NPM: https://www.npmjs.com/package/@c3d.gg/mwi-types/v/${{ github.ref_name }}
           generate_release_notes: true
           files: |
             dist/**/*
@@ -219,8 +219,8 @@ jobs:
       - name: Notify success
         if: success()
         run: |
-          echo "✅ Successfully published @c3d/mwi-types@$VERSION to NPM!"
-          echo "View at: https://www.npmjs.com/package/@c3d/mwi-types"
+          echo "✅ Successfully published @c3d.gg/mwi-types@$VERSION to NPM!"
+          echo "View at: https://www.npmjs.com/package/@c3d.gg/mwi-types"
 
       - name: Notify failure
         if: failure()
