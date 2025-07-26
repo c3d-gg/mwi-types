@@ -26,7 +26,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: node
-          package-name: '@c3d/mwi-types'
+          package-name: '@c3d.gg/mwi-types'
           
           # Conventional commits configuration
           changelog-types: |
@@ -137,18 +137,18 @@ jobs:
               
               // Create a nice summary
               const summary = `
-              ## 🎉 @c3d/mwi-types v${version} has been released!
+              ## 🎉 @c3d.gg/mwi-types v${version} has been released!
               
               ### 📦 Installation
               \`\`\`bash
-              npm install @c3d/mwi-types@${version}
+              npm install @c3d.gg/mwi-types@${version}
               \`\`\`
               
               ### 📝 Release Notes
               View the full release notes: https://github.com/${context.repo.owner}/${context.repo.repo}/releases/tag/${tag}
               
               ### 🏷️ NPM Package
-              https://www.npmjs.com/package/@c3d/mwi-types/v/${version}
+              https://www.npmjs.com/package/@c3d.gg/mwi-types/v/${version}
               
               ### 📊 Stats
               - Commits in this release: ${commits.commits.length}

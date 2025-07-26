@@ -23,6 +23,19 @@ on:
           - beta
           - next
           - canary
+  
+  # Called by other workflows
+  workflow_call:
+    inputs:
+      version:
+        description: 'Version to publish'
+        required: true
+        type: string
+      tag:
+        description: 'NPM tag'
+        required: false
+        default: 'latest'
+        type: string
 
 permissions:
   contents: read
