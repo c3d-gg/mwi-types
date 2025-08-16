@@ -26,58 +26,6 @@ jobs:
         id: release
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          release-type: node
-          package-name: '@c3d.gg/mwi-types'
-          
-          # Conventional commits configuration
-          changelog-types: |
-            [
-              {"type": "feat", "section": "✨ Features", "hidden": false},
-              {"type": "fix", "section": "🐛 Bug Fixes", "hidden": false},
-              {"type": "perf", "section": "⚡ Performance", "hidden": false},
-              {"type": "revert", "section": "↩️ Reverts", "hidden": false},
-              {"type": "docs", "section": "📚 Documentation", "hidden": false},
-              {"type": "style", "section": "💅 Styling", "hidden": false},
-              {"type": "chore", "section": "🔧 Miscellaneous", "hidden": false},
-              {"type": "refactor", "section": "♻️ Code Refactoring", "hidden": false},
-              {"type": "test", "section": "✅ Tests", "hidden": false},
-              {"type": "build", "section": "📦 Build System", "hidden": false},
-              {"type": "ci", "section": "👷 CI/CD", "hidden": false},
-              {"type": "types", "section": "🏷️ Type Updates", "hidden": false}
-            ]
-          
-          # Version bump rules
-          bump-minor-pre-major: true
-          bump-patch-for-minor-pre-major: true
-          
-          # PR configuration
-          pull-request-title-pattern: 'chore: release ${version}'
-          pull-request-header: |
-            ## 🚀 Release ${version}
-            
-            This PR was automatically created by Release Please to prepare the next release.
-            
-          include-component-in-tag: false
-          
-          # Changelog configuration
-          changelog-sections: |
-            [
-              {"type": "feat", "section": "✨ Features"},
-              {"type": "fix", "section": "🐛 Bug Fixes"},
-              {"type": "perf", "section": "⚡ Performance"},
-              {"type": "types", "section": "🏷️ Type Updates"},
-              {"type": "BREAKING CHANGE", "section": "💥 Breaking Changes"}
-            ]
-          
-          # Extra files to update version in
-          extra-files: |
-            [
-              {
-                "type": "json",
-                "path": "package.json",
-                "jsonpath": "$.version"
-              }
-            ]
 
   # Auto-merge release PRs after checks pass
   auto-merge:
