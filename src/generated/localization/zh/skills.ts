@@ -1,6 +1,6 @@
 /**
  * Skill translations for ZH locale
- * Generated on 2025-08-16T17:38:41.981Z
+ * Generated on 2025-08-16T17:51:29.743Z
  */
 
 import type { SkillHrid } from '../../game-logic/skills.js'

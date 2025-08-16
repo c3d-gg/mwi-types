@@ -76,6 +76,7 @@ src/
 - **HRID Pattern**: All entities use Human Readable IDs (e.g., `/items/milk`, `/skills/alchemy`)
 - **Type Safety**: Full TypeScript types with runtime validation via schemas
 - **Translation System**: Type-safe translations mapped to entity HRIDs
+- **Fix Generators**: Whenever there's a problem in a file inside `generated`, you should fix the `generator` that makes that file, not the file itself
 
 ### Entity Types Generated
 

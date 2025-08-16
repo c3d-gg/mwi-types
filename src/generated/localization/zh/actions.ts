@@ -1,6 +1,6 @@
 /**
  * Action translations for ZH locale
- * Generated on 2025-08-16T17:38:41.982Z
+ * Generated on 2025-08-16T17:51:29.744Z
  */
 
 import type { ActionHrid } from '../../game-logic/actions.js'

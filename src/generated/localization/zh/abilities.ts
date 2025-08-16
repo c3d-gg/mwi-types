@@ -1,6 +1,6 @@
 /**
  * Ability translations for ZH locale
- * Generated on 2025-08-16T17:38:41.983Z
+ * Generated on 2025-08-16T17:51:29.745Z
  */
 
 import type { AbilityHrid } from '../../game-logic/abilities.js'

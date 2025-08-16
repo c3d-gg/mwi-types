@@ -1,7 +1,7 @@
 /**
  * Shared types for generated game logic files
  * Auto-generated file - DO NOT EDIT
- * Generated on 2025-08-16T17:38:41.985Z
+ * Generated on 2025-08-16T17:51:29.746Z
  */
 
 // Branded types for extra type safety
