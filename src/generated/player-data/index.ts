@@ -223,7 +223,7 @@ export function hasMooPass(characterInfo: CharacterInfo): boolean {
  */
 export function getGuildRole(guildCharacterMap: Record<string, GuildCharacter>, characterId: number): string | null {
   const guildChar = Object.values(guildCharacterMap).find(gc => gc.characterID === characterId);
-  return guildChar?.roleHrid ?? null;
+  return guildChar?.role ?? null;
 }
 
 /**
@@ -232,7 +232,7 @@ export function getGuildRole(guildCharacterMap: Record<string, GuildCharacter>, 
 export function getTotalBuffValue(buffs: Buff[], buffTypeHrid: string): number {
   const buff = buffs.find(b => b.typeHrid === buffTypeHrid);
   if (!buff) return 0;
-  return buff.value + (buff.flatValue ?? 0);
+  return (buff.value ?? 0) + (buff.flatValue ?? 0);
 }
 
 /**
