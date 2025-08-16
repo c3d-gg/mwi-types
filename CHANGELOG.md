@@ -5,6 +5,19 @@ All notable changes to `@c3d.gg/mwi-types` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.5](https://github.com/c3d-gg/mwi-types/compare/v0.0.4...v0.0.5) (2025-08-16)
+
+
+### 🐛 Bug Fixes
+
+* add PAT support for Release Please workflow ([5512136](https://github.com/c3d-gg/mwi-types/commit/551213643a1cfaa6b4ba8c43a932f34d31cbb5a7))
+
+
+### 🔧 Miscellaneous
+
+* bump version to 0.0.4 and fix Release Please v4 configuration ([1c2063d](https://github.com/c3d-gg/mwi-types/commit/1c2063da251e5068d55547ad62223759e9fea6b0))
+* fix .gg name on docs ([6fa6627](https://github.com/c3d-gg/mwi-types/commit/6fa6627fd9549055cb6c529e049659697492b983))
+
 ## [Unreleased]
 
 ### Added
