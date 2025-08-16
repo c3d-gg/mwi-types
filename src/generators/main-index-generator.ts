@@ -20,7 +20,8 @@ export * from './game-logic/index.js'
 // No need to re-export them here as they would cause conflicts
 
 // Schema exports as namespaces to avoid conflicts
-export * as typebox from './schemas/typebox/index.js'
+// Note: Typebox schemas are experimental and may have compatibility issues
+// export * as typebox from './schemas/typebox/index.js'
 export * as zod from './schemas/zod/index.js'
 
 // Localization exports

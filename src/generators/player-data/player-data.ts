@@ -61,7 +61,7 @@ export class PlayerDataGenerator {
  * Generated on ${new Date().toISOString()}
  */
 
-import { TypeBoxFromZod } from '@sinclair/typemap'
+import { TypeBox } from '@sinclair/typemap'
 
 import {
 ${this.getSchemaExports().map(name => `  ${name} as Zod${name}`).join(',\n')}
@@ -69,7 +69,7 @@ ${this.getSchemaExports().map(name => `  ${name} as Zod${name}`).join(',\n')}
 
 ${this.getSchemaExports().map(name => {
   const typeName = name.replace('Schema', '').replace('Enum', '')
-  return `export const ${name} = TypeBoxFromZod(Zod${name})
+  return `export const ${name} = TypeBox(Zod${name})
 export type ${typeName} = typeof ${name}`
 }).join('\n\n')}
 `;

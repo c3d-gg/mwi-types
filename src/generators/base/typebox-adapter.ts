@@ -3,7 +3,7 @@
  * Converts Zod schemas to Typebox schemas using @sinclair/typemap
  */
 
-import { TypeBoxFromZod } from '@sinclair/typemap'
+import { TypeBox } from '@sinclair/typemap'
 import type { ZodSchema } from 'zod'
 import type { TSchema } from '@sinclair/typebox'
 
@@ -11,7 +11,7 @@ import type { TSchema } from '@sinclair/typebox'
  * Convert a Zod schema to Typebox schema
  */
 export function convertZodToTypebox(zodSchema: ZodSchema): TSchema {
-  return TypeBoxFromZod(zodSchema) as unknown as TSchema
+  return TypeBox(zodSchema) as unknown as TSchema
 }
 
 /**
@@ -45,10 +45,10 @@ export async function convertZodFileToTypebox(
 function generateTypeboxCode(schemaName: string, schema: TSchema): string {
   // We'll generate the code that recreates the schema
   // For now, we'll use the converted schema directly
-  return `import { type Static, TypeBoxFromZod } from '@sinclair/typemap'
+  return `import { type Static, TypeBox } from '@sinclair/typemap'
 import { ${schemaName} as Zod${schemaName} } from '../zod/${schemaName.replace(/Schema$/, '').toLowerCase()}'
 
-export const ${schemaName} = TypeBoxFromZod(Zod${schemaName})
+export const ${schemaName} = TypeBox(Zod${schemaName})
 export type ${schemaName.replace(/Schema$/, '')} = Static<typeof ${schemaName}>`
 }
 
@@ -93,11 +93,11 @@ export function generateTypeboxAdapterFile(
   // Use provided filename or generate from entity name
   const importFilename = filename || entityName.toLowerCase().replace(/type$/, '-type').replace(/types$/, '-types')
   
-  return `import { type Static, TypeBoxFromZod } from '@sinclair/typemap'
+  return `import { type Static, TypeBox } from '@sinclair/typemap'
 import { ${schemaName} as Zod${schemaName} } from '${zodImportPath}/${importFilename}'
 
 // Convert Zod schema to Typebox
-export const ${schemaName} = TypeBoxFromZod(Zod${schemaName})
+export const ${schemaName} = TypeBox(Zod${schemaName})
 
 // Type is already exported from Zod schema, no need to re-export`
 }
