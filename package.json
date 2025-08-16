@@ -79,7 +79,8 @@
     "prepublishOnly": "bun run build"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "chalk": "^5.5.0"
   },
   "peerDependencies": {
     "typescript": ">=5.0.0"
