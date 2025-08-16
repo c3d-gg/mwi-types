@@ -13,8 +13,7 @@ import { readFileSync, readdirSync, statSync } from 'fs';
 import { join, relative } from 'path';
 import chalk from 'chalk';
 
-// Import generated schemas for validation
-import { PlayerDataSchema } from '../generated/schemas/zod/player-data';
+// Import paths config
 import { PATHS } from '../config/paths';
 
 interface ValidationResult {
@@ -116,6 +115,9 @@ class TypeValidator {
       const playerData = JSON.parse(readFileSync(playerDataPath, 'utf-8'));
       
       console.log('  Validating PlayerData schema...');
+      
+      // Dynamically import the schema (it will be generated before this runs)
+      const { PlayerDataSchema } = await import('../generated/schemas/zod/player-data');
       const result = PlayerDataSchema.safeParse(playerData);
       
       if (result.success) {
@@ -127,7 +129,7 @@ class TypeValidator {
         
         // Extract specific validation errors
         const zodErrors = result.error.issues;
-        zodErrors.slice(0, 5).forEach(err => {
+        zodErrors.slice(0, 5).forEach((err: any) => {
           this.result.errors.push(`  - ${err.path.join('.')}: ${err.message}`);
         });
         
