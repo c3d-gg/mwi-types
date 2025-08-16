@@ -1,4 +1,12 @@
-/**
+import { writeFile } from 'fs/promises'
+import { join } from 'path'
+
+export class MainIndexGenerator {
+  async generate(): Promise<void> {
+    const { PATHS } = await import('../config/paths.js')
+    const outputPath = join(PATHS.output, 'index.ts')
+    
+    const content = `/**
  * @c3d.gg/mwi-types - TypeScript types for Milky Way Idle
  *
  * This package provides comprehensive TypeScript types, Zod schemas,
@@ -12,7 +20,8 @@ export * from './game-logic/index.js'
 // No need to re-export them here as they would cause conflicts
 
 // Schema exports as namespaces to avoid conflicts
-export * as typebox from './schemas/typebox/index.js'
+// Note: Typebox schemas are experimental and may have compatibility issues
+// export * as typebox from './schemas/typebox/index.js'
 export * as zod from './schemas/zod/index.js'
 
 // Localization exports
@@ -40,3 +49,8 @@ export type {
   CharacterSkill,
   PlayerData,
 } from './player-data/index.js'
+`
+    
+    await writeFile(outputPath, content, 'utf-8')
+  }
+}

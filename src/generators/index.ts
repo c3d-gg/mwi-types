@@ -35,6 +35,8 @@ import { LeaderboardCategoriesGenerator } from './game-logic/leaderboard-categor
 import { TranslationGenerator } from './localization/translation-generator.js'
 // Player data generator
 import { PlayerDataGenerator } from './player-data/player-data.js'
+// Main index generator
+import { MainIndexGenerator } from './main-index-generator.js'
 
 import type { GameData } from '../types/source-data.js'
 
@@ -229,6 +231,10 @@ export async function generateGameData() {
     console.log(`   - Typed translations generated for all entities in EN and ZH locales`)
 
     console.log('\n✨ Game data generation complete!')
+    
+    // Generate main index file
+    const mainIndexGenerator = new MainIndexGenerator()
+    await mainIndexGenerator.generate()
     
     // Fix all imports to use .js extensions
     console.log('\n🔧 Fixing imports to use .js extensions...')
