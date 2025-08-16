@@ -66,6 +66,9 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Generate types for TypeScript check
+        run: bun run generate
+
       - name: Check TypeScript
         run: bun run typecheck
 
@@ -204,7 +207,13 @@ jobs:
         run: |
           # Calculate sizes
           TOTAL_SIZE=$(du -sh dist | cut -f1)
-          GENERATED_SIZE=$(du -sh src/generated | cut -f1)
+          
+          # Check if generated folder exists (it should after generate command)
+          if [ -d "src/generated" ]; then
+            GENERATED_SIZE=$(du -sh src/generated | cut -f1)
+          else
+            GENERATED_SIZE="N/A (not in repo)"
+          fi
 
           echo "📊 Bundle Analysis Report"
           echo "========================"
@@ -219,7 +228,11 @@ jobs:
           # Count files
           echo ""
           echo "📄 File counts:"
-          echo "Generated TypeScript files: $(find src/generated -name "*.ts" | wc -l)"
+          if [ -d "src/generated" ]; then
+            echo "Generated TypeScript files: $(find src/generated -name "*.ts" | wc -l)"
+          else
+            echo "Generated TypeScript files: N/A (generated during build)"
+          fi
           echo "Built JavaScript files: $(find dist -name "*.js" | wc -l)"
           echo "Type definition files: $(find dist -name "*.d.ts" | wc -l)"
 
