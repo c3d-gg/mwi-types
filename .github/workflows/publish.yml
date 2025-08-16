@@ -1,11 +1,6 @@
 name: Publish to NPM
 
 on:
-  # Trigger on version tags
-  push:
-    tags:
-      - 'v*.*.*'
-
   # Manual trigger with version input
   workflow_dispatch:
     inputs:
