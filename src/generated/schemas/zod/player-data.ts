@@ -1,11 +1,11 @@
 /**
  * Auto-generated file - DO NOT EDIT
- * Generated on 2025-07-26T21:25:23.323Z
+ * Generated on 2025-08-16T17:38:41.952Z
  */
 
 /**
  * Auto-generated file - DO NOT EDIT
- * Generated on 2025-07-26T21:25:23.323Z
+ * Generated on 2025-08-16T17:38:41.952Z
  */
 
 
@@ -23,6 +23,7 @@ import { AvatarHridEnum } from './avatars.js';
 import { AvatarOutfitHridEnum } from './avatar-outfits.js';
 import { ChatChannelTypeHridEnum } from './chat-channel-types.js';
 import { BuffTypeHridEnum } from './buff-types.js';
+import { CommunityBuffTypeHridEnum } from './community-buff-types.js';
 import { GuildCharacterRoleHridEnum } from './guild-character-roles.js';
 import { HouseRoomHridEnum } from './house-rooms.js';
 
@@ -54,6 +55,20 @@ export const UserInfoSchema = z.object({
   referralCount: z.number(),
   cowbellMarketRestrictionExpireTime: z.string(),
   mooPassExpireTime: z.string()
+});
+
+// User Referral Bonus schema
+export const UserReferralBonusSchema = z.object({
+  id: z.number(),
+  referrerUserID: z.number(),
+  referrerClaimCharacterID: z.number(),
+  referredUserID: z.number(),
+  referredCharacterID: z.number(),
+  type: z.string(), // e.g., "second_level"
+  cowbellQuantity: z.number(),
+  status: z.string(), // e.g., "granted"
+  createdAt: z.string(),
+  updatedAt: z.string()
 });
 
 // Character-related schemas
@@ -274,11 +289,135 @@ export const MarketListingSchema = z.object({
   updatedAt: z.string()
 });
 
+// Character Loadout schema
+export const CharacterLoadoutSchema = z.object({
+  id: z.number(),
+  characterID: z.number(),
+  actionTypeHrid: z.string(),
+  name: z.string(),
+  isDefault: z.boolean(),
+  suppressValidation: z.boolean(),
+  wearableMap: z.record(z.string(), z.string()),
+  foodItemHrids: z.array(ItemHridEnum),
+  drinkItemHrids: z.array(ItemHridEnum),
+  abilityMap: z.record(z.string(), AbilityHridEnum)
+});
+
+// Combat Unit schema
+export const CombatAbilitySchema = z.object({
+  abilityHrid: AbilityHridEnum,
+  level: z.number(),
+  experience: z.number(),
+  availableTime: z.string()
+});
+
+export const CombatConsumableSchema = z.object({
+  itemHash: z.string(),
+  itemHrid: ItemHridEnum,
+  enhancementLevel: z.number(),
+  count: z.number(),
+  availableTime: z.string()
+});
+
+export const CombatUnitSchema = z.object({
+  isActive: z.boolean(),
+  isPlayer: z.boolean(),
+  character: CharacterSchema,
+  hrid: z.string(),
+  eliteTier: z.number(),
+  name: z.string(),
+  currentHitpoints: z.number(),
+  maxHitpoints: z.number(),
+  currentManapoints: z.number(),
+  maxManapoints: z.number(),
+  deathCount: z.number(),
+  respawnTime: z.string(),
+  combatAbilities: z.array(CombatAbilitySchema),
+  combatConsumables: z.array(CombatConsumableSchema)
+});
+
+// Chat Message schema
+export const ChatMessageSchema = z.object({
+  id: z.number(),
+  chan: ChatChannelTypeHridEnum,
+  t: z.string(), // timestamp
+  cId: z.number().optional(),
+  cName: z.string().optional(),
+  cIcon: z.string().optional(),
+  cNameColor: z.string().optional(),
+  isAdmin: z.boolean().optional(),
+  isCco: z.boolean().optional(),
+  isSuperModerator: z.boolean().optional(),
+  isModerator: z.boolean().optional(),
+  isSystemMessage: z.boolean().optional(),
+  m: z.string(), // message
+  systemMetadata: z.string().optional(),
+  rId: z.number().optional(), // recipient ID for whispers
+  rName: z.string().optional() // recipient name for whispers
+});
+
+// Combat Trigger schema
+export const CombatTriggerSchema = z.object({
+  dependencyHrid: z.string(),
+  conditionHrid: z.string().optional(),
+  comparatorHrid: z.string().optional(),
+  value: z.number().optional(),
+  effectHrids: z.array(z.string()).optional(),
+  chance: z.number().optional()
+});
+
+// Consumable Slot schema
+export const ConsumableSlotSchema = z.object({
+  characterID: z.number(),
+  actionTypeHrid: z.string(),
+  consumableSlotTypeHrid: z.string(),
+  slotIndex: z.number(),
+  itemHrid: ItemHridEnum,
+  isActive: z.boolean(),
+  duration: z.number()
+});
+
+// Character Upgrade schema  
+export const CharacterUpgradeSchema = z.object({
+  characterID: z.number(),
+  upgradeHrid: z.string(),
+  count: z.number()
+});
+
+// Sharable Character schema (for guild members)
+export const SharableCharacterSchema = z.object({
+  name: z.string(),
+  gameMode: GameModeHridEnum,
+  chatIconHrid: z.union([ChatIconHridEnum, z.literal('')]),
+  nameColorHrid: z.union([NameColorHridEnum, z.literal('')]),
+  avatarHrid: AvatarHridEnum,
+  avatarOutfitHrid: AvatarOutfitHridEnum,
+  hasMooPass: z.boolean(),
+  actionType: z.string(),
+  hideOnlineStatus: z.boolean(),
+  isOnline: z.boolean(),
+  createdAt: z.string(),
+  inactiveTime: z.string()
+});
+
+// Character Task Type Block schema
+export const CharacterTaskTypeBlockSchema = z.object({
+  characterID: z.number(),
+  slotIndex: z.number(),
+  randomTaskTypeHrid: z.string()
+});
+
 // House room schema
 export const CharacterHouseRoomSchema = z.object({
   characterID: z.number(),
   houseRoomHrid: HouseRoomHridEnum,
   level: z.number()
+});
+
+// Blocked Character schema (minimal info when a character is blocked)
+export const BlockedCharacterSchema = z.object({
+  characterID: z.number(),
+  blockedAt: z.string().optional()
 });
 
 // Friend character schema
@@ -297,41 +436,121 @@ export const FriendCharacterSchema = z.object({
   inactiveTime: z.string()
 });
 
+// Guild Invite schema
+export const GuildInviteSchema = z.object({
+  id: z.number(),
+  guildID: z.number(),
+  inviterCharacterID: z.number(),
+  invitedCharacterID: z.number(),
+  createdAt: z.string(),
+  expiresAt: z.string().optional()
+});
+
 // Guild schema
 export const GuildSchema = z.object({
   id: z.number(),
   name: z.string(),
-  tag: z.string(),
-  recruitmentMessage: z.string(),
-  motd: z.string(),
-  marketStallReduction: z.number(),
-  mooPassReduction: z.number(),
-  points: z.number(),
-  isRecruiting: z.boolean(),
+  experience: z.number(),
+  level: z.number(),
+  noticeMessage: z.string(),
+  isDisbanded: z.boolean(),
   createdAt: z.string(),
   updatedAt: z.string()
 });
 
 // Guild character schema
 export const GuildCharacterSchema = z.object({
-  id: z.number(),
-  guildId: z.number(),
+  guildID: z.number(),
   characterID: z.number(),
-  roleHrid: GuildCharacterRoleHridEnum,
-  weeklyPoints: z.number(),
-  lifetimePoints: z.number(),
-  weeklyMoosAdded: z.number(),
-  totalMoosAdded: z.number(),
-  lastSeenTimestamp: z.string(),
-  createdAt: z.string(),
-  updatedAt: z.string()
+  inviterCharacterID: z.number(),
+  role: z.string(), // e.g., "general", "member", "officer", "leader"
+  status: z.string(), // e.g., "joined"
+  guildExperience: z.number(),
+  joinTime: z.string(),
+  leaveTime: z.string()
 });
 
 // Buff-related schemas
 export const BuffSchema = z.object({
+  uniqueHrid: z.string().optional(),
   typeHrid: BuffTypeHridEnum,
-  value: z.number(),
-  flatValue: z.number().optional()
+  value: z.number().optional(),
+  flatValue: z.number().optional(),
+  ratioBoost: z.number().optional(),
+  ratioBoostLevelBonus: z.number().optional(),
+  flatBoost: z.number().optional(),
+  flatBoostLevelBonus: z.number().optional(),
+  startTime: z.string().optional(),
+  duration: z.number().optional()
+});
+
+// Community buff schema (different from regular buffs)
+export const CommunityBuffSchema = z.object({
+  id: z.number(),
+  hrid: CommunityBuffTypeHridEnum,
+  experience: z.number(),
+  level: z.number(),
+  startTime: z.string(),
+  expireTime: z.string(),
+  contributorsMetadata: z.string(),
+  isDone: z.boolean()
+});
+
+// User unlock schemas
+export const UserChatIconSchema = z.object({
+  userID: z.number(),
+  chatIconHrid: ChatIconHridEnum,
+  unlockedTime: z.string()
+});
+
+export const UserAvatarSchema = z.object({
+  userID: z.number(),
+  avatarHrid: AvatarHridEnum,
+  unlockedTime: z.string()
+});
+
+export const UserAvatarOutfitSchema = z.object({
+  userID: z.number(),
+  avatarOutfitHrid: AvatarOutfitHridEnum,
+  unlockedTime: z.string()
+});
+
+export const UserNameColorSchema = z.object({
+  userID: z.number(),
+  nameColorHrid: NameColorHridEnum,
+  unlockedTime: z.string()
+});
+
+// Party schemas
+export const PartySchema = z.object({
+  id: z.number(),
+  gameMode: GameModeHridEnum,
+  actionHrid: ActionHridEnum,
+  status: z.string(),
+  isPrivate: z.boolean(),
+  entryCode: z.string(),
+  hasRepeatLimit: z.boolean(),
+  repeatLimit: z.number(),
+  autoKickUnready: z.boolean(),
+  createdAt: z.string(),
+  updatedAt: z.string()
+});
+
+export const PartySlotSchema = z.object({
+  id: z.number(),
+  partyID: z.number(),
+  characterID: z.number().nullable(),
+  characterLoadoutID: z.number(),
+  isReady: z.boolean(),
+  isLeader: z.boolean(),
+  role: z.string(),
+  minCombatLevel: z.number()
+});
+
+export const PartyInfoSchema = z.object({
+  party: PartySchema,
+  partySlotMap: z.record(z.string(), PartySlotSchema),
+  sharableCharacterMap: z.record(z.string(), SharableCharacterSchema)
 });
 
 // Main player data schema
@@ -344,7 +563,7 @@ export const PlayerDataSchema = z.object({
   steamUserId: z.string(),
   guestPassword: z.string(),
   userInfo: UserInfoSchema,
-  userReferralBonuses: z.array(z.unknown()),
+  userReferralBonuses: z.array(UserReferralBonusSchema),
   character: CharacterSchema,
   characterInfo: CharacterInfoSchema,
   characterSetting: CharacterSettingSchema,
@@ -355,48 +574,48 @@ export const PlayerDataSchema = z.object({
   characterItems: z.array(CharacterItemSchema),
   offlineItems: z.array(CharacterItemSchema),
   offlineSkills: z.array(CharacterSkillSchema),
-  consumableCombatTriggersMap: z.record(z.string(), z.array(z.unknown())),
-  abilityCombatTriggersMap: z.record(z.string(), z.array(z.unknown())),
-  actionTypeFoodSlotsMap: z.record(z.string(), z.number()),
-  actionTypeDrinkSlotsMap: z.record(z.string(), z.number()),
-  characterLoadoutMap: z.record(z.string(), z.unknown()),
-  combatUnit: z.unknown().nullable(),
+  consumableCombatTriggersMap: z.record(z.string(), z.array(CombatTriggerSchema)),
+  abilityCombatTriggersMap: z.record(z.string(), z.array(CombatTriggerSchema)),
+  actionTypeFoodSlotsMap: z.record(z.string(), z.array(ConsumableSlotSchema.nullable())),
+  actionTypeDrinkSlotsMap: z.record(z.string(), z.array(ConsumableSlotSchema.nullable())),
+  characterLoadoutMap: z.record(z.string(), CharacterLoadoutSchema),
+  combatUnit: CombatUnitSchema.nullable(),
   noncombatStats: NonCombatStatsSchema,
   myMarketListings: z.array(MarketListingSchema),
-  characterTaskTypeBlocks: z.array(z.unknown()),
+  characterTaskTypeBlocks: z.array(CharacterTaskTypeBlockSchema),
   characterHouseRoomMap: z.record(z.string(), CharacterHouseRoomSchema),
   chatMinLevel: z.number(),
   generalChatMinLevel: z.number(),
   generalChatMinExp: z.number(),
   enableAutomod: z.boolean(),
-  serverSetting: z.unknown().nullable(),
-  chatHistoryByChannelMap: z.record(z.string(), z.array(z.unknown())),
-  guildChatHistory: z.array(z.unknown()),
-  partyChatHistory: z.array(z.unknown()),
-  whisperChatHistory: z.array(z.unknown()),
-  moderatorChatHistory: z.array(z.unknown()),
+  serverSetting: z.null(), // Always null in player data
+  chatHistoryByChannelMap: z.record(z.string(), z.array(ChatMessageSchema)),
+  guildChatHistory: z.array(ChatMessageSchema),
+  partyChatHistory: z.array(ChatMessageSchema),
+  whisperChatHistory: z.array(ChatMessageSchema),
+  moderatorChatHistory: z.array(ChatMessageSchema),
   friendCharacterMap: z.record(z.string(), FriendCharacterSchema),
-  blockedCharacterMap: z.record(z.string(), z.unknown()),
-  characterUpgradeMap: z.record(z.string(), z.unknown()),
-  userChatIconMap: z.record(z.string(), z.boolean()),
-  userNameColorMap: z.record(z.string(), z.boolean()),
-  userAvatarMap: z.record(z.string(), z.boolean()),
-  userAvatarOutfitMap: z.record(z.string(), z.boolean()),
+  blockedCharacterMap: z.record(z.string(), BlockedCharacterSchema),
+  characterUpgradeMap: z.record(z.string(), CharacterUpgradeSchema),
+  userChatIconMap: z.record(z.string(), UserChatIconSchema),
+  userNameColorMap: z.record(z.string(), UserNameColorSchema),
+  userAvatarMap: z.record(z.string(), UserAvatarSchema),
+  userAvatarOutfitMap: z.record(z.string(), UserAvatarOutfitSchema),
   mooPassBuffs: z.array(BuffSchema),
-  mooPassActionTypeBuffsMap: z.record(z.string(), z.array(BuffSchema)),
-  communityBuffs: z.array(BuffSchema),
-  communityActionTypeBuffsMap: z.record(z.string(), z.array(BuffSchema)),
-  houseActionTypeBuffsMap: z.record(z.string(), z.array(BuffSchema)),
-  consumableActionTypeBuffsMap: z.record(z.string(), z.array(BuffSchema)),
-  equipmentActionTypeBuffsMap: z.record(z.string(), z.array(BuffSchema)),
+  mooPassActionTypeBuffsMap: z.record(z.string(), z.array(BuffSchema).nullable()),
+  communityBuffs: z.array(CommunityBuffSchema),
+  communityActionTypeBuffsMap: z.record(z.string(), z.array(BuffSchema).nullable()),
+  houseActionTypeBuffsMap: z.record(z.string(), z.array(BuffSchema).nullable()),
+  consumableActionTypeBuffsMap: z.record(z.string(), z.array(BuffSchema).nullable()),
+  equipmentActionTypeBuffsMap: z.record(z.string(), z.array(BuffSchema).nullable()),
   equipmentTaskActionBuffs: z.array(BuffSchema),
   guild: GuildSchema.nullable(),
   guildCharacterMap: z.record(z.string(), GuildCharacterSchema),
-  guildSharableCharacterMap: z.record(z.string(), z.unknown()),
-  guildInviteMap: z.record(z.string(), z.unknown()),
-  guildInviterSharableCharacterMap: z.record(z.string(), z.unknown()),
+  guildSharableCharacterMap: z.record(z.string(), SharableCharacterSchema),
+  guildInviteMap: z.record(z.string(), GuildInviteSchema),
+  guildInviterSharableCharacterMap: z.record(z.string(), SharableCharacterSchema),
   guildInviteGuildNameMap: z.record(z.string(), z.string()),
-  partyInfo: z.unknown().nullable(),
+  partyInfo: PartyInfoSchema.nullable(),
   announcementMessage: z.string(),
   announcementTimestamp: z.string()
 });
@@ -404,6 +623,7 @@ export const PlayerDataSchema = z.object({
 // Export types
 export type User = z.infer<typeof UserSchema>;
 export type UserInfo = z.infer<typeof UserInfoSchema>;
+export type UserReferralBonus = z.infer<typeof UserReferralBonusSchema>;
 export type Character = z.infer<typeof CharacterSchema>;
 export type CharacterInfo = z.infer<typeof CharacterInfoSchema>;
 export type CharacterSetting = z.infer<typeof CharacterSettingSchema>;
@@ -412,14 +632,34 @@ export type CharacterQuest = z.infer<typeof CharacterQuestSchema>;
 export type CharacterSkill = z.infer<typeof CharacterSkillSchema>;
 export type CharacterAbility = z.infer<typeof CharacterAbilitySchema>;
 export type CharacterItem = z.infer<typeof CharacterItemSchema>;
+export type CharacterTaskTypeBlock = z.infer<typeof CharacterTaskTypeBlockSchema>;
 export type CombatStats = z.infer<typeof CombatStatsSchema>;
 export type NonCombatStats = z.infer<typeof NonCombatStatsSchema>;
 export type MarketListing = z.infer<typeof MarketListingSchema>;
 export type CharacterHouseRoom = z.infer<typeof CharacterHouseRoomSchema>;
+export type BlockedCharacter = z.infer<typeof BlockedCharacterSchema>;
 export type FriendCharacter = z.infer<typeof FriendCharacterSchema>;
+export type GuildInvite = z.infer<typeof GuildInviteSchema>;
 export type Guild = z.infer<typeof GuildSchema>;
 export type GuildCharacter = z.infer<typeof GuildCharacterSchema>;
 export type Buff = z.infer<typeof BuffSchema>;
+export type CommunityBuff = z.infer<typeof CommunityBuffSchema>;
+export type CharacterLoadout = z.infer<typeof CharacterLoadoutSchema>;
+export type CombatUnit = z.infer<typeof CombatUnitSchema>;
+export type CombatAbility = z.infer<typeof CombatAbilitySchema>;
+export type CombatConsumable = z.infer<typeof CombatConsumableSchema>;
+export type ChatMessage = z.infer<typeof ChatMessageSchema>;
+export type CombatTrigger = z.infer<typeof CombatTriggerSchema>;
+export type ConsumableSlot = z.infer<typeof ConsumableSlotSchema>;
+export type CharacterUpgrade = z.infer<typeof CharacterUpgradeSchema>;
+export type SharableCharacter = z.infer<typeof SharableCharacterSchema>;
+export type UserChatIcon = z.infer<typeof UserChatIconSchema>;
+export type UserAvatar = z.infer<typeof UserAvatarSchema>;
+export type UserAvatarOutfit = z.infer<typeof UserAvatarOutfitSchema>;
+export type UserNameColor = z.infer<typeof UserNameColorSchema>;
+export type Party = z.infer<typeof PartySchema>;
+export type PartySlot = z.infer<typeof PartySlotSchema>;
+export type PartyInfo = z.infer<typeof PartyInfoSchema>;
 export type PlayerData = z.infer<typeof PlayerDataSchema>;
 export type ItemReward = z.infer<typeof ItemRewardSchema>;
 export type QuestCategory = z.infer<typeof QuestCategoryEnum>;

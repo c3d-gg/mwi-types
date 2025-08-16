@@ -1,7 +1,7 @@
 /**
  * Typebox schema exports
  * Auto-generated file - DO NOT EDIT
- * Generated on 2025-07-26T21:25:23.356Z
+ * Generated on 2025-08-16T17:38:41.986Z
  */
 
 // Entity schemas

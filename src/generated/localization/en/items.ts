@@ -1,6 +1,6 @@
 /**
  * Item translations for EN locale
- * Generated on 2025-07-26T21:25:23.347Z
+ * Generated on 2025-08-16T17:38:41.977Z
  */
 
 import type { ItemHrid } from '../../game-logic/items.js'

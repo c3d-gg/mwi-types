@@ -1,6 +1,6 @@
 /**
  * Translation exports for EN locale
- * Generated on 2025-07-26T21:25:23.351Z
+ * Generated on 2025-08-16T17:38:41.981Z
  */
 
 export { skillTranslations } from './skills.js'

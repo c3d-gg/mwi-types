@@ -1,17 +1,18 @@
 /**
  * Auto-generated file - DO NOT EDIT
- * Generated on 2025-07-26T21:25:23.324Z
+ * Generated on 2025-08-16T17:38:41.953Z
  */
 
 /**
  * Auto-generated file - DO NOT EDIT
- * Generated on 2025-07-26T21:25:23.324Z
+ * Generated on 2025-08-16T17:38:41.953Z
  */
 
 
 import type { 
   User,
   UserInfo,
+  UserReferralBonus,
   Character,
   CharacterInfo,
   CharacterSetting,
@@ -20,19 +21,39 @@ import type {
   CharacterSkill,
   CharacterAbility,
   CharacterItem,
+  CharacterTaskTypeBlock,
   CombatStats,
   NonCombatStats,
   MarketListing,
   CharacterHouseRoom,
+  BlockedCharacter,
   FriendCharacter,
+  GuildInvite,
   Guild,
   GuildCharacter,
   Buff,
+  UserChatIcon,
+  UserAvatar,
+  UserAvatarOutfit,
+  UserNameColor,
+  Party,
+  PartySlot,
+  PartyInfo,
   PlayerData,
   ItemReward,
   QuestCategory,
   QuestType,
-  QuestStatus
+  QuestStatus,
+  CharacterLoadout,
+  CombatUnit,
+  CombatAbility,
+  CombatConsumable,
+  ChatMessage,
+  CombatTrigger,
+  ConsumableSlot,
+  CharacterUpgrade,
+  SharableCharacter,
+  CommunityBuff
 } from '../schemas/zod/player-data.js';
 
 import {
@@ -45,6 +66,7 @@ import {
 export type {
   User,
   UserInfo,
+  UserReferralBonus,
   Character,
   CharacterInfo,
   CharacterSetting,
@@ -53,14 +75,33 @@ export type {
   CharacterSkill,
   CharacterAbility,
   CharacterItem,
+  CharacterTaskTypeBlock,
+  CharacterLoadout,
+  CombatUnit,
+  CombatAbility,
+  CombatConsumable,
+  ChatMessage,
+  CombatTrigger,
+  ConsumableSlot,
+  CharacterUpgrade,
+  SharableCharacter,
   CombatStats,
   NonCombatStats,
   MarketListing,
   CharacterHouseRoom,
+  BlockedCharacter,
   FriendCharacter,
+  GuildInvite,
   Guild,
   GuildCharacter,
   Buff,
+  UserChatIcon,
+  UserAvatar,
+  UserAvatarOutfit,
+  UserNameColor,
+  Party,
+  PartySlot,
+  PartyInfo,
   PlayerData,
   ItemReward,
   QuestCategory,

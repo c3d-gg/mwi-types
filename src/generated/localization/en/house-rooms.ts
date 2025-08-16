@@ -1,6 +1,6 @@
 /**
  * House room translations for EN locale
- * Generated on 2025-07-26T21:25:23.351Z
+ * Generated on 2025-08-16T17:38:41.980Z
  */
 
 import type { HouseRoomHrid } from '../../game-logic/house-rooms.js'
