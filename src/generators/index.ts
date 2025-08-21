@@ -5,6 +5,8 @@ import { readdirSync, readFileSync, writeFileSync } from 'fs'
 // Game logic generators
 import { ItemsGenerator } from './game-logic/items-generator.js'
 import { RecipesGenerator } from './game-logic/recipes.js'
+import { RecipeTreeGenerator } from './game-logic/recipe-tree.js'
+import { RecipeCalculatorGenerator } from './game-logic/recipe-calculator.js'
 import { SkillsGenerator } from './game-logic/skills-generator.js'
 import { ActionsGenerator } from './game-logic/actions.js'
 import { ActionCategoriesGenerator } from './game-logic/action-categories.js'
@@ -97,6 +99,14 @@ export async function generateGameData() {
     // Generate recipes (depends on actions)
     const recipesGenerator = new RecipesGenerator()
     const recipesResult = await recipesGenerator.generate()
+
+    // Generate recipe trees (depends on recipes and items)
+    const recipeTreeGenerator = new RecipeTreeGenerator()
+    const recipeTreeResult = await recipeTreeGenerator.generate()
+
+    // Generate recipe calculator (depends on recipe trees)
+    const recipeCalculatorGenerator = new RecipeCalculatorGenerator()
+    await recipeCalculatorGenerator.generate()
 
     // Generate action categories (depends on actions)
     const actionCategoriesGenerator = new ActionCategoriesGenerator()
@@ -205,6 +215,8 @@ export async function generateGameData() {
     console.log(`   - Items: ${itemsResult.count}`)
     console.log(`   - Actions: ${actionsResult.count}`)
     console.log(`   - Recipes: ${recipesResult.count}`)
+    console.log(`   - Recipe Trees: Generated`)
+    console.log(`   - Recipe Calculator: Generated`)
     console.log(`   - Action Categories: ${actionCategoriesResult.count}`)
     console.log(`   - Abilities: ${abilitiesResult.count}`)
     console.log(`   - Buff Types: ${buffTypesResult.count}`)
@@ -295,6 +307,14 @@ export async function generateGameLogicOnly() {
     // Generate recipes (depends on actions)
     const recipesGenerator = new RecipesGenerator()
     const recipesResult = await recipesGenerator.generate()
+
+    // Generate recipe trees (depends on recipes and items)
+    const recipeTreeGenerator = new RecipeTreeGenerator()
+    const recipeTreeResult = await recipeTreeGenerator.generate()
+
+    // Generate recipe calculator (depends on recipe trees)
+    const recipeCalculatorGenerator = new RecipeCalculatorGenerator()
+    await recipeCalculatorGenerator.generate()
 
     // Generate action categories (depends on actions)
     const actionCategoriesGenerator = new ActionCategoriesGenerator()
@@ -669,6 +689,45 @@ export {
 	type RecipeHrid,
 	type RecipeItem
 } from './recipes.js'
+
+// Recipe Tree exports
+export {
+	// Types
+	type RecipeTreeNode,
+	type RecipeTreeStats,
+	// Functions
+	buildRecipeTree,
+	getItemRecipeTree,
+	calculateRecipeTreeStats,
+	getRecipesUsingItem,
+	getAllRequiredMaterials,
+	getRecipePath,
+	exportRecipeTrees,
+	clearRecipeTreeCache,
+	// Pre-generated trees
+	COMMON_RECIPE_TREES
+} from './recipe-tree.js'
+
+// Recipe Calculator exports
+export {
+	// Types
+	type TimeModifiers,
+	type GatheringEstimate,
+	type EnhancedRecipeNode,
+	type EnhancedRecipeStats,
+	// Functions
+	calculateTimeModifiers,
+	calculateModifiedTime,
+	findBestGatheringAction,
+	estimateGatheringTime,
+	getInventoryQuantity,
+	enhanceRecipeTree,
+	calculateEnhancedStats,
+	calculateRecipeWithPlayerData,
+	findCraftableRecipes,
+	// Pre-calculated data
+	COMMON_RECIPE_CALCULATIONS
+} from './recipe-calculator.js'
 
 // Item exports
 export {
