@@ -217,6 +217,7 @@ export const CharacterActionSchema = z.object({
   characterID: z.number(),
   partyID: z.number(),
   actionHrid: ActionHridEnum,
+  difficultyTier: z.number(),
   hasMaxCount: z.boolean(),
   maxCount: z.number(),
   currentCount: z.number(),
@@ -398,7 +399,11 @@ export const CombatUnitSchema = z.object({
   isPlayer: z.boolean(),
   character: CharacterSchema,
   hrid: z.string(),
-  eliteTier: z.number(),
+  experience: z.number(),
+  difficultyTier: z.number(),
+  isEnraged: z.boolean(),
+  enrageTimerDuration: z.number(),
+  spawnTime: z.string(),
   name: z.string(),
   currentHitpoints: z.number(),
   maxHitpoints: z.number(),
@@ -416,7 +421,11 @@ export const ChatMessageSchema = z.object({
   chan: ChatChannelTypeHridEnum,
   t: z.string(), // timestamp
   cId: z.number().optional(),
+  sName: z.string().optional(), // sender name
   cName: z.string().optional(),
+  icon: z.string().optional(), // chat icon (alternative to cIcon)
+  color: z.string().optional(), // name color (alternative to cNameColor)
+  specIcon: z.string().optional(), // special icon
   cIcon: z.string().optional(),
   cNameColor: z.string().optional(),
   isAdmin: z.boolean().optional(),
@@ -425,6 +434,7 @@ export const ChatMessageSchema = z.object({
   isModerator: z.boolean().optional(),
   isSystemMessage: z.boolean().optional(),
   m: z.string(), // message
+  linksMetadata: z.string().optional(), // JSON string with party links containing partyDifficultyTier
   systemMetadata: z.string().optional(),
   rId: z.number().optional(), // recipient ID for whispers
   rName: z.string().optional() // recipient name for whispers
@@ -600,6 +610,7 @@ export const PartySchema = z.object({
   id: z.number(),
   gameMode: GameModeHridEnum,
   actionHrid: ActionHridEnum,
+  difficultyTier: z.number(),
   status: z.string(),
   isPrivate: z.boolean(),
   entryCode: z.string(),
