@@ -112,7 +112,7 @@ export function getSpecialLeaderboardCategories(): LeaderboardCategory[] {
 }
 
 export function getCombatLeaderboardCategories(): LeaderboardCategory[] {
-  const combatSkills = ['/skills/attack', '/skills/defense', '/skills/power', '/skills/ranged', '/skills/magic', '/skills/intelligence', '/skills/stamina']
+  const combatSkills = ['/skills/attack', '/skills/defense', '/skills/melee', '/skills/ranged', '/skills/magic', '/skills/intelligence', '/skills/stamina']
   return Object.values(${this.config.entityNamePlural}).filter(category => combatSkills.includes(category.skillHrid))
 }
 

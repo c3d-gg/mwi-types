@@ -162,6 +162,8 @@ export class AbilitiesGenerator extends BaseGenerator<AbilityDetail> {
 									{ name: 'ratioBoostLevelBonus', type: 'number', description: 'Ratio boost increase per level' },
 									{ name: 'flatBoost', type: 'number', description: 'Flat additive boost amount' },
 									{ name: 'flatBoostLevelBonus', type: 'number', description: 'Flat boost increase per level' },
+									{ name: 'multiplierForSkillHrid', type: 'string', optional: true, description: 'Skill HRID that affects buff strength' },
+									{ name: 'multiplierPerSkillLevel', type: 'number', optional: true, description: 'Buff strength increase per skill level' },
 									{ name: 'startTime', type: 'string', description: 'When the buff starts' },
 									{ name: 'duration', type: 'number', description: 'Buff duration in nanoseconds' }
 								]

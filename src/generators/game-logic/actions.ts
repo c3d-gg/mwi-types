@@ -214,7 +214,8 @@ export class ActionsGenerator extends BaseGenerator<ActionDetail> {
             {
               name: 'minEliteTier',
               type: 'number',
-              description: 'Minimum elite tier required for this drop'
+              description: 'Minimum elite tier required for this drop',
+              optional: true
             }
           ]
         }
@@ -252,7 +253,14 @@ export class ActionsGenerator extends BaseGenerator<ActionDetail> {
             {
               name: 'minEliteTier',
               type: 'number',
-              description: 'Minimum elite tier required'
+              description: 'Minimum elite tier required',
+              optional: true
+            },
+            {
+              name: 'dropRatePerDifficultyTier',
+              type: 'number',
+              description: 'Additional drop rate per difficulty tier',
+              optional: true
             }
           ]
         }
@@ -290,7 +298,14 @@ export class ActionsGenerator extends BaseGenerator<ActionDetail> {
             {
               name: 'minEliteTier',
               type: 'number',
-              description: 'Minimum elite tier required'
+              description: 'Minimum elite tier required',
+              optional: true
+            },
+            {
+              name: 'dropRatePerDifficultyTier',
+              type: 'number',
+              description: 'Additional drop rate per difficulty tier',
+              optional: true
             }
           ]
         }
@@ -390,7 +405,7 @@ export class ActionsGenerator extends BaseGenerator<ActionDetail> {
                           type: 'string'
                         },
                         {
-                          name: 'eliteTier',
+                          name: 'difficultyTier',
                           type: 'number'
                         },
                         {
@@ -420,7 +435,7 @@ export class ActionsGenerator extends BaseGenerator<ActionDetail> {
                       type: 'string'
                     },
                     {
-                      name: 'eliteTier',
+                      name: 'difficultyTier',
                       type: 'number'
                     },
                     {
@@ -478,7 +493,13 @@ export class ActionsGenerator extends BaseGenerator<ActionDetail> {
                     },
                     {
                       name: 'minEliteTier',
-                      type: 'number'
+                      type: 'number',
+                      optional: true
+                    },
+                    {
+                      name: 'dropRatePerDifficultyTier',
+                      type: 'number',
+                      optional: true
                     }
                   ]
                 }
@@ -518,7 +539,7 @@ export class ActionsGenerator extends BaseGenerator<ActionDetail> {
                             type: 'string'
                           },
                           {
-                            name: 'eliteTier',
+                            name: 'difficultyTier',
                             type: 'number'
                           },
                           {
@@ -553,7 +574,7 @@ export class ActionsGenerator extends BaseGenerator<ActionDetail> {
                         type: 'string'
                       },
                       {
-                        name: 'eliteTier',
+                        name: 'difficultyTier',
                         type: 'number'
                       },
                       {
@@ -631,6 +652,18 @@ export class ActionsGenerator extends BaseGenerator<ActionDetail> {
             }
           ]
         }
+      },
+      {
+        name: 'maxDifficulty',
+        type: 'number',
+        description: 'Maximum difficulty tier (0-5)',
+        optional: true
+      },
+      {
+        name: 'retainAllEnhancement',
+        type: 'boolean',
+        description: 'Whether to retain all enhancement levels',
+        optional: true
       },
       {
         name: 'sortIndex',

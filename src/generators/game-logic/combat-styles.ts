@@ -4,6 +4,7 @@ import type { BaseEntity, PropertyDefinition, GeneratorConfig } from '../base/ty
 interface CombatStyleDetail extends BaseEntity {
 	hrid: string
 	name: string
+	skillExpMap: Record<string, boolean> | null
 	sortIndex: number
 }
 
@@ -40,6 +41,14 @@ export class CombatStylesGenerator extends BaseGenerator<CombatStyleDetail> {
 				name: 'name',
 				type: 'string',
 				description: 'Display name of the combat style'
+			},
+			{
+				name: 'skillExpMap',
+				type: 'record',
+				nullable: true,
+				keyType: { name: 'skill', type: 'string' },
+				valueType: { name: 'hasExp', type: 'boolean' },
+				description: 'Map of skill HRIDs to whether they gain experience'
 			},
 			{
 				name: 'sortIndex',

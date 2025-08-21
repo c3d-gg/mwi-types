@@ -7,6 +7,8 @@ interface ChatIconDetail extends BaseEntity {
   isSpecial: boolean
   isSeasonal: boolean
   cowbellCost: number
+  supporterPointCost: number
+  requiredChatIconHrid: string
   sortIndex: number
 }
 
@@ -58,6 +60,16 @@ export class ChatIconsGenerator extends BaseGenerator<ChatIconDetail> {
         name: 'cowbellCost',
         type: 'number',
         description: 'Cost in cowbells to purchase this chat icon'
+      },
+      {
+        name: 'supporterPointCost',
+        type: 'number',
+        description: 'Cost in supporter points to purchase this chat icon'
+      },
+      {
+        name: 'requiredChatIconHrid',
+        type: 'string',
+        description: 'Chat icon required to unlock this one'
       },
       {
         name: 'sortIndex',

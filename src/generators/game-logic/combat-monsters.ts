@@ -39,6 +39,16 @@ export class CombatMonstersGenerator extends BaseGenerator<CombatMonsterEntity> 
         description: 'The display name of the combat monster'
       },
       {
+        name: 'enrageTime',
+        type: 'number',
+        description: 'Time in nanoseconds before the monster enrages'
+      },
+      {
+        name: 'experience',
+        type: 'number',
+        description: 'Experience gained from defeating this monster'
+      },
+      {
         name: 'combatDetails',
         type: 'object',
         description: 'Base combat statistics and attributes',
@@ -48,13 +58,15 @@ export class CombatMonstersGenerator extends BaseGenerator<CombatMonsterEntity> 
         name: 'elite1CombatDetails',
         type: 'object',
         description: 'Elite tier 1 combat statistics and attributes',
-        properties: this.getCombatDetailsProperties()
+        properties: this.getCombatDetailsProperties(),
+        optional: true
       },
       {
         name: 'elite2CombatDetails',
         type: 'object',
         description: 'Elite tier 2 combat statistics and attributes',
-        properties: this.getCombatDetailsProperties()
+        properties: this.getCombatDetailsProperties(),
+        optional: true
       },
       {
         name: 'abilities',
@@ -76,9 +88,9 @@ export class CombatMonstersGenerator extends BaseGenerator<CombatMonsterEntity> 
               description: 'The level of the ability'
             },
             {
-              name: 'minEliteTier',
+              name: 'minDifficultyTier',
               type: 'number',
-              description: 'Minimum elite tier required for this ability'
+              description: 'Minimum difficulty tier required for this ability'
             }
           ]
         }
@@ -137,6 +149,11 @@ export class CombatMonstersGenerator extends BaseGenerator<CombatMonsterEntity> 
         type: 'number',
         description: 'Attack interval in nanoseconds'
       },
+      {
+        name: 'totalCastSpeed',
+        type: 'number',
+        description: 'Total cast speed modifier'
+      },
       // Accuracy Ratings
       {
         name: 'stabAccuracyRating',
@@ -188,6 +205,11 @@ export class CombatMonstersGenerator extends BaseGenerator<CombatMonsterEntity> 
         name: 'magicMaxDamage',
         type: 'number',
         description: 'Maximum magic damage'
+      },
+      {
+        name: 'defensiveMaxDamage',
+        type: 'number',
+        description: 'Maximum defensive damage'
       },
       // Evasion Ratings
       {
@@ -264,9 +286,9 @@ export class CombatMonstersGenerator extends BaseGenerator<CombatMonsterEntity> 
         description: 'Attack skill level'
       },
       {
-        name: 'powerLevel',
+        name: 'meleeLevel',
         type: 'number',
-        description: 'Power skill level'
+        description: 'Melee skill level'
       },
       {
         name: 'defenseLevel',
@@ -433,6 +455,12 @@ export class CombatMonstersGenerator extends BaseGenerator<CombatMonsterEntity> 
             description: 'Magic damage modifier',
             optional: true
           },
+          {
+            name: 'defensiveDamage',
+            type: 'number',
+            description: 'Defensive damage modifier',
+            optional: true
+          },
           // Special combat stats
           {
             name: 'lifeSteal',
@@ -559,9 +587,9 @@ export class CombatMonstersGenerator extends BaseGenerator<CombatMonsterEntity> 
             optional: true
           },
           {
-            name: 'power',
+            name: 'melee',
             type: 'number',
-            description: 'Power skill level',
+            description: 'Melee skill level',
             optional: true
           },
           {
@@ -696,7 +724,14 @@ export class CombatMonstersGenerator extends BaseGenerator<CombatMonsterEntity> 
       {
         name: 'minEliteTier',
         type: 'number',
-        description: 'Minimum elite tier required for this drop'
+        description: 'Minimum elite tier required for this drop',
+        optional: true
+      },
+      {
+        name: 'dropRatePerDifficultyTier',
+        type: 'number',
+        description: 'Additional drop rate per difficulty tier',
+        optional: true
       }
     ];
   }
@@ -807,9 +842,9 @@ export function getMonsterEliteStats(hrid: CombatMonsterHrid, eliteTier: 0 | 1 |
     case 0:
       return monster.combatDetails;
     case 1:
-      return monster.elite1CombatDetails;
+      return monster.elite1CombatDetails || monster.combatDetails;
     case 2:
-      return monster.elite2CombatDetails;
+      return monster.elite2CombatDetails || monster.combatDetails;
     default:
       return monster.combatDetails;
   }

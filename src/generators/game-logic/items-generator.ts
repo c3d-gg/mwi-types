@@ -215,7 +215,7 @@ export class ItemsGenerator extends BaseGenerator<ItemDetail> {
                 { name: 'dropRate', type: 'number' },
                 { name: 'minCount', type: 'number' },
                 { name: 'maxCount', type: 'number' },
-                { name: 'minEliteTier', type: 'number' }
+                { name: 'minEliteTier', type: 'number', optional: true }
               ]
             }
           }
@@ -249,6 +249,8 @@ export class ItemsGenerator extends BaseGenerator<ItemDetail> {
               { name: 'combatStyleHrids', type: 'array', items: { name: 'combatStyleHrid', type: 'string' }, optional: true },
               { name: 'damageType', type: 'string', optional: true },
               { name: 'attackInterval', type: 'number', optional: true },
+              { name: 'primaryTraining', type: 'string', optional: true },
+              { name: 'focusTraining', type: 'string', optional: true },
               // Common combat stats (all optional since not all items have all stats)
               { name: 'attackSpeed', type: 'number', optional: true },
               { name: 'rangedAccuracy', type: 'number', optional: true },
@@ -276,6 +278,8 @@ export class ItemsGenerator extends BaseGenerator<ItemDetail> {
               // Additional combat stats found in the data
               { name: 'taskDamage', type: 'number', optional: true },
               { name: 'autoAttackDamage', type: 'number', optional: true },
+              { name: 'abilityDamage', type: 'number', optional: true },
+              { name: 'defensiveDamage', type: 'number', optional: true },
               { name: 'threat', type: 'number', optional: true },
               // Resource stats
               { name: 'maxHitpoints', type: 'number', optional: true },
@@ -296,6 +300,14 @@ export class ItemsGenerator extends BaseGenerator<ItemDetail> {
               { name: 'waterPenetration', type: 'number', optional: true },
               { name: 'naturePenetration', type: 'number', optional: true },
               { name: 'armorPenetration', type: 'number', optional: true },
+              // Experience bonuses
+              { name: 'attackExperience', type: 'number', optional: true },
+              { name: 'defenseExperience', type: 'number', optional: true },
+              { name: 'intelligenceExperience', type: 'number', optional: true },
+              { name: 'magicExperience', type: 'number', optional: true },
+              { name: 'meleeExperience', type: 'number', optional: true },
+              { name: 'rangedExperience', type: 'number', optional: true },
+              { name: 'staminaExperience', type: 'number', optional: true },
               // Special combat effects
               { name: 'lifeSteal', type: 'number', optional: true },
               { name: 'manaLeech', type: 'number', optional: true },
