@@ -99,35 +99,38 @@ jobs:
 
       - name: Test package exports
         run: |
-          # Test CommonJS imports
-          cat > test-exports.cjs << 'EOF'
-          const { SKILLS } = require('./dist');
-          const { SkillSchema } = require('./dist/schemas/zod');
-          const { SkillHridEnum } = require('./dist/constants');
-          const { getSkill } = require('./dist/game-logic');
-          const { PlayerDataSchema } = require('./dist/player-data');
-          const { getTranslatedSkillName } = require('./dist/localization');
-
-          console.log('✅ CommonJS imports successful');
-          console.log('Skills count:', Object.keys(SKILLS).length);
+          # Test ES module imports
+          cat > test-exports.mjs << 'EOF'
+          import { SKILLS, getSkill, Skill } from './dist/index.js';
+          
+          // Test that exports work correctly
+          const skills = SKILLS;
+          console.log('✅ ES module imports successful');
+          console.log('Skills Map size:', skills.size);
+          
+          // Test a utility function
+          const firstSkill = skills.values().next().value;
+          if (firstSkill) {
+            console.log('First skill:', firstSkill.hrid);
+          }
           EOF
 
           # Test the imports
-          node test-exports.cjs
+          node test-exports.mjs
 
           # Test TypeScript imports
           cat > test-imports.ts << 'EOF'
-          import { SKILLS } from './dist';
-          import { SkillSchema } from './dist/schemas/zod';
-          import { SkillHrid } from './dist/game-logic/skills';
-          import type { PlayerData } from './dist/player-data';
+          import { SKILLS, getSkill } from './dist/index.js';
+          import type { Skill, Item, Action, PlayerData } from './dist/index.js';
 
-          const skill: typeof SKILLS[keyof typeof SKILLS] = SKILLS['/skills/attack'];
+          // Test that types are properly exported
+          const skillsMap: typeof SKILLS = SKILLS;
+          const firstSkill: Skill | undefined = skillsMap.values().next().value;
           console.log('✅ TypeScript imports successful');
           EOF
 
           # Just compile, don't run
-          npx tsc --noEmit test-imports.ts --module commonjs --esModuleInterop --skipLibCheck || echo "TypeScript check completed"
+          bun tsc --noEmit test-imports.ts --module esnext --esModuleInterop --skipLibCheck --moduleResolution node
 
   publish:
     name: Publish to NPM
