@@ -19,10 +19,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```json
 {
-  "generate": "bun run src/generators/index.ts",
-  "generate:watch": "bun run --watch src/generators/index.ts",
-  "typecheck": "bun tsc --noEmit",
-  "clean": "rm -rf src/generated"
+	"generate": "bun run src/generators/index.ts",
+	"generate:watch": "bun run --watch src/generators/index.ts",
+	"typecheck": "bun tsc --noEmit",
+	"clean": "rm -rf src/generated"
 }
 ```
 

@@ -1,5 +1,3 @@
-// Main entry point for @c3d.gg/mwi-types
-// This file re-exports from generated content
-// The generated content is created during the build process
-
-export * from './generated/index.js'
+// Main package index for @c3d.gg/mwi-types 
+// Re-exports everything from the generated types
+export * from './generated'

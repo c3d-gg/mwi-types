@@ -12,7 +12,7 @@ on:
         options:
           - 'true'
           - 'false'
-  
+
   # Trigger on changes to source data files
   push:
     branches:
@@ -22,7 +22,7 @@ on:
       - 'src/sources/**/*.json'
       - 'src/generators/**/*.ts'
       - 'src/types/**/*.ts'
-  
+
   # Allow running on PRs to test generation
   pull_request:
     paths:
@@ -38,7 +38,7 @@ jobs:
   generate:
     name: Generate Types
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -106,7 +106,7 @@ jobs:
             ### Changes
             - Generated types have been updated to match the latest game data
             - All TypeScript compilation checks have passed
-            
+
             ### Files Changed
             ```
             ${{ steps.changed-files.outputs.all }}

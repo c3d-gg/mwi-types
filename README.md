@@ -29,14 +29,14 @@ bun add @c3d.gg/mwi-types
 ### Basic Types
 
 ```typescript
-import { Item, Skill, Action, Recipe } from '@c3d.gg/mwi-types'
+import { Action, Item, Recipe, Skill } from '@c3d.gg/mwi-types'
 
 // Type-safe game entities
 const milk: Item = {
-  hrid: '/items/milk',
-  name: 'Milk',
-  categoryHrid: '/item_categories/product',
-  // ... other properties
+	hrid: '/items/milk',
+	name: 'Milk',
+	categoryHrid: '/item_categories/product',
+	// ... other properties
 }
 ```
 
@@ -46,37 +46,32 @@ The package provides multiple entry points for better tree-shaking:
 
 ```typescript
 // Main entry - all types
-import { Item, Skill, getItem } from '@c3d.gg/mwi-types'
-
-// Game logic only
-import { ITEMS, SKILLS, getItemsByCategory } from '@c3d.gg/mwi-types/game-logic'
-
+import { getItem, Item, Skill } from '@c3d.gg/mwi-types'
 // Constants/HRIDs only
-import { ItemHrid, SkillHrid, ITEM_HRIDS } from '@c3d.gg/mwi-types/constants'
-
-// Schemas only
-import { ItemSchema } from '@c3d.gg/mwi-types/zod'
-import { ItemSchema as ItemTypeboxSchema } from '@c3d.gg/mwi-types/typebox'
-
-// Player data types
-import { PlayerData, Character } from '@c3d.gg/mwi-types/player-data'
-
+import { ITEM_HRIDS, ItemHrid, SkillHrid } from '@c3d.gg/mwi-types/constants'
+// Game logic only
+import { getItemsByCategory, ITEMS, SKILLS } from '@c3d.gg/mwi-types/game-logic'
 // Localization
 import { getTranslatedItem } from '@c3d.gg/mwi-types/localization'
+// Player data types
+import { Character, PlayerData } from '@c3d.gg/mwi-types/player-data'
+import { ItemSchema as ItemTypeboxSchema } from '@c3d.gg/mwi-types/typebox'
+// Schemas only
+import { ItemSchema } from '@c3d.gg/mwi-types/zod'
 ```
 
 ### Schema Validation
 
 ```typescript
 // Zod schemas
-import { ItemSchema, SkillSchema } from '@c3d.gg/mwi-types/zod'
-
-const validItem = ItemSchema.parse(unknownData)
-const isValid = SkillSchema.safeParse(data).success
 
 // Typebox schemas
 import { ItemSchema, SkillSchema } from '@c3d.gg/mwi-types/typebox'
+import { ItemSchema, SkillSchema } from '@c3d.gg/mwi-types/zod'
 import { Value } from '@sinclair/typebox/value'
+
+const validItem = ItemSchema.parse(unknownData)
+const isValid = SkillSchema.safeParse(data).success
 
 const isValid = Value.Check(ItemSchema, data)
 ```
@@ -91,7 +86,7 @@ const selectedSkill: SkillHrid = SKILL_HRIDS.ALCHEMY
 
 // Or iterate all values
 ITEM_HRIDS.forEach((hrid) => {
-  console.log(`Processing item: ${hrid}`)
+	console.log(`Processing item: ${hrid}`)
 })
 ```
 
@@ -99,10 +94,10 @@ ITEM_HRIDS.forEach((hrid) => {
 
 ```typescript
 import {
-  getItemByHrid,
-  getSkillByHrid,
-  filterItemsByCategory,
-  filterActionsBySkill,
+	filterActionsBySkill,
+	filterItemsByCategory,
+	getItemByHrid,
+	getSkillByHrid,
 } from '@c3d.gg/mwi-types'
 
 const milk = getItemByHrid('/items/milk')
@@ -113,8 +108,8 @@ const cookingActions = filterActionsBySkill('/skills/cooking')
 
 ```typescript
 import {
-  ItemTranslations,
-  SkillTranslations,
+	ItemTranslations,
+	SkillTranslations,
 } from '@c3d.gg/mwi-types/localization/en'
 
 const milkName = ItemTranslations['/items/milk'].name

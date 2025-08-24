@@ -1,12 +1,12 @@
 {
-  "extends": "./tsconfig.json",
-  "exclude": [
-    "src/index.ts",
-    "src/game-logic/index.ts",
-    "src/player-data/index.ts",
-    "src/localization/index.ts",
-    "src/schemas/*/index.ts",
-    "src/scripts/validate-types.ts",
-    "src/generated/**/*"
-  ]
+	"extends": "./tsconfig.json",
+	"exclude": [
+		"src/index.ts",
+		"src/game-logic/index.ts",
+		"src/player-data/index.ts",
+		"src/localization/index.ts",
+		"src/schemas/*/index.ts",
+		"src/scripts/validate-types.ts",
+		"src/generated/**/*"
+	]
 }

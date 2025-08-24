@@ -2,209 +2,35 @@
 	"type": "init_client_data",
 	"gameVersion": "v1.20250819.0",
 	"versionTimestamp": "2025-08-19T23:13:37.75043582Z",
-	"currentTimestamp": "2025-08-20T10:02:16.313677124Z",
+	"currentTimestamp": "2025-08-21T15:59:10.618046248Z",
 	"levelExperienceTable": [
-		0,
-		0,
-		33,
-		76,
-		132,
-		202,
-		286,
-		386,
-		503,
-		637,
-		791,
-		964,
-		1159,
-		1377,
-		1620,
-		1891,
-		2192,
-		2525,
-		2893,
-		3300,
-		3750,
-		4247,
-		4795,
-		5400,
-		6068,
-		6805,
-		7618,
-		8517,
-		9508,
-		10604,
-		11814,
-		13151,
-		14629,
-		16262,
-		18068,
-		20064,
-		22271,
-		24712,
-		27411,
-		30396,
-		33697,
-		37346,
-		41381,
-		45842,
-		50773,
-		56222,
-		62243,
-		68895,
-		76242,
-		84355,
-		93311,
-		103195,
-		114100,
-		126127,
-		139390,
-		154009,
-		170118,
-		187863,
-		207403,
-		228914,
-		252584,
-		278623,
-		307256,
-		338731,
-		373318,
-		411311,
-		453030,
-		498824,
-		549074,
-		604193,
-		664632,
-		730881,
-		803472,
-		882985,
-		970050,
-		1065351,
-		1169633,
-		1283701,
-		1408433,
-		1544780,
-		1693774,
-		1856536,
-		2034279,
-		2228321,
-		2440088,
-		2671127,
-		2923113,
-		3197861,
-		3497335,
-		3823663,
-		4179145,
-		4566274,
-		4987741,
-		5446463,
-		5945587,
-		6488521,
-		7078945,
-		7720834,
-		8418485,
-		9176537,
-		10000000,
-		11404976,
-		12904567,
-		14514400,
-		16242080,
-		18095702,
-		20083886,
-		22215808,
-		24501230,
-		26950540,
-		29574787,
-		32385721,
-		35395838,
-		38618420,
-		42067584,
-		45758332,
-		49706603,
-		53929328,
-		58444489,
-		63271179,
-		68429670,
-		73941479,
-		79829440,
-		86117783,
-		92832214,
-		100000000,
-		114406130,
-		130118394,
-		147319656,
-		166147618,
-		186752428,
-		209297771,
-		233962072,
-		260939787,
-		290442814,
-		322702028,
-		357968938,
-		396517495,
-		438646053,
-		484679494,
-		534971538,
-		589907252,
-		649905763,
-		715423218,
-		786955977,
-		865044093,
-		950275074,
-		1043287971,
-		1144777804,
-		1255500373,
-		1376277458,
-		1508002470,
-		1651646566,
-		1808265285,
-		1979005730,
-		2165114358,
-		2367945418,
-		2588970089,
-		2829786381,
-		3092129857,
-		3377885250,
-		3689099031,
-		4027993033,
-		4396979184,
-		4798675471,
-		5235923207,
-		5711805728,
-		6229668624,
-		6793141628,
-		7406162301,
-		8073001662,
-		8798291902,
-		9587056372,
-		10444742007,
-		11377254401,
-		12390995728,
-		13492905745,
-		14690506120,
-		15991948361,
-		17406065609,
-		18942428633,
-		20611406335,
-		22424231139,
-		24393069640,
-		26531098945,
-		28852589138,
-		31372992363,
-		34109039054,
-		37078841860,
-		40302007875,
-		43799759843,
-		47595067021,
-		51712786465,
-		56179815564,
-		61025256696,
-		66280594953,
-		71979889960,
-		78159982881,
-		84860719814,
-		92125192822,
-		100000000000
+		0, 0, 33, 76, 132, 202, 286, 386, 503, 637, 791, 964, 1159, 1377, 1620,
+		1891, 2192, 2525, 2893, 3300, 3750, 4247, 4795, 5400, 6068, 6805, 7618,
+		8517, 9508, 10604, 11814, 13151, 14629, 16262, 18068, 20064, 22271, 24712,
+		27411, 30396, 33697, 37346, 41381, 45842, 50773, 56222, 62243, 68895, 76242,
+		84355, 93311, 103195, 114100, 126127, 139390, 154009, 170118, 187863,
+		207403, 228914, 252584, 278623, 307256, 338731, 373318, 411311, 453030,
+		498824, 549074, 604193, 664632, 730881, 803472, 882985, 970050, 1065351,
+		1169633, 1283701, 1408433, 1544780, 1693774, 1856536, 2034279, 2228321,
+		2440088, 2671127, 2923113, 3197861, 3497335, 3823663, 4179145, 4566274,
+		4987741, 5446463, 5945587, 6488521, 7078945, 7720834, 8418485, 9176537,
+		10000000, 11404976, 12904567, 14514400, 16242080, 18095702, 20083886,
+		22215808, 24501230, 26950540, 29574787, 32385721, 35395838, 38618420,
+		42067584, 45758332, 49706603, 53929328, 58444489, 63271179, 68429670,
+		73941479, 79829440, 86117783, 92832214, 100000000, 114406130, 130118394,
+		147319656, 166147618, 186752428, 209297771, 233962072, 260939787, 290442814,
+		322702028, 357968938, 396517495, 438646053, 484679494, 534971538, 589907252,
+		649905763, 715423218, 786955977, 865044093, 950275074, 1043287971,
+		1144777804, 1255500373, 1376277458, 1508002470, 1651646566, 1808265285,
+		1979005730, 2165114358, 2367945418, 2588970089, 2829786381, 3092129857,
+		3377885250, 3689099031, 4027993033, 4396979184, 4798675471, 5235923207,
+		5711805728, 6229668624, 6793141628, 7406162301, 8073001662, 8798291902,
+		9587056372, 10444742007, 11377254401, 12390995728, 13492905745, 14690506120,
+		15991948361, 17406065609, 18942428633, 20611406335, 22424231139,
+		24393069640, 26531098945, 28852589138, 31372992363, 34109039054,
+		37078841860, 40302007875, 43799759843, 47595067021, 51712786465,
+		56179815564, 61025256696, 66280594953, 71979889960, 78159982881,
+		84860719814, 92125192822, 100000000000
 	],
 	"gameModeDetailMap": {
 		"ironcow": {
@@ -214,9 +40,7 @@
 			"isCreatable": true,
 			"maxCharacterLimit": 3,
 			"marketRestricted": true,
-			"subsetGameModes": [
-				"legacy_ironcow"
-			],
+			"subsetGameModes": ["legacy_ironcow"],
 			"sortIndex": 2
 		},
 		"legacy_ironcow": {
@@ -3699,14 +3523,7 @@
 			"sortIndex": 22
 		}
 	},
-	"abilitySlotsLevelRequirementList": [
-		0,
-		1,
-		1,
-		20,
-		50,
-		90
-	],
+	"abilitySlotsLevelRequirementList": [0, 1, 1, 20, 50, 90],
 	"itemDetailMap": {
 		"/items/abyssal_essence": {
 			"hrid": "/items/abyssal_essence",
@@ -3766,9 +3583,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/acrobats_ribbon"
-			],
+			"protectionItemHrids": ["/items/acrobats_ribbon"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -6365,9 +6180,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/damaged_anchor"
-			],
+			"protectionItemHrids": ["/items/damaged_anchor"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -6582,9 +6395,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/damaged_anchor"
-			],
+			"protectionItemHrids": ["/items/damaged_anchor"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -7211,9 +7022,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000,
 					"rangedAccuracy": 0.72,
@@ -7285,9 +7094,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"rangedAccuracy": 1.08,
@@ -7359,9 +7166,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/fire",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -7542,9 +7347,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/nature",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -7696,9 +7499,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/water",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -8151,9 +7952,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"smashAccuracy": 0.32,
@@ -8661,9 +8460,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3300000000,
 					"smashAccuracy": 0.18,
@@ -9149,9 +8946,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 2800000000,
 					"stabAccuracy": 0.56,
@@ -9210,9 +9005,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000,
 					"slashAccuracy": 0.32,
@@ -12099,9 +11892,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000,
 					"rangedAccuracy": 0.18,
@@ -12160,9 +11951,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"rangedAccuracy": 0.27,
@@ -12221,9 +12010,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/fire",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -12427,9 +12214,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/nature",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -12555,9 +12340,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/water",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -12602,9 +12385,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/bishops_scroll"
-			],
+			"protectionItemHrids": ["/items/bishops_scroll"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -12723,10 +12504,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/bishops_scroll",
-				"/items/bishops_codex"
-			],
+			"protectionItemHrids": ["/items/bishops_scroll", "/items/bishops_codex"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -12937,9 +12715,7 @@
 					"count": 439
 				}
 			],
-			"protectionItemHrids": [
-				"/items/black_bear_fluff"
-			],
+			"protectionItemHrids": ["/items/black_bear_fluff"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -13276,9 +13052,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/kraken_fang"
-			],
+			"protectionItemHrids": ["/items/kraken_fang"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -13325,9 +13099,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/fire",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -13375,10 +13147,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/kraken_fang",
-				"/items/blazing_trident"
-			],
+			"protectionItemHrids": ["/items/kraken_fang", "/items/blazing_trident"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -13417,9 +13186,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/fire",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -13542,9 +13309,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/kraken_fang"
-			],
+			"protectionItemHrids": ["/items/kraken_fang"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -13591,9 +13356,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/nature",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -13643,10 +13406,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/kraken_fang",
-				"/items/blooming_trident"
-			],
+			"protectionItemHrids": ["/items/kraken_fang", "/items/blooming_trident"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -13685,9 +13445,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/nature",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -14642,9 +14400,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"smashAccuracy": 0.48,
@@ -15140,9 +14896,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3300000000,
 					"smashAccuracy": 0.27,
@@ -15616,9 +15370,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 2800000000,
 					"stabAccuracy": 0.84,
@@ -15677,9 +15429,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000,
 					"slashAccuracy": 0.48,
@@ -16091,9 +15841,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000,
 					"rangedAccuracy": 0.24,
@@ -16152,9 +15900,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"rangedAccuracy": 0.36,
@@ -16213,9 +15959,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/fire",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -16419,9 +16163,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/nature",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -16547,9 +16289,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/water",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -17590,9 +17330,7 @@
 					"count": 439
 				}
 			],
-			"protectionItemHrids": [
-				"/items/centaur_hoof"
-			],
+			"protectionItemHrids": ["/items/centaur_hoof"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -17849,9 +17587,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/chaotic_chain"
-			],
+			"protectionItemHrids": ["/items/chaotic_chain"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -17898,9 +17634,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3300000000,
 					"smashAccuracy": 0.75,
@@ -17947,10 +17681,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/chaotic_chain",
-				"/items/chaotic_flail"
-			],
+			"protectionItemHrids": ["/items/chaotic_chain", "/items/chaotic_flail"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -17989,9 +17720,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3300000000,
 					"smashAccuracy": 0.81,
@@ -18316,9 +18045,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"smashAccuracy": 0.16,
@@ -18727,9 +18454,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3300000000,
 					"smashAccuracy": 0.09,
@@ -19116,9 +18841,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 2800000000,
 					"stabAccuracy": 0.28,
@@ -19173,9 +18896,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000,
 					"slashAccuracy": 0.16,
@@ -19835,10 +19556,7 @@
 					"count": 1345
 				}
 			],
-			"protectionItemHrids": [
-				"/items/sinister_cape",
-				"/items/enchanted_cloak"
-			],
+			"protectionItemHrids": ["/items/sinister_cape", "/items/enchanted_cloak"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -20046,9 +19764,7 @@
 					"count": 1345
 				}
 			],
-			"protectionItemHrids": [
-				"/items/chrono_sphere"
-			],
+			"protectionItemHrids": ["/items/chrono_sphere"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -20375,9 +20091,7 @@
 					"count": 319
 				}
 			],
-			"protectionItemHrids": [
-				"/items/gobo_rag"
-			],
+			"protectionItemHrids": ["/items/gobo_rag"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -20525,9 +20239,7 @@
 					"count": 2034
 				}
 			],
-			"protectionItemHrids": [
-				"/items/colossus_core"
-			],
+			"protectionItemHrids": ["/items/colossus_core"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -20623,9 +20335,7 @@
 					"count": 2034
 				}
 			],
-			"protectionItemHrids": [
-				"/items/colossus_core"
-			],
+			"protectionItemHrids": ["/items/colossus_core"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -20949,9 +20659,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/corsair_crest"
-			],
+			"protectionItemHrids": ["/items/corsair_crest"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -21061,10 +20769,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/corsair_crest",
-				"/items/corsair_helmet"
-			],
+			"protectionItemHrids": ["/items/corsair_crest", "/items/corsair_helmet"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -22278,9 +21983,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"smashAccuracy": 0.64,
@@ -22788,9 +22491,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3300000000,
 					"smashAccuracy": 0.36,
@@ -23276,9 +22977,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 2800000000,
 					"stabAccuracy": 1.12,
@@ -23337,9 +23036,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000,
 					"slashAccuracy": 0.64,
@@ -24229,9 +23926,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/cursed_ball"
-			],
+			"protectionItemHrids": ["/items/cursed_ball"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -24278,9 +23973,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000,
 					"rangedAccuracy": 1.05,
@@ -24323,10 +24016,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/cursed_ball",
-				"/items/cursed_bow"
-			],
+			"protectionItemHrids": ["/items/cursed_ball", "/items/cursed_bow"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -24365,9 +24055,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000,
 					"rangedAccuracy": 1.134,
@@ -24808,9 +24496,7 @@
 					"count": 2034
 				}
 			],
-			"protectionItemHrids": [
-				"/items/demonic_core"
-			],
+			"protectionItemHrids": ["/items/demonic_core"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -24902,9 +24588,7 @@
 					"count": 2034
 				}
 			],
-			"protectionItemHrids": [
-				"/items/demonic_core"
-			],
+			"protectionItemHrids": ["/items/demonic_core"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -24996,9 +24680,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/dodocamel_plume"
-			],
+			"protectionItemHrids": ["/items/dodocamel_plume"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -26513,9 +26195,7 @@
 					"count": 319
 				}
 			],
-			"protectionItemHrids": [
-				"/items/chrono_sphere"
-			],
+			"protectionItemHrids": ["/items/chrono_sphere"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -29055,9 +28735,7 @@
 					"count": 319
 				}
 			],
-			"protectionItemHrids": [
-				"/items/eye_of_the_watcher"
-			],
+			"protectionItemHrids": ["/items/eye_of_the_watcher"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -29778,9 +29456,7 @@
 					"count": 186
 				}
 			],
-			"protectionItemHrids": [
-				"/items/flaming_cloth"
-			],
+			"protectionItemHrids": ["/items/flaming_cloth"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -29860,9 +29536,7 @@
 					"count": 186
 				}
 			],
-			"protectionItemHrids": [
-				"/items/flaming_cloth"
-			],
+			"protectionItemHrids": ["/items/flaming_cloth"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -30019,9 +29693,7 @@
 					"count": 1345
 				}
 			],
-			"protectionItemHrids": [
-				"/items/red_panda_fluff"
-			],
+			"protectionItemHrids": ["/items/red_panda_fluff"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -30670,9 +30342,7 @@
 					"count": 2034
 				}
 			],
-			"protectionItemHrids": [
-				"/items/frost_sphere"
-			],
+			"protectionItemHrids": ["/items/frost_sphere"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -30711,9 +30381,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/water",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -30852,10 +30520,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/regal_jewel",
-				"/items/sundering_jewel"
-			],
+			"protectionItemHrids": ["/items/regal_jewel", "/items/sundering_jewel"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -30906,9 +30571,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 2800000000,
 					"stabAccuracy": 2.1,
@@ -31000,9 +30663,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 2800000000,
 					"stabAccuracy": 2.268,
@@ -31328,9 +30989,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000,
 					"rangedAccuracy": 0.48,
@@ -31389,9 +31048,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"rangedAccuracy": 0.72,
@@ -31450,9 +31107,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/fire",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -31656,9 +31311,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/nature",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -31784,9 +31437,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/water",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -31863,9 +31514,7 @@
 					"count": 3115
 				}
 			],
-			"protectionItemHrids": [
-				"/items/gluttonous_energy"
-			],
+			"protectionItemHrids": ["/items/gluttonous_energy"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -31971,9 +31620,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/fire",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -32575,9 +32222,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 2900000000,
 					"rangedAccuracy": 0.3,
@@ -32636,9 +32281,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3300000000,
 					"slashAccuracy": 1,
@@ -32693,9 +32336,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3700000000,
 					"smashAccuracy": 0.1,
@@ -32750,9 +32391,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 2500000000,
 					"stabAccuracy": 2.2,
@@ -34832,9 +34471,7 @@
 					"count": 2034
 				}
 			],
-			"protectionItemHrids": [
-				"/items/living_granite"
-			],
+			"protectionItemHrids": ["/items/living_granite"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -34873,9 +34510,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3400000000,
 					"smashAccuracy": 0.7,
@@ -35000,9 +34635,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/griffin_talon"
-			],
+			"protectionItemHrids": ["/items/griffin_talon"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -35053,9 +34686,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"smashAccuracy": 1.35,
@@ -35110,10 +34741,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/griffin_talon",
-				"/items/griffin_bulwark"
-			],
+			"protectionItemHrids": ["/items/griffin_talon", "/items/griffin_bulwark"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -35152,9 +34780,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"smashAccuracy": 1.458,
@@ -35209,9 +34835,7 @@
 					"count": 2034
 				}
 			],
-			"protectionItemHrids": [
-				"/items/griffin_leather"
-			],
+			"protectionItemHrids": ["/items/griffin_leather"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -35441,9 +35065,7 @@
 					"count": 2034
 				}
 			],
-			"protectionItemHrids": [
-				"/items/griffin_leather"
-			],
+			"protectionItemHrids": ["/items/griffin_leather"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -35604,9 +35226,7 @@
 					"count": 439
 				}
 			],
-			"protectionItemHrids": [
-				"/items/grizzly_bear_fluff"
-			],
+			"protectionItemHrids": ["/items/grizzly_bear_fluff"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -35856,9 +35476,7 @@
 					"count": 3115
 				}
 			],
-			"protectionItemHrids": [
-				"/items/guzzling_energy"
-			],
+			"protectionItemHrids": ["/items/guzzling_energy"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -36357,9 +35975,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"smashAccuracy": 0.96,
@@ -36940,9 +36556,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3300000000,
 					"smashAccuracy": 0.54,
@@ -37501,9 +37115,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 2800000000,
 					"stabAccuracy": 1.68,
@@ -37575,9 +37187,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000,
 					"slashAccuracy": 0.96,
@@ -37756,9 +37366,7 @@
 					"count": 186
 				}
 			],
-			"protectionItemHrids": [
-				"/items/icy_cloth"
-			],
+			"protectionItemHrids": ["/items/icy_cloth"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -37838,9 +37446,7 @@
 					"count": 186
 				}
 			],
-			"protectionItemHrids": [
-				"/items/icy_cloth"
-			],
+			"protectionItemHrids": ["/items/icy_cloth"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -38008,9 +37614,7 @@
 					"count": 2034
 				}
 			],
-			"protectionItemHrids": [
-				"/items/infernal_ember"
-			],
+			"protectionItemHrids": ["/items/infernal_ember"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -38049,9 +37653,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/fire",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.45,
@@ -38430,9 +38032,7 @@
 					"count": 2034
 				}
 			],
-			"protectionItemHrids": [
-				"/items/jackalope_antler"
-			],
+			"protectionItemHrids": ["/items/jackalope_antler"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -38471,9 +38071,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/nature",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -38624,9 +38222,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/knights_ingot"
-			],
+			"protectionItemHrids": ["/items/knights_ingot"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -38730,10 +38326,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/knights_ingot",
-				"/items/knights_aegis"
-			],
+			"protectionItemHrids": ["/items/knights_ingot", "/items/knights_aegis"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -38888,9 +38481,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/kraken_leather"
-			],
+			"protectionItemHrids": ["/items/kraken_leather"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -38988,10 +38579,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/kraken_leather",
-				"/items/kraken_chaps"
-			],
+			"protectionItemHrids": ["/items/kraken_leather", "/items/kraken_chaps"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -39215,9 +38803,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/kraken_leather"
-			],
+			"protectionItemHrids": ["/items/kraken_leather"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -39315,10 +38901,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/kraken_leather",
-				"/items/kraken_tunic"
-			],
+			"protectionItemHrids": ["/items/kraken_leather", "/items/kraken_tunic"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -40498,9 +40081,7 @@
 					"count": 622
 				}
 			],
-			"protectionItemHrids": [
-				"/items/luna_wing"
-			],
+			"protectionItemHrids": ["/items/luna_wing"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -40586,9 +40167,7 @@
 					"count": 622
 				}
 			],
-			"protectionItemHrids": [
-				"/items/luna_wing"
-			],
+			"protectionItemHrids": ["/items/luna_wing"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -40721,9 +40300,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/maelstrom_plating"
-			],
+			"protectionItemHrids": ["/items/maelstrom_plating"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -40914,9 +40491,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/maelstrom_plating"
-			],
+			"protectionItemHrids": ["/items/maelstrom_plating"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -41301,9 +40876,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/magicians_cloth"
-			],
+			"protectionItemHrids": ["/items/magicians_cloth"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -41396,10 +40969,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/magicians_cloth",
-				"/items/magicians_hat"
-			],
+			"protectionItemHrids": ["/items/magicians_cloth", "/items/magicians_hat"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -41539,9 +41109,7 @@
 					"count": 2034
 				}
 			],
-			"protectionItemHrids": [
-				"/items/magnet"
-			],
+			"protectionItemHrids": ["/items/magnet"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -41841,9 +41409,7 @@
 					"count": 2034
 				}
 			],
-			"protectionItemHrids": [
-				"/items/manticore_sting"
-			],
+			"protectionItemHrids": ["/items/manticore_sting"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -41988,9 +41554,7 @@
 					"count": 186
 				}
 			],
-			"protectionItemHrids": [
-				"/items/marine_scale"
-			],
+			"protectionItemHrids": ["/items/marine_scale"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -42122,9 +41686,7 @@
 					"count": 186
 				}
 			],
-			"protectionItemHrids": [
-				"/items/marine_scale"
-			],
+			"protectionItemHrids": ["/items/marine_scale"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -42203,9 +41765,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/marksman_brooch"
-			],
+			"protectionItemHrids": ["/items/marksman_brooch"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -45970,9 +45530,7 @@
 					"count": 439
 				}
 			],
-			"protectionItemHrids": [
-				"/items/panda_fluff"
-			],
+			"protectionItemHrids": ["/items/panda_fluff"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -46916,9 +46474,7 @@
 					"count": 67
 				}
 			],
-			"protectionItemHrids": [
-				"/items/crab_pincer"
-			],
+			"protectionItemHrids": ["/items/crab_pincer"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -47455,9 +47011,7 @@
 					"count": 439
 				}
 			],
-			"protectionItemHrids": [
-				"/items/polar_bear_fluff"
-			],
+			"protectionItemHrids": ["/items/polar_bear_fluff"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -47921,9 +47475,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000,
 					"rangedAccuracy": 0.36,
@@ -47982,9 +47534,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"rangedAccuracy": 0.54,
@@ -48043,9 +47593,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/fire",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -48225,9 +47773,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/nature",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -48353,9 +47899,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/water",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -49458,9 +49002,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"smashAccuracy": 0.8,
@@ -49968,9 +49510,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3300000000,
 					"smashAccuracy": 0.45,
@@ -50456,9 +49996,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 2800000000,
 					"stabAccuracy": 1.4,
@@ -50517,9 +50055,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000,
 					"slashAccuracy": 0.8,
@@ -50699,9 +50235,7 @@
 					"count": 319
 				}
 			],
-			"protectionItemHrids": [
-				"/items/red_panda_fluff"
-			],
+			"protectionItemHrids": ["/items/red_panda_fluff"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -50929,9 +50463,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000,
 					"rangedAccuracy": 0.6,
@@ -50990,9 +50522,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"rangedAccuracy": 0.9,
@@ -51051,9 +50581,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/fire",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -51257,9 +50785,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/nature",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -51385,9 +50911,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/water",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -51495,9 +51019,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/regal_jewel"
-			],
+			"protectionItemHrids": ["/items/regal_jewel"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -51544,9 +51066,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000,
 					"slashAccuracy": 1.35,
@@ -51593,10 +51113,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/regal_jewel",
-				"/items/regal_sword"
-			],
+			"protectionItemHrids": ["/items/regal_jewel", "/items/regal_sword"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -51635,9 +51152,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000,
 					"slashAccuracy": 1.458,
@@ -52389,9 +51904,7 @@
 					"count": 2034
 				}
 			],
-			"protectionItemHrids": [
-				"/items/revenant_anima"
-			],
+			"protectionItemHrids": ["/items/revenant_anima"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -52485,9 +51998,7 @@
 					"count": 2034
 				}
 			],
-			"protectionItemHrids": [
-				"/items/revenant_anima"
-			],
+			"protectionItemHrids": ["/items/revenant_anima"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -53059,9 +52570,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/kraken_fang"
-			],
+			"protectionItemHrids": ["/items/kraken_fang"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -53108,9 +52617,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/water",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -53158,10 +52665,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/kraken_fang",
-				"/items/rippling_trident"
-			],
+			"protectionItemHrids": ["/items/kraken_fang", "/items/rippling_trident"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -53200,9 +52704,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/water",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -53822,9 +53324,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/royal_cloth"
-			],
+			"protectionItemHrids": ["/items/royal_cloth"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -54025,9 +53525,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/royal_cloth"
-			],
+			"protectionItemHrids": ["/items/royal_cloth"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -54228,9 +53726,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/royal_cloth"
-			],
+			"protectionItemHrids": ["/items/royal_cloth"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -54435,9 +53931,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/royal_cloth"
-			],
+			"protectionItemHrids": ["/items/royal_cloth"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -54642,9 +54136,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/royal_cloth"
-			],
+			"protectionItemHrids": ["/items/royal_cloth"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -54845,9 +54337,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/royal_cloth"
-			],
+			"protectionItemHrids": ["/items/royal_cloth"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -55312,9 +54802,7 @@
 					"count": 82
 				}
 			],
-			"protectionItemHrids": [
-				"/items/shoebill_feather"
-			],
+			"protectionItemHrids": ["/items/shoebill_feather"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -55420,9 +54908,7 @@
 					"count": 319
 				}
 			],
-			"protectionItemHrids": [
-				"/items/magnifying_glass"
-			],
+			"protectionItemHrids": ["/items/magnifying_glass"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -56639,9 +56125,7 @@
 					"count": 67
 				}
 			],
-			"protectionItemHrids": [
-				"/items/snail_shell"
-			],
+			"protectionItemHrids": ["/items/snail_shell"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -56747,9 +56231,7 @@
 					"count": 43
 				}
 			],
-			"protectionItemHrids": [
-				"/items/snake_fang"
-			],
+			"protectionItemHrids": ["/items/snake_fang"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -56830,9 +56312,7 @@
 					"count": 439
 				}
 			],
-			"protectionItemHrids": [
-				"/items/sorcerers_sole"
-			],
+			"protectionItemHrids": ["/items/sorcerers_sole"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -57040,9 +56520,7 @@
 					"count": 2034
 				}
 			],
-			"protectionItemHrids": [
-				"/items/soul_fragment"
-			],
+			"protectionItemHrids": ["/items/soul_fragment"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -57081,9 +56559,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"rangedAccuracy": 1.32,
@@ -57551,9 +57027,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"smashAccuracy": 1.15,
@@ -57654,9 +57128,7 @@
 					"count": 2034
 				}
 			],
-			"protectionItemHrids": [
-				"/items/stalactite_shard"
-			],
+			"protectionItemHrids": ["/items/stalactite_shard"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -57695,9 +57167,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 2800000000,
 					"stabAccuracy": 2,
@@ -58516,9 +57986,7 @@
 					"count": 4815
 				}
 			],
-			"protectionItemHrids": [
-				"/items/sundering_jewel"
-			],
+			"protectionItemHrids": ["/items/sundering_jewel"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -58565,9 +58033,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"rangedAccuracy": 1.45,
@@ -58652,9 +58118,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"rangedAccuracy": 1.566,
@@ -62970,9 +62434,7 @@
 					"count": 120
 				}
 			],
-			"protectionItemHrids": [
-				"/items/treant_bark"
-			],
+			"protectionItemHrids": ["/items/treant_bark"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -63092,9 +62554,7 @@
 					"count": 82
 				}
 			],
-			"protectionItemHrids": [
-				"/items/turtle_shell"
-			],
+			"protectionItemHrids": ["/items/turtle_shell"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -63165,9 +62625,7 @@
 					"count": 82
 				}
 			],
-			"protectionItemHrids": [
-				"/items/turtle_shell"
-			],
+			"protectionItemHrids": ["/items/turtle_shell"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -65302,9 +64760,7 @@
 					"count": 2034
 				}
 			],
-			"protectionItemHrids": [
-				"/items/vampire_fang"
-			],
+			"protectionItemHrids": ["/items/vampire_fang"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -65399,10 +64855,7 @@
 					"count": 2034
 				}
 			],
-			"protectionItemHrids": [
-				"/items/vampire_fang",
-				"/items/werewolf_claw"
-			],
+			"protectionItemHrids": ["/items/vampire_fang", "/items/werewolf_claw"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -65445,9 +64898,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000,
 					"rangedAccuracy": 0.85,
@@ -65798,9 +65249,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"smashAccuracy": 0.24,
@@ -66308,9 +65757,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3300000000,
 					"smashAccuracy": 0.135,
@@ -66796,9 +66243,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 2800000000,
 					"stabAccuracy": 0.42,
@@ -66857,9 +66302,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000,
 					"slashAccuracy": 0.24,
@@ -66897,9 +66340,7 @@
 					"count": 240
 				}
 			],
-			"protectionItemHrids": [
-				"/items/goggles"
-			],
+			"protectionItemHrids": ["/items/goggles"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -66976,9 +66417,7 @@
 					"count": 240
 				}
 			],
-			"protectionItemHrids": [
-				"/items/magnifying_glass"
-			],
+			"protectionItemHrids": ["/items/magnifying_glass"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -67057,9 +66496,7 @@
 					"count": 622
 				}
 			],
-			"protectionItemHrids": [
-				"/items/eye_of_the_watcher"
-			],
+			"protectionItemHrids": ["/items/eye_of_the_watcher"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -67269,9 +66706,7 @@
 					"count": 2034
 				}
 			],
-			"protectionItemHrids": [
-				"/items/werewolf_claw"
-			],
+			"protectionItemHrids": ["/items/werewolf_claw"],
 			"alchemyDetail": {
 				"bulkMultiplier": 1,
 				"isCoinifiable": true,
@@ -67310,9 +66745,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 2800000000,
 					"slashAccuracy": 1.3,
@@ -67815,9 +67248,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000,
 					"rangedAccuracy": 0.12,
@@ -67872,9 +67303,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"rangedAccuracy": 0.18,
@@ -67929,9 +67358,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/fire",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -67989,9 +67416,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/nature",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -68109,9 +67534,7 @@
 					}
 				],
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/water",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -68253,9 +67676,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": true,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/alchemy_tool"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/alchemy_tool"]
 		},
 		"/item_locations/back": {
 			"hrid": "/item_locations/back",
@@ -68263,9 +67684,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": false,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/back"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/back"]
 		},
 		"/item_locations/body": {
 			"hrid": "/item_locations/body",
@@ -68273,9 +67692,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": false,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/body"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/body"]
 		},
 		"/item_locations/brewing_tool": {
 			"hrid": "/item_locations/brewing_tool",
@@ -68283,9 +67700,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": true,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/brewing_tool"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/brewing_tool"]
 		},
 		"/item_locations/charm": {
 			"hrid": "/item_locations/charm",
@@ -68293,9 +67708,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": false,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/charm"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/charm"]
 		},
 		"/item_locations/cheesesmithing_tool": {
 			"hrid": "/item_locations/cheesesmithing_tool",
@@ -68313,9 +67726,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": true,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/cooking_tool"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/cooking_tool"]
 		},
 		"/item_locations/crafting_tool": {
 			"hrid": "/item_locations/crafting_tool",
@@ -68323,9 +67734,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": true,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/crafting_tool"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/crafting_tool"]
 		},
 		"/item_locations/earrings": {
 			"hrid": "/item_locations/earrings",
@@ -68333,9 +67742,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": false,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/earrings"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/earrings"]
 		},
 		"/item_locations/enhancing_tool": {
 			"hrid": "/item_locations/enhancing_tool",
@@ -68343,9 +67750,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": true,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/enhancing_tool"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/enhancing_tool"]
 		},
 		"/item_locations/feet": {
 			"hrid": "/item_locations/feet",
@@ -68353,9 +67758,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": false,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/feet"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/feet"]
 		},
 		"/item_locations/foraging_tool": {
 			"hrid": "/item_locations/foraging_tool",
@@ -68363,9 +67766,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": true,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/foraging_tool"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/foraging_tool"]
 		},
 		"/item_locations/hands": {
 			"hrid": "/item_locations/hands",
@@ -68373,9 +67774,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": false,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/hands"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/hands"]
 		},
 		"/item_locations/head": {
 			"hrid": "/item_locations/head",
@@ -68383,9 +67782,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": false,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/head"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/head"]
 		},
 		"/item_locations/inventory": {
 			"hrid": "/item_locations/inventory",
@@ -68401,9 +67798,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": false,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/legs"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/legs"]
 		},
 		"/item_locations/main_hand": {
 			"hrid": "/item_locations/main_hand",
@@ -68422,9 +67817,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": true,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/milking_tool"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/milking_tool"]
 		},
 		"/item_locations/neck": {
 			"hrid": "/item_locations/neck",
@@ -68432,9 +67825,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": false,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/neck"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/neck"]
 		},
 		"/item_locations/off_hand": {
 			"hrid": "/item_locations/off_hand",
@@ -68453,9 +67844,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": false,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/pouch"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/pouch"]
 		},
 		"/item_locations/ring": {
 			"hrid": "/item_locations/ring",
@@ -68463,9 +67852,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": false,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/ring"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/ring"]
 		},
 		"/item_locations/tailoring_tool": {
 			"hrid": "/item_locations/tailoring_tool",
@@ -68473,9 +67860,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": true,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/tailoring_tool"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/tailoring_tool"]
 		},
 		"/item_locations/trinket": {
 			"hrid": "/item_locations/trinket",
@@ -68483,9 +67868,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": false,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/trinket"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/trinket"]
 		},
 		"/item_locations/two_hand": {
 			"hrid": "/item_locations/two_hand",
@@ -68505,9 +67888,7 @@
 			"type": "/item_location_types/equipment",
 			"isTool": true,
 			"isMultiItem": false,
-			"conflictingOtherItemLocationHrids": [
-				"/item_locations/woodcutting_tool"
-			]
+			"conflictingOtherItemLocationHrids": ["/item_locations/woodcutting_tool"]
 		}
 	},
 	"equipmentTypeDetailMap": {
@@ -68795,9 +68176,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 160,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/fire",
 					"attackInterval": 3000000000,
 					"autoAttackDamage": -0.5,
@@ -68918,9 +68297,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3500000000,
 					"stabEvasion": 1,
@@ -69009,9 +68386,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3500000000,
 					"stabDamage": 0.06,
@@ -69136,9 +68511,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 4000000000,
 					"rangedEvasion": 0.75,
@@ -69227,9 +68600,7 @@
 				"rangedLevel": 40,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/water",
 					"attackInterval": 3000000000,
 					"waterResistance": 10,
@@ -69333,9 +68704,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000,
 					"stabEvasion": 0.3,
@@ -69469,9 +68838,7 @@
 				"rangedLevel": 480,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"magicEvasion": 0.75,
@@ -69560,9 +68927,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"stabEvasion": 0.5,
@@ -69645,9 +69010,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000,
 					"armor": 60,
@@ -69735,9 +69098,7 @@
 				"rangedLevel": 80,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000,
 					"waterResistance": 15,
@@ -69875,9 +69236,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 250,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/water",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -70050,9 +69409,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3500000000,
 					"slashEvasion": 0.4,
@@ -70158,9 +69515,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3500000000,
 					"smashEvasion": -0.2,
@@ -70351,9 +69706,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 330,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/fire",
 					"attackInterval": 3000000000,
 					"autoAttackDamage": -0.5,
@@ -70526,9 +69879,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 450,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3500000000,
 					"rangedEvasion": 0.5,
@@ -70619,9 +69970,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3500000000,
 					"slashEvasion": 0.2,
@@ -70710,9 +70059,7 @@
 				"rangedLevel": 340,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3500000000,
 					"waterResistance": 40,
@@ -70891,9 +70238,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 180,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/fire",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -71046,9 +70391,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 440,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/nature",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -71145,9 +70488,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000,
 					"tenacity": 100
@@ -71232,9 +70573,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3500000000,
 					"rangedEvasion": 0.75,
@@ -71321,9 +70660,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000,
 					"tenacity": 50
@@ -71403,9 +70740,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 520,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/water",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -71499,9 +70834,7 @@
 				"rangedLevel": 440,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"rangedEvasion": 0.5,
@@ -71592,9 +70925,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 89,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000,
 					"stabEvasion": -0.25,
@@ -71751,9 +71082,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 101,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000,
 					"stabEvasion": -0.25,
@@ -71862,9 +71191,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 130,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/fire",
 					"attackInterval": 3000000000,
 					"autoAttackDamage": -0.5,
@@ -71987,9 +71314,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 4000000000,
 					"smashAccuracy": -0.5,
@@ -72063,9 +71388,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000
 				}
@@ -72166,9 +71489,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000
 				}
@@ -72312,9 +71633,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 50,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/fire",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -72458,9 +71777,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000,
 					"armorPenetration": 0.2,
@@ -72629,9 +71946,7 @@
 				"rangedLevel": 50,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000,
 					"rangedAccuracy": 0.3,
@@ -72767,9 +72082,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3300000000,
 					"slashAccuracy": 0.9,
@@ -72902,9 +72215,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3700000000,
 					"smashAccuracy": 0.1,
@@ -73037,9 +72348,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 2500000000,
 					"stabAccuracy": 2,
@@ -73166,9 +72475,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3400000000,
 					"smashEvasion": -0.2,
@@ -73325,9 +72632,7 @@
 				"rangedLevel": 480,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 4000000000,
 					"stabEvasion": 0.3,
@@ -73419,9 +72724,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000,
 					"slashEvasion": 0.3,
@@ -73555,9 +72858,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 2800000000,
 					"smashEvasion": 0.3,
@@ -73673,9 +72974,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 120,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/water",
 					"attackInterval": 3000000000,
 					"autoAttackDamage": -0.5,
@@ -73798,9 +73097,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 250,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/fire",
 					"attackInterval": 3000000000,
 					"autoAttackDamage": -0.5,
@@ -73929,9 +73226,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 300,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/nature",
 					"attackInterval": 3000000000,
 					"autoAttackDamage": -0.5,
@@ -74016,9 +73311,7 @@
 				"rangedLevel": 450,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3500000000,
 					"magicEvasion": 0.5,
@@ -74108,9 +73401,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 30,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/nature",
 					"attackInterval": 3000000000,
 					"autoAttackDamage": -0.5,
@@ -74237,9 +73528,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 140,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/nature",
 					"attackInterval": 3000000000,
 					"autoAttackDamage": -0.5,
@@ -74405,9 +73694,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 400,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/fire",
 					"attackInterval": 3000000000,
 					"autoAttackDamage": -0.5,
@@ -74495,9 +73782,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3400000000,
 					"smashEvasion": -0.2,
@@ -74620,9 +73905,7 @@
 				"rangedLevel": 400,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3500000000,
 					"rangedEvasion": 0.3,
@@ -74713,9 +73996,7 @@
 				"rangedLevel": 95,
 				"magicLevel": 80,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/water",
 					"attackInterval": 3000000000,
 					"waterAmplify": 0.2,
@@ -74870,9 +74151,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 40,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/nature",
 					"attackInterval": 3000000000,
 					"autoAttackDamage": -0.5,
@@ -74982,9 +74261,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000,
 					"stabAccuracy": -0.2,
@@ -75120,9 +74397,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 90,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/water",
 					"attackInterval": 3000000000,
 					"autoAttackDamage": -0.5,
@@ -75240,9 +74515,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3600000000,
 					"smashEvasion": 0.3,
@@ -75395,9 +74668,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000,
 					"smashEvasion": 0.3,
@@ -75543,9 +74814,7 @@
 				"rangedLevel": 10,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000
 				}
@@ -75647,9 +74916,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000,
 					"tenacity": 50
@@ -75729,9 +74996,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3500000000
 				}
@@ -75851,9 +75116,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000,
 					"smashEvasion": 0.3,
@@ -76032,9 +75295,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 4000000000,
 					"slashEvasion": 0.4,
@@ -76152,9 +75413,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3500000000
 				}
@@ -76256,9 +75515,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 12,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/water",
 					"attackInterval": 3000000000,
 					"autoAttackDamage": -0.5
@@ -76366,9 +75623,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3200000000,
 					"slashEvasion": -0.3
@@ -76470,9 +75725,7 @@
 				"rangedLevel": 220,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000,
 					"fireAmplify": 0.2,
@@ -76607,9 +75860,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 350,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/nature",
 					"attackInterval": 3000000000,
 					"autoAttackDamage": -0.5,
@@ -76694,9 +75945,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000,
 					"physicalThorns": 0.1,
@@ -76843,9 +76092,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000,
 					"smashEvasion": -0.3
@@ -76971,9 +76218,7 @@
 				"rangedLevel": 690,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3500000000,
 					"magicEvasion": 0.5,
@@ -77064,9 +76309,7 @@
 				"rangedLevel": 180,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/ranged"
-					],
+					"combatStyleHrids": ["/combat_styles/ranged"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3500000000,
 					"stabEvasion": -0.25,
@@ -77223,9 +76466,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 340,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/water",
 					"attackInterval": 3500000000,
 					"autoAttackDamage": -0.5,
@@ -77319,9 +76560,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 60,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/magic"
-					],
+					"combatStyleHrids": ["/combat_styles/magic"],
 					"damageType": "/damage_types/nature",
 					"attackInterval": 3000000000,
 					"autoAttackDamage": -0.5,
@@ -77490,9 +76729,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/smash"
-					],
+					"combatStyleHrids": ["/combat_styles/smash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3500000000,
 					"slashEvasion": 0.4,
@@ -77633,9 +76870,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3300000000,
 					"waterResistance": 30,
@@ -77775,9 +77010,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 113,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3000000000,
 					"stabEvasion": -0.25,
@@ -77886,9 +77119,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3100000000,
 					"waterResistance": 30,
@@ -78027,9 +77258,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 180,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/slash"
-					],
+					"combatStyleHrids": ["/combat_styles/slash"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 3400000000,
 					"fireResistance": -20
@@ -78177,9 +77406,7 @@
 				"rangedLevel": 0,
 				"magicLevel": 0,
 				"combatStats": {
-					"combatStyleHrids": [
-						"/combat_styles/stab"
-					],
+					"combatStyleHrids": ["/combat_styles/stab"],
 					"damageType": "/damage_types/physical",
 					"attackInterval": 4000000000,
 					"armor": 50,
@@ -78872,49 +78099,13 @@
 		}
 	},
 	"enhancementLevelSuccessRateTable": [
-		0.5,
-		0.45,
-		0.45,
-		0.4,
-		0.4,
-		0.4,
-		0.35,
-		0.35,
-		0.35,
-		0.35,
-		0.3,
-		0.3,
-		0.3,
-		0.3,
-		0.3,
-		0.3,
-		0.3,
-		0.3,
-		0.3,
-		0.3
+		0.5, 0.45, 0.45, 0.4, 0.4, 0.4, 0.35, 0.35, 0.35, 0.35, 0.3, 0.3, 0.3, 0.3,
+		0.3, 0.3, 0.3, 0.3, 0.3, 0.3
 	],
 	"enhancementLevelTotalBonusMultiplierTable": [
-		0,
-		1,
-		2.1,
-		3.3,
-		4.6,
-		6,
-		7.5,
-		9.1,
-		10.8,
-		12.600000000000001,
-		14.500000000000002,
-		16.7,
-		19.2,
-		22,
-		25.1,
-		28.5,
-		32.2,
-		36.2,
-		40.50000000000001,
-		45.1,
-		50
+		0, 1, 2.1, 3.3, 4.6, 6, 7.5, 9.1, 10.8, 12.600000000000001,
+		14.500000000000002, 16.7, 19.2, 22, 25.1, 28.5, 32.2, 36.2,
+		40.50000000000001, 45.1, 50
 	],
 	"randomTaskTypeDetailMap": {
 		"/random_task_types/brewing": {

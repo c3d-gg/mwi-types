@@ -1,40 +1,37 @@
 {
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    // Override for build output
-    "noEmit": false,
-    "emitDeclarationOnly": false,
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    
-    // Output configuration
-    "outDir": "./dist",
-    "rootDir": "./src",
-    
-    // Module settings for build
-    "module": "esnext",
-    "moduleResolution": "node",
-    "allowImportingTsExtensions": false,
-    "verbatimModuleSyntax": false,
-    
-    // Build-specific settings
-    "composite": true,
-    "incremental": true,
-    "tsBuildInfoFile": "./dist/.tsbuildinfo"
-  },
-  "include": [
-    "src/index.ts",
-    "src/schemas/*/index.ts",
-    "src/constants/index.ts",
-    "src/game-logic/index.ts",
-    "src/player-data/index.ts",
-    "src/localization/index.ts",
-    "src/generated/**/*",
-    "src/types/**/*"
-  ],
-  "exclude": [
-    "src/generators/**/*",
-    "src/sources/**/*"
-  ]
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		// Override for build output
+		"noEmit": false,
+		"emitDeclarationOnly": false,
+		"declaration": true,
+		"declarationMap": true,
+		"sourceMap": true,
+
+		// Output configuration
+		"outDir": "./dist",
+		"rootDir": "./src",
+
+		// Module settings for build
+		"module": "esnext",
+		"moduleResolution": "node",
+		"allowImportingTsExtensions": false,
+		"verbatimModuleSyntax": false,
+
+		// Build-specific settings
+		"composite": true,
+		"incremental": true,
+		"tsBuildInfoFile": "./dist/.tsbuildinfo"
+	},
+	"include": [
+		"src/index.ts",
+		"src/schemas/*/index.ts",
+		"src/constants/index.ts",
+		"src/game-logic/index.ts",
+		"src/player-data/index.ts",
+		"src/localization/index.ts",
+		"src/generated/**/*",
+		"src/types/**/*"
+	],
+	"exclude": ["src/generators/**/*", "src/sources/**/*"]
 }

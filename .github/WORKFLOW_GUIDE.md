@@ -67,7 +67,6 @@ git commit -m "feat!: breaking change"
 ## ⚡ Tips
 
 1. **Conventional Commits** trigger correct version bumps:
-
    - `fix:` → patch (0.0.X)
    - `feat:` → minor (0.X.0)
    - `feat!:` or `BREAKING CHANGE:` → major (X.0.0)

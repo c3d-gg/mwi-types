@@ -34,11 +34,11 @@ jobs:
             sources:
               - 'src/sources/**'
             generators:
-              - 'src/generators/**'
+              - 'src/generation/**'
               - 'src/types/**'
             package:
               - 'package.json'
-              - 'bun.lockb'
+              - 'bun.lock'
               - 'tsconfig*.json'
 
   lint-and-format:
@@ -59,7 +59,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.bun/install/cache
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
           restore-keys: |
             ${{ runner.os }}-bun-
 
@@ -112,7 +112,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.bun/install/cache
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
           restore-keys: |
             ${{ runner.os }}-bun-
 
@@ -132,12 +132,15 @@ jobs:
         run: |
           # Check that all expected files were generated
           EXPECTED_FILES=(
-            "src/generated/game-logic/skills.ts"
-            "src/generated/game-logic/items.ts"
-            "src/generated/game-logic/actions.ts"
-            "src/generated/schemas/zod/skills.ts"
-            "src/generated/schemas/typebox/skills.ts"
-            "src/generated/player-data/index.ts"
+            "src/generated/types/skills.ts"
+            "src/generated/types/items.ts"
+            "src/generated/types/actions.ts"
+            "src/generated/types/recipes.ts"
+            "src/generated/types/player-data.ts"
+            "src/generated/constants/index.ts"
+            "src/generated/utils/index.ts"
+            "src/generated/localization/index.ts"
+            "src/generated/index.ts"
           )
 
           for file in "${EXPECTED_FILES[@]}"; do
@@ -164,17 +167,17 @@ jobs:
           EOF
 
           node test-import.mjs
-          
+
           # Test TypeScript types
           cat > test-types.ts << 'EOF'
           import type { Skill, Item, Action } from './dist/index.js';
           import { SKILLS } from './dist/index.js';
-          
+
           // Test that types are properly exported
           const testSkill: Skill = SKILLS[0];
           console.log('✅ TypeScript types working correctly');
           EOF
-          
+
           # Just check if it compiles, don't run it
           bun tsc test-types.ts --noEmit --esModuleInterop --skipLibCheck --moduleResolution node
 
@@ -207,7 +210,7 @@ jobs:
         run: |
           # Calculate sizes
           TOTAL_SIZE=$(du -sh dist | cut -f1)
-          
+
           # Check if generated folder exists (it should after generate command)
           if [ -d "src/generated" ]; then
             GENERATED_SIZE=$(du -sh src/generated | cut -f1)

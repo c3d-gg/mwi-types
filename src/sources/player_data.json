@@ -4893,9 +4893,7 @@
 			"rangedLevel": 9,
 			"magicLevel": 110,
 			"combatStats": {
-				"combatStyleHrids": [
-					"/combat_styles/magic"
-				],
+				"combatStyleHrids": ["/combat_styles/magic"],
 				"damageType": "/damage_types/nature",
 				"attackInterval": 3500000000,
 				"autoAttackDamage": -0.5,
