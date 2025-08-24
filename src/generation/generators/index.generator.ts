@@ -95,7 +95,7 @@ export class IndexGenerator extends BaseGenerator<any> {
 		// Localization exports
 		sourceFile.addStatements('')
 		sourceFile.addStatements('// Localization exports')
-		sourceFile.addStatements(`export * from './localization'`)
+		sourceFile.addStatements(`export * from './localization/index'`)
 
 		// Save the file
 		await sourceFile.save()
@@ -114,7 +114,7 @@ export class IndexGenerator extends BaseGenerator<any> {
 
 		sourceFile.addStatements(`// Main package index for @c3d.gg/mwi-types 
 // Re-exports everything from the generated types
-export * from './generated'`)
+export * from './generated/index'`)
 
 		await sourceFile.save()
 	}
