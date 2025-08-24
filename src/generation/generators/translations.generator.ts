@@ -146,14 +146,14 @@ export class TranslationsGenerator {
 
 	private generateLocaleImports(builder: ASTBuilder, locale: string): void {
 		// Import entity type definitions (as type-only imports)
-		builder.addImport('../../types/skills', ['SkillHrid'], true)
-		builder.addImport('../../types/items', ['ItemHrid'], true)
-		builder.addImport('../../types/actions', ['ActionHrid'], true)
-		builder.addImport('../../types/monsters', ['MonsterHrid'], true)
-		builder.addImport('../../types/abilities', ['AbilityHrid'], true)
-		builder.addImport('../../types/buff-types', ['BuffTypeHrid'], true)
-		builder.addImport('../../types/house-rooms', ['HouseRoomHrid'], true)
-		builder.addImport('../../types/recipes', ['RecipeHrid'], true)
+		builder.addImport('../../types/skills.js', ['SkillHrid'], true)
+		builder.addImport('../../types/items.js', ['ItemHrid'], true)
+		builder.addImport('../../types/actions.js', ['ActionHrid'], true)
+		builder.addImport('../../types/monsters.js', ['MonsterHrid'], true)
+		builder.addImport('../../types/abilities.js', ['AbilityHrid'], true)
+		builder.addImport('../../types/buff-types.js', ['BuffTypeHrid'], true)
+		builder.addImport('../../types/house-rooms.js', ['HouseRoomHrid'], true)
+		builder.addImport('../../types/recipes.js', ['RecipeHrid'], true)
 	}
 
 	private generateEntityTranslations(
@@ -381,7 +381,7 @@ export class TranslationsGenerator {
 		// Import all locale translations using mixed imports
 		for (const locale of this.locales) {
 			builder.addMixedImport(
-				`./${locale}/translations`,
+				`./${locale}/translations.js`,
 				[`${locale}Translations`], // value imports
 				[`${locale.toUpperCase()}Translations`], // type imports
 			)
@@ -417,16 +417,16 @@ export class TranslationsGenerator {
 
 		// Import mixed from index
 		builder.addMixedImport(
-			'./index',
+			'./index.js',
 			['TRANSLATIONS'], // value imports
 			['SupportedLocale', 'Translation'], // type imports
 		)
 
 		// Import types as type-only
-		builder.addImport('../types/skills', ['SkillHrid'], true)
-		builder.addImport('../types/items', ['ItemHrid'], true)
-		builder.addImport('../types/actions', ['ActionHrid'], true)
-		builder.addImport('../types/monsters', ['MonsterHrid'], true)
+		builder.addImport('../types/skills.js', ['SkillHrid'], true)
+		builder.addImport('../types/items.js', ['ItemHrid'], true)
+		builder.addImport('../types/actions.js', ['ActionHrid'], true)
+		builder.addImport('../types/monsters.js', ['MonsterHrid'], true)
 
 		// Get translation function
 		builder.addFunction(

@@ -58,34 +58,34 @@ export class IndexGenerator extends BaseGenerator<any> {
 		sourceFile.addStatements('// Type exports - All entities')
 
 		const typeFiles = [
-			'./types/abilities',
-			'./types/action-categories',
-			'./types/actions',
-			'./types/avatar',
-			'./types/avatars',
-			'./types/buff-types',
-			'./types/chat-channel-types',
-			'./types/chat-icons',
-			'./types/combat-styles',
-			'./types/community-buffs',
-			'./types/damage-types',
-			'./types/equipment-types',
-			'./types/game-modes',
-			'./types/house-rooms',
-			'./types/item-categories',
-			'./types/item-locations',
-			'./types/items',
-			'./types/leaderboard-categories',
-			'./types/leaderboard-types',
-			'./types/monsters',
-			'./types/name-colors',
-			'./types/player-data',
-			'./types/purchase-bundles',
-			'./types/random-tasks',
-			'./types/recipes',
-			'./types/shop-items',
-			'./types/skills',
-			'./types/task-shop-items',
+			'./types/abilities.js',
+			'./types/action-categories.js',
+			'./types/actions.js',
+			'./types/avatar.js',
+			'./types/avatars.js',
+			'./types/buff-types.js',
+			'./types/chat-channel-types.js',
+			'./types/chat-icons.js',
+			'./types/combat-styles.js',
+			'./types/community-buffs.js',
+			'./types/damage-types.js',
+			'./types/equipment-types.js',
+			'./types/game-modes.js',
+			'./types/house-rooms.js',
+			'./types/item-categories.js',
+			'./types/item-locations.js',
+			'./types/items.js',
+			'./types/leaderboard-categories.js',
+			'./types/leaderboard-types.js',
+			'./types/monsters.js',
+			'./types/name-colors.js',
+			'./types/player-data.js',
+			'./types/purchase-bundles.js',
+			'./types/random-tasks.js',
+			'./types/recipes.js',
+			'./types/shop-items.js',
+			'./types/skills.js',
+			'./types/task-shop-items.js',
 		]
 
 		typeFiles.forEach((file) => {
@@ -95,7 +95,7 @@ export class IndexGenerator extends BaseGenerator<any> {
 		// Localization exports
 		sourceFile.addStatements('')
 		sourceFile.addStatements('// Localization exports')
-		sourceFile.addStatements(`export * from './localization/index'`)
+		sourceFile.addStatements(`export * from './localization/index.js'`)
 
 		// Save the file
 		await sourceFile.save()
@@ -114,7 +114,7 @@ export class IndexGenerator extends BaseGenerator<any> {
 
 		sourceFile.addStatements(`// Main package index for @c3d.gg/mwi-types 
 // Re-exports everything from the generated types
-export * from './generated/index'`)
+export * from './generated/index.js'`)
 
 		await sourceFile.save()
 	}
