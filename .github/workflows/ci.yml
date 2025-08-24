@@ -137,7 +137,6 @@ jobs:
             "src/generated/types/actions.ts"
             "src/generated/types/recipes.ts"
             "src/generated/types/player-data.ts"
-            "src/generated/utils/index.ts"
             "src/generated/localization/index.ts"
             "src/generated/index.ts"
           )
