@@ -5,6 +5,15 @@ All notable changes to `@c3d.gg/mwi-types` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.2](https://github.com/c3d-gg/mwi-types/compare/v0.2.1...v0.2.2) (2025-08-24)
+
+
+### 🐛 Bug Fixes
+
+* add .js extensions to all ES module imports for Node.js compatibility ([79c5f6d](https://github.com/c3d-gg/mwi-types/commit/79c5f6d3a12a3a6680393adc03c13a6f75941b8d))
+* correct generation path in generate-types workflow ([ca92ccf](https://github.com/c3d-gg/mwi-types/commit/ca92ccfc4a6807d190beb5f1c48aab0eec5dc003))
+* remove utils/index.ts from CI expectations as it's not generated ([b9628fc](https://github.com/c3d-gg/mwi-types/commit/b9628fc0e1f718ed9a7986505f40cc145d23db8c))
+
 ## [0.2.1](https://github.com/c3d-gg/mwi-types/compare/v0.2.0...v0.2.1) (2025-08-24)
 
 
