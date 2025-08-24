@@ -20,14 +20,14 @@ on:
       - develop
     paths:
       - 'src/sources/**/*.json'
-      - 'src/generators/**/*.ts'
+      - 'src/generation/**/*.ts'
       - 'src/types/**/*.ts'
 
   # Allow running on PRs to test generation
   pull_request:
     paths:
       - 'src/sources/**/*.json'
-      - 'src/generators/**/*.ts'
+      - 'src/generation/**/*.ts'
       - 'src/types/**/*.ts'
 
 permissions:
