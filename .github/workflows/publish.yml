@@ -101,7 +101,7 @@ jobs:
         run: |
           # Test ES module imports
           cat > test-exports.mjs << 'EOF'
-          import { SKILLS, getSkill, Skill } from './dist/index.js';
+          import { SKILLS, getSkill } from './dist/index.js';
           
           // Test that exports work correctly
           const skills = SKILLS;
@@ -112,6 +112,9 @@ jobs:
           const firstSkill = skills.values().next().value;
           if (firstSkill) {
             console.log('First skill:', firstSkill.hrid);
+            // Test getSkill function
+            const fetchedSkill = getSkill(firstSkill.hrid);
+            console.log('getSkill works:', fetchedSkill?.hrid === firstSkill.hrid);
           }
           EOF
 
