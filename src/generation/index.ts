@@ -6,16 +6,28 @@ import { AvatarGenerator } from './generators/avatar.generator'
 import { AvatarsGenerator } from './generators/avatars.generator'
 import { BuffTypesGenerator } from './generators/buff-types.generator'
 import { ChatChannelTypesGenerator } from './generators/chat-channel-types.generator'
+import { ChatIconsGenerator } from './generators/chat-icons.generator'
 import { CombatStylesGenerator } from './generators/combat-styles.generator'
 import { CommunityBuffsGenerator } from './generators/community-buffs.generator'
+import { DamageTypesGenerator } from './generators/damage-types.generator'
+import { EquipmentTypesGenerator } from './generators/equipment-types.generator'
+import { GameModesGenerator } from './generators/game-modes.generator'
+import { GuildCharacterRolesGenerator } from './generators/guild-character-roles.generator'
 import { HouseRoomsGenerator } from './generators/house-rooms.generator'
 import { IndexGenerator } from './generators/index.generator'
+import { ItemCategoriesGenerator } from './generators/item-categories.generator'
+import { ItemLocationsGenerator } from './generators/item-locations.generator'
 import { ItemsGenerator } from './generators/items.generator'
 import { LeaderboardCategoriesGenerator } from './generators/leaderboard-categories.generator'
 import { LeaderboardTypesGenerator } from './generators/leaderboard-types.generator'
+import { LeaderboardsGenerator } from './generators/leaderboards.generator'
 import { MonstersGenerator } from './generators/monsters.generator'
+import { NameColorsGenerator } from './generators/name-colors.generator'
 import { PlayerDataGenerator } from './generators/player-data.generator'
+import { PurchaseBundlesGenerator } from './generators/purchase-bundles.generator'
+import { RandomTasksGenerator } from './generators/random-tasks.generator'
 import { RecipesGenerator } from './generators/recipes.generator'
+import { ShopCategoriesGenerator } from './generators/shop-categories.generator'
 import { ShopItemsGenerator } from './generators/shop-items.generator'
 import { SkillsGenerator } from './generators/skills.generator'
 import { TaskShopItemsGenerator } from './generators/task-shop-items.generator'
@@ -39,6 +51,17 @@ async function generateAll() {
 		await new ActionCategoriesGenerator().generate(sourcePath)
 		await new CombatStylesGenerator().generate(sourcePath)
 		await new ChatChannelTypesGenerator().generate(sourcePath)
+		await new ChatIconsGenerator().generate(sourcePath)
+		await new DamageTypesGenerator().generate(sourcePath)
+		await new EquipmentTypesGenerator().generate(sourcePath)
+		await new GameModesGenerator().generate(sourcePath)
+		await new GuildCharacterRolesGenerator().generate(sourcePath)
+		await new ItemCategoriesGenerator().generate(sourcePath)
+		await new ItemLocationsGenerator().generate(sourcePath)
+		await new NameColorsGenerator().generate(sourcePath)
+		await new PurchaseBundlesGenerator().generate(sourcePath)
+		await new RandomTasksGenerator().generate(sourcePath)
+		await new ShopCategoriesGenerator().generate(sourcePath)
 
 		// Layer 2: Single dependency
 		console.log('\n📦 Layer 2: Single dependency entities')
@@ -47,6 +70,7 @@ async function generateAll() {
 		await new ShopItemsGenerator().generate(sourcePath) // Depends on Items
 		await new TaskShopItemsGenerator().generate(sourcePath) // Depends on Items
 		await new LeaderboardCategoriesGenerator().generate(sourcePath) // Depends on Skills
+		await new LeaderboardsGenerator().generate(sourcePath) // Depends on LeaderboardTypes
 
 		// Layer 3: Multiple dependencies
 		console.log('\n📦 Layer 3: Multiple dependency entities')
