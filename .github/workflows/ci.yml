@@ -174,7 +174,7 @@ jobs:
           import { SKILLS } from './dist/index.js';
 
           // Test that types are properly exported
-          const testSkill: Skill = SKILLS[0];
+          const testSkill: Skill | undefined = SKILLS.values().next().value;
           console.log('✅ TypeScript types working correctly');
           EOF
 
