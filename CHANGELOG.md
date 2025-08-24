@@ -5,6 +5,27 @@ All notable changes to `@c3d.gg/mwi-types` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0](https://github.com/c3d-gg/mwi-types/compare/v0.1.2...v0.2.0) (2025-08-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* Complete restructure of the type generation system
+
+### ✨ Features
+
+* complete v1 implementation of type generation system ([e0fc765](https://github.com/c3d-gg/mwi-types/commit/e0fc76585312df6f6ddaaf6c8416a8cd9d28dd4b))
+* update all docs with the new API ([d54d709](https://github.com/c3d-gg/mwi-types/commit/d54d7099f58f6b39dca9a472da5af7834ef14d02))
+
+
+### 🐛 Bug Fixes
+
+* add missing generators to generation pipeline ([b4404d8](https://github.com/c3d-gg/mwi-types/commit/b4404d88a7877e3fab2b2387112ec61cd969f18e))
+* correct bun lock file reference in generate-types workflow ([6c26b89](https://github.com/c3d-gg/mwi-types/commit/6c26b8976d982e7f01510abcc540b42fd953dcce))
+* remove constants/index.ts from CI checks as it's no longer needed ([de0f183](https://github.com/c3d-gg/mwi-types/commit/de0f183d2a3667101a4a46230ac4bebb00fa392e))
+* update bun.lock file to match package.json ([ae59cd7](https://github.com/c3d-gg/mwi-types/commit/ae59cd7fcb9a911a01462d7db0c47b1cbf40af6b))
+* update CI test to work with Map-based exports ([ac1d6ae](https://github.com/c3d-gg/mwi-types/commit/ac1d6aecf3c680b2cd05205b643010a3ad248f59))
+
 ## [0.1.2](https://github.com/c3d-gg/mwi-types/compare/v0.1.1...v0.1.2) (2025-08-21)
 
 ### ✨ Features
