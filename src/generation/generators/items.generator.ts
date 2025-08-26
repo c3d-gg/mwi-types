@@ -250,6 +250,12 @@ export class ItemsGenerator extends BaseGenerator<Item> {
 			},
 		])
 
+		// Marketplace Category type (7 official marketplace categories)
+		this.builder.addTypeAlias(
+			'MarketplaceCategory',
+			"'Resources' | 'Consumables' | 'Books' | 'Keys' | 'Equipment' | 'Accessories' | 'Tools'",
+		)
+
 		// Main Item interface
 		this.builder.addInterface('Item', [
 			{
@@ -312,6 +318,50 @@ export class ItemsGenerator extends BaseGenerator<Item> {
 		this.generateSpecializedUtils()
 	}
 
+	private getMarketplaceCategoryForItem(item: Item): string {
+		// First check if it's equipment-based (Equipment, Accessories, Tools)
+		if (item.equipmentDetail) {
+			const equipType = item.equipmentDetail.type.toLowerCase()
+			
+			// Tools: equipment types containing "tool"
+			if (equipType.includes('tool')) {
+				return 'Tools'
+			}
+			
+			// Accessories: equipment types for jewelry and accessories
+			if (
+				equipType.includes('neck') ||
+				equipType.includes('ring') ||
+				equipType.includes('ear') ||
+				equipType.includes('charm') ||
+				equipType.includes('amulet') ||
+				equipType.includes('necklace') ||
+				equipType.includes('earring')
+			) {
+				return 'Accessories'
+			}
+			
+			// Everything else with equipmentDetail is Equipment
+			return 'Equipment'
+		}
+		
+		// Non-equipment items categorized by exact categoryHrid match
+		switch (item.categoryHrid) {
+			case '/item_categories/ability_book':
+				return 'Books'
+			case '/item_categories/key':
+				return 'Keys'
+			case '/item_categories/food':
+			case '/item_categories/drink':
+				return 'Consumables'
+			case '/item_categories/resource':
+			case '/item_categories/loot':
+			case '/item_categories/currency':
+			default:
+				return 'Resources'
+		}
+	}
+
 	private generateLookupMaps(items: Record<string, Item>): void {
 		// Items by category
 		const byCategory: Record<string, string[]> = {}
@@ -361,6 +411,30 @@ export class ItemsGenerator extends BaseGenerator<Item> {
 			.filter((item) => item.alchemyDetail)
 			.map((item) => item.hrid)
 		this.builder.addConstArray('ALCHEMICAL_ITEM_HRIDS', alchemicalItems)
+
+		// Items by marketplace category
+		const byMarketplaceCategory: Record<string, string[]> = {
+			Resources: [],
+			Consumables: [],
+			Books: [],
+			Keys: [],
+			Equipment: [],
+			Accessories: [],
+			Tools: [],
+		}
+		
+		for (const item of Object.values(items)) {
+			const category = this.getMarketplaceCategoryForItem(item)
+			if (byMarketplaceCategory[category]) {
+				byMarketplaceCategory[category].push(item.hrid)
+			}
+		}
+		
+		this.builder.addConstVariable(
+			'ITEMS_BY_MARKETPLACE_CATEGORY',
+			'Record<MarketplaceCategory, readonly ItemHrid[]>',
+			JSON.stringify(byMarketplaceCategory, null, 2),
+		)
 	}
 
 	private generateSpecializedUtils(): void {
@@ -457,6 +531,69 @@ export class ItemsGenerator extends BaseGenerator<Item> {
 				writer.writeLine('  value += item.itemLevel * 1000')
 				writer.writeLine('}')
 				writer.writeLine('return value')
+			},
+		)
+
+		// Get marketplace category for an item
+		this.builder.addFunction(
+			'getMarketplaceCategory',
+			[{ name: 'item', type: 'Item' }],
+			'MarketplaceCategory',
+			(writer) => {
+				writer.writeLine('// First check if it\'s equipment-based (Equipment, Accessories, Tools)')
+				writer.writeLine('if (item.equipmentDetail) {')
+				writer.writeLine('  const equipType = item.equipmentDetail.type.toLowerCase()')
+				writer.writeLine('  ')
+				writer.writeLine('  // Tools: equipment types containing "tool"')
+				writer.writeLine('  if (equipType.includes(\'tool\')) {')
+				writer.writeLine('    return \'Tools\'')
+				writer.writeLine('  }')
+				writer.writeLine('  ')
+				writer.writeLine('  // Accessories: equipment types for jewelry and accessories')
+				writer.writeLine('  if (')
+				writer.writeLine('    equipType.includes(\'neck\') ||')
+				writer.writeLine('    equipType.includes(\'ring\') ||')
+				writer.writeLine('    equipType.includes(\'ear\') ||')
+				writer.writeLine('    equipType.includes(\'charm\') ||')
+				writer.writeLine('    equipType.includes(\'amulet\') ||')
+				writer.writeLine('    equipType.includes(\'necklace\') ||')
+				writer.writeLine('    equipType.includes(\'earring\')')
+				writer.writeLine('  ) {')
+				writer.writeLine('    return \'Accessories\'')
+				writer.writeLine('  }')
+				writer.writeLine('  ')
+				writer.writeLine('  // Everything else with equipmentDetail is Equipment')
+				writer.writeLine('  return \'Equipment\'')
+				writer.writeLine('}')
+				writer.writeLine('')
+				writer.writeLine('// Non-equipment items categorized by exact categoryHrid match')
+				writer.writeLine('switch (item.categoryHrid) {')
+				writer.writeLine('  case \'/item_categories/ability_book\':')
+				writer.writeLine('    return \'Books\'')
+				writer.writeLine('  case \'/item_categories/key\':')
+				writer.writeLine('    return \'Keys\'')
+				writer.writeLine('  case \'/item_categories/food\':')
+				writer.writeLine('  case \'/item_categories/drink\':')
+				writer.writeLine('    return \'Consumables\'')
+				writer.writeLine('  case \'/item_categories/resource\':')
+				writer.writeLine('  case \'/item_categories/loot\':')
+				writer.writeLine('  case \'/item_categories/currency\':')
+				writer.writeLine('  default:')
+				writer.writeLine('    return \'Resources\'')
+				writer.writeLine('}')
+			},
+		)
+
+		// Get items by marketplace category
+		this.builder.addFunction(
+			'getItemsByMarketplaceCategory',
+			[{ name: 'category', type: 'MarketplaceCategory' }],
+			'Item[]',
+			(writer) => {
+				writer.writeLine('const hrids = ITEMS_BY_MARKETPLACE_CATEGORY[category] || []')
+				writer.writeLine(
+					'return hrids.map(hrid => ITEMS.get(hrid)!).filter(Boolean)',
+				)
 			},
 		)
 	}
