@@ -425,19 +425,75 @@ export class RecipesGenerator extends BaseGenerator<Recipe> {
 		]
 		this.builder.addInterface('RecipeTreeStats', treeStatsProps)
 
-		// buildRecipeTree function
+		// Add memoization cache and statistics
+		this.builder.addConstVariable(
+			'RECIPE_TREE_CACHE',
+			'Map<string, RecipeTreeNode>',
+			'new Map<string, RecipeTreeNode>()',
+		)
+
+		// Cache statistics variables (using let for mutation)
+		this.builder.addComment('Cache statistics for monitoring performance')
+		// We'll track hits/misses inside the cache itself
+		this.builder.addConstVariable(
+			'RECIPE_TREE_CACHE_STATS',
+			'{ hits: number; misses: number }',
+			'{ hits: 0, misses: 0 }',
+		)
+
+		// Cache management functions
+		this.builder.addFunction(
+			'getRecipeTreeCacheStats',
+			[],
+			'{ hits: number; misses: number; size: number }',
+			(writer) => {
+				writer.writeLine('return {')
+				writer.writeLine('  hits: RECIPE_TREE_CACHE_STATS.hits,')
+				writer.writeLine('  misses: RECIPE_TREE_CACHE_STATS.misses,')
+				writer.writeLine('  size: RECIPE_TREE_CACHE.size')
+				writer.writeLine('}')
+			},
+		)
+
+		this.builder.addFunction('clearRecipeTreeCache', [], 'void', (writer) => {
+			writer.writeLine('RECIPE_TREE_CACHE.clear()')
+			writer.writeLine('RECIPE_TREE_CACHE_STATS.hits = 0')
+			writer.writeLine('RECIPE_TREE_CACHE_STATS.misses = 0')
+		})
+
+		// buildRecipeTree function with memoization and better duplicate handling
 		this.builder.addFunction(
 			'buildRecipeTree',
 			[
 				{ name: 'itemHrid', type: 'ItemHrid' },
 				{ name: 'quantity', type: 'number = 1' },
 				{ name: 'depth', type: 'number = 0' },
-				{ name: 'visitedItems', type: 'Set<string> = new Set()' },
+				{ name: 'pathVisited', type: 'Set<string> = new Set()' },
+				{ name: 'maxDepth', type: 'number = 10' },
 			],
 			'RecipeTreeNode | null',
 			(writer) => {
-				writer.writeLine('// Check for circular dependencies')
-				writer.writeLine('if (visitedItems.has(itemHrid)) {')
+				writer.writeLine(
+					'// Check cache first for massive performance gains on complex trees',
+				)
+				writer.writeLine('const cacheKey = `${itemHrid}:${quantity}`')
+				writer.writeLine('')
+				writer.writeLine(
+					'// Only use cache for sub-trees (depth > 0) to avoid caching root variations',
+				)
+				writer.writeLine('if (depth > 0 && RECIPE_TREE_CACHE.has(cacheKey)) {')
+				writer.writeLine('  RECIPE_TREE_CACHE_STATS.hits++')
+				writer.writeLine('  const cached = RECIPE_TREE_CACHE.get(cacheKey)!')
+				writer.writeLine(
+					'  // Return a shallow copy with updated depth to maintain tree structure',
+				)
+				writer.writeLine('  return { ...cached, depth }')
+				writer.writeLine('}')
+				writer.writeLine('')
+				writer.writeLine('RECIPE_TREE_CACHE_STATS.misses++')
+				writer.writeLine('')
+				writer.writeLine('// Prevent infinite recursion with max depth')
+				writer.writeLine('if (depth >= maxDepth) {')
 				writer.writeLine('  return {')
 				writer.writeLine('    itemHrid,')
 				writer.writeLine('    quantity,')
@@ -448,14 +504,10 @@ export class RecipesGenerator extends BaseGenerator<Recipe> {
 				writer.writeLine('  }')
 				writer.writeLine('}')
 				writer.writeLine('')
-				writer.writeLine('const newVisitedItems = new Set(visitedItems)')
-				writer.writeLine('newVisitedItems.add(itemHrid)')
-				writer.writeLine('')
-				writer.writeLine('// Find recipes that produce this item')
-				writer.writeLine('const recipes = getRecipesForOutput(itemHrid)')
-				writer.writeLine('')
-				writer.writeLine('// If no recipe exists, this is a base material')
-				writer.writeLine('if (recipes.length === 0) {')
+				writer.writeLine(
+					'// Check for circular dependencies in current path only',
+				)
+				writer.writeLine('if (pathVisited.has(itemHrid)) {')
 				writer.writeLine('  return {')
 				writer.writeLine('    itemHrid,')
 				writer.writeLine('    quantity,')
@@ -464,6 +516,30 @@ export class RecipesGenerator extends BaseGenerator<Recipe> {
 				writer.writeLine('    depth,')
 				writer.writeLine('    isBaseMaterial: true,')
 				writer.writeLine('  }')
+				writer.writeLine('}')
+				writer.writeLine('')
+				writer.writeLine('// Create new path visited set for this branch')
+				writer.writeLine('const newPathVisited = new Set(pathVisited)')
+				writer.writeLine('newPathVisited.add(itemHrid)')
+				writer.writeLine('')
+				writer.writeLine('// Find recipes that produce this item')
+				writer.writeLine('const recipes = getRecipesForOutput(itemHrid)')
+				writer.writeLine('')
+				writer.writeLine('// If no recipe exists, this is a base material')
+				writer.writeLine('if (recipes.length === 0) {')
+				writer.writeLine('  const baseResult = {')
+				writer.writeLine('    itemHrid,')
+				writer.writeLine('    quantity,')
+				writer.writeLine('    totalQuantityNeeded: quantity,')
+				writer.writeLine('    children: [],')
+				writer.writeLine('    depth,')
+				writer.writeLine('    isBaseMaterial: true,')
+				writer.writeLine('  }')
+				writer.writeLine('  // Cache base materials too')
+				writer.writeLine('  if (depth > 0) {')
+				writer.writeLine('    RECIPE_TREE_CACHE.set(cacheKey, baseResult)')
+				writer.writeLine('  }')
+				writer.writeLine('  return baseResult')
 				writer.writeLine('}')
 				writer.writeLine('')
 				writer.writeLine('// Use the first recipe')
@@ -478,13 +554,16 @@ export class RecipesGenerator extends BaseGenerator<Recipe> {
 				writer.writeLine('// Build child nodes')
 				writer.writeLine('const children: RecipeTreeNode[] = []')
 				writer.writeLine('')
-				writer.writeLine('// Add upgrade item if needed')
+				writer.writeLine(
+					'// Add upgrade item if needed (critical for tools/equipment)',
+				)
 				writer.writeLine('if (recipe.upgradeItemHrid) {')
 				writer.writeLine('  const upgradeNode = buildRecipeTree(')
 				writer.writeLine('    recipe.upgradeItemHrid,')
 				writer.writeLine('    craftingIterations,')
 				writer.writeLine('    depth + 1,')
-				writer.writeLine('    newVisitedItems')
+				writer.writeLine('    newPathVisited,')
+				writer.writeLine('    maxDepth')
 				writer.writeLine('  )')
 				writer.writeLine('  if (upgradeNode) children.push(upgradeNode)')
 				writer.writeLine('}')
@@ -496,13 +575,14 @@ export class RecipesGenerator extends BaseGenerator<Recipe> {
 				writer.writeLine('      input.itemHrid,')
 				writer.writeLine('      input.count * craftingIterations,')
 				writer.writeLine('      depth + 1,')
-				writer.writeLine('      newVisitedItems')
+				writer.writeLine('      newPathVisited,')
+				writer.writeLine('      maxDepth')
 				writer.writeLine('    )')
 				writer.writeLine('    if (childNode) children.push(childNode)')
 				writer.writeLine('  }')
 				writer.writeLine('}')
 				writer.writeLine('')
-				writer.writeLine('return {')
+				writer.writeLine('const result = {')
 				writer.writeLine('  itemHrid,')
 				writer.writeLine('  quantity,')
 				writer.writeLine('  totalQuantityNeeded: quantity,')
@@ -517,6 +597,15 @@ export class RecipesGenerator extends BaseGenerator<Recipe> {
 					'  totalCraftingTime: recipe.baseTimeCost * craftingIterations,',
 				)
 				writer.writeLine('}')
+				writer.writeLine('')
+				writer.writeLine(
+					'// Cache the result for future use (only for sub-trees)',
+				)
+				writer.writeLine('if (depth > 0) {')
+				writer.writeLine('  RECIPE_TREE_CACHE.set(cacheKey, result)')
+				writer.writeLine('}')
+				writer.writeLine('')
+				writer.writeLine('return result')
 			},
 		)
 

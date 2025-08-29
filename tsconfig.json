@@ -1,7 +1,9 @@
 {
 	"compilerOptions": {
 		// Environment setup & latest features
-		"lib": ["ESNext"],
+		"lib": [
+			"ESNext"
+		],
 		"target": "ESNext",
 		"module": "Preserve",
 		"moduleDetection": "force",
@@ -24,9 +26,16 @@
 		"noPropertyAccessFromIndexSignature": false,
 		// Paths
 		"paths": {
-			"@/*": ["./src/*"]
+			"@/*": [
+				"./src/*"
+			]
 		},
 		// Base URL
 		"baseUrl": "."
-	}
+	},
+	"exclude": [
+		"node_modules",
+		"dist",
+		"cdn"
+	]
 }
