@@ -2,7 +2,7 @@
   "name": "@c3d.gg/mwi-types",
   "module": "index.ts",
   "type": "module",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "TypeScript type definitions and schemas for Milky Way Idle game data",
   "author": "C3D",
   "license": "MIT",
