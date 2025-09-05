@@ -214,24 +214,19 @@ export class ModularItemsGenerator extends ModularBaseGenerator<Item> {
 	protected override generateTypes(entities: Record<string, Item>): void {
 		// Import dependencies
 		const typesBuilder = this.moduleBuilder.getFile('types')
-		typesBuilder.addImport('../types/actions', ['LevelRequirement'], true)
-		typesBuilder.addImport(
-			'../types/equipment-types',
-			['EquipmentTypeHrid'],
-			true,
-		)
-		typesBuilder.addImport(
-			'../types/item-categories',
-			['ItemCategoryHrid'],
-			true,
-		)
-		typesBuilder.addImport('../types/skills', ['SkillHrid'], true)
-
-		// Re-export these types so they're available from the items module
-		typesBuilder.addNamedExports({
-			EquipmentTypeHrid: { from: '../types/equipment-types', isType: true },
-			ItemCategoryHrid: { from: '../types/item-categories', isType: true },
-		})
+		// NOTE: Currently using string types for external dependencies to avoid circular imports
+		// These will be replaced with proper imports once those modules are modularized
+		
+		// Define type aliases for external dependencies (temporary until those modules are modularized)
+		typesBuilder.addType('SkillHrid', 'string')
+		typesBuilder.addType('EquipmentTypeHrid', 'string')
+		typesBuilder.addType('ItemCategoryHrid', 'string')
+		
+		// Define LevelRequirement locally (duplicated from actions for now)
+		this.moduleBuilder.addInterface('LevelRequirement', [
+			{ name: 'skillHrid', type: 'SkillHrid', optional: false },
+			{ name: 'level', type: 'number', optional: false },
+		])
 
 		// ItemCost interface
 		this.moduleBuilder.addInterface('ItemCost', [
@@ -407,12 +402,7 @@ export class ModularItemsGenerator extends ModularBaseGenerator<Item> {
 			[
 				{ from: './lookups', names: ['ITEMS_BY_EQUIPMENT_TYPE'] },
 				// No need to import getItem - it's in the same file
-				{
-					from: '../types/equipment-types',
-					names: ['EquipmentTypeHrid'],
-					isType: true,
-				},
-				{ from: './types', names: ['Item'], isType: true },
+				{ from: './types', names: ['Item', 'EquipmentTypeHrid'], isType: true },
 			],
 		)
 

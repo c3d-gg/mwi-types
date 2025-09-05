@@ -1,6 +1,7 @@
 #!/usr/bin/env bun
 import { AbilitiesGenerator } from './generators/abilities.generator'
 import { ModularItemsGenerator } from './generators/items.generator.modular'
+import { ModularActionsGenerator } from './generators/actions.generator.modular'
 import { ActionCategoriesGenerator } from './generators/action-categories.generator'
 import { ActionsGenerator } from './generators/actions.generator'
 import { AvatarGenerator } from './generators/avatar.generator'
@@ -83,7 +84,12 @@ async function generateAll() {
 
 		// Layer 3: Multiple dependencies
 		console.log('\n📦 Layer 3: Multiple dependency entities')
-		await new ActionsGenerator().generate(sourcePath)
+		if (useModular) {
+			console.log('🧪 Using MODULAR actions generator for tree-shaking optimization')
+			await new ModularActionsGenerator().generate(sourcePath)
+		} else {
+			await new ActionsGenerator().generate(sourcePath)
+		}
 		await new HouseRoomsGenerator().generate(sourcePath)
 
 		// Layer 4: Complex dependencies

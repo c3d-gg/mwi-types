@@ -102,21 +102,51 @@ export abstract class ModularBaseGenerator<TEntity> {
 	/**
 	 * Clean entity data (remove empty values)
 	 * Note: Preserves empty strings for 'description' field as it's required
+	 * Note: Preserves null values for fields that explicitly expect null
 	 */
 	protected cleanEntityData(data: any, parentKey?: string): any {
-		if (data === null || data === undefined) {
+		// Preserve null values for fields that explicitly allow null
+		const nullPreservedFields = [
+			'experienceGain', 'dropTable', 'essenceDropTable', 'rareDropTable',
+			'inputItems', 'outputItems', 'combatZoneInfo', 'buffs',
+			'levelRequirement', 'bossSpawns', 'rewardDropTable',
+			'randomSpawnInfoMap', 'fixedSpawnsMap', 'spawns'
+		]
+
+		// Fields that should preserve empty strings
+		const emptyStringPreservedFields = [
+			'description', 'keyItemHrid'
+		]
+
+		if (data === null) {
+			// Keep null for fields that expect it
+			if (parentKey && nullPreservedFields.includes(parentKey)) {
+				return null
+			}
+			return undefined
+		}
+
+		if (data === undefined) {
 			return undefined
 		}
 
 		if (typeof data === 'string') {
-			// Preserve empty strings for description field
-			if (parentKey === 'description' && data === '') {
+			// Preserve empty strings for certain fields
+			if (parentKey && emptyStringPreservedFields.includes(parentKey) && data === '') {
 				return data
 			}
 			return data === '' ? undefined : data
 		}
 
 		if (Array.isArray(data)) {
+			// Keep empty array for spawns field
+			if (parentKey === 'spawns' && data.length === 0) {
+				return []
+			}
+			// Return null for empty arrays if the field expects null
+			if (data.length === 0 && parentKey && nullPreservedFields.includes(parentKey)) {
+				return null
+			}
 			return data.length === 0
 				? null
 				: data.map((item) => this.cleanEntityData(item))
@@ -126,9 +156,12 @@ export abstract class ModularBaseGenerator<TEntity> {
 			const cleaned: any = {}
 			for (const [key, value] of Object.entries(data)) {
 				const cleanedValue = this.cleanEntityData(value, key)
-				// Keep description field even if it's undefined or empty string
-				if (key === 'description') {
+				// Keep empty string fields even if they're undefined or empty
+				if (emptyStringPreservedFields.includes(key)) {
 					cleaned[key] = cleanedValue === undefined ? '' : cleanedValue
+				// Keep null values for fields that expect null
+				} else if (nullPreservedFields.includes(key) && (cleanedValue === null || cleanedValue !== undefined)) {
+					cleaned[key] = cleanedValue
 				} else if (cleanedValue !== undefined) {
 					cleaned[key] = cleanedValue
 				}
