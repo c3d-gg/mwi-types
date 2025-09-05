@@ -152,11 +152,14 @@ export class ModuleBuilder {
 		if (!primitiveTypes.includes(keyType)) {
 			lookupsBuilder.addImport('./types', [keyType], true)
 		}
-		if (!primitiveTypes.includes(valueType) && !valueType.includes('[]') && !valueType.startsWith('readonly')) {
-			const baseType = valueType.replace('[]', '').replace('readonly ', '')
-			if (!primitiveTypes.includes(baseType)) {
-				lookupsBuilder.addImport('./types', [baseType], true)
-			}
+		
+		// Extract base type from value type (handles 'readonly X[]', 'X[]', or plain 'X')
+		let baseValueType = valueType
+		if (valueType.includes('[]') || valueType.startsWith('readonly ')) {
+			baseValueType = valueType.replace('readonly ', '').replace('[]', '').trim()
+		}
+		if (!primitiveTypes.includes(baseValueType)) {
+			lookupsBuilder.addImport('./types', [baseValueType], true)
 		}
 
 		lookupsBuilder.addStaticLookup(name, keyType, valueType, data, isPartial)

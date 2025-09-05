@@ -401,6 +401,7 @@ export class ModularMonstersGenerator extends ModularBaseGenerator<Monster> {
 		typesBuilder.getSourceFile().addExportDeclaration({
 			namedExports: ['ItemHrid', 'AbilityHrid', 'CombatStyleHrid', 'DamageTypeHrid'],
 			moduleSpecifier: undefined,
+			isTypeOnly: true,
 		})
 
 		// Import constants for type derivation

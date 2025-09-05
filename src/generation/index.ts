@@ -38,6 +38,7 @@ import { NameColorsGenerator } from './generators/name-colors.generator'
 import { PlayerDataGenerator } from './generators/player-data.generator'
 import { PurchaseBundlesGenerator } from './generators/purchase-bundles.generator'
 import { RandomTasksGenerator } from './generators/random-tasks.generator'
+import { ModularRandomTasksGenerator } from './generators/random-tasks.generator.modular'
 import { RecipesGenerator } from './generators/recipes.generator'
 import { ModularRecipesGenerator } from './generators/recipes.generator.modular'
 import { ShopCategoriesGenerator } from './generators/shop-categories.generator'
@@ -147,7 +148,14 @@ async function generateAll() {
 		await new ItemLocationsGenerator().generate(sourcePath)
 		await new NameColorsGenerator().generate(sourcePath)
 		await new PurchaseBundlesGenerator().generate(sourcePath)
-		await new RandomTasksGenerator().generate(sourcePath)
+		
+		// RandomTasks - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR random tasks generator for tree-shaking optimization')
+			await new ModularRandomTasksGenerator().generate(sourcePath)
+		} else {
+			await new RandomTasksGenerator().generate(sourcePath)
+		}
 		await new ShopCategoriesGenerator().generate(sourcePath)
 
 		// Layer 2: Single dependency

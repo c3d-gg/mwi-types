@@ -122,7 +122,7 @@ export abstract class ModularBaseGenerator<TEntity> {
 
 		// Fields that should preserve undefined values (optional fields)
 		const undefinedPreservedFields = [
-			'requiredChatIconHrid', 'abilities'
+			'requiredChatIconHrid', 'abilities', 'skillHrid'
 		]
 
 		if (data === null) {
