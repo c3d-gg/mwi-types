@@ -22,6 +22,7 @@ import { DamageTypesModularGenerator } from './generators/damage-types.generator
 import { EquipmentTypesGenerator } from './generators/equipment-types.generator'
 import { ModularEquipmentTypesGenerator } from './generators/equipment-types.generator.modular'
 import { GameModesGenerator } from './generators/game-modes.generator'
+import { GameModesGeneratorModular } from './generators/game-modes.generator.modular'
 import { GuildCharacterRolesGenerator } from './generators/guild-character-roles.generator'
 import { HouseRoomsGenerator } from './generators/house-rooms.generator'
 import { ModularHouseRoomsGenerator } from './generators/house-rooms.generator.modular'
@@ -40,6 +41,7 @@ import { NameColorsGenerator } from './generators/name-colors.generator'
 import { NameColorsGeneratorModular } from './generators/name-colors.generator.modular'
 import { PlayerDataGenerator } from './generators/player-data.generator'
 import { PurchaseBundlesGenerator } from './generators/purchase-bundles.generator'
+import { PurchaseBundlesGeneratorModular } from './generators/purchase-bundles.generator.modular'
 import { RandomTasksGenerator } from './generators/random-tasks.generator'
 import { ModularRandomTasksGenerator } from './generators/random-tasks.generator.modular'
 import { RecipesGenerator } from './generators/recipes.generator'
@@ -146,7 +148,13 @@ async function generateAll() {
 			await new EquipmentTypesGenerator().generate(sourcePath)
 		}
 		
-		await new GameModesGenerator().generate(sourcePath)
+		// GameModes - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR game modes generator for tree-shaking optimization')
+			await new GameModesGeneratorModular().generate(sourcePath)
+		} else {
+			await new GameModesGenerator().generate(sourcePath)
+		}
 		await new GuildCharacterRolesGenerator().generate(sourcePath)
 		
 		// ItemCategories - use modular if enabled
@@ -167,7 +175,13 @@ async function generateAll() {
 			await new NameColorsGenerator().generate(sourcePath)
 		}
 		
-		await new PurchaseBundlesGenerator().generate(sourcePath)
+		// PurchaseBundles - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR purchase bundles generator for tree-shaking optimization')
+			await new PurchaseBundlesGeneratorModular().generate(sourcePath)
+		} else {
+			await new PurchaseBundlesGenerator().generate(sourcePath)
+		}
 		
 		// RandomTasks - use modular if enabled
 		if (useModular) {
