@@ -32,6 +32,7 @@ import { RecipesGenerator } from './generators/recipes.generator'
 import { ShopCategoriesGenerator } from './generators/shop-categories.generator'
 import { ShopItemsGenerator } from './generators/shop-items.generator'
 import { SkillsGenerator } from './generators/skills.generator'
+import { ModularSkillsGenerator } from './generators/skills.generator.modular'
 import { TaskShopItemsGenerator } from './generators/task-shop-items.generator'
 import { TranslationsGenerator } from './generators/translations.generator'
 
@@ -43,7 +44,15 @@ async function generateAll() {
 	try {
 		// Layer 1: No dependencies
 		console.log('📦 Layer 1: Base entities (no dependencies)')
-		await new SkillsGenerator().generate(sourcePath)
+		
+		// Test modular vs old generator based on env var
+		const useModular = process.env.USE_MODULAR === 'true'
+		if (useModular) {
+			console.log('🧪 Using MODULAR skills generator for tree-shaking optimization')
+			await new ModularSkillsGenerator().generate(sourcePath)
+		} else {
+			await new SkillsGenerator().generate(sourcePath)
+		}
 		await new MonstersGenerator().generate(sourcePath)
 		await new BuffTypesGenerator().generate(sourcePath)
 		await new AbilitiesGenerator().generate(sourcePath)
@@ -67,9 +76,6 @@ async function generateAll() {
 
 		// Layer 2: Single dependency
 		console.log('\n📦 Layer 2: Single dependency entities')
-		
-		// Test modular vs old generator based on env var
-		const useModular = process.env.USE_MODULAR === 'true'
 		if (useModular) {
 			console.log('🧪 Using MODULAR items generator for tree-shaking optimization')
 			await new ModularItemsGenerator().generate(sourcePath)
