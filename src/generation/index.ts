@@ -1,5 +1,6 @@
 #!/usr/bin/env bun
 import { AbilitiesGenerator } from './generators/abilities.generator'
+import { AbilitiesModularGenerator } from './generators/abilities.generator.modular'
 import { ModularItemsGenerator } from './generators/items.generator.modular'
 import { ModularActionsGenerator } from './generators/actions.generator.modular'
 import { ActionCategoriesGenerator } from './generators/action-categories.generator'
@@ -13,8 +14,10 @@ import { ChatChannelTypesGenerator } from './generators/chat-channel-types.gener
 import { ChatIconsGenerator } from './generators/chat-icons.generator'
 import { ModularChatIconsGenerator } from './generators/chat-icons.generator.modular'
 import { CombatStylesGenerator } from './generators/combat-styles.generator'
+import { CombatStylesModularGenerator } from './generators/combat-styles.generator.modular'
 import { CommunityBuffsGenerator } from './generators/community-buffs.generator'
 import { DamageTypesGenerator } from './generators/damage-types.generator'
+import { DamageTypesModularGenerator } from './generators/damage-types.generator.modular'
 import { EquipmentTypesGenerator } from './generators/equipment-types.generator'
 import { ModularEquipmentTypesGenerator } from './generators/equipment-types.generator.modular'
 import { GameModesGenerator } from './generators/game-modes.generator'
@@ -78,7 +81,13 @@ async function generateAll() {
 			await new BuffTypesGenerator().generate(sourcePath)
 		}
 		
-		await new AbilitiesGenerator().generate(sourcePath)
+		// Abilities - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR abilities generator for tree-shaking optimization')
+			await new AbilitiesModularGenerator().generate(sourcePath)
+		} else {
+			await new AbilitiesGenerator().generate(sourcePath)
+		}
 		await new AvatarGenerator().generate(sourcePath)
 		await new AvatarsGenerator().generate(sourcePath)
 		await new LeaderboardTypesGenerator().generate(sourcePath)
@@ -91,7 +100,13 @@ async function generateAll() {
 			await new ActionCategoriesGenerator().generate(sourcePath)
 		}
 		
-		await new CombatStylesGenerator().generate(sourcePath)
+		// CombatStyles - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR combat styles generator for tree-shaking optimization')
+			await new CombatStylesModularGenerator().generate(sourcePath)
+		} else {
+			await new CombatStylesGenerator().generate(sourcePath)
+		}
 		await new ChatChannelTypesGenerator().generate(sourcePath)
 		
 		// ChatIcons - use modular if enabled
@@ -102,7 +117,13 @@ async function generateAll() {
 			await new ChatIconsGenerator().generate(sourcePath)
 		}
 		
-		await new DamageTypesGenerator().generate(sourcePath)
+		// DamageTypes - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR damage types generator for tree-shaking optimization')
+			await new DamageTypesModularGenerator().generate(sourcePath)
+		} else {
+			await new DamageTypesGenerator().generate(sourcePath)
+		}
 		
 		// EquipmentTypes - use modular if enabled
 		if (useModular) {

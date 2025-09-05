@@ -391,12 +391,11 @@ export class ModularMonstersGenerator extends ModularBaseGenerator<Monster> {
 
 		// Add file comment
 
-		// Temporary type aliases until dependencies are modularized
-		// External type dependencies
-		typesBuilder.addType('ItemHrid', 'string')
-		typesBuilder.addType('AbilityHrid', 'string')
-		typesBuilder.addType('CombatStyleHrid', 'string')
-		typesBuilder.addType('DamageTypeHrid', 'string')
+		// Import types from modular modules
+		typesBuilder.addImport('../items/types', ['ItemHrid'], true)
+		typesBuilder.addImport('../abilities/types', ['AbilityHrid'], true)
+		typesBuilder.addImport('../combat-styles/types', ['CombatStyleHrid'], true)
+		typesBuilder.addImport('../damage-types/types', ['DamageTypeHrid'], true)
 
 		// Import constants for type derivation
 		typesBuilder.addImport('./constants', ['MONSTER_HRIDS'], false)
