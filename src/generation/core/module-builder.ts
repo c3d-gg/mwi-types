@@ -139,6 +139,7 @@ export class ModuleBuilder {
 		data: Record<K, V>,
 		keyType: string,
 		valueType: string,
+		isPartial = false,
 	): void {
 		if (!this.config.enableStaticLookups) {
 			throw new Error('Static lookups are not enabled for this module')
@@ -146,15 +147,19 @@ export class ModuleBuilder {
 
 		const lookupsBuilder = this.getFile('lookups')
 
-		// Add type imports if needed
-		if (keyType !== 'string') {
+		// Add type imports if needed (only for custom types, not primitives)
+		const primitiveTypes = ['string', 'number', 'boolean', 'object']
+		if (!primitiveTypes.includes(keyType)) {
 			lookupsBuilder.addImport('./types', [keyType], true)
 		}
-		if (valueType !== 'string' && !valueType.includes('[]')) {
-			lookupsBuilder.addImport('./types', [valueType.replace('[]', '')], true)
+		if (!primitiveTypes.includes(valueType) && !valueType.includes('[]') && !valueType.startsWith('readonly')) {
+			const baseType = valueType.replace('[]', '').replace('readonly ', '')
+			if (!primitiveTypes.includes(baseType)) {
+				lookupsBuilder.addImport('./types', [baseType], true)
+			}
 		}
 
-		lookupsBuilder.addStaticLookup(name, keyType, valueType, data)
+		lookupsBuilder.addStaticLookup(name, keyType, valueType, data, isPartial)
 		this.addExport({ name, source: './lookups' })
 	}
 

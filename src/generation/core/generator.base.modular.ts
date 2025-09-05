@@ -103,6 +103,7 @@ export abstract class ModularBaseGenerator<TEntity> {
 	 * Clean entity data (remove empty values)
 	 * Note: Preserves empty strings for 'description' field as it's required
 	 * Note: Preserves null values for fields that explicitly expect null
+	 * Note: Preserves undefined values for optional fields
 	 */
 	protected cleanEntityData(data: any, parentKey?: string): any {
 		// Preserve null values for fields that explicitly allow null
@@ -110,12 +111,17 @@ export abstract class ModularBaseGenerator<TEntity> {
 			'experienceGain', 'dropTable', 'essenceDropTable', 'rareDropTable',
 			'inputItems', 'outputItems', 'combatZoneInfo', 'buffs',
 			'levelRequirement', 'bossSpawns', 'rewardDropTable',
-			'randomSpawnInfoMap', 'fixedSpawnsMap', 'spawns'
+			'randomSpawnInfoMap', 'fixedSpawnsMap', 'spawns', 'abilities'
 		]
 
 		// Fields that should preserve empty strings
 		const emptyStringPreservedFields = [
-			'description', 'keyItemHrid'
+			'description', 'keyItemHrid', 'name'
+		]
+
+		// Fields that should preserve undefined values (optional fields)
+		const undefinedPreservedFields = [
+			'requiredChatIconHrid', 'abilities'
 		]
 
 		if (data === null) {
@@ -139,8 +145,8 @@ export abstract class ModularBaseGenerator<TEntity> {
 		}
 
 		if (Array.isArray(data)) {
-			// Keep empty array for spawns field
-			if (parentKey === 'spawns' && data.length === 0) {
+			// Keep empty array for spawns field and abilities field
+			if ((parentKey === 'spawns' || parentKey === 'abilities') && data.length === 0) {
 				return []
 			}
 			// Return null for empty arrays if the field expects null
@@ -159,6 +165,9 @@ export abstract class ModularBaseGenerator<TEntity> {
 				// Keep empty string fields even if they're undefined or empty
 				if (emptyStringPreservedFields.includes(key)) {
 					cleaned[key] = cleanedValue === undefined ? '' : cleanedValue
+				// Keep undefined values for optional fields
+				} else if (undefinedPreservedFields.includes(key)) {
+					cleaned[key] = cleanedValue  // Keep undefined as-is
 				// Keep null values for fields that expect null
 				} else if (nullPreservedFields.includes(key) && (cleanedValue === null || cleanedValue !== undefined)) {
 					cleaned[key] = cleanedValue

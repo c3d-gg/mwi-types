@@ -408,14 +408,19 @@ export class ASTBuilder {
 		keyType: string,
 		valueType: string,
 		data: Record<K, V>,
+		isPartial = false,
 	) {
+		const recordType = isPartial 
+			? `Partial<Record<${keyType}, ${valueType}>>` 
+			: `Record<${keyType}, ${valueType}>`
+		
 		this.sourceFile.addVariableStatement({
 			isExported: true,
 			declarationKind: VariableDeclarationKind.Const,
 			declarations: [
 				{
 					name,
-					type: `Record<${keyType}, ${valueType}>`,
+					type: recordType,
 					initializer: (writer) => {
 						const jsonStr = this.serializeValue(data, 1)
 						writer.write(jsonStr)

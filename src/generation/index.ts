@@ -11,6 +11,7 @@ import { BuffTypesGenerator } from './generators/buff-types.generator'
 import { ModularBuffTypesGenerator } from './generators/buff-types.generator.modular'
 import { ChatChannelTypesGenerator } from './generators/chat-channel-types.generator'
 import { ChatIconsGenerator } from './generators/chat-icons.generator'
+import { ModularChatIconsGenerator } from './generators/chat-icons.generator.modular'
 import { CombatStylesGenerator } from './generators/combat-styles.generator'
 import { CommunityBuffsGenerator } from './generators/community-buffs.generator'
 import { DamageTypesGenerator } from './generators/damage-types.generator'
@@ -19,6 +20,7 @@ import { ModularEquipmentTypesGenerator } from './generators/equipment-types.gen
 import { GameModesGenerator } from './generators/game-modes.generator'
 import { GuildCharacterRolesGenerator } from './generators/guild-character-roles.generator'
 import { HouseRoomsGenerator } from './generators/house-rooms.generator'
+import { ModularHouseRoomsGenerator } from './generators/house-rooms.generator.modular'
 import { IndexGenerator } from './generators/index.generator'
 import { ItemCategoriesGenerator } from './generators/item-categories.generator'
 import { ModularItemCategoriesGenerator } from './generators/item-categories.generator.modular'
@@ -28,6 +30,7 @@ import { LeaderboardCategoriesGenerator } from './generators/leaderboard-categor
 import { LeaderboardTypesGenerator } from './generators/leaderboard-types.generator'
 import { LeaderboardsGenerator } from './generators/leaderboards.generator'
 import { MonstersGenerator } from './generators/monsters.generator'
+import { ModularMonstersGenerator } from './generators/monsters.generator.modular'
 import { NameColorsGenerator } from './generators/name-colors.generator'
 import { PlayerDataGenerator } from './generators/player-data.generator'
 import { PurchaseBundlesGenerator } from './generators/purchase-bundles.generator'
@@ -58,7 +61,14 @@ async function generateAll() {
 		} else {
 			await new SkillsGenerator().generate(sourcePath)
 		}
-		await new MonstersGenerator().generate(sourcePath)
+		
+		// Monsters - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR monsters generator for tree-shaking optimization')
+			await new ModularMonstersGenerator().generate(sourcePath)
+		} else {
+			await new MonstersGenerator().generate(sourcePath)
+		}
 		
 		// BuffTypes - use modular if enabled
 		if (useModular) {
@@ -83,7 +93,15 @@ async function generateAll() {
 		
 		await new CombatStylesGenerator().generate(sourcePath)
 		await new ChatChannelTypesGenerator().generate(sourcePath)
-		await new ChatIconsGenerator().generate(sourcePath)
+		
+		// ChatIcons - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR chat icons generator for tree-shaking optimization')
+			await new ModularChatIconsGenerator().generate(sourcePath)
+		} else {
+			await new ChatIconsGenerator().generate(sourcePath)
+		}
+		
 		await new DamageTypesGenerator().generate(sourcePath)
 		
 		// EquipmentTypes - use modular if enabled
@@ -133,7 +151,14 @@ async function generateAll() {
 		} else {
 			await new ActionsGenerator().generate(sourcePath)
 		}
-		await new HouseRoomsGenerator().generate(sourcePath)
+		
+		// HouseRooms - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR house rooms generator for tree-shaking optimization')
+			await new ModularHouseRoomsGenerator().generate(sourcePath)
+		} else {
+			await new HouseRoomsGenerator().generate(sourcePath)
+		}
 
 		// Layer 4: Complex dependencies
 		console.log('\n📦 Layer 4: Complex dependency entities')
