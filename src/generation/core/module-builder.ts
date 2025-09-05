@@ -190,6 +190,12 @@ export class ModuleBuilder {
 	 * Track an export for the index file
 	 */
 	addExport(exp: ModuleExport): void {
+		// Skip undefined exports
+		if (!exp.name || exp.name === 'undefined') {
+			console.warn(`Skipping undefined export from ${exp.source}`)
+			return
+		}
+		
 		// Avoid duplicate exports
 		if (
 			!this.exports.find((e) => e.name === exp.name && e.source === exp.source)

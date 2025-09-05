@@ -85,6 +85,9 @@ export class CombatStylesModularGenerator extends ModularBaseGenerator<CombatSty
 
 		typesFile.addInterface('CombatStyle', properties)
 
+		// Import constants for type derivation
+		typesFile.addImport('./constants', ['COMBATSTYLE_HRIDS'], false)
+		
 		// Export the hrid type
 		typesFile.addType('CombatStyleHrid', '(typeof COMBATSTYLE_HRIDS)[number]')
 

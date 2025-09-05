@@ -111,7 +111,8 @@ export abstract class ModularBaseGenerator<TEntity> {
 			'experienceGain', 'dropTable', 'essenceDropTable', 'rareDropTable',
 			'inputItems', 'outputItems', 'combatZoneInfo', 'buffs',
 			'levelRequirement', 'bossSpawns', 'rewardDropTable',
-			'randomSpawnInfoMap', 'fixedSpawnsMap', 'spawns', 'abilities'
+			'randomSpawnInfoMap', 'fixedSpawnsMap', 'spawns', 'abilities',
+			'defaultCombatTriggers', 'skillExpMap'
 		]
 
 		// Fields that should preserve empty strings

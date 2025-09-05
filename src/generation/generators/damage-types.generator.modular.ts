@@ -72,6 +72,9 @@ export class DamageTypesModularGenerator extends ModularBaseGenerator<DamageType
 
 		typesFile.addInterface('DamageType', properties)
 
+		// Import constants for type derivation
+		typesFile.addImport('./constants', ['DAMAGETYPE_HRIDS'], false)
+		
 		// Export the hrid type derived from constants
 		typesFile.addType('DamageTypeHrid', '(typeof DAMAGETYPE_HRIDS)[number]')
 

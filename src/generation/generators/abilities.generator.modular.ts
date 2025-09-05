@@ -44,7 +44,7 @@ interface Ability {
 	cooldownDuration: number
 	castDuration: number
 	abilityEffects: AbilityEffect[]
-	defaultCombatTriggers: CombatTrigger[]
+	defaultCombatTriggers: CombatTrigger[] | null
 	sortIndex: number
 }
 
@@ -333,7 +333,7 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 			},
 			{
 				name: 'defaultCombatTriggers',
-				type: 'CombatTrigger[]',
+				type: 'CombatTrigger[] | null',
 				optional: false,
 				description: 'Default combat triggers for the ability',
 			},
@@ -347,6 +347,9 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 
 		typesFile.addInterface('Ability', properties)
 
+		// Import constants for type derivation
+		typesFile.addImport('./constants', ['ABILITY_HRIDS'], false)
+		
 		// Export the hrid type derived from constants
 		typesFile.addType('AbilityHrid', '(typeof ABILITY_HRIDS)[number]')
 
