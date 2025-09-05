@@ -71,7 +71,7 @@ export class ShopCategoriesGeneratorModular extends ModularBaseGenerator<ShopCat
 		// Generate HRIDs
 		const hrids = Object.keys(entities).sort()
 		constantsBuilder.addConstArray('SHOPCATEGORY_HRIDS', hrids, true)
-		this.moduleBuilder.addExport('constants', 'SHOPCATEGORY_HRIDS')
+		this.moduleBuilder.addExport('constants', 'SHOPCATEGORY_HRIDS', 'const')
 	}
 
 	protected override generateData(entities: Record<string, ShopCategory>): void {

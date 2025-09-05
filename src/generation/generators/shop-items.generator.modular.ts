@@ -111,17 +111,17 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 		// Generate shop item HRIDs
 		const hrids = Object.keys(entities).sort()
 		constantsBuilder.addConstArray('SHOPITEM_HRIDS', hrids, true)
-		this.moduleBuilder.addExport('constants', 'SHOPITEM_HRIDS')
+		this.moduleBuilder.addExport('constants', 'SHOPITEM_HRIDS', 'const')
 
 		// Generate shop categories
 		const categories = Array.from(this.shopCategories).sort()
 		constantsBuilder.addConstArray('SHOP_CATEGORIES', categories, true)
-		this.moduleBuilder.addExport('constants', 'SHOP_CATEGORIES')
+		this.moduleBuilder.addExport('constants', 'SHOP_CATEGORIES', 'const')
 
 		// Generate currency items
 		const currencies = Array.from(this.currencyItems).sort()
 		constantsBuilder.addConstArray('CURRENCY_ITEMS', currencies, true)
-		this.moduleBuilder.addExport('constants', 'CURRENCY_ITEMS')
+		this.moduleBuilder.addExport('constants', 'CURRENCY_ITEMS', 'const')
 	}
 
 	protected override generateData(entities: Record<string, ShopItem>): void {
@@ -344,7 +344,7 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 			'findCheapestShopItem',
 			[
 				{ name: 'itemHrid', type: 'ItemHrid' },
-				{ name: 'preferredCurrency', type: 'ItemHrid | undefined', defaultValue: 'undefined' },
+				{ name: 'preferredCurrency', type: 'ItemHrid | undefined', default: 'undefined' },
 			],
 			'ShopItem | undefined',
 			(writer) => {
@@ -372,7 +372,7 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 				writer.writeLine('return shopItems.sort((a, b) => a.sortIndex - b.sortIndex)[0]')
 			},
 		)
-		this.moduleBuilder.addExport('utils', 'findCheapestShopItem')
+		this.moduleBuilder.addExport('utils', 'findCheapestShopItem', 'function')
 
 		// Sort shop items by sort index
 		utilsBuilder.addFunction(
@@ -383,7 +383,7 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 				writer.writeLine('return [...items].sort((a, b) => a.sortIndex - b.sortIndex)')
 			},
 		)
-		this.moduleBuilder.addExport('utils', 'sortShopItemsByIndex')
+		this.moduleBuilder.addExport('utils', 'sortShopItemsByIndex', 'function')
 
 		// Group shop items by category
 		utilsBuilder.addFunction(
@@ -403,6 +403,6 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 				writer.writeLine('return grouped')
 			},
 		)
-		this.moduleBuilder.addExport('utils', 'groupShopItemsByCategory')
+		this.moduleBuilder.addExport('utils', 'groupShopItemsByCategory', 'function')
 	}
 }

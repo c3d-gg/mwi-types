@@ -354,12 +354,12 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 		typesFile.addType('AbilityHrid', '(typeof ABILITY_HRIDS)[number]')
 
 		// Add module exports
-		this.moduleBuilder.addExport('types', 'Ability', false)
-		this.moduleBuilder.addExport('types', 'AbilityHrid', false)
-		this.moduleBuilder.addExport('types', 'AbilityEffect', false)
-		this.moduleBuilder.addExport('types', 'CombatTrigger', false)
-		this.moduleBuilder.addExport('types', 'CombatStyleHrid', false)
-		this.moduleBuilder.addExport('types', 'DamageTypeHrid', false)
+		this.moduleBuilder.addExport('types', 'Ability', 'type')
+		this.moduleBuilder.addExport('types', 'AbilityHrid', 'type')
+		this.moduleBuilder.addExport('types', 'AbilityEffect', 'type')
+		this.moduleBuilder.addExport('types', 'CombatTrigger', 'type')
+		this.moduleBuilder.addExport('types', 'CombatStyleHrid', 'type')
+		this.moduleBuilder.addExport('types', 'DamageTypeHrid', 'type')
 	}
 
 	protected override generateConstants(
@@ -369,26 +369,26 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 
 		// Generate ABILITY_HRIDS array
 		const hrids = Object.keys(entities).sort()
-		constantsFile.addConstArray('ABILITY_HRIDS', hrids, 'as const')
+		constantsFile.addConstArray('ABILITY_HRIDS', hrids, true)
 
 		// Separate special abilities
-		const specialAbilities = hrids.filter(hrid => entities[hrid].isSpecialAbility)
-		const regularAbilities = hrids.filter(hrid => !entities[hrid].isSpecialAbility)
+		const specialAbilities = hrids.filter(hrid => entities[hrid]?.isSpecialAbility)
+		const regularAbilities = hrids.filter(hrid => !entities[hrid]?.isSpecialAbility)
 
 		if (specialAbilities.length > 0) {
-			constantsFile.addConstArray('SPECIAL_ABILITY_HRIDS', specialAbilities, 'as const')
+			constantsFile.addConstArray('SPECIAL_ABILITY_HRIDS', specialAbilities, true)
 		}
 		if (regularAbilities.length > 0) {
-			constantsFile.addConstArray('REGULAR_ABILITY_HRIDS', regularAbilities, 'as const')
+			constantsFile.addConstArray('REGULAR_ABILITY_HRIDS', regularAbilities, true)
 		}
 
 		// Export the constants
-		this.moduleBuilder.addExport('constants', 'ABILITY_HRIDS')
+		this.moduleBuilder.addExport('constants', 'ABILITY_HRIDS', 'const')
 		if (specialAbilities.length > 0) {
-			this.moduleBuilder.addExport('constants', 'SPECIAL_ABILITY_HRIDS')
+			this.moduleBuilder.addExport('constants', 'SPECIAL_ABILITY_HRIDS', 'const')
 		}
 		if (regularAbilities.length > 0) {
-			this.moduleBuilder.addExport('constants', 'REGULAR_ABILITY_HRIDS')
+			this.moduleBuilder.addExport('constants', 'REGULAR_ABILITY_HRIDS', 'const')
 		}
 	}
 
@@ -428,8 +428,8 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 					if (!byDamageType[effect.damageType]) {
 						byDamageType[effect.damageType] = []
 					}
-					if (!byDamageType[effect.damageType].includes(hrid)) {
-						byDamageType[effect.damageType].push(hrid)
+					if (!byDamageType[effect.damageType]?.includes(hrid)) {
+						byDamageType[effect.damageType]?.push(hrid)
 					}
 				}
 			}
@@ -437,7 +437,7 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 
 		// Sort the arrays
 		for (const damageType in byDamageType) {
-			byDamageType[damageType].sort()
+			byDamageType[damageType]?.sort()
 		}
 
 		lookupsFile.addStaticLookup(

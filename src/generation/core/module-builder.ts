@@ -192,7 +192,27 @@ export class ModuleBuilder {
 	/**
 	 * Track an export for the index file
 	 */
-	addExport(exp: ModuleExport): void {
+	addExport(exp: ModuleExport): void
+	addExport(source: string, name: string, exportType?: 'type' | 'const' | 'function'): void
+	addExport(
+		expOrSource: ModuleExport | string,
+		name?: string,
+		exportType?: 'type' | 'const' | 'function'
+	): void {
+		let exp: ModuleExport
+		
+		if (typeof expOrSource === 'string') {
+			// Called with individual parameters
+			exp = {
+				name: name!,
+				source: `./${expOrSource}`,
+				isType: exportType === 'type'
+			}
+		} else {
+			// Called with object parameter
+			exp = expOrSource
+		}
+		
 		// Skip undefined exports
 		if (!exp.name || exp.name === 'undefined') {
 			console.warn(`Skipping undefined export from ${exp.source}`)

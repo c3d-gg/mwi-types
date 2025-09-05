@@ -8,6 +8,7 @@ import { ModularActionCategoriesGenerator } from './generators/action-categories
 import { ActionsGenerator } from './generators/actions.generator'
 import { AvatarGenerator } from './generators/avatar.generator'
 import { AvatarsGenerator } from './generators/avatars.generator'
+import { ModularAvatarOutfitsGenerator } from './generators/avatars.generator.modular'
 import { BuffTypesGenerator } from './generators/buff-types.generator'
 import { ModularBuffTypesGenerator } from './generators/buff-types.generator.modular'
 import { ChatChannelTypesGenerator } from './generators/chat-channel-types.generator'
@@ -32,6 +33,7 @@ import { ItemsGenerator } from './generators/items.generator'
 import { LeaderboardCategoriesGenerator } from './generators/leaderboard-categories.generator'
 import { LeaderboardTypesGenerator } from './generators/leaderboard-types.generator'
 import { LeaderboardsGenerator } from './generators/leaderboards.generator'
+import { LeaderboardsModularGenerator } from './generators/leaderboards.generator.modular'
 import { MonstersGenerator } from './generators/monsters.generator'
 import { ModularMonstersGenerator } from './generators/monsters.generator.modular'
 import { NameColorsGenerator } from './generators/name-colors.generator'
@@ -93,7 +95,14 @@ async function generateAll() {
 			await new AbilitiesGenerator().generate(sourcePath)
 		}
 		await new AvatarGenerator().generate(sourcePath)
-		await new AvatarsGenerator().generate(sourcePath)
+		
+		// Avatars - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR avatars generator for tree-shaking optimization')
+			await new ModularAvatarOutfitsGenerator().generate(sourcePath)
+		} else {
+			await new AvatarsGenerator().generate(sourcePath)
+		}
 		await new LeaderboardTypesGenerator().generate(sourcePath)
 		
 		// ActionCategories - use modular if enabled
@@ -193,7 +202,13 @@ async function generateAll() {
 		}
 		await new TaskShopItemsGenerator().generate(sourcePath) // Depends on Items
 		await new LeaderboardCategoriesGenerator().generate(sourcePath) // Depends on Skills
-		await new LeaderboardsGenerator().generate(sourcePath) // Depends on LeaderboardTypes
+		// Leaderboards - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR leaderboards generator for tree-shaking optimization')
+			await new LeaderboardsModularGenerator().generate(sourcePath)
+		} else {
+			await new LeaderboardsGenerator().generate(sourcePath) // Depends on LeaderboardTypes
+		}
 
 		// Layer 3: Multiple dependencies
 		console.log('\n📦 Layer 3: Multiple dependency entities')
