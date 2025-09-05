@@ -1,5 +1,6 @@
 #!/usr/bin/env bun
 import { AbilitiesGenerator } from './generators/abilities.generator'
+import { ModularItemsGenerator } from './generators/items.generator.modular'
 import { ActionCategoriesGenerator } from './generators/action-categories.generator'
 import { ActionsGenerator } from './generators/actions.generator'
 import { AvatarGenerator } from './generators/avatar.generator'
@@ -65,7 +66,15 @@ async function generateAll() {
 
 		// Layer 2: Single dependency
 		console.log('\n📦 Layer 2: Single dependency entities')
-		await new ItemsGenerator().generate(sourcePath)
+		
+		// Test modular vs old generator based on env var
+		const useModular = process.env.USE_MODULAR === 'true'
+		if (useModular) {
+			console.log('🧪 Using MODULAR items generator for tree-shaking optimization')
+			await new ModularItemsGenerator().generate(sourcePath)
+		} else {
+			await new ItemsGenerator().generate(sourcePath)
+		}
 		await new CommunityBuffsGenerator().generate(sourcePath)
 		await new ShopItemsGenerator().generate(sourcePath) // Depends on Items
 		await new TaskShopItemsGenerator().generate(sourcePath) // Depends on Items

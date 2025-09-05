@@ -299,6 +299,152 @@ export class ASTBuilder {
 	}
 
 	/**
+	 * Adds a type alias to the source file
+	 *
+	 * @param name - The name of the type alias
+	 * @param type - The type definition
+	 * @returns The AST builder instance
+	 */
+	addType(name: string, type: string) {
+		this.sourceFile.addTypeAlias({
+			name,
+			type,
+			isExported: true,
+		})
+		return this
+	}
+
+
+	/**
+	 * Adds a lazy-initialized Map with getter function
+	 * This pattern enables tree-shaking by only loading data when explicitly accessed
+	 *
+	 * @param mapName - The name of the Map variable (e.g., '_itemsMap')
+	 * @param getterName - The name of the getter function (e.g., 'getItemsMap')
+	 * @param dataFunctionName - The name of the data function (e.g., 'getItemsData')
+	 * @param keyType - The type of the Map keys
+	 * @param valueType - The type of the Map values
+	 * @param entries - The entries for the Map
+	 * @returns The AST builder instance
+	 */
+	addLazyMap<K extends string, V>(
+		mapName: string,
+		getterName: string,
+		dataFunctionName: string,
+		keyType: string,
+		valueType: string,
+		entries: Array<[K, V]>,
+	) {
+		// Add the private Map variable
+		this.sourceFile.addVariableStatement({
+			declarationKind: VariableDeclarationKind.Let,
+			declarations: [
+				{
+					name: mapName,
+					type: `Map<${keyType}, ${valueType}> | undefined`,
+				},
+			],
+		})
+
+		// Add the data function (not exported, tree-shakeable)
+		this.sourceFile.addFunction({
+			name: dataFunctionName,
+			returnType: `[${keyType}, ${valueType}][]`,
+			statements: (writer) => {
+				writer.write('return [')
+				if (entries.length > 0) {
+					writer.newLine()
+					entries.forEach(([key, value], index) => {
+						writer.indent(() => {
+							writer.write(`['${key}', `)
+							const jsonStr = this.serializeValue(value, 2)
+							const lines = jsonStr.split('\n')
+							lines.forEach((line, lineIndex) => {
+								if (lineIndex > 0) {
+									writer.newLine()
+									writer.write('  ')
+								}
+								writer.write(line)
+							})
+							writer.write(']')
+							if (index < entries.length - 1) writer.write(',')
+							writer.newLine()
+						})
+					})
+				}
+				writer.write(']')
+			},
+		})
+
+		// Add the getter function
+		this.sourceFile.addFunction({
+			name: getterName,
+			isExported: true,
+			returnType: `Map<${keyType}, ${valueType}>`,
+			statements: (writer) => {
+				writer.writeLine(`if (!${mapName}) {`)
+				writer.indent(() => {
+					writer.writeLine(`${mapName} = new Map(${dataFunctionName}())`)
+				})
+				writer.writeLine('}')
+				writer.writeLine(`return ${mapName}`)
+			},
+		})
+
+		return this
+	}
+
+	/**
+	 * Adds a static lookup object (better for tree-shaking than Maps)
+	 *
+	 * @param name - The name of the lookup object
+	 * @param keyType - The type of the keys
+	 * @param valueType - The type of the values
+	 * @param data - The lookup data
+	 * @returns The AST builder instance
+	 */
+	addStaticLookup<K extends string, V>(
+		name: string,
+		keyType: string,
+		valueType: string,
+		data: Record<K, V>,
+	) {
+		this.sourceFile.addVariableStatement({
+			isExported: true,
+			declarationKind: VariableDeclarationKind.Const,
+			declarations: [
+				{
+					name,
+					type: `Record<${keyType}, ${valueType}>`,
+					initializer: (writer) => {
+						const jsonStr = this.serializeValue(data, 1)
+						writer.write(jsonStr)
+						writer.write(' as const')
+					},
+				},
+			],
+		})
+		return this
+	}
+
+	/**
+	 * Adds named exports to enable tree-shaking
+	 *
+	 * @param exports - Map of export names to their sources
+	 * @returns The AST builder instance
+	 */
+	addNamedExports(exports: Record<string, { from: string; isType?: boolean }>) {
+		Object.entries(exports).forEach(([exportName, config]) => {
+			this.sourceFile.addExportDeclaration({
+				moduleSpecifier: config.from,
+				namedExports: [exportName],
+				isTypeOnly: config.isType || false,
+			})
+		})
+		return this
+	}
+
+	/**
 	 * Adds a function declaration to the source file
 	 *
 	 * @param name - The name of the function
@@ -312,10 +458,11 @@ export class ASTBuilder {
 		params: FunctionParameter[],
 		returnType: string,
 		body: (writer: CodeBlockWriter) => void,
+		isExported = true,
 	) {
 		this.sourceFile.addFunction({
 			name,
-			isExported: true,
+			isExported,
 			parameters: params.map((param) => ({
 				name: param.name,
 				type: param.type,
@@ -360,13 +507,17 @@ export class ASTBuilder {
 	}
 
 	/**
-	 * Adds a comment to the source file
+	 * Adds a comment to the source file at the top
 	 *
 	 * @param text - The text of the comment
 	 * @returns The AST builder instance
 	 */
 	addComment(text: string) {
-		this.sourceFile.addStatements(`// ${text}`)
+		// Split multi-line comments and add each line separately
+		const lines = text.split('\n')
+		const commentText = lines.map(line => `// ${line}`).join('\n')
+		// Insert at the beginning of the file
+		this.sourceFile.insertText(0, commentText + '\n')
 		return this
 	}
 
