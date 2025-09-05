@@ -35,6 +35,7 @@ import { LeaderboardsGenerator } from './generators/leaderboards.generator'
 import { MonstersGenerator } from './generators/monsters.generator'
 import { ModularMonstersGenerator } from './generators/monsters.generator.modular'
 import { NameColorsGenerator } from './generators/name-colors.generator'
+import { NameColorsGeneratorModular } from './generators/name-colors.generator.modular'
 import { PlayerDataGenerator } from './generators/player-data.generator'
 import { PurchaseBundlesGenerator } from './generators/purchase-bundles.generator'
 import { RandomTasksGenerator } from './generators/random-tasks.generator'
@@ -146,7 +147,15 @@ async function generateAll() {
 		}
 		
 		await new ItemLocationsGenerator().generate(sourcePath)
-		await new NameColorsGenerator().generate(sourcePath)
+		
+		// NameColors - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR name colors generator for tree-shaking optimization')
+			await new NameColorsGeneratorModular().generate(sourcePath)
+		} else {
+			await new NameColorsGenerator().generate(sourcePath)
+		}
+		
 		await new PurchaseBundlesGenerator().generate(sourcePath)
 		
 		// RandomTasks - use modular if enabled
