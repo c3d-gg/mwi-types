@@ -43,7 +43,9 @@ import { ModularRandomTasksGenerator } from './generators/random-tasks.generator
 import { RecipesGenerator } from './generators/recipes.generator'
 import { ModularRecipesGenerator } from './generators/recipes.generator.modular'
 import { ShopCategoriesGenerator } from './generators/shop-categories.generator'
+import { ShopCategoriesGeneratorModular } from './generators/shop-categories.generator.modular'
 import { ShopItemsGenerator } from './generators/shop-items.generator'
+import { ShopItemsGeneratorModular } from './generators/shop-items.generator.modular'
 import { SkillsGenerator } from './generators/skills.generator'
 import { ModularSkillsGenerator } from './generators/skills.generator.modular'
 import { TaskShopItemsGenerator } from './generators/task-shop-items.generator'
@@ -165,7 +167,13 @@ async function generateAll() {
 		} else {
 			await new RandomTasksGenerator().generate(sourcePath)
 		}
-		await new ShopCategoriesGenerator().generate(sourcePath)
+		// ShopCategories - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR shop categories generator for tree-shaking optimization')
+			await new ShopCategoriesGeneratorModular().generate(sourcePath)
+		} else {
+			await new ShopCategoriesGenerator().generate(sourcePath)
+		}
 
 		// Layer 2: Single dependency
 		console.log('\n📦 Layer 2: Single dependency entities')
@@ -176,7 +184,13 @@ async function generateAll() {
 			await new ItemsGenerator().generate(sourcePath)
 		}
 		await new CommunityBuffsGenerator().generate(sourcePath)
-		await new ShopItemsGenerator().generate(sourcePath) // Depends on Items
+		// ShopItems - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR shop items generator for tree-shaking optimization')
+			await new ShopItemsGeneratorModular().generate(sourcePath)
+		} else {
+			await new ShopItemsGenerator().generate(sourcePath) // Depends on Items
+		}
 		await new TaskShopItemsGenerator().generate(sourcePath) // Depends on Items
 		await new LeaderboardCategoriesGenerator().generate(sourcePath) // Depends on Skills
 		await new LeaderboardsGenerator().generate(sourcePath) // Depends on LeaderboardTypes
