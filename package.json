@@ -1,19 +1,42 @@
 {
   "name": "@c3d.gg/mwi-types",
-  "module": "index.ts",
-  "type": "module",
   "version": "0.2.5",
-  "description": "TypeScript type definitions and schemas for Milky Way Idle game data",
   "author": "C3D",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/c3d-gg/mwi-types.git"
   },
-  "homepage": "https://github.com/c3d-gg/mwi-types#readme",
+  "main": "./dist/index.js",
+  "module": "index.ts",
+  "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
+    "@types/bun": "latest",
+    "@types/prettier": "^3.0.0",
+    "prettier": "^3.6.2",
+    "ts-morph": "^26.0.0"
+  },
+  "peerDependencies": {
+    "typescript": ">=5.0.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "bugs": {
     "url": "https://github.com/c3d-gg/mwi-types/issues"
   },
+  "description": "TypeScript type definitions and schemas for Milky Way Idle game data",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "homepage": "https://github.com/c3d-gg/mwi-types#readme",
   "keywords": [
     "milky-way-idle",
     "mwi",
@@ -26,23 +49,7 @@
     "type-generation",
     "c3d"
   ],
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    }
-  },
-  "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
-  ],
-  "sideEffects": false,
-  "engines": {
-    "node": ">=16.0.0"
-  },
+  "license": "MIT",
   "scripts": {
     "generate": "bun run src/generation/index.ts",
     "generate:watch": "bun run --watch src/generation/index.ts",
@@ -55,16 +62,7 @@
     "prebuild": "bun run generate",
     "prepublishOnly": "bun run build"
   },
-  "devDependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "^4.6.2",
-    "@types/bun": "latest",
-    "@types/prettier": "^3.0.0",
-    "chalk": "^5.5.0",
-    "prettier": "^3.6.2",
-    "ts-morph": "^26.0.0"
-  },
-  "peerDependencies": {
-    "typescript": ">=5.0.0"
-  },
-  "dependencies": {}
+  "sideEffects": false,
+  "type": "module",
+  "types": "./dist/index.d.ts"
 }

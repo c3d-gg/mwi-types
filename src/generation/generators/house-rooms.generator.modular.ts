@@ -1,12 +1,12 @@
 import { ModularBaseGenerator } from '../core/generator.base.modular'
-
-import type { PropertyDefinition } from '../core/ast-builder'
-
-// Upgrade cost interface for internal use
+// Shared types - these interfaces are defined in the shared module
+// They will be properly imported in generateTypes() method
 interface UpgradeCost {
 	itemHrid: string
 	count: number
 }
+
+import type { PropertyDefinition } from '../core/ast-builder'
 
 // Buff interface for internal use (temporary until buff-types is modularized)
 interface Buff {
@@ -158,11 +158,11 @@ export class ModularHouseRoomsGenerator extends ModularBaseGenerator<HouseRoom> 
 	protected override generateTypes(entities: Record<string, HouseRoom>): void {
 		const typesBuilder = this.moduleBuilder.getFile('types')
 		
-		// Define type aliases for external dependencies (temporary until those modules are modularized)
-		typesBuilder.addType('ItemHrid', 'string')
-		typesBuilder.addType('SkillHrid', 'string')
-		typesBuilder.addType('BuffTypeHrid', 'string')
-		typesBuilder.addType('ActionType', 'string')
+		// Import types from other modules (DO NOT re-export - domain boundary)
+		typesBuilder.addImport('../items/types', ['ItemHrid'], true)
+		typesBuilder.addImport('../skills/types', ['SkillHrid'], true)
+		typesBuilder.addImport('../bufftypes/types', ['Buff', 'BuffTypeHrid'], true)
+		typesBuilder.addImport('../actions/types', ['ActionType'], true)
 		
 		// Import constants for type derivation
 		typesBuilder.addImport('./constants', ['HOUSEROOM_HRIDS'], false)
@@ -170,25 +170,8 @@ export class ModularHouseRoomsGenerator extends ModularBaseGenerator<HouseRoom> 
 		// Derive HouseRoomHrid type from constants
 		typesBuilder.addType('HouseRoomHrid', 'typeof HOUSEROOM_HRIDS[number]')
 		
-		// Buff interface (temporary until buff-types is modularized)
-		const buffProps: PropertyDefinition[] = [
-			{ name: 'uniqueHrid', type: 'string', description: 'Unique identifier for this buff instance' },
-			{ name: 'typeHrid', type: 'BuffTypeHrid', description: 'Type of buff' },
-			{ name: 'ratioBoost', type: 'number', description: 'Percentage boost ratio' },
-			{ name: 'ratioBoostLevelBonus', type: 'number', description: 'Additional ratio boost per level' },
-			{ name: 'flatBoost', type: 'number', description: 'Flat boost amount' },
-			{ name: 'flatBoostLevelBonus', type: 'number', description: 'Additional flat boost per level' },
-			{ name: 'startTime', type: 'string', description: 'When the buff starts (ISO timestamp)' },
-			{ name: 'duration', type: 'number', description: 'Buff duration in seconds' },
-		]
-		typesBuilder.addInterface('Buff', buffProps)
-		
-		// UpgradeCost interface
-		const upgradeCostProps: PropertyDefinition[] = [
-			{ name: 'itemHrid', type: 'ItemHrid', description: 'Item required for upgrade' },
-			{ name: 'count', type: 'number', description: 'Quantity required' },
-		]
-		typesBuilder.addInterface('UpgradeCost', upgradeCostProps)
+		// Import shared types from shared module
+		typesBuilder.addImport('../sharedtypes/types', ['UpgradeCost'], true)
 		
 		// HouseRoom interface
 		const houseRoomProps: PropertyDefinition[] = [
@@ -203,17 +186,13 @@ export class ModularHouseRoomsGenerator extends ModularBaseGenerator<HouseRoom> 
 		]
 		typesBuilder.addInterface('HouseRoom', houseRoomProps)
 		
-		// Export all types from types module
+		// Export only types that belong to this module (DO NOT export imported types)
 		const types = [
-			'ItemHrid',
-			'SkillHrid', 
-			'BuffTypeHrid',
-			'ActionType',
 			'HouseRoomHrid',
-			'Buff',
-			'UpgradeCost',
 			'HouseRoom',
 		]
+		// Re-export UpgradeCost for convenience
+		// UpgradeCost is from shared module - not exported from here
 		types.forEach(name => {
 			this.moduleBuilder.addExport({ name, source: './types', isType: true })
 		})
@@ -242,7 +221,7 @@ export class ModularHouseRoomsGenerator extends ModularBaseGenerator<HouseRoom> 
 		const lookupsBuilder = this.moduleBuilder.getFile('lookups')
 
 		// Import types
-		lookupsBuilder.addImport('../houserooms/types', ['HouseRoomHrid', 'SkillHrid'], true)
+		lookupsBuilder.addImport('./types', ['HouseRoomHrid'], true)
 
 		// Sort and convert skill Map entries to object format
 		const skillMapEntries = Array.from(this.roomsBySkill.entries())
@@ -257,7 +236,7 @@ export class ModularHouseRoomsGenerator extends ModularBaseGenerator<HouseRoom> 
 		if (Object.keys(skillLookupObject).length > 0) {
 			lookupsBuilder.addStaticLookup(
 				'ROOMS_BY_SKILL',
-				'SkillHrid',
+				'string',
 				'readonly HouseRoomHrid[]',
 				skillLookupObject,
 			)
@@ -301,20 +280,18 @@ export class ModularHouseRoomsGenerator extends ModularBaseGenerator<HouseRoom> 
 		const utilsBuilder = this.moduleBuilder.getFile('utils')
 
 		// Import types
-		utilsBuilder.addImport('../houserooms/types', [
+		utilsBuilder.addImport('./types', [
 			'HouseRoom',
 			'HouseRoomHrid',
-			'SkillHrid',
-			'ActionType',
-			'UpgradeCost',
 		], true)
-		utilsBuilder.addImport('../houserooms/data', ['getHouseRoomsMap'], false)
-		utilsBuilder.addImport('../houserooms/constants', [
+		utilsBuilder.addImport('../sharedtypes/types', ['UpgradeCost'], true)
+		utilsBuilder.addImport('./data', ['getHouseRoomsMap'], false)
+		utilsBuilder.addImport('./constants', [
 			'HOUSEROOM_HRIDS',
 			'ROOMS_WITH_ACTION_BUFFS',
 			'ROOMS_WITH_GLOBAL_BUFFS',
 		], false)
-		utilsBuilder.addImport('../houserooms/lookups', [
+		utilsBuilder.addImport('./lookups', [
 			'ROOMS_BY_SKILL',
 		], false)
 
@@ -364,7 +341,7 @@ export class ModularHouseRoomsGenerator extends ModularBaseGenerator<HouseRoom> 
 		// Specialized utility functions
 		utilsBuilder.addFunction(
 			'getHouseRoomsBySkill',
-			[{ name: 'skillHrid', type: 'SkillHrid' }],
+			[{ name: 'skillHrid', type: 'string' }],
 			'HouseRoom[]',
 			(writer) => {
 				writer.writeLine('const hrids = ROOMS_BY_SKILL?.[skillHrid] || []')
@@ -392,12 +369,12 @@ export class ModularHouseRoomsGenerator extends ModularBaseGenerator<HouseRoom> 
 
 		utilsBuilder.addFunction(
 			'getRoomsForActionType',
-			[{ name: 'actionType', type: 'ActionType' }],
+			[{ name: 'actionType', type: 'string' }],
 			'HouseRoom[]',
 			(writer) => {
 				writer.writeLine('return getAllHouseRooms().filter(room => ')
 				writer.indent(() => {
-					writer.writeLine('room.usableInActionTypeMap[actionType] === true')
+					writer.writeLine('room.usableInActionTypeMap[actionType as keyof typeof room.usableInActionTypeMap] === true')
 				})
 				writer.writeLine(')')
 			}

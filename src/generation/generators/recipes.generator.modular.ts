@@ -1,21 +1,23 @@
 import { ModularBaseGenerator } from '../core/generator.base.modular'
-
-import type { PropertyDefinition } from '../core/ast-builder'
-
-interface RecipeItem {
-	itemHrid: string
-	count: number
-}
-
+// Shared types - these interfaces are defined in the shared module
+// They will be properly imported in generateTypes() method
 interface LevelRequirement {
 	skillHrid: string
 	level: number
 }
-
 interface ExperienceGain {
 	skillHrid: string
 	value: number
 }
+interface ItemCost {
+	itemHrid: string
+	count: number
+}
+
+import type { PropertyDefinition } from '../core/ast-builder'
+
+// Alias ItemCost as RecipeItem since they have the same structure
+type RecipeItem = ItemCost
 
 interface Recipe {
 	hrid: string
@@ -111,7 +113,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 		return items.map((item) => ({
 			itemHrid: item.itemHrid || '',
 			count: typeof item.count === 'number' ? item.count : 1,
-		}))
+		}) as RecipeItem)
 	}
 
 	private extractLevelRequirement(req: any): LevelRequirement | null {
@@ -121,7 +123,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 		return {
 			skillHrid: req.skillHrid || '',
 			level: typeof req.level === 'number' ? req.level : 0,
-		}
+		} as LevelRequirement
 	}
 
 	private extractExperienceGain(exp: any): ExperienceGain | null {
@@ -131,7 +133,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 		return {
 			skillHrid: exp.skillHrid || '',
 			value: typeof exp.value === 'number' ? exp.value : 0,
-		}
+		} as ExperienceGain
 	}
 
 	private collectForLookups(recipe: Recipe): void {
@@ -185,32 +187,16 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 		// Import dependencies
 		const typesBuilder = this.moduleBuilder.getFile('types')
 		
-		// Define type aliases for external dependencies (temporary until those modules are modularized)
-		// These will be replaced with proper imports once all modules are converted
-		typesBuilder.addType('ItemHrid', 'string')
-		typesBuilder.addType('SkillHrid', 'string')
-		typesBuilder.addType('ActionCategoryHrid', 'string')
-		
-		// Import from actions module (already modularized)
+		// Import types from other modules (DO NOT re-export - domain boundary)
+		typesBuilder.addImport('../items/types', ['ItemHrid'], true)
+		typesBuilder.addImport('../skills/types', ['SkillHrid'], true)
+		typesBuilder.addImport('../actioncategories/types', ['ActionCategoryHrid'], true)
 		typesBuilder.addImport('../actions/types', ['ActionFunction', 'ActionType'], true)
+		// Import shared types
+		typesBuilder.addImport('../sharedtypes/types', ['LevelRequirement', 'ExperienceGain', 'ItemCost'], true)
 
-		// RecipeItem interface
-		this.moduleBuilder.addInterface('RecipeItem', [
-			{ name: 'itemHrid', type: 'ItemHrid', optional: false },
-			{ name: 'count', type: 'number', optional: false },
-		])
-
-		// LevelRequirement interface (defined locally)
-		this.moduleBuilder.addInterface('LevelRequirement', [
-			{ name: 'skillHrid', type: 'SkillHrid', optional: false },
-			{ name: 'level', type: 'number', optional: false },
-		])
-
-		// ExperienceGain interface (defined locally)
-		this.moduleBuilder.addInterface('ExperienceGain', [
-			{ name: 'skillHrid', type: 'SkillHrid', optional: false },
-			{ name: 'value', type: 'number', optional: false },
-		])
+		// RecipeItem type alias for ItemCost
+		typesBuilder.addType('RecipeItem', 'ItemCost')
 
 		// Recipe interface
 		const recipeProps: PropertyDefinition[] = [
@@ -297,7 +283,10 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 	protected override generateLookups(entities: Record<string, Recipe>): void {
 		// Add necessary imports to lookups file
 		const lookupsBuilder = this.moduleBuilder.getFile('lookups')
-		lookupsBuilder.addImport('./types', ['RecipeHrid', 'ItemHrid', 'SkillHrid', 'ActionCategoryHrid'], true)
+		lookupsBuilder.addImport('./types', ['RecipeHrid'], true)
+		lookupsBuilder.addImport('../items/types', ['ItemHrid'], true)
+		lookupsBuilder.addImport('../skills/types', ['SkillHrid'], true)
+		lookupsBuilder.addImport('../actioncategories/types', ['ActionCategoryHrid'], true)
 		lookupsBuilder.addImport('../actions/types', ['ActionType'], true)
 		
 		// Recipes by skill
@@ -308,7 +297,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 		this.moduleBuilder.addStaticLookup(
 			'RECIPES_BY_SKILL',
 			skillLookup,
-			'SkillHrid',
+			'string',
 			'readonly RecipeHrid[]'
 		)
 
@@ -333,7 +322,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 		this.moduleBuilder.addStaticLookup(
 			'RECIPES_BY_CATEGORY',
 			categoryLookup,
-			'ActionCategoryHrid',
+			'string',
 			'readonly RecipeHrid[]'
 		)
 
@@ -345,7 +334,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 		this.moduleBuilder.addStaticLookup(
 			'RECIPES_BY_OUTPUT',
 			outputLookup,
-			'ItemHrid',
+			'string',
 			'readonly RecipeHrid[]'
 		)
 
@@ -357,7 +346,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 		this.moduleBuilder.addStaticLookup(
 			'RECIPES_BY_INPUT',
 			inputLookup,
-			'ItemHrid',
+			'string',
 			'readonly RecipeHrid[]'
 		)
 	}
@@ -369,7 +358,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 		// Get recipes by skill
 		this.moduleBuilder.addUtilityFunction(
 			'getRecipesBySkill',
-			[{ name: 'skillHrid', type: 'SkillHrid' }],
+			[{ name: 'skillHrid', type: 'string' }],
 			'Recipe[]',
 			(writer) => {
 				writer.writeLine('const hrids = RECIPES_BY_SKILL[skillHrid] || []')
@@ -379,7 +368,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 			},
 			[
 				{ from: './lookups', names: ['RECIPES_BY_SKILL'] },
-				{ from: './types', names: ['Recipe', 'SkillHrid'], isType: true },
+				{ from: './types', names: ['Recipe'], isType: true },
 			]
 		)
 
@@ -404,7 +393,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 		// Get recipes by category
 		this.moduleBuilder.addUtilityFunction(
 			'getRecipesByCategory',
-			[{ name: 'category', type: 'ActionCategoryHrid' }],
+			[{ name: 'category', type: 'string' }],
 			'Recipe[]',
 			(writer) => {
 				writer.writeLine('const hrids = RECIPES_BY_CATEGORY[category] || []')
@@ -414,14 +403,14 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 			},
 			[
 				{ from: './lookups', names: ['RECIPES_BY_CATEGORY'] },
-				{ from: './types', names: ['Recipe', 'ActionCategoryHrid'], isType: true },
+				{ from: './types', names: ['Recipe'], isType: true },
 			]
 		)
 
 		// Get recipes for output
 		this.moduleBuilder.addUtilityFunction(
 			'getRecipesForOutput',
-			[{ name: 'itemHrid', type: 'ItemHrid' }],
+			[{ name: 'itemHrid', type: 'string' }],
 			'Recipe[]',
 			(writer) => {
 				writer.writeLine('const hrids = RECIPES_BY_OUTPUT[itemHrid] || []')
@@ -431,14 +420,14 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 			},
 			[
 				{ from: './lookups', names: ['RECIPES_BY_OUTPUT'] },
-				{ from: './types', names: ['Recipe', 'ItemHrid'], isType: true },
+				{ from: './types', names: ['Recipe'], isType: true },
 			]
 		)
 
 		// Get recipes using input
 		this.moduleBuilder.addUtilityFunction(
 			'getRecipesUsingInput',
-			[{ name: 'itemHrid', type: 'ItemHrid' }],
+			[{ name: 'itemHrid', type: 'string' }],
 			'Recipe[]',
 			(writer) => {
 				writer.writeLine('const hrids = RECIPES_BY_INPUT[itemHrid] || []')
@@ -448,7 +437,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 			},
 			[
 				{ from: './lookups', names: ['RECIPES_BY_INPUT'] },
-				{ from: './types', names: ['Recipe', 'ItemHrid'], isType: true },
+				{ from: './types', names: ['Recipe'], isType: true },
 			]
 		)
 
@@ -457,7 +446,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 			'canCraftRecipe',
 			[
 				{ name: 'recipe', type: 'Recipe' },
-				{ name: 'inventory', type: 'Partial<Record<ItemHrid, number>>' },
+				{ name: 'inventory', type: 'Partial<Record<string, number>>' },
 			],
 			'boolean',
 			(writer) => {
@@ -467,7 +456,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 				writer.writeLine(')')
 			},
 			[
-				{ from: './types', names: ['Recipe', 'ItemHrid'], isType: true },
+				{ from: './types', names: ['Recipe'], isType: true },
 			]
 		)
 
@@ -478,7 +467,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 				{ name: 'recipe', type: 'Recipe' },
 				{ name: 'multiplier', type: 'number' },
 			],
-			'Array<{ itemHrid: ItemHrid; count: number }>',
+			'Array<{ itemHrid: string; count: number }>',
 			(writer) => {
 				writer.writeLine('if (!recipe.outputItems) return []')
 				writer.writeLine('return recipe.outputItems.map(output => ({')
@@ -487,7 +476,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 				writer.writeLine('}))')
 			},
 			[
-				{ from: './types', names: ['Recipe', 'ItemHrid'], isType: true },
+				{ from: './types', names: ['Recipe'], isType: true },
 			]
 		)
 
@@ -498,7 +487,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 				{ name: 'recipe', type: 'Recipe' },
 				{ name: 'multiplier', type: 'number' },
 			],
-			'Array<{ itemHrid: ItemHrid; count: number }>',
+			'Array<{ itemHrid: string; count: number }>',
 			(writer) => {
 				writer.writeLine('if (!recipe.inputItems) return []')
 				writer.writeLine('return recipe.inputItems.map(input => ({')
@@ -507,7 +496,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 				writer.writeLine('}))')
 			},
 			[
-				{ from: './types', names: ['Recipe', 'ItemHrid'], isType: true },
+				{ from: './types', names: ['Recipe'], isType: true },
 			]
 		)
 
@@ -580,7 +569,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 		this.moduleBuilder.addUtilityFunction(
 			'buildRecipeTree',
 			[
-				{ name: 'itemHrid', type: 'ItemHrid' },
+				{ name: 'itemHrid', type: 'string' },
 				{ name: 'quantity', type: 'number' },
 				{ name: 'maxDepth', type: 'number' },
 				{ name: 'currentDepth', type: 'number' },
@@ -611,7 +600,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 				
 				// Build node
 				writer.writeLine('const node: RecipeTreeNode = {')
-				writer.writeLine('  itemHrid,')
+				writer.writeLine('  itemHrid: itemHrid as any, // Type assertion needed since itemHrid is string')
 				writer.writeLine('  quantity,')
 				writer.writeLine('  recipe: primaryRecipe,')
 				writer.writeLine('  skillRequirement: primaryRecipe?.levelRequirement ? {')
@@ -645,7 +634,7 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 				writer.writeLine('return node')
 			},
 			[
-				{ from: './types', names: ['RecipeTreeNode', 'ItemHrid'], isType: true },
+				{ from: './types', names: ['RecipeTreeNode'], isType: true },
 			]
 		)
 
@@ -708,7 +697,9 @@ export class ModularRecipesGenerator extends ModularBaseGenerator<Recipe> {
 				writer.writeLine('}')
 			},
 			[
-				{ from: './types', names: ['RecipeTreeNode', 'RecipeTreeStats', 'ItemHrid', 'SkillHrid', 'Recipe'], isType: true },
+				{ from: './types', names: ['RecipeTreeNode', 'RecipeTreeStats', 'Recipe'], isType: true },
+				{ from: '../items/types', names: ['ItemHrid'], isType: true },
+				{ from: '../skills/types', names: ['SkillHrid'], isType: true },
 			]
 		)
 	}

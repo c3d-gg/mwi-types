@@ -51,9 +51,8 @@ export class CombatStylesModularGenerator extends ModularBaseGenerator<CombatSty
 		// Add JSDoc header
 		typesFile.addComment('Combat style type definitions')
 
-		// Add type imports - we'll import SkillHrid from skills module once it's modular
-		// For now, use type alias
-		typesFile.addType('SkillHrid', 'string')
+		// Import types from other modules (DO NOT re-export - domain boundary)
+		typesFile.addImport('../skills/types', ['SkillHrid'], true)
 
 		// Generate CombatStyle interface
 		const properties: PropertyDefinition[] = [
@@ -92,9 +91,9 @@ export class CombatStylesModularGenerator extends ModularBaseGenerator<CombatSty
 		typesFile.addType('CombatStyleHrid', '(typeof COMBATSTYLE_HRIDS)[number]')
 
 		// Add module exports
+		// Export only types that belong to this module (DO NOT export imported types)
 		this.moduleBuilder.addExport('types', 'CombatStyle', 'type')
 		this.moduleBuilder.addExport('types', 'CombatStyleHrid', 'type')
-		this.moduleBuilder.addExport('types', 'SkillHrid', 'type')
 	}
 
 	protected override generateConstants(
@@ -136,7 +135,8 @@ export class CombatStylesModularGenerator extends ModularBaseGenerator<CombatSty
 		const lookupsFile = this.moduleBuilder.getFile('lookups')
 
 		// Import types
-		lookupsFile.addImport('./types', ['CombatStyle', 'CombatStyleHrid', 'SkillHrid'], true)
+		lookupsFile.addImport('./types', ['CombatStyle', 'CombatStyleHrid'], true)
+		lookupsFile.addImport('../skills/types', ['SkillHrid'], true)
 
 		// Collect styles by combat type (melee, ranged, magic)
 		const melee: string[] = []
@@ -182,7 +182,7 @@ export class CombatStylesModularGenerator extends ModularBaseGenerator<CombatSty
 
 		lookupsFile.addStaticLookup(
 			'COMBAT_STYLES_BY_SKILL',
-			'SkillHrid',
+			'string',
 			'readonly CombatStyleHrid[]',
 			bySkill,
 			true // isPartial
@@ -199,7 +199,8 @@ export class CombatStylesModularGenerator extends ModularBaseGenerator<CombatSty
 		const utilsFile = this.moduleBuilder.getFile('utils')
 
 		// Import types and data
-		utilsFile.addImport('./types', ['CombatStyle', 'CombatStyleHrid', 'SkillHrid'], true)
+		utilsFile.addImport('./types', ['CombatStyle', 'CombatStyleHrid'], true)
+		utilsFile.addImport('../skills/types', ['SkillHrid'], true)
 		utilsFile.addImport('./constants', ['COMBATSTYLE_HRIDS'])
 		utilsFile.addImport('./data', ['getCombatStylesMap'])
 		utilsFile.addImport('./lookups', ['COMBAT_STYLES_BY_TYPE', 'COMBAT_STYLES_BY_SKILL'])
@@ -282,6 +283,62 @@ export class CombatStylesModularGenerator extends ModularBaseGenerator<CombatSty
 			}
 		)
 
+		// Check if melee combat
+		utilsFile.addFunction(
+			'isMeleeCombat',
+			[{ name: 'style', type: 'CombatStyle' }],
+			'boolean',
+			(writer) => {
+				writer.writeLine('return style.skillExpMap !== null && style.skillExpMap["/skills/melee"] === true')
+			}
+		)
+
+		// Check if ranged combat
+		utilsFile.addFunction(
+			'isRangedCombat',
+			[{ name: 'style', type: 'CombatStyle' }],
+			'boolean',
+			(writer) => {
+				writer.writeLine('return style.skillExpMap !== null && style.skillExpMap["/skills/ranged"] === true')
+			}
+		)
+
+		// Check if magic combat
+		utilsFile.addFunction(
+			'isMagicCombat',
+			[{ name: 'style', type: 'CombatStyle' }],
+			'boolean',
+			(writer) => {
+				writer.writeLine('return style.skillExpMap !== null && style.skillExpMap["/skills/magic"] === true')
+			}
+		)
+
+		// Get combat style damage type
+		utilsFile.addFunction(
+			'getCombatStyleDamageType',
+			[{ name: 'style', type: 'CombatStyle' }],
+			'string | undefined',
+			(writer) => {
+				writer.writeLine('// Map combat styles to their damage types')
+				writer.writeLine('// This is a simplified mapping - actual damage type depends on the weapon/spell used')
+				writer.writeLine('if (style.hrid.includes("water")) return "/damage_types/water"')
+				writer.writeLine('if (style.hrid.includes("fire")) return "/damage_types/fire"')
+				writer.writeLine('if (style.hrid.includes("nature")) return "/damage_types/nature"')
+				writer.writeLine('return "/damage_types/physical"')
+			}
+		)
+
+		// Get default combat style
+		utilsFile.addFunction(
+			'getDefaultCombatStyle',
+			[],
+			'CombatStyle | undefined',
+			(writer) => {
+				writer.writeLine('// The default combat style is typically the first one or a specific "auto" style')
+				writer.writeLine('return getCombatStyle("/combat_styles/auto" as CombatStyleHrid)')
+			}
+		)
+
 		// Export utilities
 		this.moduleBuilder.addExport('utils', 'isCombatStyleHrid')
 		this.moduleBuilder.addExport('utils', 'getCombatStyle')
@@ -290,5 +347,10 @@ export class CombatStylesModularGenerator extends ModularBaseGenerator<CombatSty
 		this.moduleBuilder.addExport('utils', 'getCombatStylesByType')
 		this.moduleBuilder.addExport('utils', 'getCombatStylesForSkill')
 		this.moduleBuilder.addExport('utils', 'sortCombatStylesByIndex')
+		this.moduleBuilder.addExport('utils', 'isMeleeCombat')
+		this.moduleBuilder.addExport('utils', 'isRangedCombat')
+		this.moduleBuilder.addExport('utils', 'isMagicCombat')
+		this.moduleBuilder.addExport('utils', 'getCombatStyleDamageType')
+		this.moduleBuilder.addExport('utils', 'getDefaultCombatStyle')
 	}
 }

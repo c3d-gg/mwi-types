@@ -89,8 +89,8 @@ export class TaskShopItemsGeneratorModular extends ModularBaseGenerator<TaskShop
 		typesBuilder.addType('TaskShopItemHrid', 'typeof TASKSHOPITEM_HRIDS[number]')
 		typesBuilder.addType('TaskCurrency', 'typeof TASK_CURRENCIES[number]')
 
-		// External type aliases (temporarily) - will be replaced when items module is converted
-		typesBuilder.addType('ItemHrid', 'string')
+		// Import types from other modules (DO NOT re-export - domain boundary)
+		typesBuilder.addImport('../items/types', ['ItemHrid'], true)
 
 		// Generate TaskShopCost interface
 		typesBuilder.addInterface('TaskShopCost', [
@@ -152,7 +152,8 @@ export class TaskShopItemsGeneratorModular extends ModularBaseGenerator<TaskShop
 		const lookupsBuilder = this.moduleBuilder.getFile('lookups')
 
 		// Import types
-		lookupsBuilder.addImport('./types', ['TaskShopItemHrid', 'TaskCurrency', 'ItemHrid'], true)
+		lookupsBuilder.addImport('./types', ['TaskShopItemHrid', 'TaskCurrency'], true)
+		lookupsBuilder.addImport('../items/types', ['ItemHrid'], true)
 
 		// Task shop items by currency
 		const byCurrency: Record<string, string[]> = {}
@@ -186,7 +187,7 @@ export class TaskShopItemsGeneratorModular extends ModularBaseGenerator<TaskShop
 
 		lookupsBuilder.addStaticLookup(
 			'TASK_SHOP_ITEMS_BY_ITEM_SOLD',
-			'ItemHrid',
+			'string',
 			'readonly TaskShopItemHrid[]',
 			byItemSold,
 			true, // isPartial
@@ -223,7 +224,8 @@ export class TaskShopItemsGeneratorModular extends ModularBaseGenerator<TaskShop
 		const utilsBuilder = this.moduleBuilder.getFile('utils')
 
 		// Import types and data
-		utilsBuilder.addImport('./types', ['TaskShopItem', 'TaskShopItemHrid', 'TaskCurrency', 'ItemHrid'], true)
+		utilsBuilder.addImport('./types', ['TaskShopItem', 'TaskShopItemHrid', 'TaskCurrency'], true)
+		utilsBuilder.addImport('../items/types', ['ItemHrid'], true)
 		utilsBuilder.addImport('./data', ['getTaskShopItemsMap'], false)
 		utilsBuilder.addImport('./constants', ['TASKSHOPITEM_HRIDS'], false)
 		utilsBuilder.addImport(
@@ -296,7 +298,7 @@ export class TaskShopItemsGeneratorModular extends ModularBaseGenerator<TaskShop
 		// Get task shop items that sell a specific item
 		utilsBuilder.addFunction(
 			'getTaskShopItemsForItem',
-			[{ name: 'itemHrid', type: 'ItemHrid' }],
+			[{ name: 'itemHrid', type: 'string' }],
 			'TaskShopItem[]',
 			(writer) => {
 				writer.writeLine('const hrids = TASK_SHOP_ITEMS_BY_ITEM_SOLD[itemHrid] || []')
@@ -311,12 +313,12 @@ export class TaskShopItemsGeneratorModular extends ModularBaseGenerator<TaskShop
 			'canAffordTaskShopItem',
 			[
 				{ name: 'item', type: 'TaskShopItem' },
-				{ name: 'inventory', type: 'Partial<Record<ItemHrid, number>>' },
+				{ name: 'inventory', type: 'Partial<Record<string, number>>' },
 			],
 			'boolean',
 			(writer) => {
 				writer.writeLine('if (!item.cost) return true')
-				writer.writeLine('return (inventory[item.cost.itemHrid as ItemHrid] || 0) >= item.cost.count')
+				writer.writeLine('return (inventory[item.cost.itemHrid] || 0) >= item.cost.count')
 			},
 		)
 		this.moduleBuilder.addExport('utils', 'canAffordTaskShopItem')
@@ -325,13 +327,13 @@ export class TaskShopItemsGeneratorModular extends ModularBaseGenerator<TaskShop
 		utilsBuilder.addFunction(
 			'calculateTotalTaskCost',
 			[{ name: 'items', type: 'TaskShopItem[]' }],
-			'Partial<Record<ItemHrid, number>>',
+			'Partial<Record<string, number>>',
 			(writer) => {
-				writer.writeLine('const totalCost: Partial<Record<ItemHrid, number>> = {}')
+				writer.writeLine('const totalCost: Partial<Record<string, number>> = {}')
 				writer.writeLine('')
 				writer.writeLine('items.forEach(item => {')
 				writer.writeLine('  if (item.cost) {')
-				writer.writeLine('    const currency = item.cost.itemHrid as ItemHrid')
+				writer.writeLine('    const currency = item.cost.itemHrid')
 				writer.writeLine('    totalCost[currency] = (totalCost[currency] || 0) + item.cost.count')
 				writer.writeLine('  }')
 				writer.writeLine('})')

@@ -89,9 +89,9 @@ export class CommunityBuffsGeneratorModular extends ModularBaseGenerator<Communi
 		// Generate type alias
 		typesBuilder.addType('CommunityBuffTypeHrid', 'typeof COMMUNITYBUFFTYPE_HRIDS[number]')
 
-		// External type aliases (temporarily) - will be replaced when other modules are converted
-		typesBuilder.addType('BuffTypeHrid', 'string')
-		typesBuilder.addType('ActionType', 'string')
+		// Import types from other modules (DO NOT re-export - domain boundary)
+		typesBuilder.addImport('../bufftypes/types', ['BuffTypeHrid'], true)
+		typesBuilder.addImport('../actions/types', ['ActionType'], true)
 
 		// Generate CommunityBuff interface (instance of a buff)
 		typesBuilder.addInterface('CommunityBuff', [
@@ -155,7 +155,8 @@ export class CommunityBuffsGeneratorModular extends ModularBaseGenerator<Communi
 		const lookupsBuilder = this.moduleBuilder.getFile('lookups')
 
 		// Import types
-		lookupsBuilder.addImport('./types', ['CommunityBuffTypeHrid', 'ActionType'], true)
+		lookupsBuilder.addImport('./types', ['CommunityBuffTypeHrid'], true)
+		lookupsBuilder.addImport('../actions/types', ['ActionType'], true)
 
 		// Generate lookup map by action type
 		const buffsByActionType: Record<string, string[]> = {}
@@ -172,7 +173,7 @@ export class CommunityBuffsGeneratorModular extends ModularBaseGenerator<Communi
 		// Add lookup map for buffs by action type
 		lookupsBuilder.addStaticLookup(
 			'COMMUNITY_BUFFS_BY_ACTION_TYPE',
-			'ActionType',
+			'string',
 			'readonly CommunityBuffTypeHrid[]',
 			buffsByActionType,
 			true, // isPartial
@@ -203,7 +204,8 @@ export class CommunityBuffsGeneratorModular extends ModularBaseGenerator<Communi
 		const utilsBuilder = this.moduleBuilder.getFile('utils')
 
 		// Import types and data
-		utilsBuilder.addImport('./types', ['CommunityBuffType', 'CommunityBuffTypeHrid', 'CommunityBuff', 'ActionType'], true)
+		utilsBuilder.addImport('./types', ['CommunityBuffType', 'CommunityBuffTypeHrid', 'CommunityBuff'], true)
+		utilsBuilder.addImport('../actions/types', ['ActionType'], true)
 		utilsBuilder.addImport('./data', ['getCommunityBuffTypesMap'], false)
 		utilsBuilder.addImport('./constants', ['COMMUNITYBUFFTYPE_HRIDS'], false)
 		utilsBuilder.addImport('./lookups', ['COMMUNITY_BUFFS_BY_ACTION_TYPE', 'COMMUNITY_BUFFS_BY_COST'], false)

@@ -1,10 +1,18 @@
 import { ModularBaseGenerator } from '../core/generator.base.modular'
-
 import type { PropertyDefinition } from '../core/ast-builder'
 
+// Shared types - these interfaces are defined in the shared module
+// They will be properly imported in generateTypes() method
+interface LevelRequirement {
+	skillHrid: string
+	level: number
+}
 interface ItemCost {
 	itemHrid: string
 	count: number
+}
+interface Stats {
+	[key: string]: number
 }
 
 interface AlchemyDetail {
@@ -20,16 +28,9 @@ interface AlchemyDetail {
 	}>
 }
 
-interface Stats {
-	[key: string]: number
-}
-
 interface EquipmentDetail {
 	type: string
-	levelRequirements?: Array<{
-		skillHrid: string
-		level: number
-	}>
+	levelRequirements?: LevelRequirement[]
 	combatStats?: Stats
 	noncombatStats?: Stats
 	combatEnhancementBonuses?: Stats
@@ -60,8 +61,13 @@ export class ModularItemsGenerator extends ModularBaseGenerator<Item> {
 	private itemsByCategory: Map<string, string[]> = new Map()
 	private itemsByEquipmentType: Map<string, string[]> = new Map()
 	private itemsByLevel: Map<number, string[]> = new Map()
+	private itemsByMarketplaceCategory: Map<string, string[]> = new Map()
 	private tradableItems: string[] = []
 	private nonTradableItems: string[] = []
+	private protectionItems: string[] = []
+	private enhancementItems: string[] = []
+	private equipmentItems: string[] = []
+	private alchemicalItems: string[] = []
 
 	constructor() {
 		super({
@@ -121,7 +127,10 @@ export class ModularItemsGenerator extends ModularBaseGenerator<Item> {
 		if (data.alchemyDetail) {
 			const alchemy = data.alchemyDetail
 			item.alchemyDetail = {
-				bulkMultiplier: typeof alchemy.bulkMultiplier === 'number' ? alchemy.bulkMultiplier : 1,
+				bulkMultiplier:
+					typeof alchemy.bulkMultiplier === 'number'
+						? alchemy.bulkMultiplier
+						: 1,
 				isCoinifiable: alchemy.isCoinifiable === true,
 				decomposeItems:
 					alchemy.decomposeItems && alchemy.decomposeItems.length > 0
@@ -130,7 +139,10 @@ export class ModularItemsGenerator extends ModularBaseGenerator<Item> {
 								count: typeof di.count === 'number' ? di.count : 0,
 							}))
 						: undefined,
-				transmuteSuccessRate: typeof alchemy.transmuteSuccessRate === 'number' ? alchemy.transmuteSuccessRate : 0,
+				transmuteSuccessRate:
+					typeof alchemy.transmuteSuccessRate === 'number'
+						? alchemy.transmuteSuccessRate
+						: 0,
 				transmuteDropTable:
 					alchemy.transmuteDropTable && alchemy.transmuteDropTable.length > 0
 						? alchemy.transmuteDropTable.map((drop: any) => ({
@@ -153,7 +165,7 @@ export class ModularItemsGenerator extends ModularBaseGenerator<Item> {
 						? equip.levelRequirements.map((req: any) => ({
 								skillHrid: req.skillHrid,
 								level: typeof req.level === 'number' ? req.level : 0,
-							}))
+							}) as LevelRequirement)
 						: undefined,
 				combatStats: this.extractStats(equip.combatStats),
 				noncombatStats: this.extractStats(equip.noncombatStats),
@@ -195,6 +207,8 @@ export class ModularItemsGenerator extends ModularBaseGenerator<Item> {
 				this.itemsByEquipmentType.set(item.equipmentDetail.type, [])
 			}
 			this.itemsByEquipmentType.get(item.equipmentDetail.type)!.push(item.hrid)
+			// Also add to equipment items
+			this.equipmentItems.push(item.hrid)
 		}
 
 		// By level
@@ -209,30 +223,83 @@ export class ModularItemsGenerator extends ModularBaseGenerator<Item> {
 		} else {
 			this.nonTradableItems.push(item.hrid)
 		}
+
+		// Protection items (items that can be used as protection)
+		if (
+			item.hrid.includes('protection_stone') ||
+			item.hrid.includes('augment_stone') ||
+			item.hrid.includes('divine_blessing')
+		) {
+			this.protectionItems.push(item.hrid)
+		}
+
+		// Enhancement items (items used for enhancement)
+		if (item.enhancementCosts && item.enhancementCosts.length > 0) {
+			// Items that can be enhanced typically use enhancement stones
+			item.enhancementCosts.forEach((cost) => {
+				if (!this.enhancementItems.includes(cost.itemHrid)) {
+					this.enhancementItems.push(cost.itemHrid)
+				}
+			})
+		}
+
+		// Alchemical items (items with alchemy details)
+		if (item.alchemyDetail) {
+			this.alchemicalItems.push(item.hrid)
+		}
+
+		// Marketplace categorization (simplified based on category and type)
+		const marketplaceCategory = this.getMarketplaceCategory(item)
+		if (!this.itemsByMarketplaceCategory.has(marketplaceCategory)) {
+			this.itemsByMarketplaceCategory.set(marketplaceCategory, [])
+		}
+		this.itemsByMarketplaceCategory.get(marketplaceCategory)!.push(item.hrid)
+	}
+
+	private getMarketplaceCategory(item: Item): string {
+		// Map item categories to marketplace categories
+		if (item.equipmentDetail) {
+			if (item.equipmentDetail.type.includes('accessory')) {
+				return 'Accessories'
+			}
+			if (item.equipmentDetail.type.includes('tool')) {
+				return 'Tools'
+			}
+			return 'Equipment'
+		}
+
+		const categoryHrid = item.categoryHrid
+		if (categoryHrid.includes('resource')) return 'Resources'
+		if (categoryHrid.includes('consumable')) return 'Consumables'
+		if (categoryHrid.includes('book')) return 'Books'
+		if (categoryHrid.includes('key')) return 'Keys'
+
+		// Default to Resources
+		return 'Resources'
 	}
 
 	protected override generateTypes(entities: Record<string, Item>): void {
 		// Import dependencies
 		const typesBuilder = this.moduleBuilder.getFile('types')
-		// NOTE: Currently using string types for external dependencies to avoid circular imports
-		// These will be replaced with proper imports once those modules are modularized
-		
-		// Define type aliases for external dependencies (temporary until those modules are modularized)
-		typesBuilder.addType('SkillHrid', 'string')
-		typesBuilder.addType('EquipmentTypeHrid', 'string')
-		typesBuilder.addType('ItemCategoryHrid', 'string')
-		
-		// Define LevelRequirement locally (duplicated from actions for now)
-		this.moduleBuilder.addInterface('LevelRequirement', [
-			{ name: 'skillHrid', type: 'SkillHrid', optional: false },
-			{ name: 'level', type: 'number', optional: false },
-		])
+		// Import types from other modules (DO NOT re-export - domain boundary)
+		typesBuilder.addImport('../skills/types', ['SkillHrid'], true)
+		typesBuilder.addImport('../equipmenttypes/types', ['EquipmentTypeHrid'], true)
+		typesBuilder.addImport('../itemcategories/types', ['ItemCategoryHrid'], true)
 
-		// ItemCost interface
-		this.moduleBuilder.addInterface('ItemCost', [
-			{ name: 'itemHrid', type: 'ItemHrid', optional: false },
-			{ name: 'count', type: 'number', optional: false },
-		])
+		// Marketplace categories
+		typesBuilder.addType(
+			'MarketplaceCategory',
+			"'Resources' | 'Consumables' | 'Books' | 'Keys' | 'Equipment' | 'Accessories' | 'Tools'",
+		)
+
+		// Import shared types from shared module
+		typesBuilder.addImport('../sharedtypes/types', ['LevelRequirement', 'ItemCost', 'Stats'], true)
+		
+		// Re-export ItemCost since it's used in utils
+		typesBuilder.addComment('Re-export ItemCost for use in utils')
+		typesBuilder.addNamedExports({
+			'ItemCost': { from: '../sharedtypes/types', isType: true }
+		})
 
 		// AlchemyDetail interface
 		const alchemyProps: PropertyDefinition[] = [
@@ -251,11 +318,6 @@ export class ModularItemsGenerator extends ModularBaseGenerator<Item> {
 			},
 		]
 		this.moduleBuilder.addInterface('AlchemyDetail', alchemyProps)
-
-		// Stats type
-		this.moduleBuilder.addInterface('Stats', [
-			{ name: '[key: string]', type: 'number', optional: false },
-		])
 
 		// EquipmentDetail interface
 		const equipmentProps: PropertyDefinition[] = [
@@ -312,6 +374,13 @@ export class ModularItemsGenerator extends ModularBaseGenerator<Item> {
 			},
 		]
 		this.moduleBuilder.addInterface('Item', itemProps)
+		
+		// Re-export ItemCost from shared types since it's used in the utils
+		this.moduleBuilder.addExport({
+			name: 'ItemCost',
+			source: './types',
+			isType: true,
+		})
 	}
 
 	protected override generateLookups(entities: Record<string, Item>): void {
@@ -323,7 +392,7 @@ export class ModularItemsGenerator extends ModularBaseGenerator<Item> {
 		this.moduleBuilder.addStaticLookup(
 			'ITEMS_BY_CATEGORY',
 			categoryLookup,
-			'ItemCategoryHrid',
+			'string',
 			'readonly ItemHrid[]',
 		)
 
@@ -335,20 +404,27 @@ export class ModularItemsGenerator extends ModularBaseGenerator<Item> {
 		this.moduleBuilder.addStaticLookup(
 			'ITEMS_BY_EQUIPMENT_TYPE',
 			equipmentLookup,
-			'EquipmentTypeHrid',
+			'string',
 			'readonly ItemHrid[]',
 		)
 
 		// Tradable items - add to lookups file instead of constants
 		const lookupsBuilder = this.moduleBuilder.getFile('lookups')
-		lookupsBuilder.addImport('./types', ['ItemHrid'], true)
+		lookupsBuilder.addImport(
+			'./types',
+			['ItemHrid', 'MarketplaceCategory'],
+			true,
+		)
 		lookupsBuilder.addConstArray(
 			'TRADABLE_ITEM_HRIDS',
 			this.tradableItems.sort(),
 			true,
 		)
 		// Export from module
-		this.moduleBuilder.addExport({ name: 'TRADABLE_ITEM_HRIDS', source: './lookups' })
+		this.moduleBuilder.addExport({
+			name: 'TRADABLE_ITEM_HRIDS',
+			source: './lookups',
+		})
 
 		// Non-tradable items
 		lookupsBuilder.addConstArray(
@@ -356,7 +432,54 @@ export class ModularItemsGenerator extends ModularBaseGenerator<Item> {
 			this.nonTradableItems.sort(),
 			true,
 		)
-		this.moduleBuilder.addExport({ name: 'NON_TRADABLE_ITEM_HRIDS', source: './lookups' })
+		this.moduleBuilder.addExport({
+			name: 'NON_TRADABLE_ITEM_HRIDS',
+			source: './lookups',
+		})
+
+		// Protection items
+		lookupsBuilder.addConstArray(
+			'PROTECTION_ITEM_HRIDS',
+			this.protectionItems.sort(),
+			true,
+		)
+		this.moduleBuilder.addExport({
+			name: 'PROTECTION_ITEM_HRIDS',
+			source: './lookups',
+		})
+
+		// Enhancement items
+		lookupsBuilder.addConstArray(
+			'ENHANCEMENT_ITEM_HRIDS',
+			this.enhancementItems.sort(),
+			true,
+		)
+		this.moduleBuilder.addExport({
+			name: 'ENHANCEMENT_ITEM_HRIDS',
+			source: './lookups',
+		})
+
+		// Equipment items
+		lookupsBuilder.addConstArray(
+			'EQUIPMENT_ITEM_HRIDS',
+			this.equipmentItems.sort(),
+			true,
+		)
+		this.moduleBuilder.addExport({
+			name: 'EQUIPMENT_ITEM_HRIDS',
+			source: './lookups',
+		})
+
+		// Alchemical items
+		lookupsBuilder.addConstArray(
+			'ALCHEMICAL_ITEM_HRIDS',
+			this.alchemicalItems.sort(),
+			true,
+		)
+		this.moduleBuilder.addExport({
+			name: 'ALCHEMICAL_ITEM_HRIDS',
+			source: './lookups',
+		})
 	}
 
 	protected override generateUtilities(entities: Record<string, Item>): void {
@@ -369,7 +492,7 @@ export class ModularItemsGenerator extends ModularBaseGenerator<Item> {
 		// Get items by category
 		this.moduleBuilder.addUtilityFunction(
 			'getItemsByCategory',
-			[{ name: 'categoryHrid', type: 'ItemCategoryHrid' }],
+			[{ name: 'categoryHrid', type: 'string' }],
 			'Item[]',
 			(writer) => {
 				writer.writeLine(
@@ -382,14 +505,14 @@ export class ModularItemsGenerator extends ModularBaseGenerator<Item> {
 			[
 				{ from: './lookups', names: ['ITEMS_BY_CATEGORY'] },
 				// No need to import getItem - it's in the same file
-				{ from: './types', names: ['Item', 'ItemCategoryHrid'], isType: true },
+				{ from: './types', names: ['Item'], isType: true },
 			],
 		)
 
 		// Get items by equipment type
 		this.moduleBuilder.addUtilityFunction(
 			'getItemsByEquipmentType',
-			[{ name: 'type', type: 'EquipmentTypeHrid' }],
+			[{ name: 'type', type: 'string' }],
 			'Item[]',
 			(writer) => {
 				writer.writeLine(
@@ -402,7 +525,7 @@ export class ModularItemsGenerator extends ModularBaseGenerator<Item> {
 			[
 				{ from: './lookups', names: ['ITEMS_BY_EQUIPMENT_TYPE'] },
 				// No need to import getItem - it's in the same file
-				{ from: './types', names: ['Item', 'EquipmentTypeHrid'], isType: true },
+				{ from: './types', names: ['Item'], isType: true },
 			],
 		)
 
@@ -453,6 +576,118 @@ export class ModularItemsGenerator extends ModularBaseGenerator<Item> {
 			[
 				// No need to import getAllItems - it's in the same file
 				{ from: './types', names: ['Item'], isType: true },
+			],
+		)
+
+		// Check if item is equipment
+		this.moduleBuilder.addUtilityFunction(
+			'isEquipment',
+			[{ name: 'item', type: 'Item' }],
+			'boolean',
+			(writer) => {
+				writer.writeLine('return item.equipmentDetail !== undefined')
+			},
+			[{ from: './types', names: ['Item'], isType: true }],
+		)
+
+		// Check if item is tradable
+		this.moduleBuilder.addUtilityFunction(
+			'isTradable',
+			[{ name: 'item', type: 'Item' }],
+			'boolean',
+			(writer) => {
+				writer.writeLine('return item.isTradable')
+			},
+			[{ from: './types', names: ['Item'], isType: true }],
+		)
+
+		// Get items for a specific skill
+		this.moduleBuilder.addUtilityFunction(
+			'getItemsForSkill',
+			[{ name: 'skillHrid', type: 'string' }],
+			'Item[]',
+			(writer) => {
+				writer.writeLine('return getAllItems().filter(item => {')
+				writer.writeLine('  if (item.equipmentDetail?.levelRequirements) {')
+				writer.writeLine(
+					'    return item.equipmentDetail.levelRequirements.some(req => req.skillHrid === skillHrid)',
+				)
+				writer.writeLine('  }')
+				writer.writeLine('  return false')
+				writer.writeLine('})')
+			},
+			[{ from: './types', names: ['Item'], isType: true }],
+		)
+
+		// Calculate enhancement cost at level
+		this.moduleBuilder.addUtilityFunction(
+			'calculateEnhancementCost',
+			[
+				{ name: 'item', type: 'Item' },
+				{ name: 'level', type: 'number' },
+			],
+			'ItemCost[] | undefined',
+			(writer) => {
+				writer.writeLine(
+					'if (!item.enhancementCosts || level <= 0) return undefined',
+				)
+				writer.writeLine('// Enhancement costs typically scale with level')
+				writer.writeLine('return item.enhancementCosts.map(cost => ({')
+				writer.writeLine('  itemHrid: cost.itemHrid,')
+				writer.writeLine('  count: cost.count * level')
+				writer.writeLine('}))')
+			},
+			[{ from: './types', names: ['Item', 'ItemCost'], isType: true }],
+		)
+
+		// Get item value for sorting/comparison
+		this.moduleBuilder.addUtilityFunction(
+			'getItemValue',
+			[{ name: 'item', type: 'Item' }],
+			'number',
+			(writer) => {
+				writer.writeLine('// Calculate item value based on various factors')
+				writer.writeLine('let value = item.sellPrice')
+				writer.writeLine('if (item.itemLevel > 0) value += item.itemLevel * 10')
+				writer.writeLine('if (item.equipmentDetail) value += 100')
+				writer.writeLine('if (item.alchemyDetail) value += 50')
+				writer.writeLine('return value')
+			},
+			[{ from: './types', names: ['Item'], isType: true }],
+		)
+
+		// Get marketplace category for an item
+		this.moduleBuilder.addUtilityFunction(
+			'getMarketplaceCategory',
+			[{ name: 'item', type: 'Item' }],
+			'MarketplaceCategory',
+			(writer) => {
+				writer.writeLine('if (item.equipmentDetail) {')
+				writer.writeLine(
+					'  if (item.equipmentDetail.type.includes("accessory")) return "Accessories"',
+				)
+				writer.writeLine(
+					'  if (item.equipmentDetail.type.includes("tool")) return "Tools"',
+				)
+				writer.writeLine('  return "Equipment"')
+				writer.writeLine('}')
+				writer.writeLine('const categoryHrid = item.categoryHrid')
+				writer.writeLine(
+					'if (categoryHrid.includes("resource")) return "Resources"',
+				)
+				writer.writeLine(
+					'if (categoryHrid.includes("consumable")) return "Consumables"',
+				)
+				writer.writeLine('if (categoryHrid.includes("book")) return "Books"')
+				writer.writeLine('if (categoryHrid.includes("key")) return "Keys"')
+				writer.writeLine('return "Resources" // Default')
+			},
+			[
+				{
+					from: './types',
+					names: ['Item', 'MarketplaceCategory'],
+					isType: true,
+				},
 			],
 		)
 	}

@@ -1,4 +1,12 @@
 import { ModularBaseGenerator } from '../core/generator.base.modular'
+// Shared types - these interfaces are defined in the shared module
+// They will be properly imported in generateTypes() method
+interface SpawnInfo {
+	combatMonsterHrid: string
+	difficultyTier: number
+	rate: number
+	strength: number
+}
 
 import type { PropertyDefinition } from '../core/ast-builder'
 
@@ -391,18 +399,11 @@ export class ModularMonstersGenerator extends ModularBaseGenerator<Monster> {
 
 		// Add file comment
 
-		// Import and re-export types from modular modules
+		// Import types from other modules (DO NOT re-export - domain boundary)
 		typesBuilder.addImport('../items/types', ['ItemHrid'], true)
 		typesBuilder.addImport('../abilities/types', ['AbilityHrid'], true)
 		typesBuilder.addImport('../combatstyles/types', ['CombatStyleHrid'], true)
 		typesBuilder.addImport('../damagetypes/types', ['DamageTypeHrid'], true)
-		
-		// Re-export imported types
-		typesBuilder.getSourceFile().addExportDeclaration({
-			namedExports: ['ItemHrid', 'AbilityHrid', 'CombatStyleHrid', 'DamageTypeHrid'],
-			moduleSpecifier: undefined,
-			isTypeOnly: true,
-		})
 
 		// Import constants for type derivation
 		typesBuilder.addImport('./constants', ['MONSTER_HRIDS'], false)
@@ -494,28 +495,17 @@ export class ModularMonstersGenerator extends ModularBaseGenerator<Monster> {
 		]
 		typesBuilder.addInterface('Monster', monsterProps)
 
-		// SpawnInfo interface for Actions generator
-		const spawnInfoProps: PropertyDefinition[] = [
-			{ name: 'combatMonsterHrid', type: 'MonsterHrid' },
-			{ name: 'difficultyTier', type: 'number' },
-			{ name: 'rate', type: 'number' },
-			{ name: 'strength', type: 'number' },
-		]
-		typesBuilder.addInterface('SpawnInfo', spawnInfoProps)
+		// Import shared types from shared module  
+		typesBuilder.addImport('../sharedtypes/types', ['SpawnInfo'], true)
 
-		// Re-export all types from types module
+		// Export only types that belong to this module (DO NOT export imported types)
 		const types = [
-			'ItemHrid',
-			'AbilityHrid',
-			'CombatStyleHrid',
-			'DamageTypeHrid',
 			'MonsterHrid',
 			'CombatStats',
 			'CombatDetails',
 			'MonsterAbility',
 			'DropItem',
 			'Monster',
-			'SpawnInfo',
 		]
 		types.forEach((name) => {
 			this.moduleBuilder.addExport({ name, source: './types', isType: true })
@@ -549,8 +539,8 @@ export class ModularMonstersGenerator extends ModularBaseGenerator<Monster> {
 
 		// Import types
 		lookupsBuilder.addImport(
-			'../monsters/types',
-			['MonsterHrid', 'DamageTypeHrid'],
+			'./types',
+			['MonsterHrid'],
 			true,
 		)
 
@@ -585,7 +575,7 @@ export class ModularMonstersGenerator extends ModularBaseGenerator<Monster> {
 
 		lookupsBuilder.addStaticLookup(
 			'MONSTERS_BY_DAMAGE_TYPE',
-			'DamageTypeHrid',
+			'string',
 			'readonly MonsterHrid[]',
 			damageTypeLookupObject,
 		)
@@ -608,14 +598,14 @@ export class ModularMonstersGenerator extends ModularBaseGenerator<Monster> {
 
 		// Import types
 		utilsBuilder.addImport(
-			'../monsters/types',
-			['Monster', 'MonsterHrid', 'ItemHrid', 'DamageTypeHrid'],
+			'./types',
+			['Monster', 'MonsterHrid'],
 			true,
 		)
-		utilsBuilder.addImport('../monsters/data', ['getMonstersMap'], false)
-		utilsBuilder.addImport('../monsters/constants', ['MONSTER_HRIDS'], false)
+		utilsBuilder.addImport('./data', ['getMonstersMap'], false)
+		utilsBuilder.addImport('./constants', ['MONSTER_HRIDS'], false)
 		utilsBuilder.addImport(
-			'../monsters/lookups',
+			'./lookups',
 			['MONSTERS_BY_COMBAT_LEVEL', 'MONSTERS_BY_DAMAGE_TYPE'],
 			false,
 		)
@@ -673,7 +663,7 @@ export class ModularMonstersGenerator extends ModularBaseGenerator<Monster> {
 
 		utilsBuilder.addFunction(
 			'getMonstersByDamageType',
-			[{ name: 'damageType', type: 'DamageTypeHrid' }],
+			[{ name: 'damageType', type: 'string' }],
 			'Monster[]',
 			(writer) => {
 				writer.writeLine(
@@ -704,7 +694,7 @@ export class ModularMonstersGenerator extends ModularBaseGenerator<Monster> {
 
 		utilsBuilder.addFunction(
 			'getItemDropChances',
-			[{ name: 'itemHrid', type: 'ItemHrid' }],
+			[{ name: 'itemHrid', type: 'string' }],
 			'Array<{ monsterHrid: MonsterHrid; dropRate: number; isRare: boolean }>',
 			(writer) => {
 				writer.writeLine(

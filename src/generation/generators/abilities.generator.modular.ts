@@ -96,10 +96,9 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 		// Add JSDoc header
 		typesFile.addComment('Combat ability type definitions')
 
-		// Add temporary type aliases for external dependencies
-		// These will be replaced with proper imports once those modules are modularized
-		typesFile.addType('CombatStyleHrid', 'string')
-		typesFile.addType('DamageTypeHrid', 'string')
+		// Import types from other modules (DO NOT re-export - domain boundary)
+		typesFile.addImport('../combatstyles/types', ['CombatStyleHrid'], true)
+		typesFile.addImport('../damagetypes/types', ['DamageTypeHrid'], true)
 
 		// Generate AbilityEffect interface
 		const effectProperties: PropertyDefinition[] = [
@@ -353,13 +352,12 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 		// Export the hrid type derived from constants
 		typesFile.addType('AbilityHrid', '(typeof ABILITY_HRIDS)[number]')
 
-		// Add module exports
+		// Add module exports - only export types defined in this module
 		this.moduleBuilder.addExport('types', 'Ability', 'type')
 		this.moduleBuilder.addExport('types', 'AbilityHrid', 'type')
 		this.moduleBuilder.addExport('types', 'AbilityEffect', 'type')
 		this.moduleBuilder.addExport('types', 'CombatTrigger', 'type')
-		this.moduleBuilder.addExport('types', 'CombatStyleHrid', 'type')
-		this.moduleBuilder.addExport('types', 'DamageTypeHrid', 'type')
+		// DO NOT export CombatStyleHrid or DamageTypeHrid - they belong to other modules
 	}
 
 	protected override generateConstants(
@@ -418,7 +416,8 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 		const lookupsFile = this.moduleBuilder.getFile('lookups')
 
 		// Import types
-		lookupsFile.addImport('./types', ['Ability', 'AbilityHrid', 'DamageTypeHrid'], true)
+		lookupsFile.addImport('./types', ['Ability', 'AbilityHrid'], true)
+		lookupsFile.addImport('../damagetypes/types', ['DamageTypeHrid'], true)
 
 		// Group abilities by damage type
 		const byDamageType: Record<string, string[]> = {}
@@ -490,7 +489,8 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 		const utilsFile = this.moduleBuilder.getFile('utils')
 
 		// Import types and data
-		utilsFile.addImport('./types', ['Ability', 'AbilityHrid', 'DamageTypeHrid'], true)
+		utilsFile.addImport('./types', ['Ability', 'AbilityHrid'], true)
+		utilsFile.addImport('../damagetypes/types', ['DamageTypeHrid'], true)
 		utilsFile.addImport('./constants', ['ABILITY_HRIDS', 'SPECIAL_ABILITY_HRIDS', 'REGULAR_ABILITY_HRIDS'])
 		utilsFile.addImport('./data', ['getAbilitiesMap'])
 		utilsFile.addImport('./lookups', ['ABILITIES_BY_DAMAGE_TYPE', 'ABILITIES_BY_MANA_COST'])

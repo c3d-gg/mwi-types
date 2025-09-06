@@ -93,12 +93,12 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 
 		// Generate type aliases
 		typesBuilder.addType('ShopItemHrid', 'typeof SHOPITEM_HRIDS[number]')
-		typesBuilder.addType('ShopCategory', 'typeof SHOP_CATEGORIES[number]')
+		typesBuilder.addType('ShopItemCategory', 'typeof SHOP_CATEGORIES[number]')
 
 		// Generate ShopItem interface
 		typesBuilder.addInterface('ShopItem', [
 			{ name: 'hrid', type: 'ShopItemHrid', optional: false },
-			{ name: 'category', type: 'ShopCategory', optional: false },
+			{ name: 'category', type: 'ShopItemCategory', optional: false },
 			{ name: 'itemHrid', type: 'ItemHrid', optional: false },
 			{ name: 'costs', type: 'Cost[]', optional: false },
 			{ name: 'sortIndex', type: 'number', optional: false },
@@ -107,7 +107,7 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 		// Export types
 		this.moduleBuilder.addExport('types', 'ShopItem', 'type')
 		this.moduleBuilder.addExport('types', 'ShopItemHrid', 'type')
-		this.moduleBuilder.addExport('types', 'ShopCategory', 'type')
+		this.moduleBuilder.addExport('types', 'ShopItemCategory', 'type')
 		this.moduleBuilder.addExport('types', 'Cost', 'type')
 	}
 
@@ -176,7 +176,7 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 		const lookupsBuilder = this.moduleBuilder.getFile('lookups')
 
 		// Import types
-		lookupsBuilder.addImport('./types', ['ShopItemHrid', 'ShopCategory'], true)
+		lookupsBuilder.addImport('./types', ['ShopItemHrid', 'ShopItemCategory'], true)
 		lookupsBuilder.addImport('../items/types', ['ItemHrid'], true)
 
 		// Shop items by category
@@ -190,7 +190,7 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 
 		lookupsBuilder.addConstVariable(
 			'SHOP_ITEMS_BY_CATEGORY',
-			'Partial<Record<ShopCategory, readonly ShopItemHrid[]>>',
+			'Partial<Record<ShopItemCategory, readonly ShopItemHrid[]>>',
 			byCategory,
 		)
 		this.moduleBuilder.addExport('lookups', 'SHOP_ITEMS_BY_CATEGORY')
@@ -238,7 +238,7 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 		// Import types
 		utilsBuilder.addImport(
 			'./types',
-			['ShopItem', 'ShopItemHrid', 'ShopCategory'],
+			['ShopItem', 'ShopItemHrid', 'ShopItemCategory'],
 			true,
 		)
 		utilsBuilder.addImport('../items/types', ['ItemHrid'], true)
@@ -304,7 +304,7 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 		// Get shop items by category
 		utilsBuilder.addFunction(
 			'getShopItemsByCategory',
-			[{ name: 'category', type: 'ShopCategory' }],
+			[{ name: 'category', type: 'ShopItemCategory' }],
 			'ShopItem[]',
 			(writer) => {
 				writer.writeLine('const hrids = SHOP_ITEMS_BY_CATEGORY[category] || []')
@@ -453,9 +453,9 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 		utilsBuilder.addFunction(
 			'groupShopItemsByCategory',
 			[],
-			'Map<ShopCategory, ShopItem[]>',
+			'Map<ShopItemCategory, ShopItem[]>',
 			(writer) => {
-				writer.writeLine('const grouped = new Map<ShopCategory, ShopItem[]>()')
+				writer.writeLine('const grouped = new Map<ShopItemCategory, ShopItem[]>()')
 				writer.writeLine('')
 				writer.writeLine('for (const category of SHOP_CATEGORIES) {')
 				writer.writeLine('  const items = getShopItemsByCategory(category)')
