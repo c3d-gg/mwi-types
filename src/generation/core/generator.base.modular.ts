@@ -27,7 +27,7 @@ export type { GeneratorConfig } from './types'
  * @see ARCHITECTURE.md for full documentation
  */
 export abstract class ModularBaseGenerator<TEntity> {
-	protected config: GeneratorConfig
+	public config: GeneratorConfig
 	protected sourceReader: SourceReader
 	protected moduleBuilder: ModuleBuilder
 	protected entities: Record<string, TEntity> = {}
@@ -44,6 +44,7 @@ export abstract class ModularBaseGenerator<TEntity> {
 			generateConstants: true,
 			generateUtils: true,
 			generateLookups: true,
+			applyDataCleaning: true,
 			...config,
 		}
 
@@ -123,7 +124,7 @@ export abstract class ModularBaseGenerator<TEntity> {
 	 * Default implementation that uses sourceKey from config
 	 * Can be overridden for complex extraction logic
 	 */
-	protected extractEntities(sourceData: any): Record<string, TEntity> {
+	public extractEntities(sourceData: any): Record<string, TEntity> {
 		const entities: Record<string, TEntity> = {}
 		const sourceMap = sourceData[this.config.sourceKey] || {}
 
@@ -145,43 +146,29 @@ export abstract class ModularBaseGenerator<TEntity> {
 	}
 
 	/**
-	 * Generate TypeScript interfaces/types (types.ts)
-	 * Default implementation - can be overridden for complex cases
+	 * Generate default interface from entity structure
+	 * Used when no custom interfaces provided by hooks
 	 */
-	protected generateTypes(entities: Record<string, TEntity>): void {
-		// Default: Generate main entity interface and HRID type
+	private generateDefaultInterface(entities: Record<string, TEntity>): void {
 		const entityName = this.config.entityName
-		const hrids = Object.keys(entities).sort()
+		const sampleEntity = Object.values(entities)[0]
 
-		// Generate main entity interface (if not provided by defineInterfaces hook)
-		const customInterfaces = this.defineInterfaces?.()
-		const hasMainInterface = customInterfaces?.some(
-			(def) => def.name === entityName,
-		)
+		if (sampleEntity) {
+			const properties = Object.keys(sampleEntity).map((key) => ({
+				name: key,
+				type: this.inferType(
+					sampleEntity[key as keyof typeof sampleEntity],
+					key,
+				),
+				optional: false,
+			}))
 
-		if (!hasMainInterface) {
-			// Auto-generate basic interface from first entity
-			const sampleEntity = Object.values(entities)[0]
-			if (sampleEntity) {
-				const properties = Object.keys(sampleEntity).map((key) => ({
-					name: key,
-					type: this.inferType(
-						sampleEntity[key as keyof typeof sampleEntity],
-						key,
-					),
-					optional: false,
-				}))
-
-				this.moduleBuilder.addInterface(entityName, properties)
-			}
-		}
-
-		// Generate HRID union type from constants
-		if (hrids.length > 0) {
-			this.moduleBuilder.addType(
-				`${entityName}Hrid`,
-				`(typeof ${entityName.toUpperCase()}_HRIDS)[number]`,
-			)
+			this.moduleBuilder.addInterface(entityName, properties)
+			this.moduleBuilder.addExport({
+				name: entityName,
+				source: './types',
+				isType: true,
+			})
 		}
 	}
 
@@ -215,7 +202,7 @@ export abstract class ModularBaseGenerator<TEntity> {
 	 * Generate static lookup tables (lookups.ts)
 	 * Override to add entity-specific lookups
 	 */
-	protected generateLookups(entities: Record<string, TEntity>): void {
+	protected generateLookups(_entities: Record<string, TEntity>): void {
 		// Default: no lookups
 		// Override in subclasses to add entity-specific lookup tables
 	}
@@ -226,111 +213,83 @@ export abstract class ModularBaseGenerator<TEntity> {
 	protected collectUniqueValues?(entity: TEntity): void
 
 	/**
-	 * Clean entity data (remove empty values)
-	 * Note: Preserves empty strings for 'description' field as it's required
-	 * Note: Preserves null values for fields that explicitly expect null
-	 * Note: Preserves undefined values for optional fields
+	 * Clean entity data (remove empty values and convert nulls to undefined where appropriate)
+	 * This method can be overridden by generators for custom cleaning logic
+	 *
+	 * IMPORTANT: This cleaning is applied automatically during data generation
+	 * unless explicitly disabled via config.applyDataCleaning = false
+	 *
+	 * Default behavior:
+	 * - Converts null to undefined for TypeScript optional fields (null !== undefined in TS strict mode)
+	 * - Preserves empty strings for 'description' and 'name' fields
+	 * - Removes empty arrays and objects (converts to undefined)
+	 * - Recursively cleans nested objects and arrays
+	 * - Preserves the data structure as transformed by the generator
+	 *
+	 * Why null to undefined conversion?
+	 * - TypeScript strict mode distinguishes between null and undefined
+	 * - Optional properties in interfaces expect undefined, not null
+	 * - Source data from JSON contains null values, but TypeScript prefers undefined
+	 * - This prevents "Type 'null' is not assignable to type 'T | undefined'" errors
+	 *
+	 * Generators should NOT manually handle null conversion in extractEntities()
+	 * Let the framework handle it via this method for consistency.
+	 *
+	 * @param data The data to clean
+	 * @param parentKey The parent key for context (used to preserve empty strings for specific fields)
+	 * @returns The cleaned data with nulls converted to undefined
 	 */
 	protected cleanEntityData(data: any, parentKey?: string): any {
-		// Preserve null values for fields that explicitly allow null
-		const nullPreservedFields = [
-			'experienceGain',
-			'dropTable',
-			'essenceDropTable',
-			'rareDropTable',
-			'inputItems',
-			'outputItems',
-			'combatZoneInfo',
-			'buffs',
-			'levelRequirement',
-			'bossSpawns',
-			'rewardDropTable',
-			'randomSpawnInfoMap',
-			'fixedSpawnsMap',
-			'spawns',
-			'abilities',
-			'defaultCombatTriggers',
-			'skillExpMap',
-		]
-
-		// Fields that should preserve empty strings
-		const emptyStringPreservedFields = ['description', 'keyItemHrid', 'name']
-
-		// Fields that should preserve undefined values (optional fields)
-		const undefinedPreservedFields = [
-			'requiredChatIconHrid',
-			'abilities',
-			'skillHrid',
-		]
-
-		if (data === null) {
-			// Keep null for fields that expect it
-			if (parentKey && nullPreservedFields.includes(parentKey)) {
-				return null
-			}
-			return undefined
-		}
-
+		// If the generator has already handled null conversion, preserve it
 		if (data === undefined) {
 			return undefined
 		}
 
+		// Convert null to undefined by default (for TypeScript optional fields)
+		// Generators should handle their own null preservation if needed
+		if (data === null) {
+			return undefined
+		}
+
 		if (typeof data === 'string') {
-			// Preserve empty strings for certain fields
+			// Preserve empty strings for description and name fields
 			if (
 				parentKey &&
-				emptyStringPreservedFields.includes(parentKey) &&
+				['description', 'name'].includes(parentKey) &&
 				data === ''
 			) {
 				return data
 			}
+			// Convert other empty strings to undefined
 			return data === '' ? undefined : data
 		}
 
 		if (Array.isArray(data)) {
-			// Keep empty array for spawns field and abilities field
-			if (
-				(parentKey === 'spawns' || parentKey === 'abilities') &&
-				data.length === 0
-			) {
-				return []
+			// Remove empty arrays (convert to undefined)
+			if (data.length === 0) {
+				return undefined
 			}
-			// Return null for empty arrays if the field expects null
-			if (
-				data.length === 0 &&
-				parentKey &&
-				nullPreservedFields.includes(parentKey)
-			) {
-				return null
-			}
-			return data.length === 0
-				? null
-				: data.map((item) => this.cleanEntityData(item))
+			// Recursively clean array items
+			const cleaned = data.map((item) => this.cleanEntityData(item))
+			// If all items were cleaned to undefined, return undefined
+			const hasContent = cleaned.some((item) => item !== undefined)
+			return hasContent ? cleaned : undefined
 		}
 
 		if (typeof data === 'object') {
 			const cleaned: any = {}
 			for (const [key, value] of Object.entries(data)) {
 				const cleanedValue = this.cleanEntityData(value, key)
-				// Keep empty string fields even if they're undefined or empty
-				if (emptyStringPreservedFields.includes(key)) {
-					cleaned[key] = cleanedValue === undefined ? '' : cleanedValue
-					// Keep undefined values for optional fields
-				} else if (undefinedPreservedFields.includes(key)) {
-					cleaned[key] = cleanedValue // Keep undefined as-is
-					// Keep null values for fields that expect null
-				} else if (
-					nullPreservedFields.includes(key) &&
-					(cleanedValue === null || cleanedValue !== undefined)
-				) {
-					cleaned[key] = cleanedValue
-				} else if (cleanedValue !== undefined) {
+				// Only include defined values
+				if (cleanedValue !== undefined) {
 					cleaned[key] = cleanedValue
 				}
 			}
-			return Object.keys(cleaned).length === 0 ? null : cleaned
+			// If object is empty after cleaning, return undefined
+			return Object.keys(cleaned).length === 0 ? undefined : cleaned
 		}
 
+		// Return primitive values as-is (numbers, booleans, etc.)
 		return data
 	}
 
@@ -344,16 +303,6 @@ export abstract class ModularBaseGenerator<TEntity> {
 
 		// Add HRIDS constant array
 		this.moduleBuilder.addConstArray(constName, hrids, true)
-
-		// Import the constant in types.ts before using it
-		const typesBuilder = this.moduleBuilder.getFile('types')
-		typesBuilder.addImport('./constants', [constName], false)
-
-		// Add type derived from constant
-		this.moduleBuilder.addType(
-			`${entityName}Hrid`,
-			`typeof ${constName}[number]`,
-		)
 	}
 
 	/**
@@ -364,15 +313,19 @@ export abstract class ModularBaseGenerator<TEntity> {
 		const typeName = this.config.entityName
 		const hridType = `${typeName}Hrid`
 
-		// Clean entity data before adding
-		const cleanedEntries = Object.entries(entities).map(([key, value]) => [
-			key,
-			this.cleanEntityData(value),
-		]) as Array<[string, TEntity]>
+		// Apply data cleaning if enabled (default: true)
+		// Generators can disable this if they handle null conversion themselves
+		const entriesToAdd =
+			this.config.applyDataCleaning !== false
+				? (Object.entries(entities).map(([key, value]) => [
+						key,
+						this.cleanEntityData(value),
+					]) as Array<[string, TEntity]>)
+				: Object.entries(entities)
 
 		this.moduleBuilder.addLazyDataRecord(
 			this.config.entityNamePlural,
-			cleanedEntries,
+			entriesToAdd,
 			hridType,
 			typeName,
 		)
@@ -382,7 +335,7 @@ export abstract class ModularBaseGenerator<TEntity> {
 	 * Generate utility functions (utils.ts)
 	 * Updated to work with Records instead of Maps for better developer experience
 	 */
-	protected generateUtilities(entities: Record<string, TEntity>): void {
+	protected generateUtilities(_entities: Record<string, TEntity>): void {
 		const typeName = this.config.entityName
 		const pluralName = this.config.entityNamePlural
 		const hridType = `${typeName}Hrid`
@@ -545,7 +498,7 @@ export abstract class ModularBaseGenerator<TEntity> {
 	// ============================================================================
 
 	/**
-	 * Process types generation with hooks
+	 * Process types generation with hooks-only architecture
 	 */
 	private processTypes(entities: Record<string, TEntity>): void {
 		// Import shared types if configured
@@ -558,7 +511,7 @@ export abstract class ModularBaseGenerator<TEntity> {
 			)
 		}
 
-		// Apply hook for additional interfaces FIRST (takes priority)
+		// Apply hook for custom interfaces
 		const customInterfaces = this.defineInterfaces?.()
 		if (customInterfaces) {
 			customInterfaces.forEach((def) => {
@@ -571,22 +524,27 @@ export abstract class ModularBaseGenerator<TEntity> {
 			})
 		}
 
-		// Generate base types only if main interface not provided by hook
+		// If no custom interfaces provided, generate default interface
 		const mainInterfaceName = this.config.entityName
 		const hasMainInterface = customInterfaces?.some(
 			(def) => def.name === mainInterfaceName,
 		)
 		if (!hasMainInterface) {
-			this.generateTypes(entities)
-		} else {
-			// Still generate HRID type even when using hooks
-			const hrids = Object.keys(entities).sort()
-			if (hrids.length > 0) {
-				this.moduleBuilder.addType(
-					`${mainInterfaceName}Hrid`,
-					`(typeof ${mainInterfaceName.toUpperCase()}_HRIDS)[number]`,
-				)
-			}
+			this.generateDefaultInterface(entities)
+		}
+
+		// Always generate HRID type (once, cleanly)
+		const hrids = Object.keys(entities).sort()
+		if (hrids.length > 0) {
+			// Import the constants array needed for HRID type
+			const constantName = `${mainInterfaceName.toUpperCase()}_HRIDS`
+			const typesBuilder = this.moduleBuilder.getFile('types')
+			typesBuilder.addImport('./constants', [constantName], false)
+
+			this.moduleBuilder.addType(
+				`${mainInterfaceName}Hrid`,
+				`(typeof ${constantName})[number]`,
+			)
 		}
 
 		// Add custom interfaces from configuration

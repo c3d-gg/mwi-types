@@ -85,3 +85,9 @@ export class ModularEquipmentTypesGenerator extends ModularBaseGenerator<Equipme
 		}
 	}
 }
+
+// Required for dev CLI to run this generator standalone
+if (import.meta.main) {
+	const generator = new ModularEquipmentTypesGenerator()
+	await generator.generate('./src/sources/game_data.json')
+}

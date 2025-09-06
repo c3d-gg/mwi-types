@@ -82,3 +82,9 @@ export class ModularDamageTypesGenerator extends ModularBaseGenerator<DamageType
 		}
 	}
 }
+
+// Main execution for standalone running
+if (import.meta.main) {
+	const generator = new ModularDamageTypesGenerator()
+	await generator.generate('./src/sources/game_data.json')
+}

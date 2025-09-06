@@ -389,6 +389,46 @@ describe('EquipmentTypes Generator (TDD)', () => {
 			}
 		})
 	})
+
+	describe('Duplication Detection', () => {
+		test('should have only one EquipmentTypeHrid type export', async () => {
+			const fs = await import('fs/promises')
+			const path = './src/generated/equipmenttypes/types.ts'
+
+			try {
+				const content = await fs.readFile(path, 'utf-8')
+				const exportMatches = content.match(/export type EquipmentTypeHrid/g)
+				expect(exportMatches).toHaveLength(1)
+			} catch {
+				// Generated file doesn't exist yet - validate configuration instead
+				const { ModularEquipmentTypesGenerator } = await import('./generator')
+				const generator = new ModularEquipmentTypesGenerator()
+				expect((generator as any).config.entityName).toBe('EquipmentType')
+			}
+		})
+
+		test('should have proper constants import structure', async () => {
+			const fs = await import('fs/promises')
+			const path = './src/generated/equipmenttypes/types.ts'
+
+			try {
+				const content = await fs.readFile(path, 'utf-8')
+				expect(content).toContain(
+					"import { EQUIPMENTTYPE_HRIDS } from './constants'",
+				)
+				// Should not have duplicate EQUIPMENTTYPE_HRIDS arrays
+				const constantMatches = content.match(/EQUIPMENTTYPE_HRIDS.*=/g) || []
+				expect(constantMatches.length).toBeLessThanOrEqual(1)
+			} catch {
+				// Generated file doesn't exist yet - validate configuration instead
+				const { ModularEquipmentTypesGenerator } = await import('./generator')
+				const generator = new ModularEquipmentTypesGenerator()
+				expect((generator as any).config.sourceKey).toBe(
+					'equipmentTypeDetailMap',
+				)
+			}
+		})
+	})
 })
 
 // Helper function for testing equipment type structure

@@ -279,6 +279,47 @@ describe('DamageTypes Generator (TDD)', () => {
 			}
 		})
 	})
+
+	describe('Duplication Detection', () => {
+		test('should not have duplicate HRID type exports', () => {
+			const fs = require('fs')
+			const typesPath = './src/generated/damagetypes/types.ts'
+
+			if (fs.existsSync(typesPath)) {
+				const content = fs.readFileSync(typesPath, 'utf-8')
+				const lines = content.split('\n')
+
+				// Find all DamageTypeHrid type definitions
+				const damageTypeHridLines = lines.filter((line: any) =>
+					line.trim().startsWith('export type DamageTypeHrid'),
+				)
+
+				expect(damageTypeHridLines.length).toBe(1)
+
+				// Verify it references constants correctly
+				if (damageTypeHridLines.length === 1) {
+					expect(damageTypeHridLines[0]).toContain('DAMAGETYPE_HRIDS')
+				}
+			}
+		})
+
+		test('should import constants for HRID type', () => {
+			const fs = require('fs')
+			const typesPath = './src/generated/damagetypes/types.ts'
+
+			if (fs.existsSync(typesPath)) {
+				const content = fs.readFileSync(typesPath, 'utf-8')
+
+				// Should import DAMAGETYPE_HRIDS from constants
+				expect(content).toContain(
+					"import { DAMAGETYPE_HRIDS } from './constants'",
+				)
+
+				// Should use it in the type definition
+				expect(content).toContain('(typeof DAMAGETYPE_HRIDS)[number]')
+			}
+		})
+	})
 })
 
 // Helper function for testing damage type structure

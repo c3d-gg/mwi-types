@@ -127,7 +127,6 @@ export class ModularSkillsGenerator extends ModularBaseGenerator<Skill> {
 			},
 			imports: [
 				{ from: './constants', names: ['COMBAT'] },
-				{ from: './utils', names: ['requireSkill'] },
 				{ from: './types', names: ['Skill'], isType: true },
 			],
 			jsDoc: {
@@ -147,7 +146,6 @@ export class ModularSkillsGenerator extends ModularBaseGenerator<Skill> {
 			},
 			imports: [
 				{ from: './constants', names: ['SKILLING'] },
-				{ from: './utils', names: ['requireSkill'] },
 				{ from: './types', names: ['Skill'], isType: true },
 			],
 			jsDoc: {
@@ -157,27 +155,7 @@ export class ModularSkillsGenerator extends ModularBaseGenerator<Skill> {
 			},
 		})
 
-		// Get skilling skills (from constant array)
-		utilities.push({
-			name: 'getSkillingSkills',
-			parameters: [],
-			returnType: 'Skill[]',
-			implementation: (writer) => {
-				writer.writeLine(
-					'return SKILLING_SKILLS.map(hrid => requireSkill(hrid))',
-				)
-			},
-			imports: [
-				{ from: './constants', names: ['SKILLING_SKILLS'] },
-				{ from: './utils', names: ['requireSkill'] },
-				{ from: './types', names: ['Skill'], isType: true },
-			],
-			jsDoc: {
-				description: 'Gets all skilling (non-combat) skills.',
-				returns: 'Array of skilling skills',
-				examples: [`const skillingSkills = getSkillingSkills()`],
-			},
-		})
+		// Duplicate removed - getSkillingSkills already defined above
 
 		// Check if skill is combat
 		utilities.push({
@@ -221,10 +199,7 @@ export class ModularSkillsGenerator extends ModularBaseGenerator<Skill> {
 					'return getAllSkills().find(skill => skill.name === name)',
 				)
 			},
-			imports: [
-				{ from: './utils', names: ['getAllSkills'] },
-				{ from: './types', names: ['Skill'], isType: true },
-			],
+			imports: [{ from: './types', names: ['Skill'], isType: true }],
 			jsDoc: {
 				description: 'Gets a skill by its display name.',
 				params: [{ name: 'name', description: 'The skill name to search for' }],

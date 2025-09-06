@@ -65,3 +65,9 @@ export class ModularItemCategoriesGenerator extends ModularBaseGenerator<ItemCat
 		}
 	}
 }
+
+// Required for dev CLI to run this generator standalone
+if (import.meta.main) {
+	const generator = new ModularItemCategoriesGenerator()
+	await generator.generate('./src/sources/game_data.json')
+}

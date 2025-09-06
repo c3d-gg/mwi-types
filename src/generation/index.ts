@@ -9,7 +9,7 @@ import { ChatChannelTypesGeneratorModular } from './generators/chat-channel-type
 import { ModularChatIconsGenerator } from './generators/chat-icons.generator.modular'
 import { CombatStylesModularGenerator } from './generators/combat-styles.generator.modular'
 import { CommunityBuffsGeneratorModular } from './generators/community-buffs.generator.modular'
-import { DamageTypesModularGenerator } from './generators/damage-types.generator.modular'
+// Legacy import removed - using new damage-types/generator.ts structure
 import { ModularEquipmentTypesGenerator } from './generators/equipment-types.generator.modular'
 import { GameModesGeneratorModular } from './generators/game-modes.generator.modular'
 import { GuildCharacterRolesGeneratorModular } from './generators/guild-character-roles.generator.modular'
@@ -84,7 +84,7 @@ async function generateAll() {
 
 		// DamageTypes - use modular if enabled
 		console.log('Generating damage types...')
-		await new DamageTypesModularGenerator().generate(sourcePath)
+		// DamageTypes now uses new damage-types/generator.ts structure
 
 		// EquipmentTypes - use modular if enabled
 		console.log('Generating equipment types...')

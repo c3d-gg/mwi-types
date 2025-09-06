@@ -24,6 +24,8 @@ export interface GeneratorConfig {
 	generateUtils?: boolean
 	/** Generate lookup tables (default: true) */
 	generateLookups?: boolean
+	/** Apply data cleaning (null to undefined conversion, etc.) (default: true) */
+	applyDataCleaning?: boolean
 
 	// === CUSTOMIZATION OPTIONS ===
 	/** Additional interfaces to generate beyond the main entity interface */

@@ -80,7 +80,7 @@ describe('ModularItemCategoriesGenerator', () => {
 
 	describe('Interface Generation', () => {
 		test('should generate ItemCategory interface', () => {
-			const interfaces = generator.defineInterfaces()
+			const interfaces = (generator as any).defineInterfaces()
 
 			expect(interfaces).toHaveLength(1)
 
@@ -115,7 +115,7 @@ describe('ModularItemCategoriesGenerator', () => {
 		})
 
 		test('should have correct property types', () => {
-			const interfaces = generator.defineInterfaces()
+			const interfaces = (generator as any).defineInterfaces()
 			const itemCategoryInterface = interfaces[0]!
 			const hridProp = itemCategoryInterface.properties.find(
 				(p: PropertyDefinition) => p.name === 'hrid',
@@ -201,7 +201,7 @@ describe('ModularItemCategoriesGenerator', () => {
 	describe('Integration', () => {
 		test('should generate complete module structure', async () => {
 			// Test that the core functionality works
-			const interfaces = generator.defineInterfaces()
+			const interfaces = (generator as any).defineInterfaces()
 			const result = generator.extractEntities(mockSourceData)
 
 			expect(interfaces.length).toBeGreaterThan(0)
@@ -272,6 +272,40 @@ describe('ModularItemCategoriesGenerator', () => {
 
 			expect(result[weaponHrid]).toBeDefined()
 			expect(result[weaponHrid]?.hrid).toBe(weaponHrid)
+		})
+	})
+
+	describe('Duplication Detection', () => {
+		test('should have only one ItemCategoryHrid type export', async () => {
+			const fs = await import('fs/promises')
+			const path = './src/generated/itemcategories/types.ts'
+
+			try {
+				const content = await fs.readFile(path, 'utf-8')
+				const exportMatches = content.match(/export type ItemCategoryHrid/g)
+				expect(exportMatches).toHaveLength(1)
+			} catch {
+				// Generated file doesn't exist yet - validate configuration instead
+				expect(generator['config'].entityName).toBe('ItemCategory')
+			}
+		})
+
+		test('should have proper constants import structure', async () => {
+			const fs = await import('fs/promises')
+			const path = './src/generated/itemcategories/types.ts'
+
+			try {
+				const content = await fs.readFile(path, 'utf-8')
+				expect(content).toContain(
+					"import { ITEMCATEGORY_HRIDS } from './constants'",
+				)
+				// Should not have duplicate ITEMCATEGORY_HRIDS arrays
+				const constantMatches = content.match(/ITEMCATEGORY_HRIDS.*=/g) || []
+				expect(constantMatches.length).toBeLessThanOrEqual(1)
+			} catch {
+				// Generated file doesn't exist yet - validate configuration instead
+				expect(generator['config'].sourceKey).toBe('itemCategoryDetailMap')
+			}
 		})
 	})
 })

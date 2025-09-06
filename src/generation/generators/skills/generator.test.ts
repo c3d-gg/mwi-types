@@ -239,6 +239,45 @@ describe('Skills Generator (TDD)', () => {
 			expect(true).toBe(true)
 		})
 	})
+
+	describe('Duplication Detection', () => {
+		test('should not have duplicate HRID type exports', () => {
+			const fs = require('fs')
+			const typesPath = './src/generated/skills/types.ts'
+
+			if (fs.existsSync(typesPath)) {
+				const content = fs.readFileSync(typesPath, 'utf-8')
+				const lines = content.split('\n')
+
+				// Find all SkillHrid type definitions
+				const skillHridLines = lines.filter((line: any) =>
+					line.trim().startsWith('export type SkillHrid'),
+				)
+
+				expect(skillHridLines.length).toBe(1)
+
+				// Verify it references constants correctly
+				if (skillHridLines.length === 1) {
+					expect(skillHridLines[0]).toContain('SKILL_HRIDS')
+				}
+			}
+		})
+
+		test('should import constants for HRID type', () => {
+			const fs = require('fs')
+			const typesPath = './src/generated/skills/types.ts'
+
+			if (fs.existsSync(typesPath)) {
+				const content = fs.readFileSync(typesPath, 'utf-8')
+
+				// Should import SKILL_HRIDS from constants
+				expect(content).toContain("import { SKILL_HRIDS } from './constants'")
+
+				// Should use it in the type definition
+				expect(content).toContain('(typeof SKILL_HRIDS)[number]')
+			}
+		})
+	})
 })
 
 // Helper function for testing skill structure

@@ -101,6 +101,8 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 			generateConstants: true,
 			generateUtils: true,
 			generateLookups: true,
+			// Disable data cleaning since Action interface has explicit null fields
+			applyDataCleaning: false,
 
 			// Import shared types this generator needs
 			sharedTypes: [
@@ -186,13 +188,10 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 		// Import types from other domains (DO NOT re-export - domain control)
 		typesBuilder.addImport('../items/types', ['ItemHrid'], true)
 		typesBuilder.addImport('../skills/types', ['SkillHrid'], true)
-		typesBuilder.addImport('../monsters/types', ['MonsterHrid'], true)
-		typesBuilder.addImport(
-			'../actioncategories/types',
-			['ActionCategoryHrid'],
-			true,
-		)
-		typesBuilder.addImport('../bufftypes/types', ['Buff', 'BuffTypeHrid'], true)
+		// NOTE: Temporarily commented out until these modules are migrated to new structure
+		// typesBuilder.addImport('../monsters/types', ['MonsterHrid'], true)
+		// typesBuilder.addImport('../actioncategories/types', ['ActionCategoryHrid'], true)
+		// typesBuilder.addImport('../bufftypes/types', ['Buff', 'BuffTypeHrid'], true)
 
 		// Generate type constants from collected values
 		this.generateTypeConstants()
@@ -238,7 +237,7 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 				{ name: 'hrid', type: 'ActionHrid', optional: false },
 				{ name: 'function', type: 'ActionFunction', optional: false },
 				{ name: 'type', type: 'ActionType', optional: false },
-				{ name: 'category', type: 'ActionCategoryHrid', optional: false },
+				{ name: 'category', type: 'string', optional: false }, // TODO: Change to ActionCategoryHrid when migrated
 				{ name: 'name', type: 'string', optional: false },
 				{ name: 'maxDifficulty', type: 'number', optional: false },
 				{
@@ -277,7 +276,7 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 					optional: false,
 				},
 				{ name: 'maxPartySize', type: 'number', optional: false },
-				{ name: 'buffs', type: 'Buff[] | null', optional: false },
+				{ name: 'buffs', type: 'unknown[] | null', optional: false }, // TODO: Change to Buff[] when bufftypes migrated
 				{ name: 'sortIndex', type: 'number | undefined', optional: true },
 			],
 		})
@@ -317,11 +316,8 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 			true,
 		)
 		lookupsBuilder.addImport('../skills/types', ['SkillHrid'], true)
-		lookupsBuilder.addImport(
-			'../actioncategories/types',
-			['ActionCategoryHrid'],
-			true,
-		)
+		// TODO: Re-add when actioncategories module is migrated
+		// lookupsBuilder.addImport('../actioncategories/types', ['ActionCategoryHrid'], true)
 
 		// Actions by skill
 		const skillLookup: Record<string, readonly string[]> = {}
@@ -344,7 +340,7 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 		lookups.push({
 			name: 'ACTIONS_BY_CATEGORY',
 			data: categoryLookup,
-			keyType: 'ActionCategoryHrid',
+			keyType: 'string', // TODO: Change to ActionCategoryHrid when migrated
 			valueType: 'readonly ActionHrid[]',
 		})
 
@@ -394,7 +390,6 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 			},
 			imports: [
 				{ from: './lookups', names: ['ACTIONS_BY_SKILL'] },
-				{ from: './utils', names: ['requireAction'] },
 				{ from: './types', names: ['Action'], isType: true },
 				{ from: '../skills/types', names: ['SkillHrid'], isType: true },
 			],
@@ -483,10 +478,7 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 				writer.writeLine('  return aLevel - bLevel')
 				writer.writeLine('})')
 			},
-			imports: [
-				{ from: './utils', names: ['getAllActions'] },
-				{ from: './types', names: ['Action'], isType: true },
-			],
+			imports: [{ from: './types', names: ['Action'], isType: true }],
 			jsDoc: {
 				description: 'Gets all actions sorted by their level requirement.',
 				returns: 'Array of actions sorted by level requirement (ascending)',

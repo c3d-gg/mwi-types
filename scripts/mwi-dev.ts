@@ -253,7 +253,7 @@ async function main() {
       log.header(`Testing tree-shaking for ${module}`)
       
       // Create test import
-      const testImport = `import { get${module?.charAt(0).toUpperCase()}${module?.slice(1)} } from './src/generated/${module}/utils'`
+      const testImport = `import { getAll${module?.charAt(0).toUpperCase()}${module?.slice(1)} } from './src/generated/${module}/utils'`
       runCommand(`echo "${testImport}" > test-treeshake.js`)
       
       // Test bundle
