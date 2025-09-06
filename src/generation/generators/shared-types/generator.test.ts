@@ -26,14 +26,14 @@ describe('ModularSharedTypesGenerator', () => {
 	})
 
 	describe('extractEntities', () => {
-		it('should return empty object since shared types are static', () => {
+		it('should return dummy entity to force generation', () => {
 			const mockSourceData = {
 				someData: { test: 'data' },
 				shared: { ignored: 'data' },
 			}
 
 			const result = generator.extractEntities(mockSourceData)
-			expect(result).toEqual({})
+			expect(result).toEqual({ 'shared-types': { dummy: true } })
 		})
 	})
 
@@ -119,34 +119,56 @@ describe('ModularSharedTypesGenerator', () => {
 			).toBe('number')
 		})
 
-		it('should define Buff interface with optional fields', () => {
+		it('should define Buff interface with correct properties', () => {
 			const interfaces = (generator as any).defineInterfaces()
 			const buff = interfaces.find((i: any) => i.name === 'Buff')
 
 			expect(buff).toBeDefined()
 			expect(buff.description).toBe(
-				'Represents a buff that can be applied to skills or global stats.',
+				'Represents a temporary buff/debuff applied to a player or action.',
 			)
-			expect(buff.properties).toHaveLength(3)
+			expect(buff.properties).toHaveLength(8)
 
-			const skillHridProp = buff.properties.find(
-				(p: any) => p.name === 'skillHrid',
+			// Check all required properties
+			const expectedProperties = [
+				{ name: 'uniqueHrid', type: 'string', optional: false },
+				{ name: 'typeHrid', type: 'string', optional: false },
+				{ name: 'ratioBoost', type: 'number', optional: false },
+				{ name: 'ratioBoostLevelBonus', type: 'number', optional: false },
+				{ name: 'flatBoost', type: 'number', optional: false },
+				{ name: 'flatBoostLevelBonus', type: 'number', optional: false },
+				{ name: 'startTime', type: 'string', optional: false },
+				{ name: 'duration', type: 'number', optional: false },
+			]
+
+			for (const expected of expectedProperties) {
+				const prop = buff.properties.find((p: any) => p.name === expected.name)
+				expect(prop).toBeDefined()
+				expect(prop.type).toBe(expected.type)
+				expect(prop.optional).toBe(expected.optional)
+			}
+
+			// Check specific property descriptions
+			const uniqueHridProp = buff.properties.find(
+				(p: any) => p.name === 'uniqueHrid',
 			)
-			expect(skillHridProp).toBeDefined()
-			expect(skillHridProp.type).toBe('string')
-			expect(skillHridProp.optional).toBe(true) // Should be optional for global buffs
-
-			const valueProp = buff.properties.find((p: any) => p.name === 'value')
-			expect(valueProp).toBeDefined()
-			expect(valueProp.type).toBe('number')
-			expect(valueProp.optional).toBe(false) // Should be required
-
-			const isPercentageProp = buff.properties.find(
-				(p: any) => p.name === 'isPercentage',
+			expect(uniqueHridProp.description).toBe(
+				'Unique identifier for this buff instance',
 			)
-			expect(isPercentageProp).toBeDefined()
-			expect(isPercentageProp.type).toBe('boolean')
-			expect(isPercentageProp.optional).toBe(true) // Should be optional
+
+			const typeHridProp = buff.properties.find(
+				(p: any) => p.name === 'typeHrid',
+			)
+			expect(typeHridProp.description).toBe(
+				'The type of buff (references BuffType)',
+			)
+
+			const durationProp = buff.properties.find(
+				(p: any) => p.name === 'duration',
+			)
+			expect(durationProp.description).toBe(
+				'Duration of the buff in seconds (0 = permanent)',
+			)
 		})
 
 		it('should define Stats interface with index signature', () => {

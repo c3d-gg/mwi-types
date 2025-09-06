@@ -188,7 +188,7 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 			name: 'FightInfo',
 			properties: [
 				{ name: 'randomSpawnInfo', type: 'RandomSpawnInfo', optional: false },
-				{ name: 'bossSpawns', type: 'any | null', optional: false },
+				{ name: 'bossSpawns', type: 'SpawnInfo[] | null', optional: false },
 				{ name: 'battlesPerBoss', type: 'number', optional: false },
 			],
 		})
@@ -203,8 +203,16 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 					optional: false,
 				},
 				{ name: 'maxWaves', type: 'number', optional: false },
-				{ name: 'randomSpawnInfoMap', type: 'any | null', optional: false },
-				{ name: 'fixedSpawnsMap', type: 'any | null', optional: false },
+				{
+					name: 'randomSpawnInfoMap',
+					type: 'Record<string, RandomSpawnInfo> | null',
+					optional: false,
+				},
+				{
+					name: 'fixedSpawnsMap',
+					type: 'Record<string, SpawnInfo[]> | null',
+					optional: false,
+				},
 			],
 		})
 
