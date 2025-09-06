@@ -66,6 +66,20 @@ This file provides guidance for agentic coding agents operating in this TypeScri
 
 ### TDD Development CLI (`bun run dev`)
 
+**⚠️ IMPORTANT: Generator Main Block Requirement**
+
+For `generate:single` command to work, generators MUST include a main execution block:
+
+```typescript
+// Required at the end of generator.ts files for dev CLI
+if (import.meta.main) {
+	const generator = new ModularXxxGenerator()
+	await generator.generate('./src/sources/game_data.json')
+}
+```
+
+**Note**: This may cause TypeScript compilation warnings about `import.meta.main` which can be safely ignored or the block can be removed after development.
+
 **ANALYSIS COMMANDS:**
 
 - **Analyze source data**: `bun run dev analyze:source <ENTITY>`
@@ -435,6 +449,22 @@ protected override generateConstants(): void { }
 protected override defineInterfaces(): InterfaceDefinition[] { }
 protected override defineUtilities(): UtilityDefinition[] { }
 protected override defineConstants(): ConstantDefinition[] { }
+
+// ❌ WRONG - Missing main block for dev CLI
+export class ModularXxxGenerator extends ModularBaseGenerator<Xxx> {
+  // ... generator implementation
+}
+// Dev CLI won't be able to run this!
+
+// ✅ CORRECT - Include main block for dev CLI
+export class ModularXxxGenerator extends ModularBaseGenerator<Xxx> {
+  // ... generator implementation
+}
+
+if (import.meta.main) {
+  const generator = new ModularXxxGenerator()
+  await generator.generate('./src/sources/game_data.json')
+}
 ```
 
 ## 💡 Common Workflow Examples
