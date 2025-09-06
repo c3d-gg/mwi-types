@@ -14,6 +14,8 @@ describe('ModularRecipesGenerator', () => {
 		const sourcePath = join(process.cwd(), 'src/sources/game_data.json')
 		const sourceContent = readFileSync(sourcePath, 'utf-8')
 		sampleSourceData = JSON.parse(sourceContent)
+		// Initialize sourceData for defineLookups tests
+		;(generator as any).sourceData = sampleSourceData
 	})
 
 	describe('Configuration', () => {
@@ -217,7 +219,10 @@ describe('ModularRecipesGenerator', () => {
 			const bySkillLookup = lookups.find((l) => l.name === 'RECIPES_BY_SKILL')
 
 			expect(bySkillLookup).toBeDefined()
-			expect(bySkillLookup?.type).toBe(
+			const lookupType = bySkillLookup?.isPartial
+				? `Partial<Record<${bySkillLookup.keyType}, ${bySkillLookup.valueType}>>`
+				: `Record<${bySkillLookup?.keyType}, ${bySkillLookup?.valueType}>`
+			expect(lookupType).toBe(
 				'Partial<Record<SkillHrid, readonly RecipeHrid[]>>',
 			)
 		})
@@ -227,7 +232,10 @@ describe('ModularRecipesGenerator', () => {
 			const byTypeLookup = lookups.find((l) => l.name === 'RECIPES_BY_TYPE')
 
 			expect(byTypeLookup).toBeDefined()
-			expect(byTypeLookup?.type).toBe(
+			const lookupType = byTypeLookup?.isPartial
+				? `Partial<Record<${byTypeLookup.keyType}, ${byTypeLookup.valueType}>>`
+				: `Record<${byTypeLookup?.keyType}, ${byTypeLookup?.valueType}>`
+			expect(lookupType).toBe(
 				'Partial<Record<ActionType, readonly RecipeHrid[]>>',
 			)
 		})
@@ -237,7 +245,10 @@ describe('ModularRecipesGenerator', () => {
 			const byOutputLookup = lookups.find((l) => l.name === 'RECIPES_BY_OUTPUT')
 
 			expect(byOutputLookup).toBeDefined()
-			expect(byOutputLookup?.type).toBe(
+			const lookupType = byOutputLookup?.isPartial
+				? `Partial<Record<${byOutputLookup.keyType}, ${byOutputLookup.valueType}>>`
+				: `Record<${byOutputLookup?.keyType}, ${byOutputLookup?.valueType}>`
+			expect(lookupType).toBe(
 				'Partial<Record<ItemHrid, readonly RecipeHrid[]>>',
 			)
 		})
@@ -247,7 +258,10 @@ describe('ModularRecipesGenerator', () => {
 			const byInputLookup = lookups.find((l) => l.name === 'RECIPES_BY_INPUT')
 
 			expect(byInputLookup).toBeDefined()
-			expect(byInputLookup?.type).toBe(
+			const lookupType = byInputLookup?.isPartial
+				? `Partial<Record<${byInputLookup.keyType}, ${byInputLookup.valueType}>>`
+				: `Record<${byInputLookup?.keyType}, ${byInputLookup?.valueType}>`
+			expect(lookupType).toBe(
 				'Partial<Record<ItemHrid, readonly RecipeHrid[]>>',
 			)
 		})
@@ -259,7 +273,7 @@ describe('ModularRecipesGenerator', () => {
 
 			const getBySkill = utilities.find((u) => u.name === 'getRecipesBySkill')
 			expect(getBySkill).toBeDefined()
-			expect(getBySkill?.params).toContainEqual({
+			expect(getBySkill?.parameters).toContainEqual({
 				name: 'skillHrid',
 				type: 'SkillHrid',
 			})
@@ -267,7 +281,7 @@ describe('ModularRecipesGenerator', () => {
 
 			const getByType = utilities.find((u) => u.name === 'getRecipesByType')
 			expect(getByType).toBeDefined()
-			expect(getByType?.params).toContainEqual({
+			expect(getByType?.parameters).toContainEqual({
 				name: 'type',
 				type: 'ActionType',
 			})
@@ -276,7 +290,7 @@ describe('ModularRecipesGenerator', () => {
 				(u) => u.name === 'getRecipesForOutput',
 			)
 			expect(getForOutput).toBeDefined()
-			expect(getForOutput?.params).toContainEqual({
+			expect(getForOutput?.parameters).toContainEqual({
 				name: 'itemHrid',
 				type: 'ItemHrid',
 			})
@@ -321,50 +335,8 @@ describe('ModularRecipesGenerator', () => {
 		})
 	})
 
-	describe('Constants Definitions', () => {
-		it('should define cache-related constants', () => {
-			const constants = generator['defineConstants']()
-
-			const cache = constants.find((c) => c.name === 'RECIPE_TREE_CACHE')
-			expect(cache).toBeDefined()
-			expect(cache?.type).toBe('Map<string, RecipeTreeNode>')
-
-			const cacheStats = constants.find(
-				(c) => c.name === 'RECIPE_TREE_CACHE_STATS',
-			)
-			expect(cacheStats).toBeDefined()
-			expect(cacheStats?.type).toBe('{ hits: number; misses: number }')
-		})
-	})
-
-	describe('Import Definitions', () => {
-		it('should define correct imports from other domains', () => {
-			const imports = generator['defineImports']()
-
-			// Should import from actions
-			const actionsImport = imports.find((i) => i.from === '../actions/types')
-			expect(actionsImport).toBeDefined()
-			expect(actionsImport?.items).toContain('ActionFunction')
-			expect(actionsImport?.items).toContain('ActionType')
-
-			// Should import from items
-			const itemsImport = imports.find((i) => i.from === '../items/types')
-			expect(itemsImport).toBeDefined()
-			expect(itemsImport?.items).toContain('ItemHrid')
-
-			// Should import from skills
-			const skillsImport = imports.find((i) => i.from === '../skills/types')
-			expect(skillsImport).toBeDefined()
-			expect(skillsImport?.items).toContain('SkillHrid')
-
-			// Should import from action-categories
-			const categoriesImport = imports.find(
-				(i) => i.from === '../actioncategories/types',
-			)
-			expect(categoriesImport).toBeDefined()
-			expect(categoriesImport?.items).toContain('ActionCategoryHrid')
-		})
-	})
+	// Note: Constants and imports are handled differently in the modular system
+	// They are added via extendUtilities and extendTypes methods, not through separate define methods
 
 	describe('Recipe Count', () => {
 		it('should extract approximately 618 recipes', () => {
