@@ -29,7 +29,8 @@ async function runCommand(command: string, description?: string): Promise<string
     log.info(description)
   }
   try {
-    const proc = Bun.spawn(command.split(' '), {
+    // Use shell execution to properly handle quoted commands with pipes
+    const proc = Bun.spawn(['sh', '-c', command], {
       stdout: 'pipe',
       stderr: 'pipe',
     })

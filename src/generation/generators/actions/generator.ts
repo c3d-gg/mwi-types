@@ -322,17 +322,6 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 	protected override defineLookups(): LookupDefinition[] {
 		const lookups: LookupDefinition[] = []
 
-		// Import types needed for lookups
-		const lookupsBuilder = this.moduleBuilder.getFile('lookups')
-		lookupsBuilder.addImport(
-			'./types',
-			['ActionHrid', 'ActionType', 'ActionFunction'],
-			true,
-		)
-		lookupsBuilder.addImport('../skills/types', ['SkillHrid'], true)
-		// TODO: Re-add when actioncategories module is migrated
-		// lookupsBuilder.addImport('../actioncategories/types', ['ActionCategoryHrid'], true)
-
 		// Actions by skill
 		const skillLookup: Record<string, readonly string[]> = {}
 		this.actionsBySkill.forEach((actions, skill) => {
@@ -385,6 +374,22 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 		// Note: DUNGEON_ACTION_HRIDS is now in defineConstants() as it's a simple array
 
 		return lookups
+	}
+
+	/**
+	 * Extension hook: Add imports needed for lookup tables
+	 */
+	protected override extendLookups(): void {
+		// Import types needed for lookups
+		const lookupsBuilder = this.moduleBuilder.getFile('lookups')
+		lookupsBuilder.addImport(
+			'./types',
+			['ActionHrid', 'ActionType', 'ActionFunction'],
+			true,
+		)
+		lookupsBuilder.addImport('../skills/types', ['SkillHrid'], true)
+		// TODO: Re-add when actioncategories module is migrated
+		// lookupsBuilder.addImport('../actioncategories/types', ['ActionCategoryHrid'], true)
 	}
 
 	/**
