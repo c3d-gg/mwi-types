@@ -1,15 +1,19 @@
 import { ModularBaseGenerator } from '../../core/generator.base.modular'
-import type { PropertyDefinition } from '../../core/ast-builder'
-import { generateFromTemplates } from '../../core/utility-templates'
-import type { 
-	LevelRequirement, 
-	ExperienceGain, 
-	ActionItem, 
-	SpawnInfo, 
-	RandomSpawnInfo, 
-	DropTable 
+
+import type {
+	ActionItem,
+	DropTable,
+	ExperienceGain,
+	LevelRequirement,
+	RandomSpawnInfo,
+	SpawnInfo,
 } from '../../../generated/sharedtypes/types'
-// Note: All shared types now imported for both local interfaces and generated types
+import type {
+	ConstantDefinition,
+	InterfaceDefinition,
+	LookupDefinition,
+	UtilityDefinition,
+} from '../../core/types'
 
 interface FightInfo {
 	randomSpawnInfo: RandomSpawnInfo
@@ -55,8 +59,17 @@ interface Action {
 }
 
 /**
- * Modular Actions Generator with tree-shaking optimizations
- * Generates separate files for types, data, utils, constants, and lookups
+ * Modular Actions Generator using the hook system
+ *
+ * This generator demonstrates the proper use of hooks instead of overrides,
+ * following the v1.0 architecture principles:
+ * - Uses defineInterfaces() hook for type generation
+ * - Uses defineConstants() hook for custom constants
+ * - Uses defineLookups() hook for lookup tables
+ * - Uses defineUtilities() hook for custom utilities
+ * - Only overrides extractEntities() for data extraction logic
+ *
+ * @see ARCHITECTURE.md for hook system documentation
  */
 export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 	// Collect unique values for lookups
@@ -81,17 +94,24 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 			entityNamePlural: 'Actions',
 			sourceKey: 'actionDetailMap',
 			outputPath: 'src/generated/actions',
-			
+
 			// Feature flags (all true by default, but being explicit)
 			generateHrids: true,
 			generateCollection: true,
 			generateConstants: true,
 			generateUtils: true,
 			generateLookups: true,
-			
+
 			// Import shared types this generator needs
-			sharedTypes: ['LevelRequirement', 'ExperienceGain', 'ActionItem', 'SpawnInfo', 'RandomSpawnInfo', 'DropTable'],
-			
+			sharedTypes: [
+				'LevelRequirement',
+				'ExperienceGain',
+				'ActionItem',
+				'SpawnInfo',
+				'RandomSpawnInfo',
+				'DropTable',
+			],
+
 			// Standard utility templates to include
 			utilityTemplates: [
 				{ type: 'getByField', field: 'category' },
@@ -100,20 +120,41 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 				{ type: 'getAllWith', field: 'combatZoneInfo' },
 				{ type: 'sortBy', field: 'sortIndex' },
 				{ type: 'filterBy' }, // Generic filterActions function
-				{ type: 'toMap' } // Convert Record to Map
+				{ type: 'toMap' }, // Convert Record to Map
 			],
-			
+
 			// Category filters for auto-generating constant arrays
 			categoryFilters: [
-				{ name: 'combat', condition: (action: any) => action.combatZoneInfo !== null },
-				{ name: 'nonCombat', condition: (action: any) => action.combatZoneInfo === null },
-				{ name: 'dungeon', condition: (action: any) => action.combatZoneInfo?.dungeonInfo !== null },
-				{ name: 'production', condition: (action: any) => action.function === "production" },
-				{ name: 'gathering', condition: (action: any) => action.function === "gathering" }
-			]
+				{
+					name: 'combat',
+					condition: (action: any) => action.combatZoneInfo !== null,
+				},
+				{
+					name: 'nonCombat',
+					condition: (action: any) => action.combatZoneInfo === null,
+				},
+				{
+					name: 'dungeon',
+					condition: (action: any) =>
+						action.combatZoneInfo?.dungeonInfo !== null,
+				},
+				{
+					name: 'production',
+					condition: (action: any) =>
+						action.function === '/action_functions/production',
+				},
+				{
+					name: 'gathering',
+					condition: (action: any) =>
+						action.function === '/action_functions/gathering',
+				},
+			],
 		})
 	}
 
+	/**
+	 * Extract entities from source data - this is the only method that should be overridden
+	 */
 	public override extractEntities(sourceData: any): Record<string, Action> {
 		const actions: Record<string, Action> = {}
 		const actionDetailMap = sourceData[this.config.sourceKey] || {}
@@ -133,6 +174,361 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 		return actions
 	}
 
+	/**
+	 * Define interfaces using the hook system
+	 */
+	protected override defineInterfaces(): InterfaceDefinition[] {
+		const interfaces: InterfaceDefinition[] = []
+
+		// Import dependencies - respecting domain boundaries
+		const typesBuilder = this.moduleBuilder.getFile('types')
+
+		// Import types from other domains (DO NOT re-export - domain control)
+		typesBuilder.addImport('../items/types', ['ItemHrid'], true)
+		typesBuilder.addImport('../skills/types', ['SkillHrid'], true)
+		typesBuilder.addImport('../monsters/types', ['MonsterHrid'], true)
+		typesBuilder.addImport(
+			'../actioncategories/types',
+			['ActionCategoryHrid'],
+			true,
+		)
+		typesBuilder.addImport('../bufftypes/types', ['Buff', 'BuffTypeHrid'], true)
+
+		// Generate type constants from collected values
+		this.generateTypeConstants()
+
+		// Define supporting interfaces
+		interfaces.push({
+			name: 'FightInfo',
+			properties: [
+				{ name: 'randomSpawnInfo', type: 'RandomSpawnInfo', optional: false },
+				{ name: 'bossSpawns', type: 'any | null', optional: false },
+				{ name: 'battlesPerBoss', type: 'number', optional: false },
+			],
+		})
+
+		interfaces.push({
+			name: 'DungeonInfo',
+			properties: [
+				{ name: 'keyItemHrid', type: 'ItemHrid | ""', optional: false },
+				{
+					name: 'rewardDropTable',
+					type: 'DropTable[] | null',
+					optional: false,
+				},
+				{ name: 'maxWaves', type: 'number', optional: false },
+				{ name: 'randomSpawnInfoMap', type: 'any | null', optional: false },
+				{ name: 'fixedSpawnsMap', type: 'any | null', optional: false },
+			],
+		})
+
+		interfaces.push({
+			name: 'CombatZoneInfo',
+			properties: [
+				{ name: 'isDungeon', type: 'boolean', optional: false },
+				{ name: 'fightInfo', type: 'FightInfo', optional: false },
+				{ name: 'dungeonInfo', type: 'DungeonInfo', optional: false },
+			],
+		})
+
+		// Main Action interface
+		interfaces.push({
+			name: 'Action',
+			properties: [
+				{ name: 'hrid', type: 'ActionHrid', optional: false },
+				{ name: 'function', type: 'ActionFunction', optional: false },
+				{ name: 'type', type: 'ActionType', optional: false },
+				{ name: 'category', type: 'ActionCategoryHrid', optional: false },
+				{ name: 'name', type: 'string', optional: false },
+				{ name: 'maxDifficulty', type: 'number', optional: false },
+				{
+					name: 'levelRequirement',
+					type: 'LevelRequirement | null',
+					optional: false,
+				},
+				{ name: 'baseTimeCost', type: 'number', optional: false },
+				{
+					name: 'experienceGain',
+					type: 'ExperienceGain | null',
+					optional: false,
+				},
+				{ name: 'dropTable', type: 'DropTable[] | null', optional: false },
+				{
+					name: 'essenceDropTable',
+					type: 'DropTable[] | null',
+					optional: false,
+				},
+				{ name: 'rareDropTable', type: 'DropTable[] | null', optional: false },
+				{
+					name: 'upgradeItemHrid',
+					type: 'ItemHrid | undefined',
+					optional: true,
+				},
+				{
+					name: 'retainAllEnhancement',
+					type: 'boolean | undefined',
+					optional: true,
+				},
+				{ name: 'inputItems', type: 'ActionItem[] | null', optional: false },
+				{ name: 'outputItems', type: 'ActionItem[] | null', optional: false },
+				{
+					name: 'combatZoneInfo',
+					type: 'CombatZoneInfo | null',
+					optional: false,
+				},
+				{ name: 'maxPartySize', type: 'number', optional: false },
+				{ name: 'buffs', type: 'Buff[] | null', optional: false },
+				{ name: 'sortIndex', type: 'number | undefined', optional: true },
+			],
+		})
+
+		return interfaces
+	}
+
+	/**
+	 * Define custom constants using the hook system
+	 */
+	protected override defineConstants(): ConstantDefinition[] {
+		const constants: ConstantDefinition[] = []
+
+		// Add the dungeon actions as a constant array
+		if (this.dungeonActions.length > 0) {
+			constants.push({
+				name: 'DUNGEON_ACTION_HRIDS',
+				value: this.dungeonActions.sort(),
+				asConst: true,
+			})
+		}
+
+		return constants
+	}
+
+	/**
+	 * Define lookup tables using the hook system
+	 */
+	protected override defineLookups(): LookupDefinition[] {
+		const lookups: LookupDefinition[] = []
+
+		// Import types needed for lookups
+		const lookupsBuilder = this.moduleBuilder.getFile('lookups')
+		lookupsBuilder.addImport(
+			'./types',
+			['ActionHrid', 'ActionType', 'ActionFunction'],
+			true,
+		)
+		lookupsBuilder.addImport('../skills/types', ['SkillHrid'], true)
+		lookupsBuilder.addImport(
+			'../actioncategories/types',
+			['ActionCategoryHrid'],
+			true,
+		)
+
+		// Actions by skill
+		const skillLookup: Record<string, readonly string[]> = {}
+		this.actionsBySkill.forEach((actions, skill) => {
+			skillLookup[skill] = actions.sort()
+		})
+		lookups.push({
+			name: 'ACTIONS_BY_SKILL',
+			data: skillLookup,
+			keyType: 'string', // Use string instead of SkillHrid to allow partial record
+			valueType: 'readonly ActionHrid[]',
+			isPartial: true,
+		})
+
+		// Actions by category
+		const categoryLookup: Record<string, readonly string[]> = {}
+		this.actionsByCategory.forEach((actions, category) => {
+			categoryLookup[category] = actions.sort()
+		})
+		lookups.push({
+			name: 'ACTIONS_BY_CATEGORY',
+			data: categoryLookup,
+			keyType: 'ActionCategoryHrid',
+			valueType: 'readonly ActionHrid[]',
+		})
+
+		// Actions by type
+		const typeLookup: Record<string, readonly string[]> = {}
+		this.actionsByType.forEach((actions, type) => {
+			typeLookup[type] = actions.sort()
+		})
+		lookups.push({
+			name: 'ACTIONS_BY_TYPE',
+			data: typeLookup,
+			keyType: 'ActionType',
+			valueType: 'readonly ActionHrid[]',
+		})
+
+		// Actions by function
+		const functionLookup: Record<string, readonly string[]> = {}
+		this.actionsByFunction.forEach((actions, func) => {
+			functionLookup[func] = actions.sort()
+		})
+		lookups.push({
+			name: 'ACTIONS_BY_FUNCTION',
+			data: functionLookup,
+			keyType: 'ActionFunction',
+			valueType: 'readonly ActionHrid[]',
+		})
+
+		// Note: DUNGEON_ACTION_HRIDS is now in defineConstants() as it's a simple array
+
+		return lookups
+	}
+
+	/**
+	 * Define custom utility functions using the hook system
+	 */
+	protected override defineUtilities(): UtilityDefinition[] {
+		const utilities: UtilityDefinition[] = []
+
+		// Add action-specific utilities
+		utilities.push({
+			name: 'getActionsBySkill',
+			parameters: [{ name: 'skillHrid', type: 'SkillHrid' }],
+			returnType: 'Action[]',
+			implementation: (writer) => {
+				writer.writeLine('const hrids = ACTIONS_BY_SKILL[skillHrid] || []')
+				writer.writeLine('return hrids.map(hrid => requireAction(hrid))')
+			},
+			imports: [
+				{ from: './lookups', names: ['ACTIONS_BY_SKILL'] },
+				{ from: './utils', names: ['requireAction'] },
+				{ from: './types', names: ['Action'], isType: true },
+				{ from: '../skills/types', names: ['SkillHrid'], isType: true },
+			],
+			jsDoc: {
+				description: 'Gets all actions that require a specific skill.',
+				params: [
+					{ name: 'skillHrid', description: 'The skill HRID to filter by' },
+				],
+				returns: 'Array of actions requiring the specified skill',
+				examples: [`const miningActions = getActionsBySkill('/skills/mining')`],
+			},
+		})
+
+		utilities.push({
+			name: 'isCombatAction',
+			parameters: [{ name: 'action', type: 'Action' }],
+			returnType: 'boolean',
+			implementation: (writer) => {
+				writer.writeLine('return action.combatZoneInfo !== null')
+			},
+			imports: [{ from: './types', names: ['Action'], isType: true }],
+			jsDoc: {
+				description: 'Checks if an action is a combat action.',
+				params: [{ name: 'action', description: 'The action to check' }],
+				returns: 'true if the action is a combat action, false otherwise',
+			},
+		})
+
+		utilities.push({
+			name: 'isDungeonAction',
+			parameters: [{ name: 'action', type: 'Action' }],
+			returnType: 'boolean',
+			implementation: (writer) => {
+				writer.writeLine('return action.combatZoneInfo?.isDungeon === true')
+			},
+			imports: [{ from: './types', names: ['Action'], isType: true }],
+			jsDoc: {
+				description: 'Checks if an action is a dungeon action.',
+				params: [{ name: 'action', description: 'The action to check' }],
+				returns: 'true if the action is a dungeon, false otherwise',
+			},
+		})
+
+		utilities.push({
+			name: 'isProductionAction',
+			parameters: [{ name: 'action', type: 'Action' }],
+			returnType: 'boolean',
+			implementation: (writer) => {
+				writer.writeLine(
+					"return action.function === '/action_functions/production'",
+				)
+			},
+			imports: [{ from: './types', names: ['Action'], isType: true }],
+			jsDoc: {
+				description: 'Checks if an action is a production action.',
+				params: [{ name: 'action', description: 'The action to check' }],
+				returns: 'true if the action is a production action, false otherwise',
+			},
+		})
+
+		utilities.push({
+			name: 'isGatheringAction',
+			parameters: [{ name: 'action', type: 'Action' }],
+			returnType: 'boolean',
+			implementation: (writer) => {
+				writer.writeLine(
+					"return action.function === '/action_functions/gathering'",
+				)
+			},
+			imports: [{ from: './types', names: ['Action'], isType: true }],
+			jsDoc: {
+				description: 'Checks if an action is a gathering action.',
+				params: [{ name: 'action', description: 'The action to check' }],
+				returns: 'true if the action is a gathering action, false otherwise',
+			},
+		})
+
+		utilities.push({
+			name: 'getActionSortedByLevel',
+			parameters: [],
+			returnType: 'Action[]',
+			implementation: (writer) => {
+				writer.writeLine('return getAllActions().sort((a, b) => {')
+				writer.writeLine('  const aLevel = a.levelRequirement?.level || 0')
+				writer.writeLine('  const bLevel = b.levelRequirement?.level || 0')
+				writer.writeLine('  return aLevel - bLevel')
+				writer.writeLine('})')
+			},
+			imports: [
+				{ from: './utils', names: ['getAllActions'] },
+				{ from: './types', names: ['Action'], isType: true },
+			],
+			jsDoc: {
+				description: 'Gets all actions sorted by their level requirement.',
+				returns: 'Array of actions sorted by level requirement (ascending)',
+			},
+		})
+
+		return utilities
+	}
+
+	// Helper method to generate type constants (called from defineInterfaces)
+	private generateTypeConstants(): void {
+		const typesBuilder = this.moduleBuilder.getFile('types')
+
+		// Action Functions
+		const functions = Array.from(this.actionFunctions).sort()
+		typesBuilder.addConstArray('ACTION_FUNCTIONS', functions, true)
+		typesBuilder.addType('ActionFunction', 'typeof ACTION_FUNCTIONS[number]')
+
+		// Action Types
+		const types = Array.from(this.actionTypes).sort()
+		typesBuilder.addConstArray('ACTION_TYPES', types, true)
+		typesBuilder.addType('ActionType', 'typeof ACTION_TYPES[number]')
+
+		// Export these for external use
+		this.moduleBuilder.addExport({
+			name: 'ACTION_FUNCTIONS',
+			source: './types',
+		})
+		this.moduleBuilder.addExport({ name: 'ACTION_TYPES', source: './types' })
+		this.moduleBuilder.addExport({
+			name: 'ActionFunction',
+			source: './types',
+			isType: true,
+		})
+		this.moduleBuilder.addExport({
+			name: 'ActionType',
+			source: './types',
+			isType: true,
+		})
+	}
+
+	// Data extraction methods (unchanged)
 	private extractAction(hrid: string, data: any): Action {
 		return {
 			hrid,
@@ -140,21 +536,34 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 			type: data.type || '',
 			category: data.category || '',
 			name: data.name || '',
-			maxDifficulty: typeof data.maxDifficulty === 'number' ? data.maxDifficulty : 0,
+			maxDifficulty:
+				typeof data.maxDifficulty === 'number' ? data.maxDifficulty : 0,
 			levelRequirement: this.extractLevelRequirement(data.levelRequirement),
-			baseTimeCost: typeof data.baseTimeCost === 'number' ? data.baseTimeCost : 0,
+			baseTimeCost:
+				typeof data.baseTimeCost === 'number' ? data.baseTimeCost : 0,
 			experienceGain: this.extractExperienceGain(data.experienceGain),
 			dropTable: this.extractDropTable(data.dropTable),
 			essenceDropTable: this.extractDropTable(data.essenceDropTable),
 			rareDropTable: this.extractDropTable(data.rareDropTable),
-			upgradeItemHrid: data.upgradeItemHrid && data.upgradeItemHrid !== '' ? data.upgradeItemHrid : undefined,
-			retainAllEnhancement: data.retainAllEnhancement === true ? true : undefined,
+			upgradeItemHrid:
+				data.upgradeItemHrid && data.upgradeItemHrid !== ''
+					? data.upgradeItemHrid
+					: undefined,
+			retainAllEnhancement:
+				data.retainAllEnhancement === true ? true : undefined,
 			inputItems: this.extractActionItems(data.inputItems),
 			outputItems: this.extractActionItems(data.outputItems),
 			combatZoneInfo: this.extractCombatZoneInfo(data.combatZoneInfo),
-			maxPartySize: typeof data.maxPartySize === 'number' ? data.maxPartySize : 0,
-			buffs: data.buffs && Array.isArray(data.buffs) && data.buffs.length > 0 ? data.buffs : null,
-			sortIndex: typeof data.sortIndex === 'number' && data.sortIndex > 0 ? data.sortIndex : undefined,
+			maxPartySize:
+				typeof data.maxPartySize === 'number' ? data.maxPartySize : 0,
+			buffs:
+				data.buffs && Array.isArray(data.buffs) && data.buffs.length > 0
+					? data.buffs
+					: null,
+			sortIndex:
+				typeof data.sortIndex === 'number' && data.sortIndex > 0
+					? data.sortIndex
+					: undefined,
 		}
 	}
 
@@ -167,7 +576,8 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 	}
 
 	private extractExperienceGain(exp: any): ExperienceGain | null {
-		if (!exp || !exp.skillHrid || exp.skillHrid === '' || exp.value === 0) return null
+		if (!exp || !exp.skillHrid || exp.skillHrid === '' || exp.value === 0)
+			return null
 		return {
 			skillHrid: exp.skillHrid,
 			value: typeof exp.value === 'number' ? exp.value : 0,
@@ -185,7 +595,8 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 	}
 
 	private extractDropTable(dropTable: any): DropTable[] | null {
-		if (!dropTable || !Array.isArray(dropTable) || dropTable.length === 0) return null
+		if (!dropTable || !Array.isArray(dropTable) || dropTable.length === 0)
+			return null
 		return dropTable.map((drop: any) => ({
 			itemHrid: drop.itemHrid || '',
 			dropRate: typeof drop.dropRate === 'number' ? drop.dropRate : 0,
@@ -198,36 +609,49 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 		if (!zoneInfo) return null
 
 		const spawns: SpawnInfo[] = []
-		if (zoneInfo.fightInfo?.randomSpawnInfo?.spawns && Array.isArray(zoneInfo.fightInfo.randomSpawnInfo.spawns)) {
+		if (zoneInfo.fightInfo?.randomSpawnInfo?.spawns) {
 			for (const spawn of zoneInfo.fightInfo.randomSpawnInfo.spawns) {
 				spawns.push({
-					combatMonsterHrid: spawn.combatMonsterHrid || '',
-					difficultyTier: typeof spawn.difficultyTier === 'number' ? spawn.difficultyTier : 0,
+					combatMonsterHrid: spawn.monsterHrid || spawn.combatMonsterHrid || '',
+					difficultyTier:
+						typeof spawn.difficultyTier === 'number' ? spawn.difficultyTier : 0,
 					rate: typeof spawn.rate === 'number' ? spawn.rate : 0,
 					strength: typeof spawn.strength === 'number' ? spawn.strength : 0,
 				})
 			}
 		}
 
+		const randomSpawnInfo: RandomSpawnInfo = {
+			maxSpawnCount:
+				zoneInfo.fightInfo?.randomSpawnInfo?.maxCount ||
+				zoneInfo.fightInfo?.randomSpawnInfo?.maxSpawnCount ||
+				0,
+			maxTotalStrength:
+				zoneInfo.fightInfo?.randomSpawnInfo?.maxStrength ||
+				zoneInfo.fightInfo?.randomSpawnInfo?.maxTotalStrength ||
+				0,
+			spawns,
+		}
+
 		return {
 			isDungeon: zoneInfo.isDungeon === true,
 			fightInfo: {
-				randomSpawnInfo: {
-					maxSpawnCount: typeof zoneInfo.fightInfo?.randomSpawnInfo?.maxSpawnCount === 'number' 
-						? zoneInfo.fightInfo.randomSpawnInfo.maxSpawnCount : 0,
-					maxTotalStrength: typeof zoneInfo.fightInfo?.randomSpawnInfo?.maxTotalStrength === 'number'
-						? zoneInfo.fightInfo.randomSpawnInfo.maxTotalStrength : 0,
-					spawns: spawns, // Always an array, never null
-				},
+				randomSpawnInfo,
 				bossSpawns: zoneInfo.fightInfo?.bossSpawns || null,
-				battlesPerBoss: typeof zoneInfo.fightInfo?.battlesPerBoss === 'number' 
-					? zoneInfo.fightInfo.battlesPerBoss : 0,
+				battlesPerBoss:
+					typeof zoneInfo.fightInfo?.battlesPerBoss === 'number'
+						? zoneInfo.fightInfo.battlesPerBoss
+						: 0,
 			},
 			dungeonInfo: {
-				keyItemHrid: (zoneInfo.dungeonInfo?.keyItemHrid || '') as any,
-				rewardDropTable: this.extractDropTable(zoneInfo.dungeonInfo?.rewardDropTable),
-				maxWaves: typeof zoneInfo.dungeonInfo?.maxWaves === 'number' 
-					? zoneInfo.dungeonInfo.maxWaves : 0,
+				keyItemHrid: zoneInfo.dungeonInfo?.keyItemHrid || '',
+				rewardDropTable: this.extractDropTable(
+					zoneInfo.dungeonInfo?.rewardDropTable,
+				),
+				maxWaves:
+					typeof zoneInfo.dungeonInfo?.maxWaves === 'number'
+						? zoneInfo.dungeonInfo.maxWaves
+						: 0,
 				randomSpawnInfoMap: zoneInfo.dungeonInfo?.randomSpawnInfoMap || null,
 				fixedSpawnsMap: zoneInfo.dungeonInfo?.fixedSpawnsMap || null,
 			},
@@ -235,8 +659,8 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 	}
 
 	private collectForLookups(action: Action): void {
-		// By skill (if has level requirement)
-		if (action.levelRequirement) {
+		// By skill (from level requirement)
+		if (action.levelRequirement?.skillHrid) {
 			const skill = action.levelRequirement.skillHrid
 			if (!this.actionsBySkill.has(skill)) {
 				this.actionsBySkill.set(skill, [])
@@ -274,7 +698,7 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 		// Combat vs non-combat
 		if (action.combatZoneInfo) {
 			this.combatActions.push(action.hrid)
-			
+
 			// Dungeon actions
 			if (action.combatZoneInfo.isDungeon) {
 				this.dungeonActions.push(action.hrid)
@@ -293,528 +717,10 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 			this.gatheringActions.push(action.hrid)
 		}
 	}
+}
 
-	public override generateTypes(entities: Record<string, Action>): void {
-		// Import dependencies - respecting domain boundaries 
-		const typesBuilder = this.moduleBuilder.getFile('types')
-		
-		// Import types from other domains (DO NOT re-export - domain control)
-		typesBuilder.addImport('../items/types', ['ItemHrid'], true)
-		typesBuilder.addImport('../skills/types', ['SkillHrid'], true)
-		typesBuilder.addImport('../monsters/types', ['MonsterHrid'], true)
-		typesBuilder.addImport('../actioncategories/types', ['ActionCategoryHrid'], true)
-		typesBuilder.addImport('../bufftypes/types', ['Buff', 'BuffTypeHrid'], true)
-
-		// Import shared types (configured in constructor)
-		if (this.config.sharedTypes?.length) {
-			typesBuilder.addImport('../sharedtypes/types', this.config.sharedTypes, true)
-		}
-
-		// Generate type constants from collected values
-		this.generateTypeConstants()
-
-		this.moduleBuilder.addInterface('FightInfo', [
-			{ name: 'randomSpawnInfo', type: 'RandomSpawnInfo', optional: false },
-			{ name: 'bossSpawns', type: 'any | null', optional: false },
-			{ name: 'battlesPerBoss', type: 'number', optional: false },
-		])
-
-		this.moduleBuilder.addInterface('DungeonInfo', [
-			{ name: 'keyItemHrid', type: 'ItemHrid | ""', optional: false },
-			{ name: 'rewardDropTable', type: 'DropTable[] | null', optional: false },
-			{ name: 'maxWaves', type: 'number', optional: false },
-			{ name: 'randomSpawnInfoMap', type: 'any | null', optional: false },
-			{ name: 'fixedSpawnsMap', type: 'any | null', optional: false },
-		])
-
-		this.moduleBuilder.addInterface('CombatZoneInfo', [
-			{ name: 'isDungeon', type: 'boolean', optional: false },
-			{ name: 'fightInfo', type: 'FightInfo', optional: false },
-			{ name: 'dungeonInfo', type: 'DungeonInfo', optional: false },
-		])
-
-		// Main Action interface
-		const actionProps: PropertyDefinition[] = [
-			{ name: 'hrid', type: 'ActionHrid', optional: false },
-			{ name: 'function', type: 'ActionFunction', optional: false },
-			{ name: 'type', type: 'ActionType', optional: false },
-			{ name: 'category', type: 'ActionCategoryHrid', optional: false },
-			{ name: 'name', type: 'string', optional: false },
-			{ name: 'maxDifficulty', type: 'number', optional: false },
-			{ name: 'levelRequirement', type: 'LevelRequirement | null', optional: false },
-			{ name: 'baseTimeCost', type: 'number', optional: false },
-			{ name: 'experienceGain', type: 'ExperienceGain | null', optional: false },
-			{ name: 'dropTable', type: 'DropTable[] | null', optional: false },
-			{ name: 'essenceDropTable', type: 'DropTable[] | null', optional: false },
-			{ name: 'rareDropTable', type: 'DropTable[] | null', optional: false },
-			{ name: 'upgradeItemHrid', type: 'ItemHrid | undefined', optional: true },
-			{ name: 'retainAllEnhancement', type: 'boolean | undefined', optional: true },
-			{ name: 'inputItems', type: 'ActionItem[] | null', optional: false },
-			{ name: 'outputItems', type: 'ActionItem[] | null', optional: false },
-			{ name: 'combatZoneInfo', type: 'CombatZoneInfo | null', optional: false },
-			{ name: 'maxPartySize', type: 'number', optional: false },
-			{ name: 'buffs', type: 'Buff[] | null', optional: false },
-			{ name: 'sortIndex', type: 'number | undefined', optional: true },
-		]
-		this.moduleBuilder.addInterface('Action', actionProps)
-	}
-
-	private generateTypeConstants(): void {
-		const typesBuilder = this.moduleBuilder.getFile('types')
-
-		// Action Functions
-		const functions = Array.from(this.actionFunctions).sort()
-		typesBuilder.addConstArray('ACTION_FUNCTIONS', functions, true)
-		typesBuilder.addType('ActionFunction', 'typeof ACTION_FUNCTIONS[number]')
-
-		// Action Types
-		const types = Array.from(this.actionTypes).sort()
-		typesBuilder.addConstArray('ACTION_TYPES', types, true)
-		typesBuilder.addType('ActionType', 'typeof ACTION_TYPES[number]')
-
-		// Export these for external use
-		this.moduleBuilder.addExport({ name: 'ACTION_FUNCTIONS', source: './types' })
-		this.moduleBuilder.addExport({ name: 'ACTION_TYPES', source: './types' })
-		this.moduleBuilder.addExport({ name: 'ActionFunction', source: './types', isType: true })
-		this.moduleBuilder.addExport({ name: 'ActionType', source: './types', isType: true })
-	}
-
-	public override generateLookups(entities: Record<string, Action>): void {
-		const lookupsBuilder = this.moduleBuilder.getFile('lookups')
-		// Import local types from types.ts
-		lookupsBuilder.addImport('./types', ['ActionHrid', 'ActionType', 'ActionFunction'], true)
-		// Import foreign types from their source modules
-		lookupsBuilder.addImport('../skills/types', ['SkillHrid'], true)
-		lookupsBuilder.addImport('../actioncategories/types', ['ActionCategoryHrid'], true)
-
-		// Actions by skill
-		const skillLookup: Record<string, readonly string[]> = {}
-		this.actionsBySkill.forEach((actions, skill) => {
-			skillLookup[skill] = actions.sort()
-		})
-		// Note: Only add skills that have actions
-		this.moduleBuilder.addStaticLookup(
-			'ACTIONS_BY_SKILL',
-			skillLookup,
-			'string', // Use string instead of SkillHrid to allow partial record
-			'readonly ActionHrid[]'
-		)
-
-		// Actions by category
-		const categoryLookup: Record<string, readonly string[]> = {}
-		this.actionsByCategory.forEach((actions, category) => {
-			categoryLookup[category] = actions.sort()
-		})
-		this.moduleBuilder.addStaticLookup(
-			'ACTIONS_BY_CATEGORY',
-			categoryLookup,
-			'string', // Use string to avoid auto-import since ActionCategoryHrid is external
-			'readonly ActionHrid[]'
-		)
-
-		// Actions by type
-		const typeLookup: Record<string, readonly string[]> = {}
-		this.actionsByType.forEach((actions, type) => {
-			typeLookup[type] = actions.sort()
-		})
-		this.moduleBuilder.addStaticLookup(
-			'ACTIONS_BY_TYPE',
-			typeLookup,
-			'ActionType',
-			'readonly ActionHrid[]'
-		)
-
-		// Actions by function
-		const functionLookup: Record<string, readonly string[]> = {}
-		this.actionsByFunction.forEach((actions, func) => {
-			functionLookup[func] = actions.sort()
-		})
-		this.moduleBuilder.addStaticLookup(
-			'ACTIONS_BY_FUNCTION',
-			functionLookup,
-			'ActionFunction',
-			'readonly ActionHrid[]'
-		)
-
-		// Combat actions
-		lookupsBuilder.addConstArray('COMBAT_ACTION_HRIDS', this.combatActions.sort(), true)
-		this.moduleBuilder.addExport({ name: 'COMBAT_ACTION_HRIDS', source: './lookups' })
-
-		// Non-combat actions
-		lookupsBuilder.addConstArray('NON_COMBAT_ACTION_HRIDS', this.nonCombatActions.sort(), true)
-		this.moduleBuilder.addExport({ name: 'NON_COMBAT_ACTION_HRIDS', source: './lookups' })
-
-		// Dungeon actions
-		lookupsBuilder.addConstArray('DUNGEON_ACTION_HRIDS', this.dungeonActions.sort(), true)
-		this.moduleBuilder.addExport({ name: 'DUNGEON_ACTION_HRIDS', source: './lookups' })
-
-		// Production actions
-		lookupsBuilder.addConstArray('PRODUCTION_ACTION_HRIDS', this.productionActions.sort(), true)
-		this.moduleBuilder.addExport({ name: 'PRODUCTION_ACTION_HRIDS', source: './lookups' })
-
-		// Gathering actions
-		lookupsBuilder.addConstArray('GATHERING_ACTION_HRIDS', this.gatheringActions.sort(), true)
-		this.moduleBuilder.addExport({ name: 'GATHERING_ACTION_HRIDS', source: './lookups' })
-	}
-
-	public override generateUtilities(entities: Record<string, Action>): void {
-		// Call base utilities first (generates basic CRUD and Record/Map functions)
-		super.generateUtilities(entities)
-
-		// Generate utilities from templates (configured in constructor)
-		if (this.config.utilityTemplates?.length) {
-			const templateUtilities = generateFromTemplates(
-				this.config.utilityTemplates,
-				this.config.entityName,
-				this.config.entityNamePlural
-			)
-			
-			// Add each template-generated utility
-			templateUtilities.forEach(utility => {
-				this.moduleBuilder.addUtilityFunction(
-					utility.name,
-					utility.parameters,
-					utility.returnType,
-					utility.implementation,
-					utility.imports,
-					utility.jsDoc
-				)
-			})
-		}
-
-		// Get actions by skill
-		this.moduleBuilder.addUtilityFunction(
-			'getActionsBySkill',
-			[{ name: 'skillHrid', type: 'SkillHrid' }],
-			'Action[]',
-			(writer) => {
-				writer.writeLine('const actionHrids = ACTIONS_BY_SKILL[skillHrid] || []')
-				writer.writeLine('return actionHrids.map(hrid => getAction(hrid)).filter(Boolean) as Action[]')
-			},
-			[
-				{ from: './lookups', names: ['ACTIONS_BY_SKILL'] },
-				{ from: './types', names: ['Action'], isType: true },
-				{ from: '../skills/types', names: ['SkillHrid'], isType: true },
-			],
-			{
-				description: 'Gets all actions that belong to a specific skill.',
-				params: [{ name: 'skillHrid', description: 'The skill HRID to filter actions by' }],
-				returns: 'Array of actions for the specified skill',
-				examples: [
-					`\nconst miningActions = getActionsBySkill('/skills/mining')\nconsole.log(\`Found \${miningActions.length} mining actions\`)`
-				]
-			}
-		)
-
-		// Get actions by category
-		this.moduleBuilder.addUtilityFunction(
-			'getActionsByCategory',
-			[{ name: 'categoryHrid', type: 'ActionCategoryHrid' }],
-			'Action[]',
-			(writer) => {
-				writer.writeLine('const actionHrids = ACTIONS_BY_CATEGORY[categoryHrid] || []')
-				writer.writeLine('return actionHrids.map(hrid => getAction(hrid)).filter(Boolean) as Action[]')
-			},
-			[
-				{ from: './lookups', names: ['ACTIONS_BY_CATEGORY'] },
-				{ from: './types', names: ['Action'], isType: true },
-				{ from: '../actioncategories/types', names: ['ActionCategoryHrid'], isType: true },
-			],
-			{
-				description: 'Gets all actions that belong to a specific category.',
-				params: [{ name: 'categoryHrid', description: 'The action category HRID to filter by' }],
-				returns: 'Array of actions in the specified category',
-				examples: [
-					`\nconst combatActions = getActionsByCategory('/action_categories/combat')\ncombatActions.forEach(action => console.log(action.name))`
-				]
-			}
-		)
-
-		// Get actions by type
-		this.moduleBuilder.addUtilityFunction(
-			'getActionsByType',
-			[{ name: 'type', type: 'ActionType' }],
-			'Action[]',
-			(writer) => {
-				writer.writeLine('const actionHrids = ACTIONS_BY_TYPE[type] || []')
-				writer.writeLine('return actionHrids.map(hrid => getAction(hrid)).filter(Boolean) as Action[]')
-			},
-			[
-				{ from: './lookups', names: ['ACTIONS_BY_TYPE'] },
-				{ from: './types', names: ['Action', 'ActionType'], isType: true },
-			],
-			{
-				description: 'Gets all actions of a specific type.',
-				params: [{ name: 'type', description: 'The action type to filter by' }],
-				returns: 'Array of actions of the specified type',
-				examples: [
-					`\nconst gatheringActions = getActionsByType('/action_types/gathering')\nconsole.log(\`Found \${gatheringActions.length} gathering actions\`)`
-				]
-			}
-		)
-
-		// Get combat actions
-		this.moduleBuilder.addUtilityFunction(
-			'getCombatActions',
-			[],
-			'Action[]',
-			(writer) => {
-				writer.writeLine('return COMBAT_ACTION_HRIDS.map(hrid => getAction(hrid)).filter(Boolean) as Action[]')
-			},
-			[
-				{ from: './lookups', names: ['COMBAT_ACTION_HRIDS'] },
-				{ from: './types', names: ['Action'], isType: true },
-			],
-			{
-				description: 'Gets all combat-related actions (actions with combat zone info).',
-				returns: 'Array of all combat actions',
-				examples: [
-					`\nconst combatActions = getCombatActions()\nconst bossCombat = combatActions.filter(a => a.combatZoneInfo?.fightInfo.bossSpawns)`
-				]
-			}
-		)
-
-		// Get non-combat actions
-		this.moduleBuilder.addUtilityFunction(
-			'getNonCombatActions',
-			[],
-			'Action[]',
-			(writer) => {
-				writer.writeLine('return NON_COMBAT_ACTION_HRIDS.map(hrid => getAction(hrid)).filter(Boolean) as Action[]')
-			},
-			[
-				{ from: './lookups', names: ['NON_COMBAT_ACTION_HRIDS'] },
-				{ from: './types', names: ['Action'], isType: true },
-			],
-			{
-				description: 'Gets all non-combat actions (gathering, production, etc).',
-				returns: 'Array of all non-combat actions',
-				examples: [
-					`\nconst peacefulActions = getNonCombatActions()\nconst gatheringOnly = peacefulActions.filter(isGatheringAction)`
-				]
-			}
-		)
-
-		// Get dungeon actions
-		this.moduleBuilder.addUtilityFunction(
-			'getDungeonActions',
-			[],
-			'Action[]',
-			(writer) => {
-				writer.writeLine('return DUNGEON_ACTION_HRIDS.map(hrid => getAction(hrid)).filter(Boolean) as Action[]')
-			},
-			[
-				{ from: './lookups', names: ['DUNGEON_ACTION_HRIDS'] },
-				{ from: './types', names: ['Action'], isType: true },
-			],
-			{
-				description: 'Gets all dungeon-specific combat actions.',
-				returns: 'Array of all dungeon actions',
-				examples: [
-					`\nconst dungeons = getDungeonActions()\ndungeons.forEach(d => {\n  console.log(\`Dungeon: \${d.name}, Key: \${d.combatZoneInfo?.dungeonInfo.keyItemHrid}\`)\n})`
-				]
-			}
-		)
-
-		// Get actions by level
-		this.moduleBuilder.addUtilityFunction(
-			'getActionsByLevel',
-			[{ name: 'skillHrid', type: 'SkillHrid' }, { name: 'level', type: 'number' }],
-			'Action[]',
-			(writer) => {
-				writer.writeLine('const skillActions = getActionsBySkill(skillHrid)')
-				writer.writeLine('return skillActions.filter(action => ')
-				writer.writeLine('  action.levelRequirement && action.levelRequirement.level <= level')
-				writer.writeLine(')')
-			},
-			[
-				{ from: './types', names: ['Action'], isType: true },
-				{ from: '../skills/types', names: ['SkillHrid'], isType: true },
-			],
-			{
-				description: 'Gets all actions for a skill that are available at or below a specific level.',
-				params: [
-					{ name: 'skillHrid', description: 'The skill to get actions for' },
-					{ name: 'level', description: 'The maximum level requirement' }
-				],
-				returns: 'Array of actions available at the specified level',
-				examples: [
-					`\nconst availableActions = getActionsByLevel('/skills/mining', 10)\nconsole.log(\`Player can perform \${availableActions.length} mining actions\`)`
-				]
-			}
-		)
-
-		// Get actions by function
-		this.moduleBuilder.addUtilityFunction(
-			'getActionsByFunction',
-			[{ name: 'func', type: 'ActionFunction' }],
-			'Action[]',
-			(writer) => {
-				writer.writeLine('const actionHrids = ACTIONS_BY_FUNCTION[func] || []')
-				writer.writeLine('return actionHrids.map(hrid => getAction(hrid)).filter(Boolean) as Action[]')
-			},
-			[
-				{ from: './lookups', names: ['ACTIONS_BY_FUNCTION'] },
-				{ from: './types', names: ['Action', 'ActionFunction'], isType: true },
-			],
-			{
-				description: 'Gets all actions with a specific function type.',
-				params: [{ name: 'func', description: 'The action function to filter by' }],
-				returns: 'Array of actions with the specified function',
-				examples: [
-					`\nconst productionActions = getActionsByFunction('/action_functions/production')\nconsole.log(\`Found \${productionActions.length} production actions\`)`
-				]
-			}
-		)
-
-		// Check if action is production type
-		this.moduleBuilder.addUtilityFunction(
-			'isProductionAction',
-			[{ name: 'action', type: 'Action' }],
-			'boolean',
-			(writer) => {
-				writer.writeLine('return action.function === "/action_functions/production"')
-			},
-			[{ from: './types', names: ['Action'], isType: true }],
-			{
-				description: 'Checks if an action is a production action (crafting, smithing, etc).',
-				params: [{ name: 'action', description: 'The action to check' }],
-				returns: 'true if the action is a production action, false otherwise',
-				examples: [
-					`\nconst action = getAction('/actions/smelt_bronze_bar')\nif (isProductionAction(action)) {\n  console.log('This is a production action')\n}`
-				]
-			}
-		)
-
-		// Check if action is combat type
-		this.moduleBuilder.addUtilityFunction(
-			'isCombatAction',
-			[{ name: 'action', type: 'Action' }],
-			'boolean',
-			(writer) => {
-				writer.writeLine('return action.combatZoneInfo !== null')
-			},
-			[{ from: './types', names: ['Action'], isType: true }],
-			{
-				description: 'Checks if an action is a combat action (has combat zone info).',
-				params: [{ name: 'action', description: 'The action to check' }],
-				returns: 'true if the action is a combat action, false otherwise',
-				examples: [
-					`\nconst action = getAction('/actions/fight_goblin')\nif (isCombatAction(action)) {\n  console.log('Combat zone:', action.combatZoneInfo)\n}`
-				]
-			}
-		)
-
-		// Check if action is gathering type
-		this.moduleBuilder.addUtilityFunction(
-			'isGatheringAction',
-			[{ name: 'action', type: 'Action' }],
-			'boolean',
-			(writer) => {
-				writer.writeLine('return action.function === "/action_functions/gathering"')
-			},
-			[{ from: './types', names: ['Action'], isType: true }],
-			{
-				description: 'Checks if an action is a gathering action (mining, foraging, etc).',
-				params: [{ name: 'action', description: 'The action to check' }],
-				returns: 'true if the action is a gathering action, false otherwise',
-				examples: [
-					`\nconst action = getAction('/actions/mine_copper')\nif (isGatheringAction(action)) {\n  console.log('This is a gathering action')\n}`
-				]
-			}
-		)
-
-		// Check action requirements against player skills
-		this.moduleBuilder.addUtilityFunction(
-			'meetsActionRequirements',
-			[{ name: 'action', type: 'Action' }, { name: 'playerSkills', type: 'Record<string, number>' }],
-			'boolean',
-			(writer) => {
-				writer.writeLine('if (!action.levelRequirement) return true')
-				writer.writeLine('const requiredLevel = action.levelRequirement.level')
-				writer.writeLine('const playerLevel = playerSkills[action.levelRequirement.skillHrid] || 0')
-				writer.writeLine('return playerLevel >= requiredLevel')
-			},
-			[{ from: './types', names: ['Action'], isType: true }],
-			{
-				description: 'Checks if a player meets the skill level requirements for an action.',
-				params: [
-					{ name: 'action', description: 'The action to check requirements for' },
-					{ name: 'playerSkills', description: 'Record of player skill HRIDs to their levels' }
-				],
-				returns: 'true if the player meets the requirements, false otherwise',
-				examples: [
-					`\nconst playerSkills = { '/skills/mining': 15, '/skills/smithing': 10 }\nconst action = getAction('/actions/mine_iron')\nif (meetsActionRequirements(action, playerSkills)) {\n  console.log('Player can perform this action')\n}`
-				]
-			}
-		)
-
-		// Check if player has required items for action
-		this.moduleBuilder.addUtilityFunction(
-			'hasRequiredItems',
-			[{ name: 'action', type: 'Action' }, { name: 'inventory', type: 'Record<string, number>' }],
-			'boolean',
-			(writer) => {
-				writer.writeLine('if (!action.inputItems) return true')
-				writer.writeLine('return action.inputItems.every(item => {')
-				writer.writeLine('  const inventoryCount = inventory[item.itemHrid] || 0')
-				writer.writeLine('  return inventoryCount >= item.count')
-				writer.writeLine('})')
-			},
-			[{ from: './types', names: ['Action'], isType: true }],
-			{
-				description: 'Checks if a player has all the required input items for an action.',
-				params: [
-					{ name: 'action', description: 'The action to check item requirements for' },
-					{ name: 'inventory', description: 'Record of item HRIDs to their quantities in inventory' }
-				],
-				returns: 'true if the player has all required items, false otherwise',
-				examples: [
-					`\nconst inventory = { '/items/copper_ore': 5, '/items/coal': 3 }\nconst action = getAction('/actions/smelt_bronze_bar')\nif (hasRequiredItems(action, inventory)) {\n  console.log('Player has all required materials')\n}`
-				]
-			}
-		)
-
-		// Get all production actions
-		this.moduleBuilder.addUtilityFunction(
-			'getProductionActions',
-			[],
-			'Action[]',
-			(writer) => {
-				writer.writeLine('return PRODUCTION_ACTION_HRIDS.map(hrid => getAction(hrid)).filter(Boolean) as Action[]')
-			},
-			[
-				{ from: './lookups', names: ['PRODUCTION_ACTION_HRIDS'] },
-				{ from: './types', names: ['Action'], isType: true }
-			],
-			{
-				description: 'Gets all production actions (crafting, smithing, cooking, etc).',
-				returns: 'Array of all production actions',
-				examples: [
-					`\nconst productionActions = getProductionActions()\nconst recipesWithOutput = productionActions.filter(a => a.outputItems !== null)`
-				]
-			}
-		)
-
-		// Get all gathering actions
-		this.moduleBuilder.addUtilityFunction(
-			'getGatheringActions',
-			[],
-			'Action[]',
-			(writer) => {
-				writer.writeLine('return GATHERING_ACTION_HRIDS.map(hrid => getAction(hrid)).filter(Boolean) as Action[]')
-			},
-			[
-				{ from: './lookups', names: ['GATHERING_ACTION_HRIDS'] },
-				{ from: './types', names: ['Action'], isType: true }
-			],
-			{
-				description: 'Gets all gathering actions (mining, foraging, woodcutting, etc).',
-				returns: 'Array of all gathering actions',
-				examples: [
-					`\nconst gatheringActions = getGatheringActions()\nconst miningOnly = gatheringActions.filter(a => a.levelRequirement?.skillHrid === '/skills/mining')`
-				]
-			}
-		)
-	}
+// Main execution for standalone running
+if (import.meta.main) {
+	const generator = new ModularActionsGenerator()
+	await generator.generate('./src/sources/game_data.json')
 }

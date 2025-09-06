@@ -1,4 +1,4 @@
-import { describe, test, expect, beforeAll } from 'bun:test'
+import { describe, test, expect, beforeAll } from 'vitest'
 import { ModularActionsGenerator } from './generator'
 import { readFileSync } from 'fs'
 import path from 'path'

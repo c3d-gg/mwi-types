@@ -2,28 +2,28 @@ import { ModuleBuilder } from './module-builder'
 import { SourceReader } from './source-reader'
 import { generateFromTemplates } from './utility-templates'
 
-import type { 
-	GeneratorConfig, 
-	InterfaceDefinition, 
+import type {
+	CategoryFilter,
 	ConstantDefinition,
+	GeneratorConfig,
+	InterfaceDefinition,
 	LookupDefinition,
 	UtilityDefinition,
-	CategoryFilter,
-	UtilityTemplate
+	UtilityTemplate,
 } from './types'
 
 export type { GeneratorConfig } from './types'
 
 /**
  * ModularBaseGenerator - Enhanced base class with hook system for extensible generation
- * 
+ *
  * Key Features:
  * - Configuration-driven generation with feature flags
  * - Hook system for customization without full overrides
  * - Utility templates for common patterns
  * - Record-based collections with Map utilities
  * - Tree-shaking optimized output
- * 
+ *
  * @see ARCHITECTURE.md for full documentation
  */
 export abstract class ModularBaseGenerator<TEntity> {
@@ -44,9 +44,9 @@ export abstract class ModularBaseGenerator<TEntity> {
 			generateConstants: true,
 			generateUtils: true,
 			generateLookups: true,
-			...config
+			...config,
 		}
-		
+
 		this.sourceReader = new SourceReader()
 
 		// Initialize module builder with modular structure
@@ -120,13 +120,96 @@ export abstract class ModularBaseGenerator<TEntity> {
 
 	/**
 	 * Extract entities from source data
+	 * Default implementation that uses sourceKey from config
+	 * Can be overridden for complex extraction logic
 	 */
-	protected abstract extractEntities(sourceData: any): Record<string, TEntity>
+	protected extractEntities(sourceData: any): Record<string, TEntity> {
+		const entities: Record<string, TEntity> = {}
+		const sourceMap = sourceData[this.config.sourceKey] || {}
+
+		for (const [key, rawEntity] of Object.entries(sourceMap)) {
+			// Apply transformation hook if provided
+			const transformed = this.transformEntity
+				? this.transformEntity(rawEntity)
+				: (rawEntity as TEntity)
+
+			// Apply filter hook if provided
+			if (this.shouldIncludeEntity && !this.shouldIncludeEntity(transformed)) {
+				continue
+			}
+
+			entities[key] = transformed
+		}
+
+		return entities
+	}
 
 	/**
 	 * Generate TypeScript interfaces/types (types.ts)
+	 * Default implementation - can be overridden for complex cases
 	 */
-	protected abstract generateTypes(entities: Record<string, TEntity>): void
+	protected generateTypes(entities: Record<string, TEntity>): void {
+		// Default: Generate main entity interface and HRID type
+		const entityName = this.config.entityName
+		const hrids = Object.keys(entities).sort()
+
+		// Generate main entity interface (if not provided by defineInterfaces hook)
+		const customInterfaces = this.defineInterfaces?.()
+		const hasMainInterface = customInterfaces?.some(
+			(def) => def.name === entityName,
+		)
+
+		if (!hasMainInterface) {
+			// Auto-generate basic interface from first entity
+			const sampleEntity = Object.values(entities)[0]
+			if (sampleEntity) {
+				const properties = Object.keys(sampleEntity).map((key) => ({
+					name: key,
+					type: this.inferType(
+						sampleEntity[key as keyof typeof sampleEntity],
+						key,
+					),
+					optional: false,
+				}))
+
+				this.moduleBuilder.addInterface(entityName, properties)
+			}
+		}
+
+		// Generate HRID union type from constants
+		if (hrids.length > 0) {
+			this.moduleBuilder.addType(
+				`${entityName}Hrid`,
+				`(typeof ${entityName.toUpperCase()}_HRIDS)[number]`,
+			)
+		}
+	}
+
+	/**
+	 * Infer TypeScript type from value
+	 */
+	private inferType(value: any, key: string): string {
+		if (key.toLowerCase().includes('hrid')) {
+			// HRID fields reference other entities
+			const entityType = key.replace('Hrid', '').replace(/s$/, '')
+			return `${entityType.charAt(0).toUpperCase()}${entityType.slice(1)}Hrid`
+		}
+
+		switch (typeof value) {
+			case 'boolean':
+				return 'boolean'
+			case 'number':
+				return 'number'
+			case 'string':
+				return 'string'
+			case 'object':
+				if (value === null) return 'null'
+				if (Array.isArray(value)) return 'any[]' // Can be refined
+				return 'any' // Can be refined
+			default:
+				return 'any'
+		}
+	}
 
 	/**
 	 * Generate static lookup tables (lookups.ts)
@@ -323,9 +406,9 @@ export abstract class ModularBaseGenerator<TEntity> {
 				params: [{ name: 'value', description: 'The string value to check' }],
 				returns: `true if the value is a valid ${typeName}Hrid, false otherwise`,
 				examples: [
-					`\nif (is${typeName}Hrid(someValue)) {\n  // someValue is now typed as ${typeName}Hrid\n  const ${typeName.toLowerCase()} = get${typeName}(someValue)\n}`
-				]
-			}
+					`\nif (is${typeName}Hrid(someValue)) {\n  // someValue is now typed as ${typeName}Hrid\n  const ${typeName.toLowerCase()} = get${typeName}(someValue)\n}`,
+				],
+			},
 		)
 
 		// Getter function
@@ -342,12 +425,14 @@ export abstract class ModularBaseGenerator<TEntity> {
 			],
 			{
 				description: `Gets a ${typeName} by its HRID.`,
-				params: [{ name: 'hrid', description: `The ${typeName}Hrid to look up` }],
+				params: [
+					{ name: 'hrid', description: `The ${typeName}Hrid to look up` },
+				],
 				returns: `The ${typeName} if found, undefined otherwise`,
 				examples: [
-					`\nconst ${typeName.toLowerCase()} = get${typeName}('/${typeName.toLowerCase()}s/example')\nif (${typeName.toLowerCase()}) {\n  console.log(${typeName.toLowerCase()}.name)\n}`
-				]
-			}
+					`\nconst ${typeName.toLowerCase()} = get${typeName}('/${typeName.toLowerCase()}s/example')\nif (${typeName.toLowerCase()}) {\n  console.log(${typeName.toLowerCase()}.name)\n}`,
+				],
+			},
 		)
 
 		// Require function
@@ -372,12 +457,14 @@ export abstract class ModularBaseGenerator<TEntity> {
 			],
 			{
 				description: `Gets a ${typeName} by its HRID or throws an error if not found.\nUseful when you know the ${typeName} exists and want TypeScript to narrow the type.`,
-				params: [{ name: 'hrid', description: `The ${typeName}Hrid to look up` }],
+				params: [
+					{ name: 'hrid', description: `The ${typeName}Hrid to look up` },
+				],
 				returns: `The ${typeName}`,
 				examples: [
-					`\n// This will throw if the ${typeName.toLowerCase()} doesn't exist\nconst ${typeName.toLowerCase()} = require${typeName}('/${typeName.toLowerCase()}s/example')\nconsole.log(${typeName.toLowerCase()}.name) // TypeScript knows this is defined`
-				]
-			}
+					`\n// This will throw if the ${typeName.toLowerCase()} doesn't exist\nconst ${typeName.toLowerCase()} = require${typeName}('/${typeName.toLowerCase()}s/example')\nconsole.log(${typeName.toLowerCase()}.name) // TypeScript knows this is defined`,
+				],
+			},
 		)
 
 		// Get all function
@@ -396,9 +483,9 @@ export abstract class ModularBaseGenerator<TEntity> {
 				description: `Gets all ${pluralName} as an array.`,
 				returns: `Array of all ${typeName} entities`,
 				examples: [
-					`\nconst all${pluralName} = getAll${pluralName}()\nconsole.log(\`Found \${all${pluralName}.length} ${pluralName.toLowerCase()}\`)\n\n// Filter or map over all ${pluralName.toLowerCase()}\nconst filtered = all${pluralName}.filter(item => item.level > 10)`
-				]
-			}
+					`\nconst all${pluralName} = getAll${pluralName}()\nconsole.log(\`Found \${all${pluralName}.length} ${pluralName.toLowerCase()}\`)\n\n// Filter or map over all ${pluralName.toLowerCase()}\nconst filtered = all${pluralName}.filter(item => item.level > 10)`,
+				],
+			},
 		)
 
 		// Generic toMap utility function
@@ -407,19 +494,21 @@ export abstract class ModularBaseGenerator<TEntity> {
 			[{ name: 'record', type: `Record<${hridType}, ${typeName}>` }],
 			`Map<${hridType}, ${typeName}>`,
 			(writer) => {
-				writer.writeLine(`return new Map(Object.entries(record) as [${hridType}, ${typeName}][])`)
+				writer.writeLine(
+					`return new Map(Object.entries(record) as [${hridType}, ${typeName}][])`,
+				)
 			},
-			[
-				{ from: './types', names: [typeName, hridType], isType: true },
-			],
+			[{ from: './types', names: [typeName, hridType], isType: true }],
 			{
 				description: `Converts a ${typeName} record to a Map for O(1) lookups.\\nUseful for performance-critical code that needs frequent lookups.`,
-				params: [{ name: 'record', description: `The record to convert to a Map` }],
+				params: [
+					{ name: 'record', description: `The record to convert to a Map` },
+				],
 				returns: `Map with ${hridType} keys and ${typeName} values`,
 				examples: [
-					`\nconst record = ${getRecordName}()\nconst map = toMap(record)\nconst entity = map.get('/path/to/entity') // O(1) lookup`
-				]
-			}
+					`\nconst record = ${getRecordName}()\nconst map = toMap(record)\nconst entity = map.get('/path/to/entity') // O(1) lookup`,
+				],
+			},
 		)
 
 		// Convenience function that combines getRecord + toMap
@@ -438,9 +527,9 @@ export abstract class ModularBaseGenerator<TEntity> {
 				description: `Gets all ${pluralName} as a Map for O(1) lookups.\\nConvenience function that combines ${getRecordName}() + toMap().`,
 				returns: `Map with ${hridType} keys and ${typeName} values`,
 				examples: [
-					`\nconst map = get${pluralName}Map()\nconst entity = map.get('/path/to/entity') // Fast O(1) lookup\nif (entity) console.log(entity.name)`
-				]
-			}
+					`\nconst map = get${pluralName}Map()\nconst entity = map.get('/path/to/entity') // Fast O(1) lookup\nif (entity) console.log(entity.name)`,
+				],
+			},
 		)
 	}
 
@@ -462,28 +551,58 @@ export abstract class ModularBaseGenerator<TEntity> {
 		// Import shared types if configured
 		if (this.config.sharedTypes && this.config.sharedTypes.length > 0) {
 			const typesBuilder = this.moduleBuilder.getFile('types')
-			typesBuilder.addImport('../sharedtypes/types', this.config.sharedTypes, true)
+			typesBuilder.addImport(
+				'../sharedtypes/types',
+				this.config.sharedTypes,
+				true,
+			)
 		}
 
-		// Generate base types (may be overridden completely)
-		this.generateTypes(entities)
-
-		// Add custom interfaces from configuration
-		if (this.config.interfaces) {
-			this.config.interfaces.forEach(interfaceConfig => {
-				this.moduleBuilder.addInterface(interfaceConfig.name, interfaceConfig.properties)
-				if (interfaceConfig.export !== false) {
-					this.moduleBuilder.addExport({ name: interfaceConfig.name, source: './types', isType: true })
-				}
+		// Apply hook for additional interfaces FIRST (takes priority)
+		const customInterfaces = this.defineInterfaces?.()
+		if (customInterfaces) {
+			customInterfaces.forEach((def) => {
+				this.moduleBuilder.addInterface(def.name, def.properties)
+				this.moduleBuilder.addExport({
+					name: def.name,
+					source: './types',
+					isType: true,
+				})
 			})
 		}
 
-		// Apply hook for additional interfaces
-		const customInterfaces = this.defineInterfaces?.()
-		if (customInterfaces) {
-			customInterfaces.forEach(def => {
-				this.moduleBuilder.addInterface(def.name, def.properties)
-				this.moduleBuilder.addExport({ name: def.name, source: './types', isType: true })
+		// Generate base types only if main interface not provided by hook
+		const mainInterfaceName = this.config.entityName
+		const hasMainInterface = customInterfaces?.some(
+			(def) => def.name === mainInterfaceName,
+		)
+		if (!hasMainInterface) {
+			this.generateTypes(entities)
+		} else {
+			// Still generate HRID type even when using hooks
+			const hrids = Object.keys(entities).sort()
+			if (hrids.length > 0) {
+				this.moduleBuilder.addType(
+					`${mainInterfaceName}Hrid`,
+					`(typeof ${mainInterfaceName.toUpperCase()}_HRIDS)[number]`,
+				)
+			}
+		}
+
+		// Add custom interfaces from configuration
+		if (this.config.interfaces) {
+			this.config.interfaces.forEach((interfaceConfig) => {
+				this.moduleBuilder.addInterface(
+					interfaceConfig.name,
+					interfaceConfig.properties,
+				)
+				if (interfaceConfig.export !== false) {
+					this.moduleBuilder.addExport({
+						name: interfaceConfig.name,
+						source: './types',
+						isType: true,
+					})
+				}
 			})
 		}
 
@@ -508,7 +627,7 @@ export abstract class ModularBaseGenerator<TEntity> {
 		// Apply hook for additional constants
 		const customConstants = this.defineConstants?.()
 		if (customConstants) {
-			customConstants.forEach(def => {
+			customConstants.forEach((def) => {
 				this.moduleBuilder.addConstArray(def.name, def.value, def.asConst)
 				this.moduleBuilder.addExport({ name: def.name, source: './constants' })
 			})
@@ -536,8 +655,14 @@ export abstract class ModularBaseGenerator<TEntity> {
 		// Apply hook for additional lookups
 		const customLookups = this.defineLookups?.()
 		if (customLookups) {
-			customLookups.forEach(def => {
-				this.moduleBuilder.addStaticLookup(def.name, def.data, def.keyType, def.valueType, def.isPartial)
+			customLookups.forEach((def) => {
+				this.moduleBuilder.addStaticLookup(
+					def.name,
+					def.data,
+					def.keyType,
+					def.valueType,
+					def.isPartial,
+				)
 				this.moduleBuilder.addExport({ name: def.name, source: './lookups' })
 			})
 		}
@@ -560,7 +685,7 @@ export abstract class ModularBaseGenerator<TEntity> {
 
 		// Generate custom utilities from configuration
 		if (this.config.customUtilities) {
-			this.config.customUtilities.forEach(util => {
+			this.config.customUtilities.forEach((util) => {
 				this.moduleBuilder.addUtilityFunction(
 					util.name,
 					util.parameters,
@@ -569,10 +694,13 @@ export abstract class ModularBaseGenerator<TEntity> {
 					util.imports,
 					{
 						description: util.description,
-						params: util.parameters.map(p => ({ name: p.name, description: '' })),
+						params: util.parameters.map((p) => ({
+							name: p.name,
+							description: '',
+						})),
 						returns: util.returnType,
-						examples: util.examples
-					}
+						examples: util.examples,
+					},
 				)
 			})
 		}
@@ -580,14 +708,14 @@ export abstract class ModularBaseGenerator<TEntity> {
 		// Apply hook for additional utilities
 		const customUtilities = this.defineUtilities?.()
 		if (customUtilities) {
-			customUtilities.forEach(def => {
+			customUtilities.forEach((def) => {
 				this.moduleBuilder.addUtilityFunction(
 					def.name,
 					def.parameters,
 					def.returnType,
 					def.implementation,
 					def.imports,
-					def.jsDoc
+					def.jsDoc,
 				)
 			})
 		}
@@ -599,29 +727,37 @@ export abstract class ModularBaseGenerator<TEntity> {
 	/**
 	 * Generate category constants from filters
 	 */
-	private generateCategoryConstants(entities: Record<string, TEntity>, filters: CategoryFilter[]): void {
-		filters.forEach(filter => {
+	private generateCategoryConstants(
+		entities: Record<string, TEntity>,
+		filters: CategoryFilter[],
+	): void {
+		filters.forEach((filter) => {
 			const matchingHrids: string[] = []
-			
+
 			Object.entries(entities).forEach(([hrid, entity]) => {
 				let matches = false
-				
+
 				if (filter.condition) {
 					matches = filter.condition(entity)
 				} else if (filter.field && filter.value !== undefined) {
 					matches = (entity as any)[filter.field] === filter.value
 				} else if (filter.field && filter.exists) {
-					matches = (entity as any)[filter.field] !== undefined && (entity as any)[filter.field] !== null
+					matches =
+						(entity as any)[filter.field] !== undefined &&
+						(entity as any)[filter.field] !== null
 				}
-				
+
 				if (matches) {
 					matchingHrids.push(hrid)
 				}
 			})
-			
+
 			const constantName = filter.name.toUpperCase()
 			this.moduleBuilder.addConstArray(constantName, matchingHrids.sort(), true)
-			this.moduleBuilder.addExport({ name: constantName, source: './constants' })
+			this.moduleBuilder.addExport({
+				name: constantName,
+				source: './constants',
+			})
 		})
 	}
 
@@ -630,19 +766,19 @@ export abstract class ModularBaseGenerator<TEntity> {
 	 */
 	private generateUtilityTemplates(templates: UtilityTemplate[]): void {
 		const utilities = generateFromTemplates(
-			templates, 
-			this.config.entityName, 
-			this.config.entityNamePlural
+			templates,
+			this.config.entityName,
+			this.config.entityNamePlural,
 		)
-		
-		utilities.forEach(util => {
+
+		utilities.forEach((util) => {
 			this.moduleBuilder.addUtilityFunction(
 				util.name,
 				util.parameters,
 				util.returnType,
 				util.implementation,
 				util.imports,
-				util.jsDoc
+				util.jsDoc,
 			)
 		})
 	}

@@ -42,13 +42,18 @@ class GetByFieldTemplate implements TemplateGenerator {
 		const functionName = `get${entityNamePlural}By${field.charAt(0).toUpperCase() + field.slice(1)}`
 		const getRecordName = `get${entityNamePlural}Record`
 
+		// Avoid reserved keywords as parameter names
+		const paramName = field === 'function' ? 'functionValue' : field
+
 		return {
 			name: functionName,
-			parameters: [{ name: field, type: fieldType }],
+			parameters: [{ name: paramName, type: fieldType }],
 			returnType: `${entityName}[]`,
 			implementation: (writer) => {
 				writer.writeLine(`return Object.values(${getRecordName}())`)
-				writer.writeLine(`  .filter(entity => entity.${field} === ${field})`)
+				writer.writeLine(
+					`  .filter(entity => entity.${field} === ${paramName})`,
+				)
 			},
 			imports: [
 				{ from: './data', names: [getRecordName] },
@@ -56,7 +61,7 @@ class GetByFieldTemplate implements TemplateGenerator {
 			],
 			jsDoc: {
 				description: `Gets all ${entityNamePlural.toLowerCase()} that match the specified ${field}.`,
-				params: [{ name: field, description: `The ${field} to filter by` }],
+				params: [{ name: paramName, description: `The ${field} to filter by` }],
 				returns: `Array of ${entityNamePlural.toLowerCase()} with matching ${field}`,
 				examples: [
 					`\\nconst filtered = ${functionName}(someValue)\\nconsole.log(\`Found \\$\{filtered.length\} ${entityNamePlural.toLowerCase()}\`)`,
