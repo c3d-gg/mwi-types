@@ -1,4 +1,5 @@
 import { ModularBaseGenerator } from '../core/generator.base.modular'
+
 import type { GeneratorConfig, PropertyDefinition } from '../core/types'
 
 interface AbilityEffect {
@@ -61,9 +62,7 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 		super(config)
 	}
 
-	protected override extractEntities(
-		sourceData: any,
-	): Record<string, Ability> {
+	protected override extractEntities(sourceData: any): Record<string, Ability> {
 		const abilities: Record<string, Ability> = {}
 
 		for (const [hrid, data] of Object.entries(
@@ -88,9 +87,7 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 		return abilities
 	}
 
-	protected override generateTypes(
-		_abilities: Record<string, Ability>,
-	): void {
+	protected override generateTypes(_abilities: Record<string, Ability>): void {
 		const typesFile = this.moduleBuilder.getFile('types')
 
 		// Add JSDoc header
@@ -348,7 +345,7 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 
 		// Import constants for type derivation
 		typesFile.addImport('./constants', ['ABILITY_HRIDS'], false)
-		
+
 		// Export the hrid type derived from constants
 		typesFile.addType('AbilityHrid', '(typeof ABILITY_HRIDS)[number]')
 
@@ -370,36 +367,53 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 		constantsFile.addConstArray('ABILITY_HRIDS', hrids, true)
 
 		// Separate special abilities
-		const specialAbilities = hrids.filter(hrid => entities[hrid]?.isSpecialAbility)
-		const regularAbilities = hrids.filter(hrid => !entities[hrid]?.isSpecialAbility)
+		const specialAbilities = hrids.filter(
+			(hrid) => entities[hrid]?.isSpecialAbility,
+		)
+		const regularAbilities = hrids.filter(
+			(hrid) => !entities[hrid]?.isSpecialAbility,
+		)
 
 		if (specialAbilities.length > 0) {
-			constantsFile.addConstArray('SPECIAL_ABILITY_HRIDS', specialAbilities, true)
+			constantsFile.addConstArray(
+				'SPECIAL_ABILITY_HRIDS',
+				specialAbilities,
+				true,
+			)
 		}
 		if (regularAbilities.length > 0) {
-			constantsFile.addConstArray('REGULAR_ABILITY_HRIDS', regularAbilities, true)
+			constantsFile.addConstArray(
+				'REGULAR_ABILITY_HRIDS',
+				regularAbilities,
+				true,
+			)
 		}
 
 		// Export the constants
 		this.moduleBuilder.addExport('constants', 'ABILITY_HRIDS', 'const')
 		if (specialAbilities.length > 0) {
-			this.moduleBuilder.addExport('constants', 'SPECIAL_ABILITY_HRIDS', 'const')
+			this.moduleBuilder.addExport(
+				'constants',
+				'SPECIAL_ABILITY_HRIDS',
+				'const',
+			)
 		}
 		if (regularAbilities.length > 0) {
-			this.moduleBuilder.addExport('constants', 'REGULAR_ABILITY_HRIDS', 'const')
+			this.moduleBuilder.addExport(
+				'constants',
+				'REGULAR_ABILITY_HRIDS',
+				'const',
+			)
 		}
 	}
 
-	protected override generateLazyData(
-		entities: Record<string, Ability>,
-	): void {
+	protected override generateLazyData(entities: Record<string, Ability>): void {
 		// Clean entity data before adding
 		const cleanedEntries = Object.entries(entities)
 			.sort(([a], [b]) => a.localeCompare(b))
-			.map(([key, value]) => [
-				key,
-				this.cleanEntityData(value),
-			]) as Array<[string, Ability]>
+			.map(([key, value]) => [key, this.cleanEntityData(value)]) as Array<
+			[string, Ability]
+		>
 
 		// Use the moduleBuilder's addLazyData method which handles everything
 		this.moduleBuilder.addLazyData(
@@ -410,9 +424,7 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 		)
 	}
 
-	protected override generateLookups(
-		entities: Record<string, Ability>,
-	): void {
+	protected override generateLookups(entities: Record<string, Ability>): void {
 		const lookupsFile = this.moduleBuilder.getFile('lookups')
 
 		// Import types
@@ -444,7 +456,7 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 			'DamageTypeHrid',
 			'readonly AbilityHrid[]',
 			byDamageType,
-			true // isPartial
+			true, // isPartial
 		)
 
 		// Group abilities by mana cost ranges
@@ -475,7 +487,7 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 				medium: mediumCost.sort(),
 				high: highCost.sort(),
 			},
-			false // not partial, all keys are present
+			false, // not partial, all keys are present
 		)
 
 		// Export the lookups
@@ -491,9 +503,16 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 		// Import types and data
 		utilsFile.addImport('./types', ['Ability', 'AbilityHrid'], true)
 		utilsFile.addImport('../damagetypes/types', ['DamageTypeHrid'], true)
-		utilsFile.addImport('./constants', ['ABILITY_HRIDS', 'SPECIAL_ABILITY_HRIDS', 'REGULAR_ABILITY_HRIDS'])
+		utilsFile.addImport('./constants', [
+			'ABILITY_HRIDS',
+			'SPECIAL_ABILITY_HRIDS',
+			'REGULAR_ABILITY_HRIDS',
+		])
 		utilsFile.addImport('./data', ['getAbilitiesMap'])
-		utilsFile.addImport('./lookups', ['ABILITIES_BY_DAMAGE_TYPE', 'ABILITIES_BY_MANA_COST'])
+		utilsFile.addImport('./lookups', [
+			'ABILITIES_BY_DAMAGE_TYPE',
+			'ABILITIES_BY_MANA_COST',
+		])
 
 		// Type guard
 		utilsFile.addFunction(
@@ -502,7 +521,7 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 			'value is AbilityHrid',
 			(writer) => {
 				writer.writeLine('return ABILITY_HRIDS.includes(value as AbilityHrid)')
-			}
+			},
 		)
 
 		// Getter
@@ -512,7 +531,7 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 			'Ability | undefined',
 			(writer) => {
 				writer.writeLine('return getAbilitiesMap().get(hrid)')
-			}
+			},
 		)
 
 		// Require getter
@@ -528,38 +547,27 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 				})
 				writer.writeLine('}')
 				writer.writeLine('return ability')
-			}
+			},
 		)
 
 		// Get all
-		utilsFile.addFunction(
-			'getAllAbilities',
-			[],
-			'Ability[]',
-			(writer) => {
-				writer.writeLine('return Array.from(getAbilitiesMap().values())')
-			}
-		)
+		utilsFile.addFunction('getAllAbilities', [], 'Ability[]', (writer) => {
+			writer.writeLine('return Array.from(getAbilitiesMap().values())')
+		})
 
 		// Get special abilities
-		utilsFile.addFunction(
-			'getSpecialAbilities',
-			[],
-			'Ability[]',
-			(writer) => {
-				writer.writeLine('return (SPECIAL_ABILITY_HRIDS || []).map(hrid => requireAbility(hrid))')
-			}
-		)
+		utilsFile.addFunction('getSpecialAbilities', [], 'Ability[]', (writer) => {
+			writer.writeLine(
+				'return (SPECIAL_ABILITY_HRIDS || []).map(hrid => requireAbility(hrid))',
+			)
+		})
 
 		// Get regular abilities
-		utilsFile.addFunction(
-			'getRegularAbilities',
-			[],
-			'Ability[]',
-			(writer) => {
-				writer.writeLine('return (REGULAR_ABILITY_HRIDS || []).map(hrid => requireAbility(hrid))')
-			}
-		)
+		utilsFile.addFunction('getRegularAbilities', [], 'Ability[]', (writer) => {
+			writer.writeLine(
+				'return (REGULAR_ABILITY_HRIDS || []).map(hrid => requireAbility(hrid))',
+			)
+		})
 
 		// Get abilities by damage type
 		utilsFile.addFunction(
@@ -567,9 +575,11 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 			[{ name: 'damageType', type: 'DamageTypeHrid' }],
 			'Ability[]',
 			(writer) => {
-				writer.writeLine('const hrids = ABILITIES_BY_DAMAGE_TYPE[damageType] || []')
+				writer.writeLine(
+					'const hrids = ABILITIES_BY_DAMAGE_TYPE[damageType] || []',
+				)
 				writer.writeLine('return hrids.map(hrid => requireAbility(hrid))')
-			}
+			},
 		)
 
 		// Get abilities by mana cost range
@@ -580,7 +590,7 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 			(writer) => {
 				writer.writeLine('const hrids = ABILITIES_BY_MANA_COST[range]')
 				writer.writeLine('return hrids.map(hrid => requireAbility(hrid))')
-			}
+			},
 		)
 
 		// Sort by sortIndex
@@ -589,8 +599,10 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 			[{ name: 'abilities', type: 'Ability[]' }],
 			'Ability[]',
 			(writer) => {
-				writer.writeLine('return [...abilities].sort((a, b) => a.sortIndex - b.sortIndex)')
-			}
+				writer.writeLine(
+					'return [...abilities].sort((a, b) => a.sortIndex - b.sortIndex)',
+				)
+			},
 		)
 
 		// Search abilities by name
@@ -603,10 +615,12 @@ export class AbilitiesModularGenerator extends ModularBaseGenerator<Ability> {
 				writer.writeLine('return getAllAbilities().filter(ability =>')
 				writer.indent(() => {
 					writer.writeLine('ability.name.toLowerCase().includes(lowerQuery) ||')
-					writer.writeLine('ability.description.toLowerCase().includes(lowerQuery)')
+					writer.writeLine(
+						'ability.description.toLowerCase().includes(lowerQuery)',
+					)
 				})
 				writer.writeLine(')')
-			}
+			},
 		)
 
 		// Export utilities

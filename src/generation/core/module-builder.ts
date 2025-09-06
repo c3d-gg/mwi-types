@@ -1,5 +1,3 @@
-import * as path from 'path'
-
 import { ASTBuilder } from './ast-builder'
 
 import type { PropertyDefinition } from './ast-builder'
@@ -35,26 +33,26 @@ export class ModuleBuilder {
 	}
 
 	private initializeFiles(): void {
-		const modulePath = path.join(this.config.basePath, this.config.moduleName)
+		const modulePath = `${this.config.basePath}/${this.config.moduleName}`
 
 		// Core files for every module
-		this.files.set('types', new ASTBuilder(path.join(modulePath, 'types.ts')))
+		this.files.set('types', new ASTBuilder(`${modulePath}/types.ts`))
 		this.files.set(
 			'constants',
-			new ASTBuilder(path.join(modulePath, 'constants.ts')),
+			new ASTBuilder(`${modulePath}/constants.ts`),
 		)
-		this.files.set('utils', new ASTBuilder(path.join(modulePath, 'utils.ts')))
-		this.files.set('index', new ASTBuilder(path.join(modulePath, 'index.ts')))
+		this.files.set('utils', new ASTBuilder(`${modulePath}/utils.ts`))
+		this.files.set('index', new ASTBuilder(`${modulePath}/index.ts`))
 
 		// Optional files based on config
 		if (this.config.enableLazyData) {
-			this.files.set('data', new ASTBuilder(path.join(modulePath, 'data.ts')))
+			this.files.set('data', new ASTBuilder(`${modulePath}/data.ts`))
 		}
 
 		if (this.config.enableStaticLookups) {
 			this.files.set(
 				'lookups',
-				new ASTBuilder(path.join(modulePath, 'lookups.ts')),
+				new ASTBuilder(`${modulePath}/lookups.ts`),
 			)
 		}
 	}
@@ -152,11 +150,14 @@ export class ModuleBuilder {
 		if (!primitiveTypes.includes(keyType)) {
 			lookupsBuilder.addImport('./types', [keyType], true)
 		}
-		
+
 		// Extract base type from value type (handles 'readonly X[]', 'X[]', or plain 'X')
 		let baseValueType = valueType
 		if (valueType.includes('[]') || valueType.startsWith('readonly ')) {
-			baseValueType = valueType.replace('readonly ', '').replace('[]', '').trim()
+			baseValueType = valueType
+				.replace('readonly ', '')
+				.replace('[]', '')
+				.trim()
 		}
 		if (!primitiveTypes.includes(baseValueType)) {
 			lookupsBuilder.addImport('./types', [baseValueType], true)
@@ -193,32 +194,36 @@ export class ModuleBuilder {
 	 * Track an export for the index file
 	 */
 	addExport(exp: ModuleExport): void
-	addExport(source: string, name: string, exportType?: 'type' | 'const' | 'function'): void
+	addExport(
+		source: string,
+		name: string,
+		exportType?: 'type' | 'const' | 'function',
+	): void
 	addExport(
 		expOrSource: ModuleExport | string,
 		name?: string,
-		exportType?: 'type' | 'const' | 'function'
+		exportType?: 'type' | 'const' | 'function',
 	): void {
 		let exp: ModuleExport
-		
+
 		if (typeof expOrSource === 'string') {
 			// Called with individual parameters
 			exp = {
 				name: name!,
 				source: `./${expOrSource}`,
-				isType: exportType === 'type'
+				isType: exportType === 'type',
 			}
 		} else {
 			// Called with object parameter
 			exp = expOrSource
 		}
-		
+
 		// Skip undefined exports
 		if (!exp.name || exp.name === 'undefined') {
 			console.warn(`Skipping undefined export from ${exp.source}`)
 			return
 		}
-		
+
 		// Avoid duplicate exports
 		if (
 			!this.exports.find((e) => e.name === exp.name && e.source === exp.source)
@@ -289,13 +294,22 @@ export class ModuleBuilder {
 		// Generate index before saving
 		this.generateIndex()
 
-		// Save all files
-		for (const [name, builder] of this.files) {
-			await builder.save()
-		}
+		// Save all files in parallel for better performance
+		const builders = Array.from(this.files.values())
+		await ASTBuilder.saveAll(builders, {
+			format: true,
+			organizeImports: true,
+			fixUnusedIdentifiers: false
+		})
 
 		console.log(
 			`✅ Generated module: ${this.config.moduleName} with ${this.files.size} files`,
 		)
+		
+		// Log performance metrics if in development
+		if (process.env.NODE_ENV === 'development') {
+			const report = ASTBuilder.getPerformanceReport()
+			console.log('📊 Performance Report:', report)
+		}
 	}
 }
