@@ -17,4 +17,17 @@
 		},
 	},
 	"autoupdate": true,
+	"mcp": {
+		"sequentialthinking": {
+			"type": "local",
+			"command": [
+				"docker",
+				"run",
+				"--rm",
+				"-i",
+				"mcp/sequentialthinking"
+			],
+			"enabled": true
+		}
+	}
 }

@@ -1,210 +1,164 @@
-# Skills Generator
+# Skills Generator Module
 
-## Purpose
+## 📋 Purpose
 
-The Skills generator creates TypeScript types and utilities for game skills in Milky Way Idle. Skills are fundamental game mechanics that define player progression paths and are used extensively throughout the game system.
+Generates TypeScript types, utilities, constants, and lookups for game skills. Skills represent the different abilities and proficiencies that players can develop in the game, categorized into combat and non-combat (skilling) activities.
 
-## Source Data Analysis
+## 📊 Source Data Structure
 
-**Entity**: `skillDetailMap` from `game_data.json`
-**Count**: 18 skills
-**Complexity**: Simple (no dependencies, flat structure)
+Reads from `game_data.json` → `skillDetailMap`
 
-### Sample Entity Structure
+**Sample Source Data:**
+
 ```json
 {
-  "hrid": "/skills/alchemy",
-  "name": "Alchemy", 
-  "isSkilling": true,
-  "isCombat": false,
-  "sortIndex": 10
+	"skillDetailMap": {
+		"/skills/alchemy": {
+			"hrid": "/skills/alchemy",
+			"name": "Alchemy",
+			"isSkilling": true,
+			"isCombat": false,
+			"sortIndex": 10
+		},
+		"/skills/attack": {
+			"hrid": "/skills/attack",
+			"name": "Attack",
+			"isSkilling": false,
+			"isCombat": true,
+			"sortIndex": 1
+		}
+	}
 }
 ```
 
-### All Properties
-- `hrid`: Human-readable ID (e.g., "/skills/alchemy")
-- `name`: Display name (e.g., "Alchemy")
-- `isSkilling`: Boolean indicating if this is a skilling activity
-- `isCombat`: Boolean indicating if this is a combat skill
-- `sortIndex`: Numeric sort order for UI display
-
-## Generated Exports
+## 🏗️ Generated Exports
 
 ### Types (`types.ts`)
-```typescript
-export interface Skill {
-  hrid: SkillHrid
-  name: string
-  isSkilling: boolean
-  isCombat: boolean
-  sortIndex: number
-}
 
-export type SkillHrid = 
-  | "/skills/alchemy"
-  | "/skills/brewing"
-  | "/skills/cooking"
-  // ... all 18 skill HRIDs
-```
+- **`Skill`** - Main skill interface with all properties
+- **`SkillHrid`** - Union type of all skill HRIDs
 
 ### Constants (`constants.ts`)
-```typescript
-export const SKILL_HRIDS: readonly SkillHrid[]
-export const SKILLING_SKILL_HRIDS: readonly SkillHrid[]  // isSkilling === true
-export const COMBAT_SKILL_HRIDS: readonly SkillHrid[]    // isCombat === true
-```
 
-### Data Collection (`data.ts`)
-```typescript
-export const SKILLS_RECORD: Record<SkillHrid, Skill>
-export function getSkillsRecord(): Record<SkillHrid, Skill>
-```
+- **`SKILL_HRIDS`** - Array of all skill HRIDs
+- **`COMBAT_SKILLS`** - Array of combat skill HRIDs (filtered by isCombat: true)
+- **`SKILLING_SKILLS`** - Array of skilling skill HRIDs (filtered by isSkilling: true)
 
-### Utility Functions (`utils.ts`)
+### Data (`data.ts`)
+
+- **`getSkillsRecord()`** - Lazy-loaded Record<SkillHrid, Skill>
+- Raw skill data in Record format for tree-shaking
+
+### Utilities (`utils.ts`)
+
+**Basic CRUD:**
+
+- `isSkillHrid(value)` - Type guard
+- `getSkill(hrid)` - Safe getter
+- `requireSkill(hrid)` - Getter with error
+- `getAllSkills()` - Get all skills as array
+- `toSkillsMap()` - Convert Record to Map
+
+**Generated from Templates:**
+
+- `getSkillsSortedBySortIndex()` - Sorted by display order
+- `filterSkills(predicate)` - Custom filtering
+
+**Custom Skill-Specific:**
+
+- `getCombatSkills()` - All combat skills (isCombat: true)
+- `getSkillingSkills()` - All skilling skills (isSkilling: true)
+
+### Lookups (`lookups.ts`)
+
+- **`COMBAT_SKILL_HRIDS`** - Pre-filtered array of combat skills
+- **`SKILLING_SKILL_HRIDS`** - Pre-filtered array of skilling skills
+- Pre-computed lookup arrays for efficient filtering
+
+## 🔗 Dependencies
+
+### Imports FROM other domains:
+
+- None (Skills is a foundational module with no dependencies)
+
+### Imports FROM shared types:
+
+- None (Skills uses only primitive types)
+
+### Exports TO other domains:
+
+- **`SkillHrid`** - Used by actions, recipes, player data, level requirements
+- **`Skill`** - Used by game logic requiring skill information
+
+## 💡 Usage Examples
+
 ```typescript
-// Standard utilities from templates
-export function getSkill(hrid: SkillHrid): Skill | undefined
-export function requireSkill(hrid: SkillHrid): Skill
-export function getAllSkills(): Skill[]
-export function isSkillHrid(value: string): value is SkillHrid
-export function toSkillsMap(record: Record<SkillHrid, Skill>): Map<SkillHrid, Skill>
+// Basic usage
+
+// Tree-shaking friendly imports
+import {
+	COMBAT_SKILLS,
+	SKILLING_SKILLS,
+} from '@c3d.gg/mwi-types/skills/constants'
+// "Alchemy"
 
 // Category filtering
-export function getSkillingSkills(): Skill[]     // isSkilling === true
-export function getCombatSkills(): Skill[]       // isCombat === true  
 
-// Sorting utilities
-export function getSkillsSortedByIndex(): Skill[]
-export function getSkillsSortedByName(): Skill[]
+// Sorted skills for UI display
 
-// Generic filtering
-export function filterSkills(predicate: (skill: Skill) => boolean): Skill[]
-```
+// Performance-critical lookups
+import {
+	getCombatSkills,
+	getSkill,
+	getSkillingSkills,
+	getSkillsSortedBySortIndex,
+	isSkillHrid,
+	toSkillsMap,
+} from '@c3d.gg/mwi-types/skills/utils'
 
-### Lookup Tables (`lookups.ts`)
-```typescript
-export const SKILL_NAME_BY_HRID: Record<SkillHrid, string>
-export const SKILL_HRID_BY_NAME: Record<string, SkillHrid>
-```
-
-## Dependencies
-
-**None** - Skills is a foundational module with no external dependencies.
-
-## Usage Examples
-
-### Basic Usage
-```typescript
-import { getSkill, requireSkill } from '@c3d.gg/mwi-types/skills/utils'
-import { SKILL_HRIDS } from '@c3d.gg/mwi-types/skills/constants'
-import type { Skill, SkillHrid } from '@c3d.gg/mwi-types/skills/types'
-
-// Safe access
-const alchemy = getSkill('/skills/alchemy')
-if (alchemy) {
-  console.log(`${alchemy.name} (sort: ${alchemy.sortIndex})`)
-}
-
-// Required access (throws if not found)
-const cooking = requireSkill('/skills/cooking')
-```
-
-### Category Filtering
-```typescript
-import { getSkillingSkills, getCombatSkills } from '@c3d.gg/mwi-types/skills/utils'
-
-// Get all skilling vs combat skills
-const skillingSkills = getSkillingSkills()
-const combatSkills = getCombatSkills()
-
-console.log(`${skillingSkills.length} skilling skills`)
-console.log(`${combatSkills.length} combat skills`)
-```
-
-### Performance-Critical Usage
-```typescript
-import { getSkillsRecord, toSkillsMap } from '@c3d.gg/mwi-types/skills/utils'
-
-// For frequent lookups, convert to Map for O(1) access
-const skillsMap = toSkillsMap(getSkillsRecord())
-const fastLookup = skillsMap.get('/skills/alchemy')
-```
-
-### Integration with Other Modules
-```typescript
-// Skills are referenced by other modules via SkillHrid type
 import type { SkillHrid } from '@c3d.gg/mwi-types/skills/types'
-import { requireSkill } from '@c3d.gg/mwi-types/skills/utils'
 
-function processSkillRequirement(skillHrid: SkillHrid, level: number) {
-  const skill = requireSkill(skillHrid)
-  return `Requires ${skill.name} level ${level}`
-}
+// Type-safe skill retrieval
+const skill = getSkill('/skills/alchemy')
+console.log(skill?.name)
+
+const combatSkills = getCombatSkills()
+const skillingSkills = getSkillingSkills()
+
+const sortedSkills = getSkillsSortedBySortIndex()
+
+const skillMap = toSkillsMap() // O(1) lookups
+const fastLookup = skillMap.get('/skills/alchemy')
 ```
 
-## Testing Strategy
+## 🧪 Testing Strategy
 
-### Data Extraction Tests
-- Verify all 18 skills are extracted from source
-- Validate each property is correctly mapped
-- Test edge cases (missing properties, invalid data)
+- **Data extraction**: Validate parsing of skill properties (hrid, name, booleans, sortIndex)
+- **Type generation**: Confirm Skill interface and SkillHrid union created correctly
+- **Utilities**: Test all generated utility functions
+- **Category filtering**: Verify combat vs skilling skill filtering
+- **Constants**: Validate generated constant arrays
+- **Edge cases**: Handle missing/invalid data gracefully
 
-### Type Generation Tests  
-- Confirm SkillHrid union type includes all HRIDs
-- Validate Skill interface matches source data structure
-- Test type safety and IntelliSense support
+## 📈 Performance Characteristics
 
-### Utility Function Tests
-- Test all getter functions (get, require, getAll)
-- Validate category filtering (skilling vs combat)
-- Test sorting utilities
-- Verify Map conversion functionality
+- **Dataset size**: 18 skills (small, foundational dataset)
+- **Generation time**: <1 second
+- **Output size**: Minimal (simple data structure)
+- **Tree-shaking**: Individual utilities can be imported
+- **Runtime performance**: O(1) lookups via toSkillsMap()
 
-### Integration Tests
-- Test usage as dependency in other modules
-- Validate tree-shaking works correctly
-- Performance benchmarking for large-scale usage
+## 🎯 Design Notes
 
-## Performance Characteristics
+Skills is designed as a foundational module that many other generators depend on:
 
-- **Dataset Size**: Small (18 entities)
-- **Memory Usage**: Minimal (<1KB)
-- **Generation Time**: <100ms
-- **Tree-shaking**: Fully compatible
-- **Bundle Impact**: Negligible for most use cases
+- Actions reference skills for level requirements and experience gains
+- Recipes reference skills for crafting requirements
+- Player data tracks skill levels and experience
+- Simple data structure makes it ideal for TDD migration practice
 
-## Generator Configuration
+---
 
-```typescript
-{
-  entityName: 'Skill',
-  entityNamePlural: 'Skills',
-  sourceKey: 'skillDetailMap',
-  sharedTypes: [], // No shared types needed
-  categoryFilters: [
-    { name: 'skilling', condition: (skill: any) => skill.isSkilling },
-    { name: 'combat', condition: (skill: any) => skill.isCombat }
-  ],
-  utilityTemplates: [
-    { type: 'getByField', field: 'isSkilling' },
-    { type: 'getByField', field: 'isCombat' },
-    { type: 'sortBy', field: 'sortIndex' },
-    { type: 'sortBy', field: 'name' },
-    { type: 'filterBy' },
-    { type: 'toMap' }
-  ]
-}
-```
-
-## Notes
-
-- Skills serve as the foundation for many other game systems
-- The `sortIndex` property is crucial for UI display order
-- Clean boolean categorization makes filtering straightforward
-- No circular dependencies make this ideal for early-phase generation
-- Perfect test case for new TDD workflow due to simplicity
-
-**Estimated Development Time**: 2-3 hours following TDD workflow  
-**Risk Level**: Low (simple, well-defined structure)  
-**Dependencies**: None  
-**Dependents**: Actions, Recipes, Items (and many others)
+**Generated with**: MWI Types v1.0 Architecture  
+**Migration status**: TDD Phase 3 (Layer 1 - No Dependencies)  
+**Last updated**: 2024-09-06
