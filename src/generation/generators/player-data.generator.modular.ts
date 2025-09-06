@@ -567,7 +567,11 @@ export class ModularPlayerDataGenerator extends ModularBaseGenerator<PlayerData>
 		const typesBuilder = this.moduleBuilder.getFile('types')
 		typesBuilder.addImport('../skills/types', ['SkillHrid'], true)
 		typesBuilder.addImport('../items/types', ['ItemHrid'], true)
-		typesBuilder.addImport('../actions/types', ['ActionHrid'], true)
+		typesBuilder.addImport(
+			'../actions/types',
+			['ActionHrid', 'ActionType'],
+			true,
+		)
 		typesBuilder.addImport('../abilities/types', ['AbilityHrid'], true)
 		typesBuilder.addImport('../avatars/types', ['AvatarHrid'], true)
 		typesBuilder.addImport('../avataroutfits/types', ['AvatarOutfitHrid'], true)
@@ -851,7 +855,7 @@ export class ModularPlayerDataGenerator extends ModularBaseGenerator<PlayerData>
 		const properties: PropertyDefinition[] = [
 			{ name: 'id', type: 'number', optional: false },
 			{ name: 'characterID', type: 'number', optional: false },
-			{ name: 'actionTypeHrid', type: 'string', optional: false }, // TODO: ActionTypeHrid when available
+			{ name: 'actionTypeHrid', type: 'ActionType', optional: false }, // TODO: ActionTypeHrid when available
 			{ name: 'name', type: 'string', optional: false },
 			{ name: 'isDefault', type: 'boolean', optional: false },
 			{ name: 'suppressValidation', type: 'boolean', optional: false },
@@ -1614,7 +1618,7 @@ export class ModularPlayerDataGenerator extends ModularBaseGenerator<PlayerData>
 				writer.writeLine('  serverSetting: {},')
 				writer.writeLine('  announcementMessage: "",')
 				writer.writeLine('  announcementTimestamp: "",')
-				writer.writeLine('} as PlayerData')
+				writer.writeLine('} as unknown as PlayerData')
 			},
 		)
 	}
