@@ -92,9 +92,9 @@ export class CombatStylesModularGenerator extends ModularBaseGenerator<CombatSty
 		typesFile.addType('CombatStyleHrid', '(typeof COMBATSTYLE_HRIDS)[number]')
 
 		// Add module exports
-		this.moduleBuilder.addExport('types', 'CombatStyle', false)
-		this.moduleBuilder.addExport('types', 'CombatStyleHrid', false)
-		this.moduleBuilder.addExport('types', 'SkillHrid', false)
+		this.moduleBuilder.addExport('types', 'CombatStyle', 'type')
+		this.moduleBuilder.addExport('types', 'CombatStyleHrid', 'type')
+		this.moduleBuilder.addExport('types', 'SkillHrid', 'type')
 	}
 
 	protected override generateConstants(
@@ -104,7 +104,7 @@ export class CombatStylesModularGenerator extends ModularBaseGenerator<CombatSty
 
 		// Generate COMBATSTYLE_HRIDS array
 		const hrids = Object.keys(entities).sort()
-		constantsFile.addConstArray('COMBATSTYLE_HRIDS', hrids, 'as const')
+		constantsFile.addConstArray('COMBATSTYLE_HRIDS', hrids, true)
 
 		// Export the constants
 		this.moduleBuilder.addExport('constants', 'COMBATSTYLE_HRIDS')
@@ -177,7 +177,7 @@ export class CombatStylesModularGenerator extends ModularBaseGenerator<CombatSty
 
 		// Sort the arrays
 		for (const skillHrid in bySkill) {
-			bySkill[skillHrid].sort()
+			bySkill[skillHrid]!.sort()
 		}
 
 		lookupsFile.addStaticLookup(

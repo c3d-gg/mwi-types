@@ -127,7 +127,7 @@ export class NameColorsGeneratorModular extends ModularBaseGenerator<NameColor> 
 				if (!byCost[color.cowbellCost]) {
 					byCost[color.cowbellCost] = []
 				}
-				byCost[color.cowbellCost].push(hrid)
+				byCost[color.cowbellCost]!.push(hrid)
 			}
 		}
 

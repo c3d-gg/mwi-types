@@ -32,7 +32,9 @@ export class LeaderboardsModularGenerator extends ModularBaseGenerator<Leaderboa
 			entityName: 'Leaderboard',
 			entityNamePlural: 'Leaderboards',
 			sourceKey: 'leaderboardCategoryDetailMap',
-			modulePath: 'leaderboards',
+			outputPath: './src/generated/leaderboards',
+			generateConstants: true,
+			generateUtils: true,
 		})
 	}
 
@@ -103,6 +105,9 @@ export class LeaderboardsModularGenerator extends ModularBaseGenerator<Leaderboa
 	protected override generateTypes(): void {
 		const typesBuilder = this.moduleBuilder.getFile('types')
 		
+		// Import type constants from constants file
+		typesBuilder.addImport('./constants', ['LeaderboardCategoryHrid', 'LeaderboardTypeHrid'], true)
+		
 		// Import from modular skills if available, otherwise use string
 		if (this.uniqueSkillHrids.size > 0) {
 			typesBuilder.addImport('../skills/types', ['SkillHrid'], true)
@@ -110,7 +115,8 @@ export class LeaderboardsModularGenerator extends ModularBaseGenerator<Leaderboa
 		
 		// Import from modular game-modes if available, otherwise use string  
 		if (this.uniqueGameModes.size > 0) {
-			typesBuilder.addImport('../game-modes/types', ['GameModeHrid'], true)
+			// Comment out until game-modes module exists
+			// typesBuilder.addImport('../game-modes/types', ['GameModeHrid'], true)
 		}
 
 		// Generate LeaderboardCategory interface
@@ -189,10 +195,10 @@ export class LeaderboardsModularGenerator extends ModularBaseGenerator<Leaderboa
 		}
 		
 		// Export constant-derived types (they're actually in constants.ts, not types.ts)
-		this.moduleBuilder.addExport('constants', 'LeaderboardCategoryHrid', true)
-		this.moduleBuilder.addExport('constants', 'LeaderboardTypeHrid', true)
-		this.moduleBuilder.addExport('types', 'LeaderboardCategory')
-		this.moduleBuilder.addExport('types', 'LeaderboardType')
+		this.moduleBuilder.addExport('constants', 'LeaderboardCategoryHrid', 'type')
+		this.moduleBuilder.addExport('constants', 'LeaderboardTypeHrid', 'type')
+		this.moduleBuilder.addExport('types', 'LeaderboardCategory', 'type')
+		this.moduleBuilder.addExport('types', 'LeaderboardType', 'type')
 	}
 
 	protected override generateConstants(
@@ -304,14 +310,22 @@ export class LeaderboardsModularGenerator extends ModularBaseGenerator<Leaderboa
 		// Clean entity data
 		const cleanedCategories: Record<string, any> = {}
 		for (const [hrid, category] of Object.entries(categories)) {
-			cleanedCategories[hrid] = this.cleanEntityData(category, [
-				'skillHrid', // Preserve null values
-			])
+			const cleaned = this.cleanEntityData(category)
+			// Convert empty string or undefined to null for skillHrid
+			if (cleaned.skillHrid === '' || cleaned.skillHrid === undefined) {
+				cleaned.skillHrid = null
+			}
+			cleanedCategories[hrid] = cleaned
 		}
 
 		const cleanedTypes: Record<string, any> = {}
 		for (const [hrid, type] of Object.entries(types)) {
-			cleanedTypes[hrid] = this.cleanEntityData(type)
+			const cleaned = this.cleanEntityData(type)
+			// Convert empty string to empty string for gameMode (keep as string type)
+			if (!cleaned.gameMode) {
+				cleaned.gameMode = ''
+			}
+			cleanedTypes[hrid] = cleaned
 		}
 
 		// Generate lazy-loaded data for categories
@@ -402,6 +416,23 @@ export class LeaderboardsModularGenerator extends ModularBaseGenerator<Leaderboa
 
 	protected override generateUtilities(entities: Record<string, LeaderboardEntity>): void {
 		const utilsBuilder = this.moduleBuilder.getFile('utils')
+		
+		// Add imports needed by utils
+		utilsBuilder.addImport('./types', ['LeaderboardCategory', 'LeaderboardType', 'SkillHrid'], true)
+		// Import type-only items as types
+		utilsBuilder.addImport('./constants', ['LeaderboardCategoryHrid', 'LeaderboardTypeHrid'], true)
+		// Import value items as values (arrays that are used at runtime)
+		utilsBuilder.addImport('./constants', [
+			'LEADERBOARD_CATEGORY_HRIDS',
+			'LEADERBOARD_TYPE_HRIDS',
+			'GUILD_LEADERBOARD_CATEGORIES',
+			'GUILD_LEADERBOARD_TYPES',
+			'SKILL_LEADERBOARD_CATEGORIES',
+			'NON_SKILL_LEADERBOARD_CATEGORIES',
+			'STEAM_LEADERBOARD_TYPES'
+		], false)
+		utilsBuilder.addImport('./data', ['getLeaderboardCategoriesMap', 'getLeaderboardTypesMap'], false)
+		utilsBuilder.addImport('./lookups', ['LEADERBOARD_CATEGORIES_BY_SKILL', 'LEADERBOARD_TYPES_BY_GAME_MODE'], false)
 		
 		// Type guards
 		utilsBuilder.addFunction(

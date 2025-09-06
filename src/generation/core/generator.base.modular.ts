@@ -108,21 +108,33 @@ export abstract class ModularBaseGenerator<TEntity> {
 	protected cleanEntityData(data: any, parentKey?: string): any {
 		// Preserve null values for fields that explicitly allow null
 		const nullPreservedFields = [
-			'experienceGain', 'dropTable', 'essenceDropTable', 'rareDropTable',
-			'inputItems', 'outputItems', 'combatZoneInfo', 'buffs',
-			'levelRequirement', 'bossSpawns', 'rewardDropTable',
-			'randomSpawnInfoMap', 'fixedSpawnsMap', 'spawns', 'abilities',
-			'defaultCombatTriggers', 'skillExpMap'
+			'experienceGain',
+			'dropTable',
+			'essenceDropTable',
+			'rareDropTable',
+			'inputItems',
+			'outputItems',
+			'combatZoneInfo',
+			'buffs',
+			'levelRequirement',
+			'bossSpawns',
+			'rewardDropTable',
+			'randomSpawnInfoMap',
+			'fixedSpawnsMap',
+			'spawns',
+			'abilities',
+			'defaultCombatTriggers',
+			'skillExpMap',
 		]
 
 		// Fields that should preserve empty strings
-		const emptyStringPreservedFields = [
-			'description', 'keyItemHrid', 'name'
-		]
+		const emptyStringPreservedFields = ['description', 'keyItemHrid', 'name']
 
 		// Fields that should preserve undefined values (optional fields)
 		const undefinedPreservedFields = [
-			'requiredChatIconHrid', 'abilities', 'skillHrid'
+			'requiredChatIconHrid',
+			'abilities',
+			'skillHrid',
 		]
 
 		if (data === null) {
@@ -139,7 +151,11 @@ export abstract class ModularBaseGenerator<TEntity> {
 
 		if (typeof data === 'string') {
 			// Preserve empty strings for certain fields
-			if (parentKey && emptyStringPreservedFields.includes(parentKey) && data === '') {
+			if (
+				parentKey &&
+				emptyStringPreservedFields.includes(parentKey) &&
+				data === ''
+			) {
 				return data
 			}
 			return data === '' ? undefined : data
@@ -147,11 +163,18 @@ export abstract class ModularBaseGenerator<TEntity> {
 
 		if (Array.isArray(data)) {
 			// Keep empty array for spawns field and abilities field
-			if ((parentKey === 'spawns' || parentKey === 'abilities') && data.length === 0) {
+			if (
+				(parentKey === 'spawns' || parentKey === 'abilities') &&
+				data.length === 0
+			) {
 				return []
 			}
 			// Return null for empty arrays if the field expects null
-			if (data.length === 0 && parentKey && nullPreservedFields.includes(parentKey)) {
+			if (
+				data.length === 0 &&
+				parentKey &&
+				nullPreservedFields.includes(parentKey)
+			) {
 				return null
 			}
 			return data.length === 0
@@ -166,11 +189,14 @@ export abstract class ModularBaseGenerator<TEntity> {
 				// Keep empty string fields even if they're undefined or empty
 				if (emptyStringPreservedFields.includes(key)) {
 					cleaned[key] = cleanedValue === undefined ? '' : cleanedValue
-				// Keep undefined values for optional fields
+					// Keep undefined values for optional fields
 				} else if (undefinedPreservedFields.includes(key)) {
-					cleaned[key] = cleanedValue  // Keep undefined as-is
-				// Keep null values for fields that expect null
-				} else if (nullPreservedFields.includes(key) && (cleanedValue === null || cleanedValue !== undefined)) {
+					cleaned[key] = cleanedValue // Keep undefined as-is
+					// Keep null values for fields that expect null
+				} else if (
+					nullPreservedFields.includes(key) &&
+					(cleanedValue === null || cleanedValue !== undefined)
+				) {
 					cleaned[key] = cleanedValue
 				} else if (cleanedValue !== undefined) {
 					cleaned[key] = cleanedValue

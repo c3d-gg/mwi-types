@@ -79,8 +79,8 @@ export class DamageTypesModularGenerator extends ModularBaseGenerator<DamageType
 		typesFile.addType('DamageTypeHrid', '(typeof DAMAGETYPE_HRIDS)[number]')
 
 		// Add module exports
-		this.moduleBuilder.addExport('types', 'DamageType', false)
-		this.moduleBuilder.addExport('types', 'DamageTypeHrid', false)
+		this.moduleBuilder.addExport('types', 'DamageType', 'type')
+		this.moduleBuilder.addExport('types', 'DamageTypeHrid', 'type')
 	}
 
 	protected override generateConstants(
@@ -90,7 +90,7 @@ export class DamageTypesModularGenerator extends ModularBaseGenerator<DamageType
 
 		// Generate DAMAGETYPE_HRIDS array
 		const hrids = Object.keys(entities).sort()
-		constantsFile.addConstArray('DAMAGETYPE_HRIDS', hrids, 'as const')
+		constantsFile.addConstArray('DAMAGETYPE_HRIDS', hrids, true)
 
 		// Export the constants
 		this.moduleBuilder.addExport('constants', 'DAMAGETYPE_HRIDS')
@@ -126,9 +126,9 @@ export class DamageTypesModularGenerator extends ModularBaseGenerator<DamageType
 
 		// Create lookup for damage types sorted by index
 		const sortedTypes = Object.keys(entities)
-			.sort((a, b) => entities[a].sortIndex - entities[b].sortIndex)
+			.sort((a, b) => entities[a]!.sortIndex - entities[b]!.sortIndex)
 
-		lookupsFile.addConstArray('DAMAGE_TYPES_BY_INDEX', sortedTypes, 'as const')
+		lookupsFile.addConstArray('DAMAGE_TYPES_BY_INDEX', sortedTypes, true)
 
 		// Create element types mapping (common damage types)
 		const elementTypes: string[] = []
@@ -140,7 +140,7 @@ export class DamageTypesModularGenerator extends ModularBaseGenerator<DamageType
 		}
 
 		if (elementTypes.length > 0) {
-			lookupsFile.addConstArray('ELEMENT_DAMAGE_TYPES', elementTypes, 'as const')
+			lookupsFile.addConstArray('ELEMENT_DAMAGE_TYPES', elementTypes, true)
 		}
 
 		// Export the lookups

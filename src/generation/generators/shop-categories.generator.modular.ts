@@ -15,6 +15,8 @@ export class ShopCategoriesGeneratorModular extends ModularBaseGenerator<ShopCat
 			entityNamePlural: 'ShopCategories',
 			sourceKey: 'shopCategoryDetailMap',
 			outputPath: './src/generated/shop-categories',
+			generateConstants: true,
+			generateUtils: true,
 		}
 		super(config)
 	}
@@ -74,7 +76,7 @@ export class ShopCategoriesGeneratorModular extends ModularBaseGenerator<ShopCat
 		this.moduleBuilder.addExport('constants', 'SHOPCATEGORY_HRIDS', 'const')
 	}
 
-	protected override generateData(entities: Record<string, ShopCategory>): void {
+	protected override generateLazyData(entities: Record<string, ShopCategory>): void {
 		const dataBuilder = this.moduleBuilder.getFile('data')
 
 		// Import types
@@ -84,10 +86,11 @@ export class ShopCategoriesGeneratorModular extends ModularBaseGenerator<ShopCat
 		const entries = Object.entries(entities)
 		dataBuilder.addLazyMap(
 			'SHOPCATEGORIES',
+			'getShopCategoriesMap',
+			'loadShopCategories',
 			'ShopCategoryHrid',
 			'ShopCategory',
 			entries,
-			'getShopCategoriesMap',
 		)
 
 		this.moduleBuilder.addExport('data', 'getShopCategoriesMap')
@@ -108,7 +111,7 @@ export class ShopCategoriesGeneratorModular extends ModularBaseGenerator<ShopCat
 		this.moduleBuilder.addExport('lookups', 'SHOPCATEGORIES_BY_INDEX')
 	}
 
-	protected override generateUtils(): void {
+	protected override generateUtilities(): void {
 		const utilsBuilder = this.moduleBuilder.getFile('utils')
 
 		// Import types

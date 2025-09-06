@@ -26,7 +26,7 @@ export class ModularAvatarOutfitsGenerator extends ModularBaseGenerator<AvatarOu
 			entityName: 'AvatarOutfit',
 			entityNamePlural: 'AvatarOutfits',
 			sourceKey: 'avatarOutfitDetailMap',
-			outputPath: './src/generated/avatars/index.ts',
+			outputPath: './src/generated/avataroutfits/index.ts',
 			generateConstants: true,
 			generateUtils: true,
 		})
@@ -173,21 +173,21 @@ export class ModularAvatarOutfitsGenerator extends ModularBaseGenerator<AvatarOu
 		this.moduleBuilder.addExport('lookups', 'AVATAR_OUTFITS_BY_COST', 'const')
 	}
 
-	protected override generateUtils(entities: Record<string, AvatarOutfit>): void {
+	protected override generateUtilities(entities: Record<string, AvatarOutfit>): void {
 		const utilsFile = this.moduleBuilder.getFile('utils')
 		
 		utilsFile.addComment('Avatar outfit utility functions')
 		
 		// Import required types and data
-		utilsFile.addImport('../types', ['AvatarOutfit', 'AvatarOutfitHrid'])
-		utilsFile.addImport('../constants', [
+		utilsFile.addImport('./types', ['AvatarOutfit', 'AvatarOutfitHrid'], true)
+		utilsFile.addImport('./constants', [
 			'AVATAROUTFIT_HRIDS',
 			'SEASONAL_AVATAR_OUTFIT_HRIDS',
 			'COWBELL_AVATAR_OUTFIT_HRIDS',
 			'FREE_AVATAR_OUTFIT_HRIDS',
-		])
-		utilsFile.addImport('../data', ['getAvatarOutfitsMap'])
-		utilsFile.addImport('../lookups', ['AVATAR_OUTFITS_BY_COST'])
+		], false)
+		utilsFile.addImport('./data', ['getAvatarOutfitsMap'], false)
+		utilsFile.addImport('./lookups', ['AVATAR_OUTFITS_BY_COST'], false)
 		
 		// isAvatarOutfitHrid - type guard
 		utilsFile.addFunction(

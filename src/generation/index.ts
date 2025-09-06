@@ -7,16 +7,19 @@ import { ActionCategoriesGenerator } from './generators/action-categories.genera
 import { ModularActionCategoriesGenerator } from './generators/action-categories.generator.modular'
 import { ActionsGenerator } from './generators/actions.generator'
 import { AvatarGenerator } from './generators/avatar.generator'
+import { ModularAvatarGenerator } from './generators/avatar.generator.modular'
 import { AvatarsGenerator } from './generators/avatars.generator'
 import { ModularAvatarOutfitsGenerator } from './generators/avatars.generator.modular'
 import { BuffTypesGenerator } from './generators/buff-types.generator'
 import { ModularBuffTypesGenerator } from './generators/buff-types.generator.modular'
 import { ChatChannelTypesGenerator } from './generators/chat-channel-types.generator'
+import { ChatChannelTypesGeneratorModular } from './generators/chat-channel-types.generator.modular'
 import { ChatIconsGenerator } from './generators/chat-icons.generator'
 import { ModularChatIconsGenerator } from './generators/chat-icons.generator.modular'
 import { CombatStylesGenerator } from './generators/combat-styles.generator'
 import { CombatStylesModularGenerator } from './generators/combat-styles.generator.modular'
 import { CommunityBuffsGenerator } from './generators/community-buffs.generator'
+import { CommunityBuffsGeneratorModular } from './generators/community-buffs.generator.modular'
 import { DamageTypesGenerator } from './generators/damage-types.generator'
 import { DamageTypesModularGenerator } from './generators/damage-types.generator.modular'
 import { EquipmentTypesGenerator } from './generators/equipment-types.generator'
@@ -24,12 +27,14 @@ import { ModularEquipmentTypesGenerator } from './generators/equipment-types.gen
 import { GameModesGenerator } from './generators/game-modes.generator'
 import { GameModesGeneratorModular } from './generators/game-modes.generator.modular'
 import { GuildCharacterRolesGenerator } from './generators/guild-character-roles.generator'
+import { GuildCharacterRolesGeneratorModular } from './generators/guild-character-roles.generator.modular'
 import { HouseRoomsGenerator } from './generators/house-rooms.generator'
 import { ModularHouseRoomsGenerator } from './generators/house-rooms.generator.modular'
 import { IndexGenerator } from './generators/index.generator'
 import { ItemCategoriesGenerator } from './generators/item-categories.generator'
 import { ModularItemCategoriesGenerator } from './generators/item-categories.generator.modular'
 import { ItemLocationsGenerator } from './generators/item-locations.generator'
+import { ItemLocationsGeneratorModular } from './generators/item-locations.generator.modular'
 import { ItemsGenerator } from './generators/items.generator'
 import { LeaderboardCategoriesGenerator } from './generators/leaderboard-categories.generator'
 import { LeaderboardTypesGenerator } from './generators/leaderboard-types.generator'
@@ -40,6 +45,7 @@ import { ModularMonstersGenerator } from './generators/monsters.generator.modula
 import { NameColorsGenerator } from './generators/name-colors.generator'
 import { NameColorsGeneratorModular } from './generators/name-colors.generator.modular'
 import { PlayerDataGenerator } from './generators/player-data.generator'
+import { ModularPlayerDataGenerator } from './generators/player-data.generator.modular'
 import { PurchaseBundlesGenerator } from './generators/purchase-bundles.generator'
 import { PurchaseBundlesGeneratorModular } from './generators/purchase-bundles.generator.modular'
 import { RandomTasksGenerator } from './generators/random-tasks.generator'
@@ -53,6 +59,7 @@ import { ShopItemsGeneratorModular } from './generators/shop-items.generator.mod
 import { SkillsGenerator } from './generators/skills.generator'
 import { ModularSkillsGenerator } from './generators/skills.generator.modular'
 import { TaskShopItemsGenerator } from './generators/task-shop-items.generator'
+import { TaskShopItemsGeneratorModular } from './generators/task-shop-items.generator.modular'
 import { TranslationsGenerator } from './generators/translations.generator'
 
 async function generateAll() {
@@ -96,11 +103,18 @@ async function generateAll() {
 		} else {
 			await new AbilitiesGenerator().generate(sourcePath)
 		}
-		await new AvatarGenerator().generate(sourcePath)
 		
 		// Avatars - use modular if enabled
 		if (useModular) {
 			console.log('🧪 Using MODULAR avatars generator for tree-shaking optimization')
+			await new ModularAvatarGenerator().generate(sourcePath)
+		} else {
+			await new AvatarGenerator().generate(sourcePath)
+		}
+		
+		// Avatar Outfits - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR avatar outfits generator for tree-shaking optimization')
 			await new ModularAvatarOutfitsGenerator().generate(sourcePath)
 		} else {
 			await new AvatarsGenerator().generate(sourcePath)
@@ -122,7 +136,13 @@ async function generateAll() {
 		} else {
 			await new CombatStylesGenerator().generate(sourcePath)
 		}
-		await new ChatChannelTypesGenerator().generate(sourcePath)
+		// ChatChannelTypes - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR chat channel types generator for tree-shaking optimization')
+			await new ChatChannelTypesGeneratorModular().generate(sourcePath)
+		} else {
+			await new ChatChannelTypesGenerator().generate(sourcePath)
+		}
 		
 		// ChatIcons - use modular if enabled
 		if (useModular) {
@@ -155,7 +175,13 @@ async function generateAll() {
 		} else {
 			await new GameModesGenerator().generate(sourcePath)
 		}
-		await new GuildCharacterRolesGenerator().generate(sourcePath)
+		// GuildCharacterRoles - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR guild character roles generator for tree-shaking optimization')
+			await new GuildCharacterRolesGeneratorModular().generate(sourcePath)
+		} else {
+			await new GuildCharacterRolesGenerator().generate(sourcePath)
+		}
 		
 		// ItemCategories - use modular if enabled
 		if (useModular) {
@@ -165,7 +191,13 @@ async function generateAll() {
 			await new ItemCategoriesGenerator().generate(sourcePath)
 		}
 		
-		await new ItemLocationsGenerator().generate(sourcePath)
+		// ItemLocations - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR item locations generator for tree-shaking optimization')
+			await new ItemLocationsGeneratorModular().generate(sourcePath)
+		} else {
+			await new ItemLocationsGenerator().generate(sourcePath)
+		}
 		
 		// NameColors - use modular if enabled
 		if (useModular) {
@@ -206,7 +238,13 @@ async function generateAll() {
 		} else {
 			await new ItemsGenerator().generate(sourcePath)
 		}
-		await new CommunityBuffsGenerator().generate(sourcePath)
+		// CommunityBuffs - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR community buffs generator for tree-shaking optimization')
+			await new CommunityBuffsGeneratorModular().generate(sourcePath)
+		} else {
+			await new CommunityBuffsGenerator().generate(sourcePath)
+		}
 		// ShopItems - use modular if enabled
 		if (useModular) {
 			console.log('🧪 Using MODULAR shop items generator for tree-shaking optimization')
@@ -214,7 +252,13 @@ async function generateAll() {
 		} else {
 			await new ShopItemsGenerator().generate(sourcePath) // Depends on Items
 		}
-		await new TaskShopItemsGenerator().generate(sourcePath) // Depends on Items
+		// TaskShopItems - use modular if enabled
+		if (useModular) {
+			console.log('🧪 Using MODULAR task shop items generator for tree-shaking optimization')
+			await new TaskShopItemsGeneratorModular().generate(sourcePath) // Depends on Items
+		} else {
+			await new TaskShopItemsGenerator().generate(sourcePath) // Depends on Items
+		}
 		await new LeaderboardCategoriesGenerator().generate(sourcePath) // Depends on Skills
 		// Leaderboards - use modular if enabled
 		if (useModular) {
@@ -252,7 +296,12 @@ async function generateAll() {
 
 		// Layer 5: Player data (requires all game entity types)
 		console.log('\n📦 Layer 5: Player data generation')
-		await new PlayerDataGenerator().generate('./src/sources/player_data.json')
+		if (useModular) {
+			console.log('🧪 Using MODULAR player data generator for tree-shaking optimization')
+			await new ModularPlayerDataGenerator().generate('./src/sources/player_data.json')
+		} else {
+			await new PlayerDataGenerator().generate('./src/sources/player_data.json')
+		}
 
 		// Layer 6: Translations (requires all entity types to be generated)
 		console.log('\n📦 Layer 6: Translation generation')

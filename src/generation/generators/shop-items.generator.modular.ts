@@ -26,6 +26,8 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 			entityNamePlural: 'ShopItems',
 			sourceKey: 'shopItemDetailMap',
 			outputPath: './src/generated/shop-items',
+			generateConstants: true,
+			generateUtils: true,
 		} as GeneratorConfig)
 	}
 
@@ -83,7 +85,11 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 		])
 
 		// Import constants for type derivation
-		typesBuilder.addImport('./constants', ['SHOPITEM_HRIDS', 'SHOP_CATEGORIES'], false)
+		typesBuilder.addImport(
+			'./constants',
+			['SHOPITEM_HRIDS', 'SHOP_CATEGORIES'],
+			false,
+		)
 
 		// Generate type aliases
 		typesBuilder.addType('ShopItemHrid', 'typeof SHOPITEM_HRIDS[number]')
@@ -105,7 +111,9 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 		this.moduleBuilder.addExport('types', 'Cost', 'type')
 	}
 
-	protected override generateConstants(entities: Record<string, ShopItem>): void {
+	protected override generateConstants(
+		entities: Record<string, ShopItem>,
+	): void {
 		const constantsBuilder = this.moduleBuilder.getFile('constants')
 
 		// Generate shop item HRIDs
@@ -124,7 +132,9 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 		this.moduleBuilder.addExport('constants', 'CURRENCY_ITEMS', 'const')
 	}
 
-	protected override generateData(entities: Record<string, ShopItem>): void {
+	protected override generateLazyData(
+		entities: Record<string, ShopItem>,
+	): void {
 		const dataBuilder = this.moduleBuilder.getFile('data')
 
 		// Import types
@@ -132,25 +142,31 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 		dataBuilder.addImport('../items/types', ['ItemHrid'], true)
 
 		// Generate lazy map
-		const entries = Object.entries(entities).map(([hrid, item]) => {
-			// Format costs properly
-			const costs = item.costs.map(cost => ({
-				itemHrid: `'${cost.itemHrid}' as ItemHrid`,
-				count: cost.count
-			}))
+		const entries = Object.entries(entities).map(
+			([hrid, item]): [string, any] => {
+				// Format costs properly
+				const costs = item.costs.map((cost) => ({
+					itemHrid: cost.itemHrid,
+					count: cost.count,
+				}))
 
-			return [hrid, {
-				...item,
-				costs: costs
-			}]
-		})
+				return [
+					hrid,
+					{
+						...item,
+						costs: costs,
+					},
+				]
+			},
+		)
 
 		dataBuilder.addLazyMap(
 			'SHOPITEMS',
+			'getShopItemsMap',
+			'loadShopItems',
 			'ShopItemHrid',
 			'ShopItem',
 			entries,
-			'getShopItemsMap',
 		)
 
 		this.moduleBuilder.addExport('data', 'getShopItemsMap')
@@ -216,15 +232,31 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 		this.moduleBuilder.addExport('lookups', 'SHOP_ITEMS_BY_ITEM_SOLD')
 	}
 
-	protected override generateUtils(): void {
+	protected override generateUtilities(): void {
 		const utilsBuilder = this.moduleBuilder.getFile('utils')
 
 		// Import types
-		utilsBuilder.addImport('./types', ['ShopItem', 'ShopItemHrid', 'ShopCategory'], true)
+		utilsBuilder.addImport(
+			'./types',
+			['ShopItem', 'ShopItemHrid', 'ShopCategory'],
+			true,
+		)
 		utilsBuilder.addImport('../items/types', ['ItemHrid'], true)
 		utilsBuilder.addImport('./data', ['getShopItemsMap'], false)
-		utilsBuilder.addImport('./constants', ['SHOPITEM_HRIDS', 'SHOP_CATEGORIES'], false)
-		utilsBuilder.addImport('./lookups', ['SHOP_ITEMS_BY_CATEGORY', 'SHOP_ITEMS_BY_CURRENCY', 'SHOP_ITEMS_BY_ITEM_SOLD'], false)
+		utilsBuilder.addImport(
+			'./constants',
+			['SHOPITEM_HRIDS', 'SHOP_CATEGORIES'],
+			false,
+		)
+		utilsBuilder.addImport(
+			'./lookups',
+			[
+				'SHOP_ITEMS_BY_CATEGORY',
+				'SHOP_ITEMS_BY_CURRENCY',
+				'SHOP_ITEMS_BY_ITEM_SOLD',
+			],
+			false,
+		)
 
 		// Type guard
 		utilsBuilder.addFunction(
@@ -232,7 +264,9 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 			[{ name: 'value', type: 'string' }],
 			'value is ShopItemHrid',
 			(writer) => {
-				writer.writeLine('return SHOPITEM_HRIDS.includes(value as ShopItemHrid)')
+				writer.writeLine(
+					'return SHOPITEM_HRIDS.includes(value as ShopItemHrid)',
+				)
 			},
 		)
 		this.moduleBuilder.addExport('utils', 'isShopItemHrid')
@@ -274,7 +308,9 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 			'ShopItem[]',
 			(writer) => {
 				writer.writeLine('const hrids = SHOP_ITEMS_BY_CATEGORY[category] || []')
-				writer.writeLine('return hrids.map(hrid => getShopItemsMap().get(hrid)!).filter(Boolean)')
+				writer.writeLine(
+					'return hrids.map(hrid => getShopItemsMap().get(hrid)!).filter(Boolean)',
+				)
 			},
 		)
 		this.moduleBuilder.addExport('utils', 'getShopItemsByCategory')
@@ -286,7 +322,9 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 			'ShopItem[]',
 			(writer) => {
 				writer.writeLine('const hrids = SHOP_ITEMS_BY_CURRENCY[currency] || []')
-				writer.writeLine('return hrids.map(hrid => getShopItemsMap().get(hrid)!).filter(Boolean)')
+				writer.writeLine(
+					'return hrids.map(hrid => getShopItemsMap().get(hrid)!).filter(Boolean)',
+				)
 			},
 		)
 		this.moduleBuilder.addExport('utils', 'getShopItemsByCurrency')
@@ -297,8 +335,12 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 			[{ name: 'itemHrid', type: 'ItemHrid' }],
 			'ShopItem[]',
 			(writer) => {
-				writer.writeLine('const hrids = SHOP_ITEMS_BY_ITEM_SOLD[itemHrid] || []')
-				writer.writeLine('return hrids.map(hrid => getShopItemsMap().get(hrid)!).filter(Boolean)')
+				writer.writeLine(
+					'const hrids = SHOP_ITEMS_BY_ITEM_SOLD[itemHrid] || []',
+				)
+				writer.writeLine(
+					'return hrids.map(hrid => getShopItemsMap().get(hrid)!).filter(Boolean)',
+				)
 			},
 		)
 		this.moduleBuilder.addExport('utils', 'getShopItemsForItem')
@@ -325,12 +367,16 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 			[{ name: 'items', type: 'ShopItem[]' }],
 			'Partial<Record<ItemHrid, number>>',
 			(writer) => {
-				writer.writeLine('const totalCost: Partial<Record<ItemHrid, number>> = {}')
+				writer.writeLine(
+					'const totalCost: Partial<Record<ItemHrid, number>> = {}',
+				)
 				writer.writeLine('')
 				writer.writeLine('items.forEach(item => {')
 				writer.writeLine('  item.costs.forEach(cost => {')
 				writer.writeLine('    const currency = cost.itemHrid')
-				writer.writeLine('    totalCost[currency] = (totalCost[currency] || 0) + cost.count')
+				writer.writeLine(
+					'    totalCost[currency] = (totalCost[currency] || 0) + cost.count',
+				)
 				writer.writeLine('  })')
 				writer.writeLine('})')
 				writer.writeLine('')
@@ -344,7 +390,11 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 			'findCheapestShopItem',
 			[
 				{ name: 'itemHrid', type: 'ItemHrid' },
-				{ name: 'preferredCurrency', type: 'ItemHrid | undefined', default: 'undefined' },
+				{
+					name: 'preferredCurrency',
+					type: 'ItemHrid | undefined',
+					default: undefined,
+				},
 			],
 			'ShopItem | undefined',
 			(writer) => {
@@ -353,23 +403,35 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 				writer.writeLine('if (shopItems.length === 0) return undefined')
 				writer.writeLine('if (shopItems.length === 1) return shopItems[0]')
 				writer.writeLine('')
-				writer.writeLine('// If preferred currency specified, filter to those first')
+				writer.writeLine(
+					'// If preferred currency specified, filter to those first',
+				)
 				writer.writeLine('if (preferredCurrency) {')
 				writer.writeLine('  const preferred = shopItems.filter(item =>')
-				writer.writeLine('    item.costs.some(c => c.itemHrid === preferredCurrency)')
+				writer.writeLine(
+					'    item.costs.some(c => c.itemHrid === preferredCurrency)',
+				)
 				writer.writeLine('  )')
 				writer.writeLine('  if (preferred.length > 0) {')
-				writer.writeLine('    // Sort by cost amount for the preferred currency')
+				writer.writeLine(
+					'    // Sort by cost amount for the preferred currency',
+				)
 				writer.writeLine('    return preferred.sort((a, b) => {')
-				writer.writeLine('      const aCost = a.costs.find(c => c.itemHrid === preferredCurrency)?.count || 0')
-				writer.writeLine('      const bCost = b.costs.find(c => c.itemHrid === preferredCurrency)?.count || 0')
+				writer.writeLine(
+					'      const aCost = a.costs.find(c => c.itemHrid === preferredCurrency)?.count || 0',
+				)
+				writer.writeLine(
+					'      const bCost = b.costs.find(c => c.itemHrid === preferredCurrency)?.count || 0',
+				)
 				writer.writeLine('      return aCost - bCost')
 				writer.writeLine('    })[0]')
 				writer.writeLine('  }')
 				writer.writeLine('}')
 				writer.writeLine('')
 				writer.writeLine('// Return first item by sort index as fallback')
-				writer.writeLine('return shopItems.sort((a, b) => a.sortIndex - b.sortIndex)[0]')
+				writer.writeLine(
+					'return shopItems.sort((a, b) => a.sortIndex - b.sortIndex)[0]',
+				)
 			},
 		)
 		this.moduleBuilder.addExport('utils', 'findCheapestShopItem', 'function')
@@ -380,7 +442,9 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 			[{ name: 'items', type: 'ShopItem[]' }],
 			'ShopItem[]',
 			(writer) => {
-				writer.writeLine('return [...items].sort((a, b) => a.sortIndex - b.sortIndex)')
+				writer.writeLine(
+					'return [...items].sort((a, b) => a.sortIndex - b.sortIndex)',
+				)
 			},
 		)
 		this.moduleBuilder.addExport('utils', 'sortShopItemsByIndex', 'function')
@@ -396,13 +460,19 @@ export class ShopItemsGeneratorModular extends ModularBaseGenerator<ShopItem> {
 				writer.writeLine('for (const category of SHOP_CATEGORIES) {')
 				writer.writeLine('  const items = getShopItemsByCategory(category)')
 				writer.writeLine('  if (items.length > 0) {')
-				writer.writeLine('    grouped.set(category, sortShopItemsByIndex(items))')
+				writer.writeLine(
+					'    grouped.set(category, sortShopItemsByIndex(items))',
+				)
 				writer.writeLine('  }')
 				writer.writeLine('}')
 				writer.writeLine('')
 				writer.writeLine('return grouped')
 			},
 		)
-		this.moduleBuilder.addExport('utils', 'groupShopItemsByCategory', 'function')
+		this.moduleBuilder.addExport(
+			'utils',
+			'groupShopItemsByCategory',
+			'function',
+		)
 	}
 }
