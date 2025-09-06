@@ -40,42 +40,6 @@ export class ModularSharedTypesGenerator extends ModularBaseGenerator<any> {
 	}
 
 	/**
-	 * Override generate method for shared types special case
-	 */
-	override async generate(_sourcePath: string): Promise<void> {
-		console.log(`🔧 Generating ${this.config.entityNamePlural} (modular)...`)
-
-		// For shared types, we don't need source data - just generate static types
-		this.entities = {}
-
-		// Generate types using the hook system
-		this.processTypesDirectly()
-
-		// Save all files
-		await this.moduleBuilder.save()
-
-		console.log(`✅ Generated shared types module with static definitions`)
-	}
-
-	/**
-	 * Process types directly for shared types special case
-	 */
-	private processTypesDirectly(): void {
-		// Apply hook for custom interfaces
-		const customInterfaces = this.defineInterfaces?.()
-		if (customInterfaces) {
-			customInterfaces.forEach((def) => {
-				this.moduleBuilder.addInterface(def.name, def.properties)
-				this.moduleBuilder.addExport({
-					name: def.name,
-					source: './types',
-					isType: true,
-				})
-			})
-		}
-	}
-
-	/**
 	 * Shared types don't come from source data - they're defined statically
 	 */
 	public override extractEntities(_sourceData: any): Record<string, any> {
@@ -87,19 +51,6 @@ export class ModularSharedTypesGenerator extends ModularBaseGenerator<any> {
 	 */
 	protected override defineInterfaces(): InterfaceDefinition[] {
 		const interfaces: InterfaceDefinition[] = []
-
-		// Add file header comment
-		const typesBuilder = this.moduleBuilder.getFile('types')
-		typesBuilder.addComment(
-			'Shared type definitions used across multiple modules',
-		)
-		typesBuilder.addComment('')
-		typesBuilder.addComment(
-			'These types eliminate duplication and provide consistency across generators.',
-		)
-		typesBuilder.addComment(
-			'Consuming modules import these types and cast HRID strings as needed.',
-		)
 
 		// LevelRequirement - used by actions, items, recipes, etc.
 		interfaces.push({
@@ -341,6 +292,23 @@ export class ModularSharedTypesGenerator extends ModularBaseGenerator<any> {
 		})
 
 		return interfaces
+	}
+
+	/**
+	 * Extension hook: Add file header comments for shared types
+	 */
+	protected override extendTypes(): void {
+		const typesBuilder = this.moduleBuilder.getFile('types')
+		typesBuilder.addComment(
+			'Shared type definitions used across multiple modules',
+		)
+		typesBuilder.addComment('')
+		typesBuilder.addComment(
+			'These types eliminate duplication and provide consistency across generators.',
+		)
+		typesBuilder.addComment(
+			'Consuming modules import these types and cast HRID strings as needed.',
+		)
 	}
 }
 

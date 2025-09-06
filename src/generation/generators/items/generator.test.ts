@@ -331,7 +331,7 @@ describe('ModularItemsGenerator', () => {
 		})
 
 		test('should generate AlchemyDetail interface', () => {
-			const interfaces = generator.defineInterfaces()
+			const interfaces = generator['defineInterfaces']()
 
 			const alchemyInterface = interfaces.find(
 				(i: any) => i.name === 'AlchemyDetail',
@@ -351,7 +351,7 @@ describe('ModularItemsGenerator', () => {
 		})
 
 		test('should generate EquipmentDetail interface', () => {
-			const interfaces = generator.defineInterfaces()
+			const interfaces = generator['defineInterfaces']()
 
 			const equipInterface = interfaces.find(
 				(i: any) => i.name === 'EquipmentDetail',
@@ -374,7 +374,7 @@ describe('ModularItemsGenerator', () => {
 		})
 
 		test('should generate CombatStats interface with typed properties', () => {
-			const interfaces = generator.defineInterfaces()
+			const interfaces = generator['defineInterfaces']()
 
 			const combatInterface = interfaces.find(
 				(i: any) => i.name === 'CombatStats',
@@ -404,7 +404,7 @@ describe('ModularItemsGenerator', () => {
 		})
 
 		test('should generate NoncombatStats interface with skill patterns', () => {
-			const interfaces = generator.defineInterfaces()
+			const interfaces = generator['defineInterfaces']()
 
 			const noncombatInterface = interfaces.find(
 				(i: any) => i.name === 'NoncombatStats',
@@ -434,7 +434,7 @@ describe('ModularItemsGenerator', () => {
 		})
 
 		test('should generate ConsumableDetail interface', () => {
-			const interfaces = generator.defineInterfaces()
+			const interfaces = generator['defineInterfaces']()
 
 			const consumableInterface = interfaces.find(
 				(i) => i.name === 'ConsumableDetail',
@@ -454,7 +454,7 @@ describe('ModularItemsGenerator', () => {
 		})
 
 		test('should generate AbilityBookDetail interface', () => {
-			const interfaces = generator.defineInterfaces()
+			const interfaces = generator['defineInterfaces']()
 
 			const abilityInterface = interfaces.find(
 				(i) => i.name === 'AbilityBookDetail',
@@ -586,7 +586,7 @@ describe('ModularItemsGenerator', () => {
 			// Test with larger mock data
 			const largeData = { itemDetailMap: {} }
 			for (let i = 0; i < 100; i++) {
-				largeData.itemDetailMap[`/items/test_${i}`] = {
+				;(largeData.itemDetailMap as any)[`/items/test_${i}`] = {
 					hrid: `/items/test_${i}`,
 					name: `Test Item ${i}`,
 					description: 'Test item',
@@ -618,9 +618,9 @@ describe('ModularItemsGenerator', () => {
 	describe('Integration Tests', () => {
 		test('should work with the complete module structure', () => {
 			// Test that all hooks work together
-			const interfaces = generator.defineInterfaces()
-			const utilities = generator.defineUtilities()
-			const constants = generator.defineConstants()
+			const interfaces = generator['defineInterfaces']()
+			const utilities = generator['defineUtilities']()
+			const constants = generator['defineConstants']()
 			const result = generator.extractEntities(mockSourceData)
 
 			expect(interfaces.length).toBeGreaterThan(5) // Item + detail interfaces

@@ -182,20 +182,6 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 	protected override defineInterfaces(): InterfaceDefinition[] {
 		const interfaces: InterfaceDefinition[] = []
 
-		// Import dependencies - respecting domain boundaries
-		const typesBuilder = this.moduleBuilder.getFile('types')
-
-		// Import types from other domains (DO NOT re-export - domain control)
-		typesBuilder.addImport('../items/types', ['ItemHrid'], true)
-		typesBuilder.addImport('../skills/types', ['SkillHrid'], true)
-		// NOTE: Temporarily commented out until these modules are migrated to new structure
-		// typesBuilder.addImport('../monsters/types', ['MonsterHrid'], true)
-		// typesBuilder.addImport('../actioncategories/types', ['ActionCategoryHrid'], true)
-		// typesBuilder.addImport('../bufftypes/types', ['Buff', 'BuffTypeHrid'], true)
-
-		// Generate type constants from collected values
-		this.generateTypeConstants()
-
 		// Define supporting interfaces
 		interfaces.push({
 			name: 'FightInfo',
@@ -282,6 +268,34 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 		})
 
 		return interfaces
+	}
+
+	/**
+	 * Extension hook: Add imports and type definitions after base types generation
+	 */
+	protected override extendTypes(): void {
+		const typesBuilder = this.moduleBuilder.getFile('types')
+
+		// Import types from other domains (DO NOT re-export - domain control)
+		typesBuilder.addImport('../items/types', ['ItemHrid'], true)
+		typesBuilder.addImport('../skills/types', ['SkillHrid'], true)
+		// NOTE: Temporarily commented out until these modules are migrated to new structure
+		// typesBuilder.addImport('../monsters/types', ['MonsterHrid'], true)
+		// typesBuilder.addImport('../actioncategories/types', ['ActionCategoryHrid'], true)
+		// typesBuilder.addImport('../bufftypes/types', ['Buff', 'BuffTypeHrid'], true)
+
+		// Generate ActionFunction and ActionType constants and types
+		if (this.actionFunctions.size > 0) {
+			const functions = Array.from(this.actionFunctions).sort()
+			typesBuilder.addConstArray('ACTION_FUNCTIONS', functions, true)
+			typesBuilder.addType('ActionFunction', 'typeof ACTION_FUNCTIONS[number]')
+		}
+
+		if (this.actionTypes.size > 0) {
+			const types = Array.from(this.actionTypes).sort()
+			typesBuilder.addConstArray('ACTION_TYPES', types, true)
+			typesBuilder.addType('ActionType', 'typeof ACTION_TYPES[number]')
+		}
 	}
 
 	/**
@@ -488,36 +502,31 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 		return utilities
 	}
 
-	// Helper method to generate type constants (called from defineInterfaces)
-	private generateTypeConstants(): void {
-		const typesBuilder = this.moduleBuilder.getFile('types')
+	/**
+	 * Extension hook: Add exports for ACTION_FUNCTIONS and ACTION_TYPES
+	 */
+	protected override extendConstants(): void {
+		// Export ACTION_FUNCTIONS and ACTION_TYPES for external use if they were generated
+		if (this.actionFunctions.size > 0) {
+			this.moduleBuilder.addExport({
+				name: 'ACTION_FUNCTIONS',
+				source: './types',
+			})
+			this.moduleBuilder.addExport({
+				name: 'ActionFunction',
+				source: './types',
+				isType: true,
+			})
+		}
 
-		// Action Functions
-		const functions = Array.from(this.actionFunctions).sort()
-		typesBuilder.addConstArray('ACTION_FUNCTIONS', functions, true)
-		typesBuilder.addType('ActionFunction', 'typeof ACTION_FUNCTIONS[number]')
-
-		// Action Types
-		const types = Array.from(this.actionTypes).sort()
-		typesBuilder.addConstArray('ACTION_TYPES', types, true)
-		typesBuilder.addType('ActionType', 'typeof ACTION_TYPES[number]')
-
-		// Export these for external use
-		this.moduleBuilder.addExport({
-			name: 'ACTION_FUNCTIONS',
-			source: './types',
-		})
-		this.moduleBuilder.addExport({ name: 'ACTION_TYPES', source: './types' })
-		this.moduleBuilder.addExport({
-			name: 'ActionFunction',
-			source: './types',
-			isType: true,
-		})
-		this.moduleBuilder.addExport({
-			name: 'ActionType',
-			source: './types',
-			isType: true,
-		})
+		if (this.actionTypes.size > 0) {
+			this.moduleBuilder.addExport({ name: 'ACTION_TYPES', source: './types' })
+			this.moduleBuilder.addExport({
+				name: 'ActionType',
+				source: './types',
+				isType: true,
+			})
+		}
 	}
 
 	// Data extraction methods (unchanged)

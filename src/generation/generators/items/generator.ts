@@ -294,31 +294,6 @@ export class ModularItemsGenerator extends ModularBaseGenerator<Item> {
 	}
 
 	protected override defineInterfaces(): InterfaceDefinition[] {
-		// Import dependencies - respecting domain boundaries
-		const typesBuilder = this.moduleBuilder.getFile('types')
-
-		// Import types from other domains (DO NOT re-export - domain control)
-		typesBuilder.addImport(
-			'../itemcategories/types',
-			['ItemCategoryHrid'],
-			true,
-		)
-		typesBuilder.addImport(
-			'../equipmenttypes/types',
-			['EquipmentTypeHrid'],
-			true,
-		)
-		typesBuilder.addImport(
-			'../itemcategories/types',
-			['ItemCategoryHrid'],
-			true,
-		)
-		typesBuilder.addImport(
-			'../equipmenttypes/types',
-			['EquipmentTypeHrid'],
-			true,
-		)
-
 		return [
 			// Main Item interface
 			{
@@ -649,6 +624,25 @@ export class ModularItemsGenerator extends ModularBaseGenerator<Item> {
 	protected override defineConstants(): ConstantDefinition[] {
 		// Standard constants will be auto-generated
 		return []
+	}
+
+	/**
+	 * Extension hook: Add imports from other domains
+	 */
+	protected override extendTypes(): void {
+		const typesBuilder = this.moduleBuilder.getFile('types')
+
+		// Import types from other domains (DO NOT re-export - domain control)
+		typesBuilder.addImport(
+			'../itemcategories/types',
+			['ItemCategoryHrid'],
+			true,
+		)
+		typesBuilder.addImport(
+			'../equipmenttypes/types',
+			['EquipmentTypeHrid'],
+			true,
+		)
 	}
 
 	public override extractEntities(sourceData: any): Record<string, Item> {
