@@ -1,20 +1,7 @@
 import { ModularBaseGenerator } from '../core/generator.base.modular'
-// Shared types - these interfaces are defined in the shared module
-// They will be properly imported in generateTypes() method
-interface LevelRequirement {
-	skillHrid: string
-	level: number
-}
-interface ExperienceGain {
-	skillHrid: string
-	value: number
-}
-interface ItemCost {
-	itemHrid: string
-	count: number
-}
-
 import type { PropertyDefinition } from '../core/ast-builder'
+import type { LevelRequirement, ExperienceGain, ItemCost } from '../../generated/sharedtypes/types'
+// Note: Shared types are imported from sharedtypes module
 
 // Alias ItemCost as RecipeItem since they have the same structure
 type RecipeItem = ItemCost

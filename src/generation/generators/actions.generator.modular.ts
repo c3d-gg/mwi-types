@@ -1,37 +1,15 @@
 import { ModularBaseGenerator } from '../core/generator.base.modular'
-// Shared types - these interfaces are defined in the shared module
-// They will be properly imported in generateTypes() method
-interface LevelRequirement {
-	skillHrid: string
-	level: number
-}
-interface ExperienceGain {
-	skillHrid: string
-	value: number
-}
-interface ActionItem {
-	itemHrid: string
-	count: number
-}
-interface DropTable {
-	itemHrid: string
-	dropRate: number
-	minCount: number
-	maxCount: number
-}
-interface SpawnInfo {
-	combatMonsterHrid: string
-	difficultyTier: number
-	rate: number
-	strength: number
-}
-interface RandomSpawnInfo {
-	maxSpawnCount: number
-	maxTotalStrength: number
-	spawns: SpawnInfo[]
-}
-
 import type { PropertyDefinition } from '../core/ast-builder'
+import { generateFromTemplates } from '../core/utility-templates'
+import type { 
+	LevelRequirement, 
+	ExperienceGain, 
+	ActionItem, 
+	SpawnInfo, 
+	RandomSpawnInfo, 
+	DropTable 
+} from '../../generated/sharedtypes/types'
+// Note: All shared types now imported for both local interfaces and generated types
 
 interface FightInfo {
 	randomSpawnInfo: RandomSpawnInfo
@@ -102,9 +80,37 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 			entityName: 'Action',
 			entityNamePlural: 'Actions',
 			sourceKey: 'actionDetailMap',
-			outputPath: './src/generated/actions/index.ts',
+			outputPath: 'src/generated/actions',
+			
+			// Feature flags (all true by default, but being explicit)
+			generateHrids: true,
+			generateCollection: true,
 			generateConstants: true,
 			generateUtils: true,
+			generateLookups: true,
+			
+			// Import shared types this generator needs
+			sharedTypes: ['LevelRequirement', 'ExperienceGain', 'ActionItem', 'SpawnInfo', 'RandomSpawnInfo', 'DropTable'],
+			
+			// Standard utility templates to include
+			utilityTemplates: [
+				{ type: 'getByField', field: 'category' },
+				{ type: 'getByField', field: 'type' },
+				{ type: 'getByField', field: 'skillHrid' },
+				{ type: 'getAllWith', field: 'combatZoneInfo' },
+				{ type: 'sortBy', field: 'sortIndex' },
+				{ type: 'filterBy', name: 'getProductionActions', condition: 'action => action.function === "production"' },
+				{ type: 'filterBy', name: 'getCombatActions', condition: 'action => action.combatZoneInfo !== null' }
+			],
+			
+			// Category filters for auto-generating constant arrays
+			categoryFilters: [
+				{ name: 'combat', condition: (action: any) => action.combatZoneInfo !== null },
+				{ name: 'nonCombat', condition: (action: any) => action.combatZoneInfo === null },
+				{ name: 'dungeon', condition: (action: any) => action.combatZoneInfo?.dungeonInfo !== null },
+				{ name: 'production', condition: (action: any) => action.function === "production" },
+				{ name: 'gathering', condition: (action: any) => action.function === "gathering" }
+			]
 		})
 	}
 
@@ -289,18 +295,20 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 	}
 
 	protected override generateTypes(entities: Record<string, Action>): void {
-		// Import dependencies
+		// Import dependencies - respecting domain boundaries 
 		const typesBuilder = this.moduleBuilder.getFile('types')
 		
-		// Import types from other modules (DO NOT re-export - domain boundary)
+		// Import types from other domains (DO NOT re-export - domain control)
 		typesBuilder.addImport('../items/types', ['ItemHrid'], true)
 		typesBuilder.addImport('../skills/types', ['SkillHrid'], true)
 		typesBuilder.addImport('../monsters/types', ['MonsterHrid'], true)
 		typesBuilder.addImport('../actioncategories/types', ['ActionCategoryHrid'], true)
 		typesBuilder.addImport('../bufftypes/types', ['Buff', 'BuffTypeHrid'], true)
 
-		// Import shared types from shared module
-		typesBuilder.addImport('../sharedtypes/types', ['LevelRequirement', 'ExperienceGain', 'ActionItem', 'DropTable', 'SpawnInfo', 'RandomSpawnInfo'], true)
+		// Import shared types (configured in constructor)
+		if (this.config.sharedTypes?.length) {
+			typesBuilder.addImport('../sharedtypes/types', this.config.sharedTypes, true)
+		}
 
 		// Generate type constants from collected values
 		this.generateTypeConstants()
@@ -450,11 +458,29 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 	}
 
 	protected override generateUtilities(entities: Record<string, Action>): void {
-		// Call base utilities first
+		// Call base utilities first (generates basic CRUD and Record/Map functions)
 		super.generateUtilities(entities)
 
-		// Add action-specific utilities
-		const getMapName = 'getActionsMap'
+		// Generate utilities from templates (configured in constructor)
+		if (this.config.utilityTemplates?.length) {
+			const templateUtilities = generateFromTemplates(
+				this.config.utilityTemplates,
+				this.config.entityName,
+				this.config.entityNamePlural
+			)
+			
+			// Add each template-generated utility
+			templateUtilities.forEach(utility => {
+				this.moduleBuilder.addUtilityFunction(
+					utility.name,
+					utility.parameters,
+					utility.returnType,
+					utility.implementation,
+					utility.imports,
+					utility.jsDoc
+				)
+			})
+		}
 
 		// Get actions by skill
 		this.moduleBuilder.addUtilityFunction(
@@ -469,7 +495,15 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 				{ from: './lookups', names: ['ACTIONS_BY_SKILL'] },
 				{ from: './types', names: ['Action'], isType: true },
 				{ from: '../skills/types', names: ['SkillHrid'], isType: true },
-			]
+			],
+			{
+				description: 'Gets all actions that belong to a specific skill.',
+				params: [{ name: 'skillHrid', description: 'The skill HRID to filter actions by' }],
+				returns: 'Array of actions for the specified skill',
+				examples: [
+					`\nconst miningActions = getActionsBySkill('/skills/mining')\nconsole.log(\`Found \${miningActions.length} mining actions\`)`
+				]
+			}
 		)
 
 		// Get actions by category
@@ -485,7 +519,15 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 				{ from: './lookups', names: ['ACTIONS_BY_CATEGORY'] },
 				{ from: './types', names: ['Action'], isType: true },
 				{ from: '../actioncategories/types', names: ['ActionCategoryHrid'], isType: true },
-			]
+			],
+			{
+				description: 'Gets all actions that belong to a specific category.',
+				params: [{ name: 'categoryHrid', description: 'The action category HRID to filter by' }],
+				returns: 'Array of actions in the specified category',
+				examples: [
+					`\nconst combatActions = getActionsByCategory('/action_categories/combat')\ncombatActions.forEach(action => console.log(action.name))`
+				]
+			}
 		)
 
 		// Get actions by type
@@ -500,7 +542,15 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 			[
 				{ from: './lookups', names: ['ACTIONS_BY_TYPE'] },
 				{ from: './types', names: ['Action', 'ActionType'], isType: true },
-			]
+			],
+			{
+				description: 'Gets all actions of a specific type.',
+				params: [{ name: 'type', description: 'The action type to filter by' }],
+				returns: 'Array of actions of the specified type',
+				examples: [
+					`\nconst gatheringActions = getActionsByType('/action_types/gathering')\nconsole.log(\`Found \${gatheringActions.length} gathering actions\`)`
+				]
+			}
 		)
 
 		// Get combat actions
@@ -514,7 +564,14 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 			[
 				{ from: './lookups', names: ['COMBAT_ACTION_HRIDS'] },
 				{ from: './types', names: ['Action'], isType: true },
-			]
+			],
+			{
+				description: 'Gets all combat-related actions (actions with combat zone info).',
+				returns: 'Array of all combat actions',
+				examples: [
+					`\nconst combatActions = getCombatActions()\nconst bossCombat = combatActions.filter(a => a.combatZoneInfo?.fightInfo.bossSpawns)`
+				]
+			}
 		)
 
 		// Get non-combat actions
@@ -528,7 +585,14 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 			[
 				{ from: './lookups', names: ['NON_COMBAT_ACTION_HRIDS'] },
 				{ from: './types', names: ['Action'], isType: true },
-			]
+			],
+			{
+				description: 'Gets all non-combat actions (gathering, production, etc).',
+				returns: 'Array of all non-combat actions',
+				examples: [
+					`\nconst peacefulActions = getNonCombatActions()\nconst gatheringOnly = peacefulActions.filter(isGatheringAction)`
+				]
+			}
 		)
 
 		// Get dungeon actions
@@ -542,7 +606,14 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 			[
 				{ from: './lookups', names: ['DUNGEON_ACTION_HRIDS'] },
 				{ from: './types', names: ['Action'], isType: true },
-			]
+			],
+			{
+				description: 'Gets all dungeon-specific combat actions.',
+				returns: 'Array of all dungeon actions',
+				examples: [
+					`\nconst dungeons = getDungeonActions()\ndungeons.forEach(d => {\n  console.log(\`Dungeon: \${d.name}, Key: \${d.combatZoneInfo?.dungeonInfo.keyItemHrid}\`)\n})`
+				]
+			}
 		)
 
 		// Get actions by level
@@ -559,7 +630,18 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 			[
 				{ from: './types', names: ['Action'], isType: true },
 				{ from: '../skills/types', names: ['SkillHrid'], isType: true },
-			]
+			],
+			{
+				description: 'Gets all actions for a skill that are available at or below a specific level.',
+				params: [
+					{ name: 'skillHrid', description: 'The skill to get actions for' },
+					{ name: 'level', description: 'The maximum level requirement' }
+				],
+				returns: 'Array of actions available at the specified level',
+				examples: [
+					`\nconst availableActions = getActionsByLevel('/skills/mining', 10)\nconsole.log(\`Player can perform \${availableActions.length} mining actions\`)`
+				]
+			}
 		)
 
 		// Get actions by function
@@ -574,7 +656,15 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 			[
 				{ from: './lookups', names: ['ACTIONS_BY_FUNCTION'] },
 				{ from: './types', names: ['Action', 'ActionFunction'], isType: true },
-			]
+			],
+			{
+				description: 'Gets all actions with a specific function type.',
+				params: [{ name: 'func', description: 'The action function to filter by' }],
+				returns: 'Array of actions with the specified function',
+				examples: [
+					`\nconst productionActions = getActionsByFunction('/action_functions/production')\nconsole.log(\`Found \${productionActions.length} production actions\`)`
+				]
+			}
 		)
 
 		// Check if action is production type
@@ -586,6 +676,14 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 				writer.writeLine('return action.function === "/action_functions/production"')
 			},
 			[{ from: './types', names: ['Action'], isType: true }],
+			{
+				description: 'Checks if an action is a production action (crafting, smithing, etc).',
+				params: [{ name: 'action', description: 'The action to check' }],
+				returns: 'true if the action is a production action, false otherwise',
+				examples: [
+					`\nconst action = getAction('/actions/smelt_bronze_bar')\nif (isProductionAction(action)) {\n  console.log('This is a production action')\n}`
+				]
+			}
 		)
 
 		// Check if action is combat type
@@ -597,6 +695,14 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 				writer.writeLine('return action.combatZoneInfo !== null')
 			},
 			[{ from: './types', names: ['Action'], isType: true }],
+			{
+				description: 'Checks if an action is a combat action (has combat zone info).',
+				params: [{ name: 'action', description: 'The action to check' }],
+				returns: 'true if the action is a combat action, false otherwise',
+				examples: [
+					`\nconst action = getAction('/actions/fight_goblin')\nif (isCombatAction(action)) {\n  console.log('Combat zone:', action.combatZoneInfo)\n}`
+				]
+			}
 		)
 
 		// Check if action is gathering type
@@ -608,6 +714,14 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 				writer.writeLine('return action.function === "/action_functions/gathering"')
 			},
 			[{ from: './types', names: ['Action'], isType: true }],
+			{
+				description: 'Checks if an action is a gathering action (mining, foraging, etc).',
+				params: [{ name: 'action', description: 'The action to check' }],
+				returns: 'true if the action is a gathering action, false otherwise',
+				examples: [
+					`\nconst action = getAction('/actions/mine_copper')\nif (isGatheringAction(action)) {\n  console.log('This is a gathering action')\n}`
+				]
+			}
 		)
 
 		// Check action requirements against player skills
@@ -622,6 +736,17 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 				writer.writeLine('return playerLevel >= requiredLevel')
 			},
 			[{ from: './types', names: ['Action'], isType: true }],
+			{
+				description: 'Checks if a player meets the skill level requirements for an action.',
+				params: [
+					{ name: 'action', description: 'The action to check requirements for' },
+					{ name: 'playerSkills', description: 'Record of player skill HRIDs to their levels' }
+				],
+				returns: 'true if the player meets the requirements, false otherwise',
+				examples: [
+					`\nconst playerSkills = { '/skills/mining': 15, '/skills/smithing': 10 }\nconst action = getAction('/actions/mine_iron')\nif (meetsActionRequirements(action, playerSkills)) {\n  console.log('Player can perform this action')\n}`
+				]
+			}
 		)
 
 		// Check if player has required items for action
@@ -637,6 +762,17 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 				writer.writeLine('})')
 			},
 			[{ from: './types', names: ['Action'], isType: true }],
+			{
+				description: 'Checks if a player has all the required input items for an action.',
+				params: [
+					{ name: 'action', description: 'The action to check item requirements for' },
+					{ name: 'inventory', description: 'Record of item HRIDs to their quantities in inventory' }
+				],
+				returns: 'true if the player has all required items, false otherwise',
+				examples: [
+					`\nconst inventory = { '/items/copper_ore': 5, '/items/coal': 3 }\nconst action = getAction('/actions/smelt_bronze_bar')\nif (hasRequiredItems(action, inventory)) {\n  console.log('Player has all required materials')\n}`
+				]
+			}
 		)
 
 		// Get all production actions
@@ -651,6 +787,13 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 				{ from: './lookups', names: ['PRODUCTION_ACTION_HRIDS'] },
 				{ from: './types', names: ['Action'], isType: true }
 			],
+			{
+				description: 'Gets all production actions (crafting, smithing, cooking, etc).',
+				returns: 'Array of all production actions',
+				examples: [
+					`\nconst productionActions = getProductionActions()\nconst recipesWithOutput = productionActions.filter(a => a.outputItems !== null)`
+				]
+			}
 		)
 
 		// Get all gathering actions
@@ -665,6 +808,13 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 				{ from: './lookups', names: ['GATHERING_ACTION_HRIDS'] },
 				{ from: './types', names: ['Action'], isType: true }
 			],
+			{
+				description: 'Gets all gathering actions (mining, foraging, woodcutting, etc).',
+				returns: 'Array of all gathering actions',
+				examples: [
+					`\nconst gatheringActions = getGatheringActions()\nconst miningOnly = gatheringActions.filter(a => a.levelRequirement?.skillHrid === '/skills/mining')`
+				]
+			}
 		)
 	}
 }

@@ -95,7 +95,47 @@ export class ModuleBuilder {
 	}
 
 	/**
+	 * Add lazy-loaded data as a Record to data.ts
+	 * @param entityName - The name of the entity collection
+	 * @param entries - The key-value pairs to include
+	 * @param keyType - The TypeScript type for keys
+	 * @param valueType - The TypeScript type for values
+	 */
+	addLazyDataRecord<K extends string, V>(
+		entityName: string,
+		entries: Array<[K, V]>,
+		keyType: string,
+		valueType: string,
+	): void {
+		if (!this.config.enableLazyData) {
+			throw new Error('Lazy data is not enabled for this module')
+		}
+
+		const dataBuilder = this.getFile('data')
+
+		// Add type imports to data file
+		dataBuilder.addImport(`./types`, [valueType, keyType], true)
+
+		// Add the lazy record
+		const recordName = `_${entityName.toLowerCase()}Record`
+		const getterName = `get${entityName}Record`
+		const dataFunctionName = `get${entityName}Data`
+
+		dataBuilder.addLazyRecord(
+			recordName,
+			getterName,
+			dataFunctionName,
+			keyType,
+			valueType,
+			entries,
+		)
+
+		this.addExport({ name: getterName, source: './data' })
+	}
+
+	/**
 	 * Add lazy-loaded data to data.ts
+	 * @deprecated Use addLazyDataRecord instead for better DX
 	 */
 	addLazyData<K extends string, V>(
 		entityName: string,
@@ -168,7 +208,13 @@ export class ModuleBuilder {
 	}
 
 	/**
-	 * Add utility function to utils.ts
+	 * Add utility function to utils.ts with optional JSDoc
+	 * @param name - Function name
+	 * @param params - Function parameters
+	 * @param returnType - Return type
+	 * @param body - Function body writer
+	 * @param imports - Required imports
+	 * @param jsDoc - Optional JSDoc configuration
 	 */
 	addUtilityFunction(
 		name: string,
@@ -176,6 +222,12 @@ export class ModuleBuilder {
 		returnType: string,
 		body: (writer: any) => void,
 		imports?: { from: string; names: string[]; isType?: boolean }[],
+		jsDoc?: {
+			description?: string
+			params?: Array<{ name: string; description: string }>
+			returns?: string
+			examples?: string[]
+		}
 	): void {
 		const utilsBuilder = this.getFile('utils')
 
@@ -186,7 +238,7 @@ export class ModuleBuilder {
 			})
 		}
 
-		utilsBuilder.addFunction(name, params, returnType, body)
+		utilsBuilder.addFunction(name, params, returnType, body, true, jsDoc)
 		this.addExport({ name, source: './utils' })
 	}
 

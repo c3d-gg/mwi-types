@@ -4,6 +4,8 @@ import type { GeneratorConfig, PropertyDefinition } from '../core/types'
 /**
  * Generator for shared types that are used across multiple modules
  * These types are defined once here and imported by other modules
+ * 
+ * Updated for v1.0 architecture with hook system
  */
 export class SharedTypesModularGenerator extends ModularBaseGenerator<any> {
 	constructor() {
@@ -12,8 +14,12 @@ export class SharedTypesModularGenerator extends ModularBaseGenerator<any> {
 			entityNamePlural: 'SharedTypes',
 			sourceKey: 'shared', // Not used, but required by base class
 			outputPath: 'src/generated/sharedtypes',
+			// Disable all standard generation features for special case
+			generateHrids: false,
+			generateCollection: false,
 			generateConstants: false,
 			generateUtils: false,
+			generateLookups: false,
 		}
 		super(config)
 	}
@@ -231,6 +237,29 @@ export class SharedTypesModularGenerator extends ModularBaseGenerator<any> {
 			},
 		]
 		this.moduleBuilder.addInterface('UpgradeCost', upgradeCostProps)
+
+		// Buff - used by items, abilities, and guild buffs
+		const buffProps: PropertyDefinition[] = [
+			{
+				name: 'skillHrid',
+				type: 'string', // Will be cast to SkillHrid
+				optional: true,
+				description: 'The skill this buff applies to (optional)',
+			},
+			{
+				name: 'value',
+				type: 'number',
+				optional: false,
+				description: 'The buff value (can be percentage or flat amount)',
+			},
+			{
+				name: 'isPercentage',
+				type: 'boolean',
+				optional: true,
+				description: 'Whether the buff value is a percentage',
+			},
+		]
+		this.moduleBuilder.addInterface('Buff', buffProps)
 
 		// Interfaces are already exported by addInterface() method
 	}

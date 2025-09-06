@@ -1,14 +1,7 @@
 import { ModularBaseGenerator } from '../core/generator.base.modular'
-// Shared types - these interfaces are defined in the shared module
-// They will be properly imported in generateTypes() method
-interface SpawnInfo {
-	combatMonsterHrid: string
-	difficultyTier: number
-	rate: number
-	strength: number
-}
-
 import type { PropertyDefinition } from '../core/ast-builder'
+import type { SpawnInfo } from '../../generated/sharedtypes/types'
+// Note: SpawnInfo is imported from sharedtypes module
 
 // Combat Stats interface for internal use
 interface CombatStats {

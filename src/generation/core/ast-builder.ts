@@ -392,7 +392,117 @@ export class ASTBuilder {
 	}
 
 	/**
+	 * Adds a lazy-initialized Record with getter function (with chunking for large datasets)
+	 * @param recordName - The private variable name for the cached record
+	 * @param getterName - The public function name to get the record
+	 * @param dataFunctionName - The internal function name that returns the data
+	 * @param keyType - The TypeScript type for the record keys
+	 * @param valueType - The TypeScript type for the record values
+	 * @param entries - The key-value pairs to include in the record
+	 * @param options - Optional configuration for chunking large datasets
+	 */
+	addLazyRecord<K extends string, V>(
+		recordName: string,
+		getterName: string,
+		dataFunctionName: string,
+		keyType: string,
+		valueType: string,
+		entries: Array<[K, V]>,
+		options?: { chunkSize?: number },
+	) {
+		const start = performance.now()
+		const chunkSize = options?.chunkSize || 5000
+
+		// For very large datasets, create chunked data functions
+		if (entries.length > chunkSize) {
+			const chunks: Array<Array<[K, V]>> = []
+			for (let i = 0; i < entries.length; i += chunkSize) {
+				chunks.push(entries.slice(i, i + chunkSize))
+			}
+
+			// Create chunk functions
+			chunks.forEach((chunk, index) => {
+				this.sourceFile.addFunction({
+					name: `${dataFunctionName}_chunk${index}`,
+					returnType: `Record<${keyType}, ${valueType}>`,
+					statements: (writer) => {
+						writer.write('return ')
+						const chunkObject = Object.fromEntries(chunk)
+						writer.write(this.serializeValue(chunkObject, 1))
+					},
+				})
+			})
+
+			// Create main data function that combines chunks
+			this.sourceFile.addFunction({
+				name: dataFunctionName,
+				returnType: `Record<${keyType}, ${valueType}>`,
+				statements: (writer) => {
+					writer.write('return {')
+					chunks.forEach((_, index) => {
+						if (index > 0) writer.write(',')
+						writer.write(`...${dataFunctionName}_chunk${index}()`)
+					})
+					writer.write('}')
+				},
+			})
+		} else {
+			// Original implementation for smaller datasets
+			this.sourceFile.addFunction({
+				name: dataFunctionName,
+				returnType: `Record<${keyType}, ${valueType}>`,
+				statements: (writer) => {
+					const recordObject = Object.fromEntries(entries)
+					writer.write('return ')
+					writer.write(this.serializeValue(recordObject, 1))
+				},
+			})
+		}
+
+		// Add the private Record variable
+		this.sourceFile.addVariableStatement({
+			declarationKind: VariableDeclarationKind.Let,
+			declarations: [
+				{
+					name: recordName,
+					type: `Record<${keyType}, ${valueType}> | undefined`,
+				},
+			],
+		})
+
+		// Add the getter function with JSDoc
+		const func = this.sourceFile.addFunction({
+			name: getterName,
+			isExported: true,
+			returnType: `Record<${keyType}, ${valueType}>`,
+			statements: (writer) => {
+				writer.writeLine(`if (!${recordName}) {`)
+				writer.indent(() => {
+					writer.writeLine(`${recordName} = ${dataFunctionName}()`)
+				})
+				writer.writeLine('}')
+				writer.writeLine(`return ${recordName}`)
+			},
+		})
+
+		// Add JSDoc documentation
+		func.addJsDoc({
+			description: `Gets the cached record of all ${valueType.toLowerCase()} entities.\nThe record is lazily initialized on first access for optimal performance.`,
+			tags: [
+				{
+					tagName: 'returns',
+					text: `A record mapping ${keyType} to ${valueType} entities`,
+				},
+			],
+		})
+
+		this.trackPerformance('addLazyRecord', performance.now() - start)
+		return this
+	}
+
+	/**
 	 * Adds a lazy-initialized Map with getter function (with chunking for large datasets)
+	 * @deprecated Use addLazyRecord instead for better DX in a public NPM package
 	 */
 	addLazyMap<K extends string, V>(
 		mapName: string,
@@ -555,7 +665,13 @@ export class ASTBuilder {
 	}
 
 	/**
-	 * Adds a function declaration to the source file
+	 * Adds a function declaration to the source file with optional JSDoc
+	 * @param name - The function name
+	 * @param params - The function parameters
+	 * @param returnType - The TypeScript return type
+	 * @param body - Function body writer
+	 * @param isExported - Whether to export the function
+	 * @param jsDoc - Optional JSDoc configuration
 	 */
 	addFunction(
 		name: string,
@@ -563,10 +679,17 @@ export class ASTBuilder {
 		returnType: string,
 		body: (writer: CodeBlockWriter) => void,
 		isExported = true,
+		jsDoc?: {
+			description?: string
+			params?: Array<{ name: string; description: string; type?: string }>
+			returns?: string
+			examples?: string[]
+			tags?: Array<{ tagName: string; text: string }>
+		},
 	) {
 		const start = performance.now()
 
-		this.sourceFile.addFunction({
+		const func = this.sourceFile.addFunction({
 			name,
 			isExported,
 			parameters: params.map((param) => ({
@@ -580,6 +703,58 @@ export class ASTBuilder {
 			returnType,
 			statements: (writer) => body(writer),
 		})
+
+		// Add JSDoc if provided
+		if (jsDoc) {
+			const jsdocConfig: any = {}
+
+			if (jsDoc.description) {
+				jsdocConfig.description = jsDoc.description
+			}
+
+			const tags: any[] = []
+
+			// Add @param tags
+			if (jsDoc.params) {
+				jsDoc.params.forEach((param) => {
+					tags.push({
+						tagName: 'param',
+						text: param.type
+							? `{${param.type}} ${param.name} - ${param.description}`
+							: `${param.name} - ${param.description}`,
+					})
+				})
+			}
+
+			// Add @returns tag
+			if (jsDoc.returns) {
+				tags.push({
+					tagName: 'returns',
+					text: jsDoc.returns,
+				})
+			}
+
+			// Add @example tags
+			if (jsDoc.examples) {
+				jsDoc.examples.forEach((example) => {
+					tags.push({
+						tagName: 'example',
+						text: example,
+					})
+				})
+			}
+
+			// Add any custom tags
+			if (jsDoc.tags) {
+				tags.push(...jsDoc.tags)
+			}
+
+			if (tags.length > 0) {
+				jsdocConfig.tags = tags
+			}
+
+			func.addJsDoc(jsdocConfig)
+		}
 
 		this.trackPerformance('addFunction', performance.now() - start)
 		return this

@@ -1,19 +1,7 @@
 import { ModularBaseGenerator } from '../core/generator.base.modular'
 import type { PropertyDefinition } from '../core/ast-builder'
-
-// Shared types - these interfaces are defined in the shared module
-// They will be properly imported in generateTypes() method
-interface LevelRequirement {
-	skillHrid: string
-	level: number
-}
-interface ItemCost {
-	itemHrid: string
-	count: number
-}
-interface Stats {
-	[key: string]: number
-}
+import type { LevelRequirement, ItemCost, Stats } from '../../generated/sharedtypes/types'
+// Note: Shared types are imported from sharedtypes module
 
 interface AlchemyDetail {
 	bulkMultiplier: number

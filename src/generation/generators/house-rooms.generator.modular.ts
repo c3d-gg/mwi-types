@@ -1,12 +1,7 @@
 import { ModularBaseGenerator } from '../core/generator.base.modular'
-// Shared types - these interfaces are defined in the shared module
-// They will be properly imported in generateTypes() method
-interface UpgradeCost {
-	itemHrid: string
-	count: number
-}
-
 import type { PropertyDefinition } from '../core/ast-builder'
+import type { UpgradeCost } from '../../generated/sharedtypes/types'
+// Note: UpgradeCost is imported from sharedtypes module
 
 // Buff interface for internal use (temporary until buff-types is modularized)
 interface Buff {
