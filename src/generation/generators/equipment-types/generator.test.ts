@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs'
 import path from 'path'
 
-import { beforeAll, describe, expect, test } from 'vitest'
+import { beforeAll, describe, expect, test } from 'bun:test'
 
 // Import will be available after implementation
 // import { ModularEquipmentTypesGenerator } from './generator'

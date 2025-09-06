@@ -1,6 +1,6 @@
 import path from 'path'
 
-import { beforeAll, describe, expect, test } from 'vitest'
+import { beforeAll, describe, expect, test } from 'bun:test'
 
 import { ModularActionsGenerator } from './generator'
 
@@ -166,7 +166,7 @@ describe('Actions Generator', () => {
 			const sourcePath = './src/sources/game_data.json'
 
 			// This should not throw
-			await expect(generator.generate(sourcePath)).resolves.toBeUndefined()
+			expect(generator.generate(sourcePath)).resolves.toBeUndefined()
 		})
 	})
 

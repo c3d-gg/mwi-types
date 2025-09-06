@@ -2,7 +2,7 @@
  * @fileoverview Tests for ModularItemsGenerator - The most complex generator with 894 entities
  */
 
-import { beforeEach, describe, expect, test } from 'vitest'
+import { beforeEach, describe, expect, test } from 'bun:test'
 
 import { ModularItemsGenerator } from './generator'
 

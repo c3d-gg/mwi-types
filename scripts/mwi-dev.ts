@@ -1,11 +1,8 @@
 #!/usr/bin/env bun
 /**
- * MWI Types Development CLI
- * Unified development tooling for generator development
+ * MWI Types Development CLI - Bun-First Edition
+ * Unified development tooling for generator development using native Bun APIs
  */
-
-import { execSync } from 'child_process'
-import { appendFileSync, existsSync, mkdirSync } from 'fs'
 
 // ANSI colors for better CLI output
 const colors = {
@@ -27,26 +24,35 @@ const log = {
   header: (msg: string) => console.log(`\n${colors.bright}${colors.cyan}${msg}${colors.reset}\n`),
 }
 
-function runCommand(command: string, description?: string): string {
+async function runCommand(command: string, description?: string): Promise<string> {
   if (description) {
     log.info(description)
   }
   try {
-    const result = execSync(command, { 
-      encoding: 'utf-8',
-      stdio: ['inherit', 'pipe', 'inherit']
-    }).toString()
-    console.log(result)
-    return result
+    const proc = Bun.spawn(command.split(' '), {
+      stdout: 'pipe',
+      stderr: 'pipe',
+    })
+    const output = await new Response(proc.stdout).text()
+    const exitCode = await proc.exited
+    
+    if (exitCode !== 0) {
+      const error = await new Response(proc.stderr).text()
+      throw new Error(`Exit code ${exitCode}: ${error}`)
+    }
+    
+    console.log(output)
+    return output
   } catch (error) {
     log.error(`Command failed: ${command}`)
+    log.error(error instanceof Error ? error.message : String(error))
     process.exit(1)
   }
 }
 
 function showUsage() {
   console.log(`
-${colors.bright}${colors.cyan}MWI Types Development CLI${colors.reset}
+${colors.bright}${colors.cyan}MWI Types Development CLI - Bun Edition${colors.reset}
 
 ${colors.bright}ANALYSIS COMMANDS:${colors.reset}
   analyze:source <ENTITY>     Analyze entity in game_data.json
@@ -102,9 +108,9 @@ async function main() {
       log.header(`Analyzing ${entity}`)
       
       console.log('Entity count:')
-      runCommand(`/usr/bin/jq '.${entity} | length' src/sources/game_data.json`)
+      await runCommand(`/usr/bin/jq '.${entity} | length' src/sources/game_data.json`)
       console.log('\nSample keys:')
-      runCommand(`/usr/bin/jq '.${entity} | to_entries[0].value | keys[0:10]' src/sources/game_data.json`)
+      await runCommand(`/usr/bin/jq '.${entity} | to_entries[0].value | keys[0:10]' src/sources/game_data.json`)
       break
     }
 
@@ -114,13 +120,13 @@ async function main() {
       log.header(`Deep dive: ${entity}`)
       
       console.log('Total entities:')
-      runCommand(`/usr/bin/jq '.${entity} | length' src/sources/game_data.json`)
+      await runCommand(`/usr/bin/jq '.${entity} | length' src/sources/game_data.json`)
       
       console.log('\nSample entity:')
-      runCommand(`/usr/bin/jq '.${entity} | to_entries[0].value' src/sources/game_data.json`)
+      await runCommand(`/usr/bin/jq '.${entity} | to_entries[0].value' src/sources/game_data.json`)
       
       console.log('\nAll properties in sample:')
-      runCommand(`/usr/bin/jq '.${entity} | to_entries[0].value | keys' src/sources/game_data.json`)
+      await runCommand(`/usr/bin/jq '.${entity} | to_entries[0].value | keys' src/sources/game_data.json`)
       break
     }
 
@@ -130,19 +136,20 @@ async function main() {
       log.header(`Analyzing ${module} generator`)
       
       const generatorPath = `src/generation/generators/${module}/generator.ts`
-      if (!existsSync(generatorPath)) {
+      const generatorFile = Bun.file(generatorPath)
+      if (!(await generatorFile.exists())) {
         log.error(`Generator not found: ${generatorPath}`)
         return
       }
       
       console.log('Source Key:')
-      runCommand(`grep -o 'sourceKey: [^,]*' ${generatorPath} || echo 'Not found'`)
+      await runCommand(`grep -o 'sourceKey: [^,]*' ${generatorPath} || echo 'Not found'`)
       
       console.log('\nShared Types:')
-      runCommand(`grep -A 5 'sharedTypes:' ${generatorPath} | head -6 || echo 'Not found'`)
+      await runCommand(`grep -A 5 'sharedTypes:' ${generatorPath} | head -6 || echo 'Not found'`)
       
       console.log('\nTemplates:')
-      runCommand(`grep -A 10 'utilityTemplates:' ${generatorPath} | head -11 || echo 'Not found'`)
+      await runCommand(`grep -A 10 'utilityTemplates:' ${generatorPath} | head -11 || echo 'Not found'`)
       break
     }
 
@@ -152,21 +159,22 @@ async function main() {
       log.header(`Generated ${module} analysis`)
       
       const genPath = `src/generated/${module}/`
-      if (!existsSync(genPath)) {
+      const genDir = Bun.file(genPath)
+      if (!(await genDir.exists())) {
         log.error(`Generated module not found: ${genPath}`)
         return
       }
       
-      runCommand(`ls -la ${genPath}`)
+      await runCommand(`ls -la ${genPath}`)
       
       console.log('\nTypes file preview:')
-      runCommand(`head -20 ${genPath}types.ts 2>/dev/null || echo 'No types file'`)
+      await runCommand(`head -20 ${genPath}types.ts 2>/dev/null || echo 'No types file'`)
       
       console.log('\nUtils file size:')
-      runCommand(`wc -l ${genPath}utils.ts 2>/dev/null || echo 'No utils file'`)
+      await runCommand(`wc -l ${genPath}utils.ts 2>/dev/null || echo 'No utils file'`)
       
       console.log('\nConstants count:')
-      runCommand(`grep -c 'export const' ${genPath}constants.ts 2>/dev/null || echo 'No constants file'`)
+      await runCommand(`grep -c 'export const' ${genPath}constants.ts 2>/dev/null || echo 'No constants file'`)
       break
     }
 
@@ -176,10 +184,13 @@ async function main() {
       const module = params[0]
       const generatorDir = `src/generation/generators/${module}`
       
-      if (existsSync(generatorDir)) {
+      const dirFile = Bun.file(generatorDir)
+      if (await dirFile.exists()) {
         log.warn(`Generator directory already exists: ${generatorDir}`)
       } else {
-        mkdirSync(generatorDir, { recursive: true })
+        await Bun.write(`${generatorDir}/generator.ts`, '// TODO: Create generator\n')
+        await Bun.write(`${generatorDir}/generator.test.ts`, '// TODO: Create tests\n')
+        await Bun.write(`${generatorDir}/README.md`, `# ${module} Generator\n\nTODO: Document generator\n`)
         log.success(`Generator scaffolded at ${generatorDir}/`)
       }
       
@@ -193,12 +204,13 @@ async function main() {
       log.header(`Generating ${module} module`)
       
       const generatorPath = `src/generation/generators/${module}/generator.ts`
-      if (!existsSync(generatorPath)) {
+      const generatorFile = Bun.file(generatorPath)
+      if (!(await generatorFile.exists())) {
         log.error(`Generator not found: ${generatorPath}`)
         return
       }
       
-      runCommand(`bun run ${generatorPath}`, `Running ${module} generator`)
+      await runCommand(`bun run ${generatorPath}`, `Running ${module} generator`)
       log.success(`${module} module generated successfully`)
       break
     }
@@ -209,16 +221,17 @@ async function main() {
       log.header(`Validating ${module} generator`)
       
       const generatorPath = `src/generation/generators/${module}/generator.ts`
-      if (!existsSync(generatorPath)) {
+      const generatorFile = Bun.file(generatorPath)
+      if (!(await generatorFile.exists())) {
         log.error(`Generator not found: ${generatorPath}`)
         return
       }
       
-      // Run tests
-      runCommand(`vitest run src/generation/generators/${module}/generator.test.ts`, 'Running tests...')
+      // Run tests with Bun
+      await runCommand(`bun test src/generation/generators/${module}/generator.test.ts`, 'Running tests...')
       
       // Type check generator
-      runCommand(`bun tsc --noEmit --skipLibCheck ${generatorPath}`, 'Type checking generator...')
+      await runCommand(`bun tsc --noEmit --skipLibCheck ${generatorPath}`, 'Type checking generator...')
       
       log.success(`${module} generator validated!`)
       break
@@ -230,10 +243,10 @@ async function main() {
       log.header(`Debugging ${module} generator`)
       
       // Run analysis first
-      runCommand(`bun scripts/mwi-dev.ts analyze:generator ${module}`)
+      await runCommand(`bun scripts/mwi-dev.ts analyze:generator ${module}`)
       
       console.log('\nRunning tests with detailed output:')
-      runCommand(`vitest run src/generation/generators/${module}/generator.test.ts --reporter=verbose`)
+      await runCommand(`bun test src/generation/generators/${module}/generator.test.ts --verbose`)
       break
     }
 
@@ -243,7 +256,7 @@ async function main() {
       const module = params[0]
       log.header(`Testing ${module} generator`)
       
-      runCommand(`vitest run src/generation/generators/${module}/generator.test.ts`)
+      await runCommand(`bun test src/generation/generators/${module}/generator.test.ts`)
       break
     }
 
@@ -254,16 +267,16 @@ async function main() {
       
       // Create test import
       const testImport = `import { getAll${module?.charAt(0).toUpperCase()}${module?.slice(1)} } from './src/generated/${module}/utils'`
-      runCommand(`echo "${testImport}" > test-treeshake.js`)
+      await Bun.write('test-treeshake.js', testImport)
       
       // Test bundle
-      runCommand('bun build test-treeshake.js --outdir=test-build --minify')
+      await runCommand('bun build test-treeshake.js --outdir=test-build --minify')
       
       console.log('\nBundle size:')
-      runCommand('ls -lh test-build/*.js')
+      await runCommand('ls -lh test-build/*.js')
       
       // Cleanup
-      runCommand('rm -rf test-build test-treeshake.js')
+      await runCommand('rm -rf test-build test-treeshake.js')
       log.success('Tree-shaking test complete')
       break
     }
@@ -276,15 +289,21 @@ async function main() {
       
       log.header(`Logging investigation: ${module}`)
       
-      appendFileSync('INVESTIGATION_LOG.md', `## Investigation Needed: ${module}\n`)
-      appendFileSync('INVESTIGATION_LOG.md', `- Entity: ${entity}\n`)
-      appendFileSync('INVESTIGATION_LOG.md', `- Date: ${new Date().toString()}\n`)
-      appendFileSync('INVESTIGATION_LOG.md', `- Source data analysis:\n\`\`\`\n`)
+      const logFile = 'INVESTIGATION_LOG.md'
+      let logContent = `## Investigation Needed: ${module}\n`
+      logContent += `- Entity: ${entity}\n`
+      logContent += `- Date: ${new Date().toString()}\n`
+      logContent += `- Source data analysis:\n\`\`\`\n`
       
-      const output = runCommand(`bun scripts/mwi-dev.ts explore:entity ${entity}`, 'Getting entity analysis...')
-      appendFileSync('INVESTIGATION_LOG.md', output)
-      appendFileSync('INVESTIGATION_LOG.md', `\`\`\`\n`)
-      appendFileSync('INVESTIGATION_LOG.md', `- Questions/Concerns: [TO BE FILLED]\n\n`)
+      const output = await runCommand(`bun scripts/mwi-dev.ts explore:entity ${entity}`, 'Getting entity analysis...')
+      logContent += output
+      logContent += `\`\`\`\n`
+      logContent += `- Questions/Concerns: [TO BE FILLED]\n\n`
+      
+      // Check if file exists and append, or create new
+      const existingFile = Bun.file(logFile)
+      const existingContent = (await existingFile.exists()) ? await existingFile.text() : ''
+      await Bun.write(logFile, existingContent + logContent)
       
       log.success('Investigation logged to INVESTIGATION_LOG.md')
       console.log('Please review and add your questions/concerns to the file.')

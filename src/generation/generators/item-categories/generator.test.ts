@@ -2,7 +2,7 @@
  * @fileoverview Tests for ModularItemCategoriesGenerator
  */
 
-import { beforeEach, describe, expect, test } from 'vitest'
+import { beforeEach, describe, expect, test } from 'bun:test'
 
 import { ModularItemCategoriesGenerator } from './generator'
 
