@@ -41,9 +41,10 @@ export class ModularSharedTypesGenerator extends ModularBaseGenerator<any> {
 
 	/**
 	 * Shared types don't come from source data - they're defined statically
+	 * Return a dummy entity to force generation
 	 */
 	public override extractEntities(_sourceData: any): Record<string, any> {
-		return {} // No entities to extract
+		return { 'shared-types': { dummy: true } } // Dummy entity to force generation
 	}
 
 	/**
@@ -262,33 +263,61 @@ export class ModularSharedTypesGenerator extends ModularBaseGenerator<any> {
 				'Represents the cost to upgrade house rooms or other entities.',
 		})
 
-		// Buff - used by items, abilities, and guild buffs
+		// Buff - used by actions for temporary buffs/debuffs
 		interfaces.push({
 			name: 'Buff',
 			properties: [
 				{
-					name: 'skillHrid',
-					type: 'string', // Will be cast to SkillHrid
-					optional: true,
-					description:
-						'The skill this buff applies to (optional for global buffs)',
+					name: 'uniqueHrid',
+					type: 'string',
+					optional: false,
+					description: 'Unique identifier for this buff instance',
 				},
 				{
-					name: 'value',
+					name: 'typeHrid',
+					type: 'string', // Will be cast to BuffTypeHrid
+					optional: false,
+					description: 'The type of buff (references BuffType)',
+				},
+				{
+					name: 'ratioBoost',
 					type: 'number',
 					optional: false,
-					description: 'The buff value (can be percentage or flat amount)',
+					description: 'Percentage boost applied by this buff',
 				},
 				{
-					name: 'isPercentage',
-					type: 'boolean',
-					optional: true,
-					description:
-						'Whether the buff value is a percentage (default: false)',
+					name: 'ratioBoostLevelBonus',
+					type: 'number',
+					optional: false,
+					description: 'Additional percentage boost per level',
+				},
+				{
+					name: 'flatBoost',
+					type: 'number',
+					optional: false,
+					description: 'Flat value boost applied by this buff',
+				},
+				{
+					name: 'flatBoostLevelBonus',
+					type: 'number',
+					optional: false,
+					description: 'Additional flat boost per level',
+				},
+				{
+					name: 'startTime',
+					type: 'string',
+					optional: false,
+					description: 'When the buff started (ISO date string)',
+				},
+				{
+					name: 'duration',
+					type: 'number',
+					optional: false,
+					description: 'Duration of the buff in seconds (0 = permanent)',
 				},
 			],
 			description:
-				'Represents a buff that can be applied to skills or global stats.',
+				'Represents a temporary buff/debuff applied to a player or action.',
 		})
 
 		return interfaces

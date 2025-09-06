@@ -39,7 +39,7 @@ interface Action {
 	hrid: string
 	function: string
 	type: string
-	category: string
+	category: string // Will be ActionCategoryHrid in generated types
 	name: string
 	maxDifficulty: number
 	levelRequirement: LevelRequirement | null
@@ -54,7 +54,7 @@ interface Action {
 	outputItems: ActionItem[] | null
 	combatZoneInfo: CombatZoneInfo | null
 	maxPartySize: number
-	buffs: unknown[] | null
+	buffs: unknown[] | null // Will be Buff[] in generated types
 	sortIndex?: number
 }
 
@@ -112,6 +112,7 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 				'SpawnInfo',
 				'RandomSpawnInfo',
 				'DropTable',
+				'Buff',
 			],
 
 			// Standard utility templates to include
@@ -223,7 +224,7 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 				{ name: 'hrid', type: 'ActionHrid', optional: false },
 				{ name: 'function', type: 'ActionFunction', optional: false },
 				{ name: 'type', type: 'ActionType', optional: false },
-				{ name: 'category', type: 'string', optional: false }, // TODO: Change to ActionCategoryHrid when migrated
+				{ name: 'category', type: 'ActionCategoryHrid', optional: false },
 				{ name: 'name', type: 'string', optional: false },
 				{ name: 'maxDifficulty', type: 'number', optional: false },
 				{
@@ -262,7 +263,7 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 					optional: false,
 				},
 				{ name: 'maxPartySize', type: 'number', optional: false },
-				{ name: 'buffs', type: 'unknown[] | null', optional: false }, // TODO: Change to Buff[] when bufftypes migrated
+				{ name: 'buffs', type: 'Buff[] | null', optional: false },
 				{ name: 'sortIndex', type: 'number | undefined', optional: true },
 			],
 		})
@@ -279,10 +280,14 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 		// Import types from other domains (DO NOT re-export - domain control)
 		typesBuilder.addImport('../items/types', ['ItemHrid'], true)
 		typesBuilder.addImport('../skills/types', ['SkillHrid'], true)
-		// NOTE: Temporarily commented out until these modules are migrated to new structure
+		// NOTE: Some types temporarily commented out until migrated
 		// typesBuilder.addImport('../monsters/types', ['MonsterHrid'], true)
-		// typesBuilder.addImport('../actioncategories/types', ['ActionCategoryHrid'], true)
-		// typesBuilder.addImport('../bufftypes/types', ['Buff', 'BuffTypeHrid'], true)
+		typesBuilder.addImport(
+			'../actioncategories/types',
+			['ActionCategoryHrid'],
+			true,
+		)
+		typesBuilder.addImport('../bufftypes/types', ['BuffTypeHrid'], true)
 
 		// Generate ActionFunction and ActionType constants and types
 		if (this.actionFunctions.size > 0) {
@@ -343,7 +348,7 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 		lookups.push({
 			name: 'ACTIONS_BY_CATEGORY',
 			data: categoryLookup,
-			keyType: 'string', // TODO: Change to ActionCategoryHrid when migrated
+			keyType: 'ActionCategoryHrid',
 			valueType: 'readonly ActionHrid[]',
 		})
 
@@ -388,8 +393,11 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 			true,
 		)
 		lookupsBuilder.addImport('../skills/types', ['SkillHrid'], true)
-		// TODO: Re-add when actioncategories module is migrated
-		// lookupsBuilder.addImport('../actioncategories/types', ['ActionCategoryHrid'], true)
+		lookupsBuilder.addImport(
+			'../actioncategories/types',
+			['ActionCategoryHrid'],
+			true,
+		)
 	}
 
 	/**
