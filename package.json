@@ -53,8 +53,13 @@
   "scripts": {
     "generate": "bun run src/generation/index.ts",
     "generate:watch": "bun run --watch src/generation/index.ts",
+    "generate:single": "if [ -z \"$MODULE\" ]; then echo 'Usage: MODULE=actions bun run generate:single'; exit 1; fi; bun run src/generation/generators/$MODULE/generator.ts",
     "typecheck": "bun tsc --noEmit",
     "format": "prettier --write ./src",
+    "test": "bun test",
+    "test:watch": "bun test --watch",
+    "test:generator": "if [ -z \"$MODULE\" ]; then echo 'Usage: MODULE=actions bun run test:generator'; exit 1; fi; bun test src/generation/generators/$MODULE/generator.test.ts",
+    "generate:test": "if [ -z \"$MODULE\" ]; then echo 'Usage: MODULE=actions bun run generate:test'; exit 1; fi; bun run generate:single && bun run test:generator",
     "build": "bun run clean:dist && bun run build:tsc",
     "build:tsc": "tsc -p tsconfig.build.json",
     "clean": "rm -rf src/generated",

@@ -1,6 +1,6 @@
-import { ModularBaseGenerator } from '../core/generator.base.modular'
-import type { PropertyDefinition } from '../core/ast-builder'
-import { generateFromTemplates } from '../core/utility-templates'
+import { ModularBaseGenerator } from '../../core/generator.base.modular'
+import type { PropertyDefinition } from '../../core/ast-builder'
+import { generateFromTemplates } from '../../core/utility-templates'
 import type { 
 	LevelRequirement, 
 	ExperienceGain, 
@@ -8,7 +8,7 @@ import type {
 	SpawnInfo, 
 	RandomSpawnInfo, 
 	DropTable 
-} from '../../generated/sharedtypes/types'
+} from '../../../generated/sharedtypes/types'
 // Note: All shared types now imported for both local interfaces and generated types
 
 interface FightInfo {
@@ -96,11 +96,11 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 			utilityTemplates: [
 				{ type: 'getByField', field: 'category' },
 				{ type: 'getByField', field: 'type' },
-				{ type: 'getByField', field: 'skillHrid' },
+				{ type: 'getByField', field: 'function' },
 				{ type: 'getAllWith', field: 'combatZoneInfo' },
 				{ type: 'sortBy', field: 'sortIndex' },
-				{ type: 'filterBy', name: 'getProductionActions', condition: 'action => action.function === "production"' },
-				{ type: 'filterBy', name: 'getCombatActions', condition: 'action => action.combatZoneInfo !== null' }
+				{ type: 'filterBy' }, // Generic filterActions function
+				{ type: 'toMap' } // Convert Record to Map
 			],
 			
 			// Category filters for auto-generating constant arrays
@@ -114,7 +114,7 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 		})
 	}
 
-	protected override extractEntities(sourceData: any): Record<string, Action> {
+	public override extractEntities(sourceData: any): Record<string, Action> {
 		const actions: Record<string, Action> = {}
 		const actionDetailMap = sourceData[this.config.sourceKey] || {}
 
@@ -294,7 +294,7 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 		}
 	}
 
-	protected override generateTypes(entities: Record<string, Action>): void {
+	public override generateTypes(entities: Record<string, Action>): void {
 		// Import dependencies - respecting domain boundaries 
 		const typesBuilder = this.moduleBuilder.getFile('types')
 		
@@ -379,7 +379,7 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 		this.moduleBuilder.addExport({ name: 'ActionType', source: './types', isType: true })
 	}
 
-	protected override generateLookups(entities: Record<string, Action>): void {
+	public override generateLookups(entities: Record<string, Action>): void {
 		const lookupsBuilder = this.moduleBuilder.getFile('lookups')
 		// Import local types from types.ts
 		lookupsBuilder.addImport('./types', ['ActionHrid', 'ActionType', 'ActionFunction'], true)
@@ -457,7 +457,7 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 		this.moduleBuilder.addExport({ name: 'GATHERING_ACTION_HRIDS', source: './lookups' })
 	}
 
-	protected override generateUtilities(entities: Record<string, Action>): void {
+	public override generateUtilities(entities: Record<string, Action>): void {
 		// Call base utilities first (generates basic CRUD and Record/Map functions)
 		super.generateUtilities(entities)
 

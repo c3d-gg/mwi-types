@@ -32,12 +32,19 @@ src/
 │   │   ├── ast-builder.ts             # TypeScript AST manipulation
 │   │   ├── utility-templates.ts       # Reusable utility patterns
 │   │   └── types.ts                   # Core type definitions
-│   └── generators/              # Individual generators
-│       ├── *.generator.modular.ts     # Standard generators
-│       └── special/                    # Special case generators
-│           ├── player-data.generator.ts
-│           ├── translations.generator.ts
-│           └── shared-types.generator.ts
+│   └── generators/              # Individual generator modules
+│       ├── actions/                   # Example: Actions generator module
+│       │   ├── generator.ts           # Main generator implementation
+│       │   ├── generator.test.ts      # Unit tests for generator
+│       │   └── README.md              # Module documentation
+│       ├── items/                     # Items generator module
+│       │   ├── generator.ts
+│       │   ├── generator.test.ts
+│       │   └── README.md
+│       └── shared-types/              # Special: SharedTypes module
+│           ├── generator.ts
+│           ├── generator.test.ts
+│           └── README.md
 └── generated/                   # Output (git-ignored)
     ├── sharedtypes/            # Shared type definitions
     │   ├── types.ts            # Shared interfaces
@@ -51,6 +58,70 @@ src/
     │   └── index.ts            # Module exports (tree-shakeable)
     └── index.ts                # Package entry (explicit exports)
 ```
+
+## 🧪 Development Standards & Workflow
+
+### **Test-Driven Development (TDD) Approach**
+Every generator must follow this structured approach:
+
+#### 1. **Understanding Phase**
+- Analyze source data structure for the entity
+- Define what the generator should extract and export
+- Document the module's purpose and scope
+
+#### 2. **Planning Phase** 
+- Write module README.md with:
+  - Purpose and data extraction logic
+  - Expected exports (types, constants, utilities, lookups)
+  - Dependencies on other modules
+  - Usage examples
+
+#### 3. **Testing Phase**
+- Write comprehensive unit tests (`generator.test.ts`)
+- Test data extraction logic
+- Test type generation
+- Test utility functions
+- Test edge cases and error handling
+
+#### 4. **Implementation Phase**
+- Implement generator using TDD approach
+- Follow architectural patterns from Actions module template
+- Use configuration system and templates
+- Maintain domain boundaries
+
+#### 5. **Validation Phase**
+- Run individual generator tests
+- Run full type checking
+- Verify generated files structure
+- Test tree-shaking compatibility
+
+### **Module Organization Standards**
+```
+src/generation/generators/{module}/
+├── generator.ts        # Main generator class implementation
+├── generator.test.ts   # Comprehensive unit tests  
+└── README.md          # Module documentation
+```
+
+### **Package.json Commands**
+Essential commands for development workflow:
+```json
+{
+  "test": "bun test",
+  "test:watch": "bun test --watch", 
+  "test:generator": "bun test src/generation/generators/$MODULE/generator.test.ts",
+  "generate:single": "bun run src/generation/generators/$MODULE/generator.ts",
+  "generate:test": "bun run generate:single && bun run test:generator"
+}
+```
+
+### **Documentation Requirements**
+Each module README.md must include:
+- **Purpose**: What entity type this generates
+- **Source Data**: What it reads from game_data.json  
+- **Exports**: Types, constants, utilities, lookups generated
+- **Dependencies**: Other modules it imports from
+- **Examples**: Usage examples for consumers
 
 ## 🏗️ Generator Configuration System
 
@@ -283,19 +354,41 @@ interface UtilityTemplate {
 - [ ] Tree-shaking verification
 - [ ] Integration tests
 
-### Migration Checklist per Generator:
+### **TDD Migration Checklist per Generator:**
 ```markdown
 ## Generator: [NAME]
+
+### Phase 1: Understanding & Planning
+- [ ] Analyze source data structure for [NAME]
+- [ ] Define extraction logic and export requirements  
+- [ ] Create module folder: src/generation/generators/[name]/
+- [ ] Write comprehensive README.md documentation
+
+### Phase 2: Test-Driven Development
+- [ ] Write generator.test.ts with comprehensive test cases
+- [ ] Test data extraction from source
+- [ ] Test type generation and shared types integration
+- [ ] Test utility functions and templates
+- [ ] Test edge cases and error handling
+
+### Phase 3: Implementation
+- [ ] Implement generator.ts following Actions template
+- [ ] Use new GeneratorConfig with shared types
 - [ ] Replace getXxxMap() with getXxxRecord()
-- [ ] Add toMap() utility function
+- [ ] Add toMap() utility function  
 - [ ] Import shared types from ../sharedtypes/types
 - [ ] Remove duplicated type definitions
-- [ ] Convert full overrides to hooks
 - [ ] Use utility templates where applicable
-- [ ] Add JSDoc documentation
+- [ ] Add comprehensive JSDoc documentation
 - [ ] Fix import paths (no re-exports)
-- [ ] Test tree-shaking
-- [ ] Verify bundle size impact
+
+### Phase 4: Validation
+- [ ] Run individual generator tests: `bun test:generator [NAME]`
+- [ ] Run full type checking
+- [ ] Test tree-shaking compatibility
+- [ ] Verify bundle size impact  
+- [ ] Generate and inspect all 6 output files
+- [ ] Integration test with other modules
 ```
 
 ## 🚀 Implementation Priorities
