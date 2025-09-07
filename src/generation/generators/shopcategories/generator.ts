@@ -1,12 +1,12 @@
 import { ModularBaseGenerator } from '../../core/generator.base.modular'
+import type { InterfaceDefinition } from '../../core/types'
 
-export interface ShopCategory {
-	hrid: ShopCategoryHrid
+// Internal interface for TypeScript typing (NOT exported)
+interface ShopCategory {
+	hrid: string
 	name: string
 	sortIndex: number
 }
-
-export type ShopCategoryHrid = string & { __brand: 'ShopCategoryHrid' }
 
 export class ModularShopCategoriesGenerator extends ModularBaseGenerator<ShopCategory> {
 	constructor() {
@@ -24,10 +24,24 @@ export class ModularShopCategoriesGenerator extends ModularBaseGenerator<ShopCat
 		})
 	}
 
+	// MANDATORY: Explicit interface definition to prevent HridHrid bug
+	protected override defineInterfaces(): InterfaceDefinition[] {
+		return [
+			{
+				name: 'ShopCategory',
+				properties: [
+					{ name: 'hrid', type: 'ShopCategoryHrid' }, // ✅ EXPLICIT HRID TYPE!
+					{ name: 'name', type: 'string' },
+					{ name: 'sortIndex', type: 'number' },
+				],
+			},
+		]
+	}
+
 	// Simple transformation for basic entity
 	protected override transformEntity(rawData: any): ShopCategory {
 		return {
-			hrid: rawData.hrid as ShopCategoryHrid,
+			hrid: rawData.hrid,
 			name: rawData.name,
 			sortIndex: rawData.sortIndex,
 		}

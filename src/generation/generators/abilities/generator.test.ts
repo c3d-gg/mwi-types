@@ -28,9 +28,9 @@ describe('Abilities Generator', () => {
 
 		test('should have required dependencies configured', () => {
 			const sharedTypes = generator.config.sharedTypes
-			expect(sharedTypes).toContain('CombatStyleHrid')
-			expect(sharedTypes).toContain('DamageTypeHrid')
 			expect(sharedTypes).toContain('Buff')
+			// CombatStyleHrid and DamageTypeHrid are imported from their modules, not shared types
+			expect(sharedTypes).toHaveLength(1)
 		})
 
 		test('should disable data cleaning for null handling', () => {

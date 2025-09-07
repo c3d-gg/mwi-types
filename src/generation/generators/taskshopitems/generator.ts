@@ -1,21 +1,21 @@
 import { ModularBaseGenerator } from '../../core/generator.base.modular'
+import type { InterfaceDefinition } from '../../core/types'
 
 import type { ItemHrid } from '../../../generated/items/types'
 
-export interface TaskShopItemCost {
+// Internal interfaces for TypeScript typing (NOT exported)
+interface TaskShopItemCost {
 	itemHrid: ItemHrid
 	count: number
 }
 
-export interface TaskShopItem {
-	hrid: TaskShopItemHrid
+interface TaskShopItem {
+	hrid: string
 	name: string
 	itemHrid: ItemHrid
 	cost: TaskShopItemCost
 	sortIndex: number
 }
-
-export type TaskShopItemHrid = string & { __brand: 'TaskShopItemHrid' }
 
 export class ModularTaskShopItemsGenerator extends ModularBaseGenerator<TaskShopItem> {
 	constructor() {
@@ -33,10 +33,33 @@ export class ModularTaskShopItemsGenerator extends ModularBaseGenerator<TaskShop
 		})
 	}
 
+	// MANDATORY: Explicit interface definitions to prevent HridHrid bug
+	protected override defineInterfaces(): InterfaceDefinition[] {
+		return [
+			{
+				name: 'TaskShopItem',
+				properties: [
+					{ name: 'hrid', type: 'TaskShopItemHrid' }, // ✅ EXPLICIT HRID TYPE!
+					{ name: 'name', type: 'string' },
+					{ name: 'itemHrid', type: 'ItemHrid' },
+					{ name: 'cost', type: 'TaskShopItemCost' },
+					{ name: 'sortIndex', type: 'number' },
+				],
+			},
+			{
+				name: 'TaskShopItemCost',
+				properties: [
+					{ name: 'itemHrid', type: 'ItemHrid' },
+					{ name: 'count', type: 'number' },
+				],
+			},
+		]
+	}
+
 	// Transform task shop item data
 	protected override transformEntity(rawData: any): TaskShopItem {
 		return {
-			hrid: rawData.hrid as TaskShopItemHrid,
+			hrid: rawData.hrid,
 			name: rawData.name,
 			itemHrid: rawData.itemHrid as ItemHrid,
 			cost: {
@@ -45,6 +68,13 @@ export class ModularTaskShopItemsGenerator extends ModularBaseGenerator<TaskShop
 			},
 			sortIndex: rawData.sortIndex,
 		}
+	}
+
+	// Extension hook: Add imports needed for types
+	protected override extendTypes(): void {
+		const typesBuilder = this.moduleBuilder.getFile('types')
+		// Import types from other domains
+		typesBuilder.addImport('../items/types', ['ItemHrid'], true)
 	}
 }
 

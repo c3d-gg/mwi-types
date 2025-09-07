@@ -127,7 +127,7 @@ describe('ModularSharedTypesGenerator', () => {
 			expect(buff.description).toBe(
 				'Represents a temporary buff/debuff applied to a player or action.',
 			)
-			expect(buff.properties).toHaveLength(8)
+			expect(buff.properties).toHaveLength(10)
 
 			// Check all required properties
 			const expectedProperties = [
@@ -139,6 +139,8 @@ describe('ModularSharedTypesGenerator', () => {
 				{ name: 'flatBoostLevelBonus', type: 'number', optional: false },
 				{ name: 'startTime', type: 'string', optional: false },
 				{ name: 'duration', type: 'number', optional: false },
+				{ name: 'multiplierForSkillHrid', type: 'SkillHrid', optional: true },
+				{ name: 'multiplierPerSkillLevel', type: 'number', optional: true },
 			]
 
 			for (const expected of expectedProperties) {

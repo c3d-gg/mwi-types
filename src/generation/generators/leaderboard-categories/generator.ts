@@ -22,6 +22,9 @@ export class ModularLeaderboardCategoriesGenerator extends ModularBaseGenerator<
 			entityNamePlural: 'LeaderboardCategories',
 			sourceKey: 'leaderboardCategoryDetailMap',
 			outputPath: 'src/generated/leaderboardcategories',
+			
+			// Preserve empty strings for skillHrid  
+			applyDataCleaning: false,
 
 			// No shared types needed for this simple module
 			sharedTypes: [],

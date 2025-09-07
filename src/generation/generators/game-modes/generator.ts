@@ -20,15 +20,17 @@ export class ModularGameModesGenerator extends ModularBaseGenerator<GameMode> {
 			entityName: 'GameMode',
 			entityNamePlural: 'GameModes',
 			sourceKey: 'gameModeDetailMap',
-			outputPath: 'src/generated/game-modes',
 
 			// No shared types needed for this simple generator
 			sharedTypes: [],
 
+			// Preserve data with null values
+			applyDataCleaning: false,
+
 			// Use utility templates
 			utilityTemplates: [
-				{ type: 'getByField', field: 'isCreatable' },
-				{ type: 'getByField', field: 'marketRestricted' },
+				{ type: 'getByField', field: 'isCreatable', config: { fieldType: 'boolean' } },
+				{ type: 'getByField', field: 'marketRestricted', config: { fieldType: 'boolean' } },
 				{ type: 'sortBy', field: 'sortIndex' },
 				{ type: 'toMap' },
 			],
@@ -75,7 +77,7 @@ export class ModularGameModesGenerator extends ModularBaseGenerator<GameMode> {
 			isCreatable: rawData.isCreatable || false,
 			maxCharacterLimit: rawData.maxCharacterLimit || 0,
 			marketRestricted: rawData.marketRestricted || false,
-			subsetGameModes: rawData.subsetGameModes || [],
+			subsetGameModes: Array.isArray(rawData.subsetGameModes) ? rawData.subsetGameModes : [],
 			sortIndex: rawData.sortIndex || 0,
 		}
 	}

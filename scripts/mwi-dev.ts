@@ -74,6 +74,11 @@ ${colors.bright}TESTING COMMANDS:${colors.reset}
 ${colors.bright}INVESTIGATION COMMANDS:${colors.reset}
   investigate:entity <ENTITY> <MODULE>  Log investigation for manual review
 
+${colors.bright}PROJECT COMMANDS:${colors.reset}
+  list:generators            List all generators and their status
+  check:duplicates          Check for duplication issues in generated files
+  project:stats             Show project statistics and progress
+
 ${colors.bright}EXAMPLES:${colors.reset}
   bun scripts/mwi-dev.ts analyze:source skillDetailMap
   bun scripts/mwi-dev.ts generate:single skills
@@ -283,6 +288,118 @@ async function main() {
     }
 
     // === INVESTIGATION COMMANDS ===
+    case 'list:generators': {
+      log.header('Generator Status')
+      
+      // Get all generator directories
+      const generatorDir = './src/generation/generators'
+      const dirs = await Array.fromAsync(new Bun.Glob(`${generatorDir}/*/generator.ts`).scan())
+      
+      const generators = []
+      for (const file of dirs) {
+        const parts = file.split('/')
+        const moduleName = parts[parts.length - 2]  // Get the directory name before generator.ts
+        const generatedPath = `./src/generated/${moduleName.replace(/-/g, '')}`
+        const exists = await Bun.file(`${generatedPath}/index.ts`).exists()
+        
+        generators.push({
+          name: moduleName,
+          hasGenerator: true,
+          isGenerated: exists,
+          status: exists ? '✅ Complete' : '⚠️  Not generated'
+        })
+      }
+      
+      // Sort and display
+      generators.sort((a, b) => a.name.localeCompare(b.name))
+      
+      console.log('Module Name                Status')
+      console.log('─'.repeat(50))
+      for (const gen of generators) {
+        const padding = ' '.repeat(25 - gen.name.length)
+        console.log(`${gen.name}${padding}${gen.status}`)
+      }
+      
+      const complete = generators.filter(g => g.isGenerated).length
+      const total = generators.length
+      const percentage = ((complete / total) * 100).toFixed(1)
+      
+      console.log('─'.repeat(50))
+      console.log(`Progress: ${complete}/${total} generators (${percentage}% complete)`)
+      break
+    }
+
+    case 'check:duplicates': {
+      log.header('Checking for Duplication Issues')
+      
+      const generatedDir = './src/generated'
+      const modules = await Array.fromAsync(new Bun.Glob(`${generatedDir}/*/types.ts`).scan())
+      
+      let issues = 0
+      for (const file of modules) {
+        const moduleName = file.split('/')[2]
+        const content = await Bun.file(file).text()
+        
+        // Check for duplicate interface definitions
+        const interfaceMatches = content.match(/export interface \w+/g) || []
+        const interfaceNames = interfaceMatches.map(m => m.split(' ')[2])
+        const duplicates = interfaceNames.filter((name, index) => interfaceNames.indexOf(name) !== index)
+        
+        if (duplicates.length > 0) {
+          log.error(`${moduleName}: Duplicate interfaces found: ${duplicates.join(', ')}`)
+          issues++
+        }
+        
+        // Check for HridHrid bug
+        if (content.includes('HridHrid')) {
+          log.error(`${moduleName}: HridHrid bug detected`)
+          issues++
+        }
+      }
+      
+      if (issues === 0) {
+        log.success('No duplication issues found!')
+      } else {
+        log.warn(`Found ${issues} duplication issue(s)`)
+      }
+      break
+    }
+
+    case 'project:stats': {
+      log.header('Project Statistics')
+      
+      // Count generators
+      const generatorFiles = await Array.fromAsync(new Bun.Glob('./src/generation/generators/*/generator.ts').scan())
+      const generatedModules = await Array.fromAsync(new Bun.Glob('./src/generated/*/index.ts').scan())
+      
+      // Count entities
+      let totalEntities = 0
+      for (const file of await Array.fromAsync(new Bun.Glob('./src/generated/*/data.ts').scan())) {
+        const content = await Bun.file(file).text()
+        const matches = content.match(/'\/.+?'/g) || []
+        totalEntities += matches.length
+      }
+      
+      // Count tests
+      const testFiles = await Array.fromAsync(new Bun.Glob('./src/generation/generators/*/generator.test.ts').scan())
+      
+      console.log(`📊 Project Metrics:`)
+      console.log(`─`.repeat(40))
+      console.log(`Generators:      ${generatorFiles.length}`)
+      console.log(`Generated:       ${generatedModules.length}`)
+      console.log(`Test Files:      ${testFiles.length}`)
+      console.log(`Total Entities:  ${totalEntities}+`)
+      console.log(`─`.repeat(40))
+      
+      const percentage = ((generatedModules.length / 32) * 100).toFixed(1)
+      console.log(`Overall Progress: ${generatedModules.length}/32 (${percentage}%)`)
+      
+      if (generatedModules.length >= 28) {
+        log.success('🎉 Project is in final phase!')
+      }
+      break
+    }
+
     case 'investigate:entity': {
       validateArgs(2, params, 'investigate:entity')
       const entity = params[0]

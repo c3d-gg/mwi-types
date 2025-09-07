@@ -98,7 +98,7 @@ describe('GameModes Generator', () => {
 		test('should not have duplicate interface definitions', async () => {
 			await generator.generate('./src/sources/game_data.json')
 
-			const typesFile = Bun.file('./src/generated/game-modes/types.ts')
+			const typesFile = Bun.file('./src/generated/gamemodes/types.ts')
 			const content = await typesFile.text()
 
 			const interfaceMatches = content.match(/export interface GameMode/g)
@@ -111,7 +111,7 @@ describe('GameModes Generator', () => {
 		test('should not have duplicate constant definitions', async () => {
 			await generator.generate('./src/sources/game_data.json')
 
-			const constantsFile = Bun.file('./src/generated/game-modes/constants.ts')
+			const constantsFile = Bun.file('./src/generated/gamemodes/constants.ts')
 			const content = await constantsFile.text()
 
 			const hridMatches = content.match(/export const GAMEMODE_HRIDS/g)
@@ -121,7 +121,7 @@ describe('GameModes Generator', () => {
 		test('should not have duplicate function definitions', async () => {
 			await generator.generate('./src/sources/game_data.json')
 
-			const utilsFile = Bun.file('./src/generated/game-modes/utils.ts')
+			const utilsFile = Bun.file('./src/generated/gamemodes/utils.ts')
 			const content = await utilsFile.text()
 
 			const getMatches = content.match(/export function getGameMode\b/g)
@@ -134,7 +134,7 @@ describe('GameModes Generator', () => {
 		test('should generate correct HRID type (not HridHrid)', async () => {
 			await generator.generate('./src/sources/game_data.json')
 
-			const typesFile = Bun.file('./src/generated/game-modes/types.ts')
+			const typesFile = Bun.file('./src/generated/gamemodes/types.ts')
 			const content = await typesFile.text()
 
 			// Should have GameModeHrid, not HridHrid
@@ -147,7 +147,7 @@ describe('GameModes Generator', () => {
 		test('should generate creatable game modes category', async () => {
 			await generator.generate('./src/sources/game_data.json')
 
-			const constantsFile = Bun.file('./src/generated/game-modes/constants.ts')
+			const constantsFile = Bun.file('./src/generated/gamemodes/constants.ts')
 			const content = await constantsFile.text()
 
 			expect(content).toContain('CREATABLE')
@@ -156,7 +156,7 @@ describe('GameModes Generator', () => {
 		test('should generate market restricted modes category', async () => {
 			await generator.generate('./src/sources/game_data.json')
 
-			const constantsFile = Bun.file('./src/generated/game-modes/constants.ts')
+			const constantsFile = Bun.file('./src/generated/gamemodes/constants.ts')
 			const content = await constantsFile.text()
 
 			expect(content).toContain('MARKETRESTRICTED')
@@ -167,7 +167,7 @@ describe('GameModes Generator', () => {
 		test('should generate standard utility functions', async () => {
 			await generator.generate('./src/sources/game_data.json')
 
-			const utilsFile = Bun.file('./src/generated/game-modes/utils.ts')
+			const utilsFile = Bun.file('./src/generated/gamemodes/utils.ts')
 			const content = await utilsFile.text()
 
 			// Standard utilities
@@ -183,7 +183,7 @@ describe('GameModes Generator', () => {
 		test('should generate game mode specific utilities', async () => {
 			await generator.generate('./src/sources/game_data.json')
 
-			const utilsFile = Bun.file('./src/generated/game-modes/utils.ts')
+			const utilsFile = Bun.file('./src/generated/gamemodes/utils.ts')
 			const content = await utilsFile.text()
 
 			expect(content).toContain('getCreatableGameModes')
@@ -196,11 +196,11 @@ describe('GameModes Generator', () => {
 			await generator.generate('./src/sources/game_data.json')
 
 			const files = [
-				'./src/generated/game-modes/types.ts',
-				'./src/generated/game-modes/constants.ts',
-				'./src/generated/game-modes/data.ts',
-				'./src/generated/game-modes/utils.ts',
-				'./src/generated/game-modes/index.ts',
+				'./src/generated/gamemodes/types.ts',
+				'./src/generated/gamemodes/constants.ts',
+				'./src/generated/gamemodes/data.ts',
+				'./src/generated/gamemodes/utils.ts',
+				'./src/generated/gamemodes/index.ts',
 			]
 
 			for (const filePath of files) {
@@ -219,7 +219,7 @@ describe('GameModes Generator', () => {
 		test('should maintain tree-shaking compatibility', async () => {
 			await generator.generate('./src/sources/game_data.json')
 
-			const indexFile = Bun.file('./src/generated/game-modes/index.ts')
+			const indexFile = Bun.file('./src/generated/gamemodes/index.ts')
 			const content = await indexFile.text()
 
 			// Should have explicit exports, not barrel exports

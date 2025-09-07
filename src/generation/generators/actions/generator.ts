@@ -356,8 +356,9 @@ export class ModularActionsGenerator extends ModularBaseGenerator<Action> {
 		lookups.push({
 			name: 'ACTIONS_BY_CATEGORY',
 			data: categoryLookup,
-			keyType: 'ActionCategoryHrid',
+			keyType: 'string', // Use string to avoid import issues, will be typed properly in extendLookups
 			valueType: 'readonly ActionHrid[]',
+			isPartial: true,
 		})
 
 		// Actions by type

@@ -246,8 +246,9 @@ export class ModularHouseRoomsGenerator extends ModularBaseGenerator<HouseRoom> 
 		lookups.push({
 			name: 'HOUSE_ROOMS_BY_SKILL',
 			data: skillLookup,
-			keyType: 'SkillHrid',
+			keyType: 'string', // Use string to avoid import issues, will be typed properly in extendLookups
 			valueType: 'readonly HouseRoomHrid[]',
+			isPartial: true,
 		})
 
 		return lookups

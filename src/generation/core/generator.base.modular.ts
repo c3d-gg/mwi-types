@@ -345,148 +345,154 @@ export abstract class ModularBaseGenerator<TEntity> {
 		const constName = `${typeName.toUpperCase()}_HRIDS`
 		const getRecordName = `get${pluralName}Record`
 
-		// Type guard
-		this.moduleBuilder.addUtilityFunction(
-			`is${typeName}Hrid`,
-			[{ name: 'value', type: 'string' }],
-			`value is ${hridType}`,
-			(writer) => {
-				writer.writeLine(`return ${constName}.includes(value as ${hridType})`)
-			},
-			[
-				{ from: './constants', names: [constName] },
-				{ from: './types', names: [hridType], isType: true },
-			],
-			{
-				description: `Type guard to check if a value is a valid ${typeName}Hrid.`,
-				params: [{ name: 'value', description: 'The string value to check' }],
-				returns: `true if the value is a valid ${typeName}Hrid, false otherwise`,
-				examples: [
-					`\nif (is${typeName}Hrid(someValue)) {\n  // someValue is now typed as ${typeName}Hrid\n  const ${typeName.toLowerCase()} = get${typeName}(someValue)\n}`,
+		// Only generate HRID-based utilities if HRIDs are enabled
+		if (this.config.generateHrids !== false) {
+			// Type guard
+			this.moduleBuilder.addUtilityFunction(
+				`is${typeName}Hrid`,
+				[{ name: 'value', type: 'string' }],
+				`value is ${hridType}`,
+				(writer) => {
+					writer.writeLine(`return ${constName}.includes(value as ${hridType})`)
+				},
+				[
+					{ from: './constants', names: [constName] },
+					{ from: './types', names: [hridType], isType: true },
 				],
-			},
-		)
+				{
+					description: `Type guard to check if a value is a valid ${typeName}Hrid.`,
+					params: [{ name: 'value', description: 'The string value to check' }],
+					returns: `true if the value is a valid ${typeName}Hrid, false otherwise`,
+					examples: [
+						`\nif (is${typeName}Hrid(someValue)) {\n  // someValue is now typed as ${typeName}Hrid\n  const ${typeName.toLowerCase()} = get${typeName}(someValue)\n}`,
+					],
+				},
+			)
+		}
 
-		// Getter function
-		this.moduleBuilder.addUtilityFunction(
-			`get${typeName}`,
-			[{ name: 'hrid', type: hridType }],
-			`${typeName} | undefined`,
-			(writer) => {
-				writer.writeLine(`return ${getRecordName}()[hrid]`)
-			},
-			[
-				{ from: './data', names: [getRecordName] },
-				{ from: './types', names: [typeName, hridType], isType: true },
-			],
-			{
-				description: `Gets a ${typeName} by its HRID.`,
-				params: [
-					{ name: 'hrid', description: `The ${typeName}Hrid to look up` },
+		// Only generate collection-based utilities if collection is enabled
+		if (this.config.generateCollection !== false) {
+			// Getter function
+			this.moduleBuilder.addUtilityFunction(
+				`get${typeName}`,
+				[{ name: 'hrid', type: hridType }],
+				`${typeName} | undefined`,
+				(writer) => {
+					writer.writeLine(`return ${getRecordName}()[hrid]`)
+				},
+				[
+					{ from: './data', names: [getRecordName] },
+					{ from: './types', names: [typeName, hridType], isType: true },
 				],
-				returns: `The ${typeName} if found, undefined otherwise`,
-				examples: [
-					`\nconst ${typeName.toLowerCase()} = get${typeName}('/${typeName.toLowerCase()}s/example')\nif (${typeName.toLowerCase()}) {\n  console.log(${typeName.toLowerCase()}.name)\n}`,
-				],
-			},
-		)
+				{
+					description: `Gets a ${typeName} by its HRID.`,
+					params: [
+						{ name: 'hrid', description: `The ${typeName}Hrid to look up` },
+					],
+					returns: `The ${typeName} if found, undefined otherwise`,
+					examples: [
+						`\nconst ${typeName.toLowerCase()} = get${typeName}('/${typeName.toLowerCase()}s/example')\nif (${typeName.toLowerCase()}) {\n  console.log(${typeName.toLowerCase()}.name)\n}`,
+					],
+				},
+			)
 
-		// Require function
-		this.moduleBuilder.addUtilityFunction(
-			`require${typeName}`,
-			[{ name: 'hrid', type: hridType }],
-			typeName,
-			(writer) => {
-				writer.writeLine(
-					`const ${typeName.toLowerCase()} = ${getRecordName}()[hrid]`,
-				)
-				writer.writeLine(`if (!${typeName.toLowerCase()}) {`)
-				writer.writeLine(
-					`  throw new Error(\`${typeName} not found: \${hrid}\`)`,
-				)
-				writer.writeLine(`}`)
-				writer.writeLine(`return ${typeName.toLowerCase()}`)
-			},
-			[
-				{ from: './data', names: [getRecordName] },
-				{ from: './types', names: [typeName, hridType], isType: true },
-			],
-			{
-				description: `Gets a ${typeName} by its HRID or throws an error if not found.\nUseful when you know the ${typeName} exists and want TypeScript to narrow the type.`,
-				params: [
-					{ name: 'hrid', description: `The ${typeName}Hrid to look up` },
+			// Require function
+			this.moduleBuilder.addUtilityFunction(
+				`require${typeName}`,
+				[{ name: 'hrid', type: hridType }],
+				typeName,
+				(writer) => {
+					writer.writeLine(
+						`const ${typeName.toLowerCase()} = ${getRecordName}()[hrid]`,
+					)
+					writer.writeLine(`if (!${typeName.toLowerCase()}) {`)
+					writer.writeLine(
+						`  throw new Error(\`${typeName} not found: \${hrid}\`)`,
+					)
+					writer.writeLine(`}`)
+					writer.writeLine(`return ${typeName.toLowerCase()}`)
+				},
+				[
+					{ from: './data', names: [getRecordName] },
+					{ from: './types', names: [typeName, hridType], isType: true },
 				],
-				returns: `The ${typeName}`,
-				examples: [
-					`\n// This will throw if the ${typeName.toLowerCase()} doesn't exist\nconst ${typeName.toLowerCase()} = require${typeName}('/${typeName.toLowerCase()}s/example')\nconsole.log(${typeName.toLowerCase()}.name) // TypeScript knows this is defined`,
-				],
-			},
-		)
+				{
+					description: `Gets a ${typeName} by its HRID or throws an error if not found.\nUseful when you know the ${typeName} exists and want TypeScript to narrow the type.`,
+					params: [
+						{ name: 'hrid', description: `The ${typeName}Hrid to look up` },
+					],
+					returns: `The ${typeName}`,
+					examples: [
+						`\n// This will throw if the ${typeName.toLowerCase()} doesn't exist\nconst ${typeName.toLowerCase()} = require${typeName}('/${typeName.toLowerCase()}s/example')\nconsole.log(${typeName.toLowerCase()}.name) // TypeScript knows this is defined`,
+					],
+				},
+			)
 
-		// Get all function
-		this.moduleBuilder.addUtilityFunction(
-			`getAll${pluralName}`,
-			[],
-			`${typeName}[]`,
-			(writer) => {
-				writer.writeLine(`return Object.values(${getRecordName}())`)
-			},
-			[
-				{ from: './data', names: [getRecordName] },
-				{ from: './types', names: [typeName], isType: true },
-			],
-			{
-				description: `Gets all ${pluralName} as an array.`,
-				returns: `Array of all ${typeName} entities`,
-				examples: [
-					`\nconst all${pluralName} = getAll${pluralName}()\nconsole.log(\`Found \${all${pluralName}.length} ${pluralName.toLowerCase()}\`)\n\n// Filter or map over all ${pluralName.toLowerCase()}\nconst filtered = all${pluralName}.filter(item => item.level > 10)`,
+			// Get all function
+			this.moduleBuilder.addUtilityFunction(
+				`getAll${pluralName}`,
+				[],
+				`${typeName}[]`,
+				(writer) => {
+					writer.writeLine(`return Object.values(${getRecordName}())`)
+				},
+				[
+					{ from: './data', names: [getRecordName] },
+					{ from: './types', names: [typeName], isType: true },
 				],
-			},
-		)
+				{
+					description: `Gets all ${pluralName} as an array.`,
+					returns: `Array of all ${typeName} entities`,
+					examples: [
+						`\nconst all${pluralName} = getAll${pluralName}()\nconsole.log(\`Found \${all${pluralName}.length} ${pluralName.toLowerCase()}\`)\n\n// Filter or map over all ${pluralName.toLowerCase()}\nconst filtered = all${pluralName}.filter(item => item.level > 10)`,
+					],
+				},
+			)
 
-		// Generic toMap utility function
-		this.moduleBuilder.addUtilityFunction(
-			'toMap',
-			[{ name: 'record', type: `Record<${hridType}, ${typeName}>` }],
-			`Map<${hridType}, ${typeName}>`,
-			(writer) => {
-				writer.writeLine(
-					`return new Map(Object.entries(record) as [${hridType}, ${typeName}][])`,
-				)
-			},
-			[{ from: './types', names: [typeName, hridType], isType: true }],
-			{
-				description: `Converts a ${typeName} record to a Map for O(1) lookups.\\nUseful for performance-critical code that needs frequent lookups.`,
-				params: [
-					{ name: 'record', description: `The record to convert to a Map` },
-				],
-				returns: `Map with ${hridType} keys and ${typeName} values`,
-				examples: [
-					`\nconst record = ${getRecordName}()\nconst map = toMap(record)\nconst entity = map.get('/path/to/entity') // O(1) lookup`,
-				],
-			},
-		)
+			// Generic toMap utility function
+			this.moduleBuilder.addUtilityFunction(
+				'toMap',
+				[{ name: 'record', type: `Record<${hridType}, ${typeName}>` }],
+				`Map<${hridType}, ${typeName}>`,
+				(writer) => {
+					writer.writeLine(
+						`return new Map(Object.entries(record) as [${hridType}, ${typeName}][])`,
+					)
+				},
+				[{ from: './types', names: [typeName, hridType], isType: true }],
+				{
+					description: `Converts a ${typeName} record to a Map for O(1) lookups.\\nUseful for performance-critical code that needs frequent lookups.`,
+					params: [
+						{ name: 'record', description: `The record to convert to a Map` },
+					],
+					returns: `Map with ${hridType} keys and ${typeName} values`,
+					examples: [
+						`\nconst record = ${getRecordName}()\nconst map = toMap(record)\nconst entity = map.get('/path/to/entity') // O(1) lookup`,
+					],
+				},
+			)
 
-		// Convenience function that combines getRecord + toMap
-		this.moduleBuilder.addUtilityFunction(
-			`get${pluralName}Map`,
-			[],
-			`Map<${hridType}, ${typeName}>`,
-			(writer) => {
-				writer.writeLine(`return toMap(${getRecordName}())`)
-			},
-			[
-				{ from: './data', names: [getRecordName] },
-				{ from: './types', names: [typeName, hridType], isType: true },
-			],
-			{
-				description: `Gets all ${pluralName} as a Map for O(1) lookups.\\nConvenience function that combines ${getRecordName}() + toMap().`,
-				returns: `Map with ${hridType} keys and ${typeName} values`,
-				examples: [
-					`\nconst map = get${pluralName}Map()\nconst entity = map.get('/path/to/entity') // Fast O(1) lookup\nif (entity) console.log(entity.name)`,
+			// Convenience function that combines getRecord + toMap
+			this.moduleBuilder.addUtilityFunction(
+				`get${pluralName}Map`,
+				[],
+				`Map<${hridType}, ${typeName}>`,
+				(writer) => {
+					writer.writeLine(`return toMap(${getRecordName}())`)
+				},
+				[
+					{ from: './data', names: [getRecordName] },
+					{ from: './types', names: [typeName, hridType], isType: true },
 				],
-			},
-		)
+				{
+					description: `Gets all ${pluralName} as a Map for O(1) lookups.\\nConvenience function that combines ${getRecordName}() + toMap().`,
+					returns: `Map with ${hridType} keys and ${typeName} values`,
+					examples: [
+						`\nconst map = get${pluralName}Map()\nconst entity = map.get('/path/to/entity') // Fast O(1) lookup\nif (entity) console.log(entity.name)`,
+					],
+				},
+			)
+		}
 	}
 
 	/**
@@ -536,18 +542,20 @@ export abstract class ModularBaseGenerator<TEntity> {
 			this.generateDefaultInterface(entities)
 		}
 
-		// Always generate HRID type (once, cleanly)
-		const hrids = Object.keys(entities).sort()
-		if (hrids.length > 0) {
-			// Import the constants array needed for HRID type
-			const constantName = `${mainInterfaceName.toUpperCase()}_HRIDS`
-			const typesBuilder = this.moduleBuilder.getFile('types')
-			typesBuilder.addImport('./constants', [constantName], false)
+		// Only generate HRID type if HRIDs are enabled
+		if (this.config.generateHrids !== false) {
+			const hrids = Object.keys(entities).sort()
+			if (hrids.length > 0) {
+				// Import the constants array needed for HRID type
+				const constantName = `${mainInterfaceName.toUpperCase()}_HRIDS`
+				const typesBuilder = this.moduleBuilder.getFile('types')
+				typesBuilder.addImport('./constants', [constantName], false)
 
-			this.moduleBuilder.addType(
-				`${mainInterfaceName}Hrid`,
-				`(typeof ${constantName})[number]`,
-			)
+				this.moduleBuilder.addType(
+					`${mainInterfaceName}Hrid`,
+					`(typeof ${constantName})[number]`,
+				)
+			}
 		}
 
 		// Add custom interfaces from configuration
@@ -589,7 +597,9 @@ export abstract class ModularBaseGenerator<TEntity> {
 		const customConstants = this.defineConstants?.()
 		if (customConstants) {
 			customConstants.forEach((def) => {
-				this.moduleBuilder.addConstArray(def.name, def.value, def.asConst)
+				// If value is a function, call it with entities, otherwise use as-is
+				const value = typeof def.value === 'function' ? def.value(entities) : def.value
+				this.moduleBuilder.addConstArray(def.name, value, def.asConst)
 				this.moduleBuilder.addExport({ name: def.name, source: './constants' })
 			})
 		}

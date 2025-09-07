@@ -19,6 +19,9 @@ export class ModularItemLocationsGenerator extends ModularBaseGenerator<ItemLoca
 			sourceKey: 'itemLocationDetailMap',
 			outputPath: 'src/generated/itemlocations',
 
+			// Preserve data including empty arrays
+			applyDataCleaning: false,
+
 			// Utility templates for common functions
 			utilityTemplates: [{ type: 'toMap' }],
 

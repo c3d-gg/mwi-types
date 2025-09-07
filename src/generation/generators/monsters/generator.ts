@@ -12,7 +12,8 @@ import type {
 	UtilityDefinition,
 } from '../../core/types'
 
-export interface CombatStats {
+// Internal interface for TypeScript typing (NOT exported)
+interface CombatStats {
 	combatStyleHrids: CombatStyleHrid[]
 	damageType: DamageTypeHrid
 	attackInterval: number
@@ -24,7 +25,7 @@ export interface CombatStats {
 	// Add other optional combat modifiers as needed
 }
 
-export interface CombatDetails {
+interface CombatDetails {
 	currentHitpoints: number
 	maxHitpoints: number
 	currentManapoints: number
@@ -63,21 +64,26 @@ export interface CombatDetails {
 	combatStats: CombatStats
 }
 
-export interface MonsterAbility {
+interface MonsterAbility {
 	abilityHrid: AbilityHrid
 	level: number
 	minDifficultyTier: number
 }
 
-export interface Monster {
+// Extended DropTable for monsters that includes difficulty tier scaling
+interface MonsterDropTable extends DropTable {
+	dropRatePerDifficultyTier?: number
+}
+
+interface Monster {
 	hrid: MonsterHrid
 	name: string
 	enrageTime: number
 	experience: number
 	combatDetails: CombatDetails
 	abilities: MonsterAbility[]
-	dropTable: DropTable[]
-	rareDropTable: DropTable[]
+	dropTable: MonsterDropTable[]
+	rareDropTable: MonsterDropTable[]
 }
 
 export type MonsterHrid = string & { __brand: 'MonsterHrid' }
@@ -95,7 +101,7 @@ export class ModularMonstersGenerator extends ModularBaseGenerator<Monster> {
 
 			// Use utility templates for common operations
 			utilityTemplates: [
-				{ type: 'getByField', field: 'combatLevel' },
+				// Removed getByField for combatLevel to avoid conflict with custom function
 				{ type: 'sortBy', field: 'combatLevel' },
 				{ type: 'filterBy' },
 				{ type: 'toMap' },
@@ -206,15 +212,69 @@ export class ModularMonstersGenerator extends ModularBaseGenerator<Monster> {
 	protected override defineInterfaces(): InterfaceDefinition[] {
 		return [
 			{
+				name: 'MonsterDropTable',
+				properties: [
+					{ name: 'itemHrid', type: 'string' },
+					{ name: 'dropRate', type: 'number' },
+					{ name: 'minCount', type: 'number' },
+					{ name: 'maxCount', type: 'number' },
+					{ name: 'dropRatePerDifficultyTier?', type: 'number' },
+				] as PropertyDefinition[],
+				description: 'Drop table entry with difficulty tier scaling for monsters',
+			},
+			{
+				name: 'Monster',
+				properties: [
+					{ name: 'hrid', type: 'MonsterHrid' }, // ✅ EXPLICIT HRID TYPE!
+					{ name: 'name', type: 'string' },
+					{ name: 'enrageTime', type: 'number' },
+					{ name: 'experience', type: 'number' },
+					{ name: 'combatDetails', type: 'CombatDetails' },
+					{ name: 'abilities', type: 'MonsterAbility[]' },
+					{ name: 'dropTable', type: 'MonsterDropTable[]' },
+					{ name: 'rareDropTable', type: 'MonsterDropTable[]' },
+				] as PropertyDefinition[],
+				description: 'Complete monster entity with combat details and rewards',
+			},
+			{
 				name: 'CombatDetails',
 				properties: [
 					{ name: 'currentHitpoints', type: 'number' },
 					{ name: 'maxHitpoints', type: 'number' },
 					{ name: 'currentManapoints', type: 'number' },
 					{ name: 'maxManapoints', type: 'number' },
+					{ name: 'attackInterval', type: 'number' },
+					{ name: 'totalCastSpeed', type: 'number' },
+					{ name: 'stabAccuracyRating', type: 'number' },
+					{ name: 'slashAccuracyRating', type: 'number' },
+					{ name: 'smashAccuracyRating', type: 'number' },
+					{ name: 'rangedAccuracyRating', type: 'number' },
+					{ name: 'magicAccuracyRating', type: 'number' },
+					{ name: 'defensiveMaxDamage', type: 'number' },
+					{ name: 'stabMaxDamage', type: 'number' },
+					{ name: 'slashMaxDamage', type: 'number' },
+					{ name: 'smashMaxDamage', type: 'number' },
+					{ name: 'rangedMaxDamage', type: 'number' },
+					{ name: 'magicMaxDamage', type: 'number' },
+					{ name: 'stabEvasionRating', type: 'number' },
+					{ name: 'slashEvasionRating', type: 'number' },
+					{ name: 'smashEvasionRating', type: 'number' },
+					{ name: 'rangedEvasionRating', type: 'number' },
+					{ name: 'magicEvasionRating', type: 'number' },
+					{ name: 'totalArmor', type: 'number' },
+					{ name: 'totalWaterResistance', type: 'number' },
+					{ name: 'totalNatureResistance', type: 'number' },
+					{ name: 'totalFireResistance', type: 'number' },
+					{ name: 'totalThreat', type: 'number' },
 					{ name: 'combatLevel', type: 'number' },
+					{ name: 'staminaLevel', type: 'number' },
+					{ name: 'intelligenceLevel', type: 'number' },
+					{ name: 'attackLevel', type: 'number' },
+					{ name: 'meleeLevel', type: 'number' },
+					{ name: 'defenseLevel', type: 'number' },
+					{ name: 'rangedLevel', type: 'number' },
+					{ name: 'magicLevel', type: 'number' },
 					{ name: 'combatStats', type: 'CombatStats' },
-					// Add other properties as needed
 				] as PropertyDefinition[],
 				description: 'Combat statistics and details for a monster',
 			},
@@ -224,7 +284,11 @@ export class ModularMonstersGenerator extends ModularBaseGenerator<Monster> {
 					{ name: 'combatStyleHrids', type: 'CombatStyleHrid[]' },
 					{ name: 'damageType', type: 'DamageTypeHrid' },
 					{ name: 'attackInterval', type: 'number' },
-					// Add other properties as needed
+					{ name: 'autoAttackDamage', type: 'number | undefined' },
+					{ name: 'fireAmplify', type: 'number | undefined' },
+					{ name: 'natureResistance', type: 'number | undefined' },
+					{ name: 'fireResistance', type: 'number | undefined' },
+					{ name: 'waterResistance', type: 'number | undefined' },
 				] as PropertyDefinition[],
 				description: 'Specific combat modifiers and attributes',
 			},
@@ -248,7 +312,7 @@ export class ModularMonstersGenerator extends ModularBaseGenerator<Monster> {
 				parameters: [{ name: 'damageType', type: 'DamageTypeHrid' }],
 				returnType: 'Monster[]',
 				implementation: (writer: any) => {
-					writer.writeLine('const monsters = await getMonstersRecord()')
+					writer.writeLine('const monsters = getMonstersRecord()')
 					writer.writeLine(
 						'return Object.values(monsters).filter(monster => monster.combatDetails.combatStats.damageType === damageType)',
 					)
@@ -262,7 +326,7 @@ export class ModularMonstersGenerator extends ModularBaseGenerator<Monster> {
 				],
 				returnType: 'Monster[]',
 				implementation: (writer: any) => {
-					writer.writeLine('const monsters = await getMonstersRecord()')
+					writer.writeLine('const monsters = getMonstersRecord()')
 					writer.writeLine('return Object.values(monsters).filter(monster => {')
 					writer.writeLine('  const level = monster.combatDetails.combatLevel')
 					writer.writeLine('  if (maxLevel !== undefined) {')
@@ -277,7 +341,7 @@ export class ModularMonstersGenerator extends ModularBaseGenerator<Monster> {
 				parameters: [{ name: 'abilityHrid', type: 'AbilityHrid' }],
 				returnType: 'Monster[]',
 				implementation: (writer: any) => {
-					writer.writeLine('const monsters = await getMonstersRecord()')
+					writer.writeLine('const monsters = getMonstersRecord()')
 					writer.writeLine('return Object.values(monsters).filter(monster => ')
 					writer.writeLine(
 						'  monster.abilities.some(ability => ability.abilityHrid === abilityHrid)',
@@ -292,6 +356,16 @@ export class ModularMonstersGenerator extends ModularBaseGenerator<Monster> {
 	protected override defineLookups(): LookupDefinition[] {
 		// For now, return empty array. Lookups will be implemented later.
 		return []
+	}
+
+	// Import external types needed for this module
+	protected override extendTypes(): void {
+		const typesBuilder = this.moduleBuilder.getFile('types')
+		
+		// Import types from other domains
+		typesBuilder.addImport('../combatstyles/types', ['CombatStyleHrid'], true)
+		typesBuilder.addImport('../damagetypes/types', ['DamageTypeHrid'], true)
+		typesBuilder.addImport('../abilities/types', ['AbilityHrid'], true)
 	}
 }
 
