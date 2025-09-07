@@ -64,11 +64,17 @@ export class ModularAbilitiesGenerator extends ModularBaseGenerator<Ability> {
 			applyDataCleaning: false,
 
 			// Import shared types this generator needs
-			sharedTypes: ['CombatStyleHrid', 'DamageTypeHrid', 'Buff'],
+			sharedTypes: ['Buff'],
 
 			// Standard utility templates
 			utilityTemplates: [
-				{ type: 'getByField', field: 'isSpecialAbility' },
+				{
+					type: 'getByField',
+					field: 'isSpecialAbility',
+					config: {
+						fieldType: 'boolean',
+					},
+				},
 				{ type: 'sortBy', field: 'manaCost' },
 				{ type: 'sortBy', field: 'sortIndex' },
 				{ type: 'toMap' },
@@ -299,6 +305,17 @@ export class ModularAbilitiesGenerator extends ModularBaseGenerator<Ability> {
 				],
 			},
 		]
+	}
+
+	/**
+	 * Extension hook: Add file header comments for shared types
+	 */
+	protected override extendTypes(): void {
+		const typesBuilder = this.moduleBuilder.getFile('types')
+
+		// Import types from other domains (DO NOT re-export - domain control)
+		typesBuilder.addImport('../damagetypes/types', ['DamageTypeHrid'], true)
+		typesBuilder.addImport('../combatstyles/types', ['CombatStyleHrid'], true)
 	}
 
 	/**

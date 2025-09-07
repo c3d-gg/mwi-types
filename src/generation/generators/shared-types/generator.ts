@@ -321,6 +321,12 @@ export class ModularSharedTypesGenerator extends ModularBaseGenerator<any> {
 					optional: true,
 					description: 'The skill that the buff applies to',
 				},
+				{
+					name: 'multiplierPerSkillLevel',
+					type: 'number',
+					optional: true,
+					description: 'Additional multiplier per skill level',
+				},
 			],
 			description:
 				'Represents a temporary buff/debuff applied to a player or action.',
