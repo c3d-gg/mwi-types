@@ -5,6 +5,7 @@ import { ModularDamageTypesGenerator } from './generators/damage-types/generator
 import { ModularEquipmentTypesGenerator } from './generators/equipment-types/generator'
 import { ModularItemCategoriesGenerator } from './generators/item-categories/generator'
 import { ModularItemsGenerator } from './generators/items/generator'
+import { ModularLeaderboardCategoriesGenerator } from './generators/leaderboard-categories/generator'
 import { ModularSharedTypesGenerator } from './generators/shared-types/generator'
 import { ModularSkillsGenerator } from './generators/skills/generator'
 
@@ -35,15 +36,19 @@ async function generateAll() {
 
 		// Layer 2: Single dependency (migrated)
 		console.log('\n📦 Layer 2: Single dependency entities')
+
 		console.log('Generating items...')
 		await new ModularItemsGenerator().generate(sourcePath)
+
+		console.log('Generating leaderboard categories...')
+		await new ModularLeaderboardCategoriesGenerator().generate(sourcePath)
 
 		// Layer 3: Multiple dependencies (migrated)
 		console.log('\n📦 Layer 3: Multiple dependency entities')
 		console.log('Generating actions...')
 		await new ModularActionsGenerator().generate(sourcePath)
 
-		console.log('\n✨ V1.0 type generation complete (7 modules migrated)!')
+		console.log('\n✨ V1.0 type generation complete (8 modules migrated)!')
 		console.log(
 			'📝 Note: Additional generators will be added as they are migrated to v1.0',
 		)

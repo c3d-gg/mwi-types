@@ -315,6 +315,12 @@ export class ModularSharedTypesGenerator extends ModularBaseGenerator<any> {
 					optional: false,
 					description: 'Duration of the buff in seconds (0 = permanent)',
 				},
+				{
+					name: 'multiplierForSkillHrid',
+					type: 'SkillHrid',
+					optional: true,
+					description: 'The skill that the buff applies to',
+				},
 			],
 			description:
 				'Represents a temporary buff/debuff applied to a player or action.',
@@ -328,15 +334,20 @@ export class ModularSharedTypesGenerator extends ModularBaseGenerator<any> {
 	 */
 	protected override extendTypes(): void {
 		const typesBuilder = this.moduleBuilder.getFile('types')
+
+		// Import types from other domains (DO NOT re-export - domain control)
+		typesBuilder.addImport('../skills/types', ['SkillHrid'], true)
+
+		// Add header comments
 		typesBuilder.addComment(
-			'Shared type definitions used across multiple modules',
+			'Consuming modules import these types and cast HRID strings as needed.',
 		)
-		typesBuilder.addComment('')
 		typesBuilder.addComment(
 			'These types eliminate duplication and provide consistency across generators.',
 		)
+		typesBuilder.addComment('')
 		typesBuilder.addComment(
-			'Consuming modules import these types and cast HRID strings as needed.',
+			'Shared type definitions used across multiple modules',
 		)
 	}
 }

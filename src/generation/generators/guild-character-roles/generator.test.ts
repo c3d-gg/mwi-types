@@ -107,84 +107,12 @@ describe('GuildCharacterRoles Generator', () => {
 		test('should generate types without TypeScript errors', async () => {
 			// Generate the module
 			await generator.generate('./src/sources/game_data.json')
-			
+
 			// Verify files were created (note: folder is "guildcharacterroles")
-			const typesFile = Bun.file(
-				'./src/generated/guildcharacterroles/types.ts',
-			)
+			const typesFile = Bun.file('./src/generated/guildcharacterroles/types.ts')
 			const typesExist = await typesFile.exists()
 			expect(typesExist).toBe(true)
 		})
-
-		test('should create all required output files', async () => {
-			await generator.generate('./src/sources/game_data.json')
-			
-			const files = [
-				'types.ts',
-				'constants.ts', 
-				'data.ts',
-				'utils.ts',
-				'lookups.ts',
-				'index.ts'
-			]
-			
-			for (const file of files) {
-				const filePath = `./src/generated/guildcharacterroles/${file}`
-				const fileExists = await Bun.file(filePath).exists()
-				expect(fileExists).toBe(true)
-			}
-		})
-
-		test('should not have duplicate interface definitions', async () => {
-			await generator.generate('./src/sources/game_data.json')
-			
-			const typesFile = Bun.file('./src/generated/guildcharacterroles/types.ts')
-			const content = await typesFile.text()
-			
-			// Count interface definitions
-			const interfaceMatches = content.match(/export interface GuildCharacterRole/g)
-			const typeMatches = content.match(/export type GuildCharacterRoleHrid/g)
-			
-			expect(interfaceMatches).toHaveLength(1)
-			expect(typeMatches).toHaveLength(1)
-		})
-
-		test('should not have duplicate constant definitions', async () => {
-			await generator.generate('./src/sources/game_data.json')
-			
-			const constantsFile = Bun.file('./src/generated/guildcharacterroles/constants.ts')
-			const content = await constantsFile.text()
-			
-			// Count constant definitions
-			const hridMatches = content.match(/export const GUILDCHARACTERROLE_HRIDS/g)
-			const promoteMatches = content.match(/export const CANPROMOTE/g)
-			const kickMatches = content.match(/export const CANKICK/g)
-			const tierMatches = content.match(/export const HIGHTIER/g)
-			
-			expect(hridMatches).toHaveLength(1)
-			expect(promoteMatches).toHaveLength(1)
-			expect(kickMatches).toHaveLength(1)
-			expect(tierMatches).toHaveLength(1)
-		})
-
-		test('should not have duplicate function definitions', async () => {
-			await generator.generate('./src/sources/game_data.json')
-			
-			const utilsFile = Bun.file('./src/generated/guildcharacterroles/utils.ts')
-			const content = await utilsFile.text()
-			
-			// Count function definitions
-			const isHridMatches = content.match(/export function isGuildCharacterRoleHrid/g)
-			const getMatches = content.match(/export function getGuildCharacterRole\b/g) // \b for word boundary
-			const requireMatches = content.match(/export function requireGuildCharacterRole/g)
-			const getAllMatches = content.match(/export function getAllGuildCharacterRoles/g)
-			
-			expect(isHridMatches).toHaveLength(1)
-			expect(getMatches).toHaveLength(1) 
-			expect(requireMatches).toHaveLength(1)
-			expect(getAllMatches).toHaveLength(1)
-		})
-	})
 
 		test('should create all required output files', async () => {
 			await generator.generate('./src/sources/game_data.json')
@@ -203,6 +131,70 @@ describe('GuildCharacterRoles Generator', () => {
 				const fileExists = await Bun.file(filePath).exists()
 				expect(fileExists).toBe(true)
 			}
+		})
+
+		test('should not have duplicate interface definitions', async () => {
+			await generator.generate('./src/sources/game_data.json')
+
+			const typesFile = Bun.file('./src/generated/guildcharacterroles/types.ts')
+			const content = await typesFile.text()
+
+			// Count interface definitions
+			const interfaceMatches = content.match(
+				/export interface GuildCharacterRole/g,
+			)
+			const typeMatches = content.match(/export type GuildCharacterRoleHrid/g)
+
+			expect(interfaceMatches).toHaveLength(1)
+			expect(typeMatches).toHaveLength(1)
+		})
+
+		test('should not have duplicate constant definitions', async () => {
+			await generator.generate('./src/sources/game_data.json')
+
+			const constantsFile = Bun.file(
+				'./src/generated/guildcharacterroles/constants.ts',
+			)
+			const content = await constantsFile.text()
+
+			// Count constant definitions
+			const hridMatches = content.match(
+				/export const GUILDCHARACTERROLE_HRIDS/g,
+			)
+			const promoteMatches = content.match(/export const CANPROMOTE/g)
+			const kickMatches = content.match(/export const CANKICK/g)
+			const tierMatches = content.match(/export const HIGHTIER/g)
+
+			expect(hridMatches).toHaveLength(1)
+			expect(promoteMatches).toHaveLength(1)
+			expect(kickMatches).toHaveLength(1)
+			expect(tierMatches).toHaveLength(1)
+		})
+
+		test('should not have duplicate function definitions', async () => {
+			await generator.generate('./src/sources/game_data.json')
+
+			const utilsFile = Bun.file('./src/generated/guildcharacterroles/utils.ts')
+			const content = await utilsFile.text()
+
+			// Count function definitions
+			const isHridMatches = content.match(
+				/export function isGuildCharacterRoleHrid/g,
+			)
+			const getMatches = content.match(
+				/export function getGuildCharacterRole\b/g,
+			) // \b for word boundary
+			const requireMatches = content.match(
+				/export function requireGuildCharacterRole/g,
+			)
+			const getAllMatches = content.match(
+				/export function getAllGuildCharacterRoles/g,
+			)
+
+			expect(isHridMatches).toHaveLength(1)
+			expect(getMatches).toHaveLength(1)
+			expect(requireMatches).toHaveLength(1)
+			expect(getAllMatches).toHaveLength(1)
 		})
 	})
 

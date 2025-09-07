@@ -166,7 +166,7 @@ describe('Actions Generator', () => {
 			const sourcePath = './src/sources/game_data.json'
 
 			// This should not throw
-			expect(generator.generate(sourcePath)).resolves.toBeUndefined()
+			await generator.generate(sourcePath)
 		})
 	})
 

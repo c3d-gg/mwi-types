@@ -29,7 +29,7 @@ export type { GeneratorConfig } from './types'
 export abstract class ModularBaseGenerator<TEntity> {
 	public config: GeneratorConfig
 	protected sourceReader: SourceReader
-	protected moduleBuilder: ModuleBuilder
+	protected moduleBuilder!: ModuleBuilder // Will be initialized in generate()
 	protected entities: Record<string, TEntity> = {}
 
 	protected uniqueTypes: Set<string> = new Set()
@@ -50,9 +50,16 @@ export abstract class ModularBaseGenerator<TEntity> {
 
 		this.sourceReader = new SourceReader()
 
-		// Initialize module builder with modular structure
+		// ModuleBuilder will be created fresh in generate() to avoid duplication
+	}
+
+	async generate(sourcePath: string): Promise<void> {
+		console.log(`🔧 Generating ${this.config.entityNamePlural} (modular)...`)
+
+		// Create fresh ModuleBuilder for each generation to avoid duplication
+		// This ensures that multiple generate() calls don't append to the same files
 		const basePath = './src/generated'
-		const moduleName = config.entityNamePlural.toLowerCase()
+		const moduleName = this.config.entityNamePlural.toLowerCase()
 
 		this.moduleBuilder = new ModuleBuilder({
 			basePath,
@@ -60,10 +67,6 @@ export abstract class ModularBaseGenerator<TEntity> {
 			enableLazyData: this.config.generateCollection,
 			enableStaticLookups: this.config.generateLookups,
 		})
-	}
-
-	async generate(sourcePath: string): Promise<void> {
-		console.log(`🔧 Generating ${this.config.entityNamePlural} (modular)...`)
 
 		// Lifecycle hook: before generation
 		this.beforeGenerate?.()

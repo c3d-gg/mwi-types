@@ -108,12 +108,12 @@ export class ModularAbilitiesGenerator extends ModularBaseGenerator<Ability> {
 					},
 					{
 						name: 'combatStyleHrid',
-						type: 'CombatStyleHrid | undefined',
+						type: 'CombatStyleHrid | ""',
 						description: 'Combat style associated with this effect',
 					},
 					{
 						name: 'damageType',
-						type: 'DamageTypeHrid | undefined',
+						type: 'DamageTypeHrid | ""',
 						description: 'Damage type for this effect',
 					},
 					{
