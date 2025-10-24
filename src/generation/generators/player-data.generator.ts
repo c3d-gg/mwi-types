@@ -311,15 +311,24 @@ export class PlayerDataGenerator extends BaseGenerator<PlayerData> {
 		}
 	}
 
-	private extractCharacterQuest(data: any): CharacterQuest {
+	private extractCharacterQuest(data: Partial<CharacterQuest>): CharacterQuest {
 		return {
 			id: data.id || 0,
 			characterID: data.characterID || 0,
-			questHrid: data.questHrid || '',
-			isCompleted: data.isCompleted || false,
-			completedAt: data.completedAt || '',
-			createdAt: data.createdAt || '',
-			updatedAt: data.updatedAt || '',
+			category: data.category || '',
+			tutorialQuestHrid: data.tutorialQuestHrid || '',
+			type: data.type || '',
+			actionHrid: data.actionHrid || '',
+			monsterHrid: data.monsterHrid || '',
+			goalCount: data.goalCount || 0,
+			currentCount: data.currentCount || 0,
+			itemRewardsJSON: data.itemRewardsJSON || '',
+			status: data.status || '',
+			coinRerollCount: data.coinRerollCount || 0,
+			cowbellRerollCount: data.cowbellRerollCount || 0,
+			mooPassRerollCount: data.mooPassRerollCount || 0,
+			createdAt: data.createdAt || new Date(),
+			updatedAt: data.updatedAt || new Date(),
 		}
 	}
 
@@ -585,11 +594,20 @@ export class PlayerDataGenerator extends BaseGenerator<PlayerData> {
 		const properties: PropertyDefinition[] = [
 			{ name: 'id', type: 'number', optional: false },
 			{ name: 'characterID', type: 'number', optional: false },
-			{ name: 'questHrid', type: 'string', optional: false }, // TODO: Import QuestHrid when available
-			{ name: 'isCompleted', type: 'boolean', optional: false },
-			{ name: 'completedAt', type: 'string', optional: false },
-			{ name: 'createdAt', type: 'string', optional: false },
-			{ name: 'updatedAt', type: 'string', optional: false },
+			{ name: 'category', type: 'string', optional: false },
+			{ name: 'tutorialQuestHrid', type: 'string', optional: false },
+			{ name: 'type', type: 'string', optional: false },
+			{ name: 'actionHrid', type: 'string', optional: false },
+			{ name: 'monsterHrid', type: 'string', optional: false },
+			{ name: 'goalCount', type: 'number', optional: false },
+			{ name: 'currentCount', type: 'number', optional: false },
+			{ name: 'itemRewardsJSON', type: 'string', optional: false },
+			{ name: 'status', type: 'string', optional: false },
+			{ name: 'coinRerollCount', type: 'number', optional: false },
+			{ name: 'cowbellRerollCount', type: 'number', optional: false },
+			{ name: 'mooPassRerollCount', type: 'number', optional: false },
+			{ name: 'createdAt', type: 'Date', optional: false },
+			{ name: 'updatedAt', type: 'Date', optional: false },
 		]
 
 		this.builder.addInterface('CharacterQuest', properties)
@@ -1162,7 +1180,7 @@ export class PlayerDataGenerator extends BaseGenerator<PlayerData> {
 			[{ name: 'quests', type: 'CharacterQuest[]' }],
 			'CharacterQuest[]',
 			(writer) => {
-				writer.writeLine('return quests.filter(quest => !quest.isCompleted)')
+				writer.writeLine('return quests.filter(quest => quest.status === "/quest_status/in_progress")')
 			},
 		)
 
@@ -1171,7 +1189,7 @@ export class PlayerDataGenerator extends BaseGenerator<PlayerData> {
 			[{ name: 'quests', type: 'CharacterQuest[]' }],
 			'CharacterQuest[]',
 			(writer) => {
-				writer.writeLine('return quests.filter(quest => quest.isCompleted)')
+				writer.writeLine('return quests.filter(quest => quest.status === "/quest_status/completed")')
 			},
 		)
 
@@ -1432,11 +1450,20 @@ interface CharacterAction {
 interface CharacterQuest {
 	id: number
 	characterID: number
-	questHrid: string
-	isCompleted: boolean
-	completedAt: string
-	createdAt: string
-	updatedAt: string
+	category: string
+	tutorialQuestHrid: string
+	type: string
+	actionHrid: string
+	monsterHrid: string
+	goalCount: number
+	currentCount: number
+	itemRewardsJSON: string
+	status: string
+	coinRerollCount: number
+	cowbellRerollCount: number
+	mooPassRerollCount: number
+	createdAt: Date
+	updatedAt: Date
 }
 
 interface CharacterAbility {
